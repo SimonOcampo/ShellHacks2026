@@ -18,8 +18,10 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
+  Legend,
   Line,
   LineChart,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -42,6 +44,18 @@ const number = (n: number | undefined, digits = 0) =>
   n == null
     ? "—"
     : n.toLocaleString(undefined, { maximumFractionDigits: digits });
+const chartValue = (value: unknown, unit = "", digits = 0) =>
+  typeof value === "number" && Number.isFinite(value)
+    ? `${unit}${number(value, digits)}`
+    : "Unavailable";
+const chartCurrencyTick = (value: unknown) => {
+  if (typeof value !== "number" || !Number.isFinite(value))
+    return "Unavailable";
+  return Math.abs(value) >= 1000
+    ? `$${(value / 1000).toLocaleString(undefined, { maximumFractionDigits: 1 })}k`
+    : chartValue(value, "$");
+};
+const chartAxisTick = { fontSize: 9, fill: "#c2d0c8" };
 export default function Scenario({
   cityId,
   cityName,
@@ -128,6 +142,7 @@ export default function Scenario({
       color: "#e8efea",
     },
     labelStyle: { color: "#a4b5b0" },
+    cursor: { stroke: "#a4b5b0", strokeDasharray: "3 4" },
   };
   return (
     <section className="scenario">
@@ -374,11 +389,11 @@ export default function Scenario({
                   </section>
                   <div className="charts-grid">
                     <ChartPanel
-                      title="Demand meets capacity"
-                      subtitle="Requests and completed rides by hour"
+                      title="Hourly requests vs. completed rides"
+                      subtitle="Returned counts for each simulated hour"
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={chart}>
+                        <AreaChart data={chart} syncId="simulation-hours">
                           <defs>
                             <linearGradient
                               id="rides-fill"
@@ -395,14 +410,31 @@ export default function Scenario({
                               />
                             </linearGradient>
                           </defs>
-                          <CartesianGrid vertical={false} stroke="#233638" />
+                          <CartesianGrid vertical={false} stroke="#334748" />
                           <XAxis
                             dataKey="label"
                             minTickGap={80}
-                            tick={{ fontSize: 9 }}
+                            tick={chartAxisTick}
                           />
-                          <YAxis tick={{ fontSize: 10 }} width={30} />
-                          <Tooltip {...tooltip} />
+                          <YAxis
+                            tick={chartAxisTick}
+                            width={42}
+                            tickFormatter={(value) => chartValue(value)}
+                          />
+                          <Tooltip
+                            {...tooltip}
+                            formatter={(value, name) => [
+                              chartValue(value),
+                              name,
+                            ]}
+                          />
+                          {chart[hour] && (
+                            <ReferenceLine
+                              x={chart[hour].label}
+                              stroke="#71e2c3"
+                              strokeDasharray="3 4"
+                            />
+                          )}
                           <Area
                             name="Requests"
                             dataKey="requests"
@@ -410,6 +442,11 @@ export default function Scenario({
                             fill="transparent"
                             strokeDasharray="4 4"
                             isAnimationActive={false}
+                          />
+                          <Legend
+                            verticalAlign="top"
+                            height={28}
+                            wrapperStyle={{ fontSize: 10, color: "#e6ede7" }}
                           />
                           <Area
                             name="Completed rides"
@@ -422,23 +459,36 @@ export default function Scenario({
                       </ResponsiveContainer>
                     </ChartPanel>
                     <ChartPanel
-                      title="Revenue accumulates"
-                      subtitle="Simulated gross fares · USD · costs excluded"
+                      title="Cumulative gross revenue"
+                      subtitle="Simulated fares · USD · costs excluded"
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={chart}>
-                          <CartesianGrid vertical={false} stroke="#233638" />
+                        <AreaChart data={chart} syncId="simulation-hours">
+                          <CartesianGrid vertical={false} stroke="#334748" />
                           <XAxis
                             dataKey="label"
                             minTickGap={90}
-                            tick={{ fontSize: 9 }}
+                            tick={chartAxisTick}
                           />
                           <YAxis
-                            tick={{ fontSize: 10 }}
-                            width={42}
-                            tickFormatter={(v) => `${Number(v) / 1000}k`}
+                            tick={chartAxisTick}
+                            width={52}
+                            tickFormatter={chartCurrencyTick}
                           />
-                          <Tooltip {...tooltip} />
+                          <Tooltip
+                            {...tooltip}
+                            formatter={(value) => [
+                              chartValue(value, "$"),
+                              "Cumulative gross revenue",
+                            ]}
+                          />
+                          {chart[hour] && (
+                            <ReferenceLine
+                              x={chart[hour].label}
+                              stroke="#71e2c3"
+                              strokeDasharray="3 4"
+                            />
+                          )}
                           <Area
                             name="Gross revenue"
                             dataKey="cumulative_revenue"
@@ -451,22 +501,38 @@ export default function Scenario({
                     </ChartPanel>
                     <ChartPanel
                       title="Fleet utilization"
-                      subtitle="Percentage of total vehicle time in service"
+                      subtitle="Hourly share of total vehicle time in service"
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={chart}>
-                          <CartesianGrid vertical={false} stroke="#233638" />
+                        <LineChart data={chart} syncId="simulation-hours">
+                          <CartesianGrid vertical={false} stroke="#334748" />
                           <XAxis
                             dataKey="label"
                             minTickGap={90}
-                            tick={{ fontSize: 9 }}
+                            tick={chartAxisTick}
                           />
                           <YAxis
                             domain={[0, 100]}
-                            tick={{ fontSize: 10 }}
-                            width={30}
+                            tick={chartAxisTick}
+                            width={42}
+                            tickFormatter={(value) =>
+                              chartValue(value, "", 0) + "%"
+                            }
                           />
-                          <Tooltip {...tooltip} />
+                          <Tooltip
+                            {...tooltip}
+                            formatter={(value) => [
+                              chartValue(value, "%", 1),
+                              "Utilization",
+                            ]}
+                          />
+                          {chart[hour] && (
+                            <ReferenceLine
+                              x={chart[hour].label}
+                              stroke="#71e2c3"
+                              strokeDasharray="3 4"
+                            />
+                          )}
                           <Line
                             name="Utilization %"
                             dataKey="utilization_pct"
@@ -478,19 +544,36 @@ export default function Scenario({
                       </ResponsiveContainer>
                     </ChartPanel>
                     <ChartPanel
-                      title="Pickup wait"
-                      subtitle="Mean wait for rides completed in each hour · minutes"
+                      title="Average pickup wait"
+                      subtitle="Mean wait for rides completed that hour · minutes"
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={chart}>
-                          <CartesianGrid vertical={false} stroke="#233638" />
+                        <LineChart data={chart} syncId="simulation-hours">
+                          <CartesianGrid vertical={false} stroke="#334748" />
                           <XAxis
                             dataKey="label"
                             minTickGap={90}
-                            tick={{ fontSize: 9 }}
+                            tick={chartAxisTick}
                           />
-                          <YAxis tick={{ fontSize: 10 }} width={30} />
-                          <Tooltip {...tooltip} />
+                          <YAxis
+                            tick={chartAxisTick}
+                            width={42}
+                            tickFormatter={(value) => chartValue(value, "", 0)}
+                          />
+                          <Tooltip
+                            {...tooltip}
+                            formatter={(value) => [
+                              chartValue(value, " min", 1),
+                              "Average pickup wait",
+                            ]}
+                          />
+                          {chart[hour] && (
+                            <ReferenceLine
+                              x={chart[hour].label}
+                              stroke="#71e2c3"
+                              strokeDasharray="3 4"
+                            />
+                          )}
                           <Line
                             name="Wait minutes"
                             dataKey="average_wait_minutes"
