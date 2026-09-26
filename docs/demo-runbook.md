@@ -26,7 +26,7 @@ Vercel root directory: `apps/web`. Set `NEXT_PUBLIC_API_BASE_URL` to the Render 
 
 Render uses the root Dockerfile and `/health`. The backend is live as service `srv-dartlbm0tbcc73d0lmug` on mock release `mock.v1`; API smoke checks pass. The Vercel frontend is not hosted yet. Set `ODD_ALLOWED_ORIGINS` to its exact origin when available. `render.yaml` defaults to mock mode. Select verified mode and release only after publication and startup validation. This mock deployment is not production-ready.
 
-Render Free sleeps after inactivity. Warm the service before rehearsal. The latest warm default-scenario measurements were 2.67 and 2.76 seconds, above the two-second target. Repeat timing proof after the target passes. Earlier deployments failed, so no prior healthy backend image is available for rollback; keep local HTTP fallback available.
+Render Free sleeps after inactivity. Warm the service before rehearsal. Three warm default-scenario measurements were 2.578, 2.659, and 2.095 seconds, above the two-second target. The project owner accepts this latency for the hackathon mock demo; cold-start latency remains unmeasured and may be longer. Prior smoke-checked deployment `dep-darunmg473hc73fbpsdg` remains in Render history as rollback target; keep local HTTP fallback available.
 
 ## Failure handling
 
@@ -38,7 +38,8 @@ API errors retain prior simulation output with an error/retry state. Invalid inp
 - [x] Twenty synthetic metros and five reference fixtures.
 - [x] Explainable ranking and finite seeded fleet operations.
 - [x] No mixing synthetic and verified modes.
-- [x] Render mock backend deployed, measured, and smoke checked.
+- [x] Render mock backend deployed, measured, and smoke checked; owner accepts warm simulation latency above two seconds for the hackathon demo.
 - [ ] Eight verified ranked candidates with official evidence.
-- [ ] Default-scenario timing below two seconds and hosted frontend connection.
-- [ ] Remote CI success and deployed rehearsal.
+- [ ] Hosted frontend connection.
+- [x] GitHub Actions run #23 passed on PR commit `9674d85`, including the new startup test.
+- [ ] Deployed rehearsal.

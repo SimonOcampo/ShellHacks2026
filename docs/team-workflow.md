@@ -47,8 +47,8 @@ Each task names an owner, bounded files, an output, and proof. Start the indepen
 - **Paths:** deployment files and necessary backend configuration only.
 - **Inputs:** verified release path and Vercel origin when available. A mock deployment may be used earlier if its UI is visibly labeled.
 - **Output:** reachable Render service, `/health`, and deployment/release IDs.
-- **Proof:** API smoke tests against the deployed service and default-scenario timing below the two-second target. Record actual results. Preserve the prior image/release for rollback. Do not claim production readiness before a verified release is selected.
-- **Status:** Closed for the mock backend deployment on 2026-09-26. The service is live and its results are recorded. The two-second timing target and healthy-image rollback remain open integration gates; neither is claimed as passed.
+- **Proof:** Run API smoke tests against the deployed service and measure the default scenario against the two-second target. Record actual results. The project owner may accept slower latency for the hackathon mock demo; do not report it as meeting the target. Preserve the prior image/release for rollback. Do not claim production readiness before a verified release is selected.
+- **Status:** Closed for the mock backend deployment on 2026-09-26. Live deployment `dep-darv61avcj2c73acjng0` serves mock release `mock.v1`. Three warm default simulations took 2.578, 2.659, and 2.095 seconds on Render Free. The project owner accepts latency above two seconds for the hackathon mock demo; the measured target remains unmet. Render retains prior smoke-checked deployment `dep-darunmg473hc73fbpsdg` (commit `23679e6`) as a rollback target. No rollback was performed.
 
 **P1. Add live explanation service after P0.**
 
@@ -93,16 +93,16 @@ Developer 1 must not change frontend or simulation. Developer 2 must not change 
 2. Twenty mocks display through HTTP, selection/explanation/simulation work.
 3. Ranking and seeded simulation tests pass; UI consumes real engines.
 4. Eight verified candidates and reference evidence replace mock ranking release.
-5. Host deployment, visual flow, errors, and performance pass.
+5. Host deployment, visual flow, and errors pass. Measure performance against the two-second target and record any owner-accepted demo exception.
 6. Freeze release, rehearse, keep rollback/local fallback.
 
 ## Backlog status
 
 **P0 delivered locally:** monorepo, contracts/types, twenty-metro mock release, engines, HTTP integration, map, rankings, controls, factor/source drawer, template explanations, simulation, KPIs/charts/playback, environment example, docs, CI definition, deployment definitions.
 
-**P0 closed — Developer 2 mock backend deployment:** Render service `srv-dartlbm0tbcc73d0lmug` is live on deployment `dep-darunmg473hc73fbpsdg`, commit `23679e6`, release `mock.v1`. Health and API smoke checks pass. The actual timing and rollback limitations are recorded in `docs/verification.md`.
+**P0 closed — Developer 2 mock backend deployment:** Render service `srv-dartlbm0tbcc73d0lmug` is live on deployment `dep-darv61avcj2c73acjng0`, commit `329076b`, release `mock.v1`. Health and API smoke checks pass. The project owner accepts warm simulation latency above two seconds for the hackathon demo. Prior smoke-checked deployment `dep-darunmg473hc73fbpsdg` remains in Render history as rollback target. Details are recorded in `docs/verification.md`.
 
-**P0 outstanding:** Developer 1 must complete official ingestion/harmonization and publish eight verified candidates. Developer 3 must deploy the frontend, verify its hosted connection, and rehearse the deployed flow. Two warm default-scenario requests took 2.67 and 2.76 seconds on Render Free, exceeding the two-second integration target. Earlier deployment attempts failed, so no earlier healthy image is available for rollback. Remote CI status remains unverified. Do not claim production readiness before a verified release is selected.
+**P0 outstanding:** Developer 1 must complete official ingestion/harmonization and publish eight verified candidates. Developer 3 must deploy the frontend, verify its hosted connection, and rehearse the deployed flow. GitHub Actions run #23 passed on PR commit `9674d85`, including the new startup test. Do not claim production readiness before a verified release is selected.
 
 **P1/P2:** assigned to owners above. Defer until verified P0 passes.
 
