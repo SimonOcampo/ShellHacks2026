@@ -10,6 +10,19 @@ Count = Annotated[int, Field(ge=0)]
 Pillar = Literal["familiarity", "readiness", "opportunity"]
 DataMode = Literal["mock", "verified"]
 FeatureKey = Literal["annual_precipitation_mm", "annual_snowfall_mm", "hot_days_32c", "mean_commute_minutes", "public_dc_ports_per_100k", "population_share_in_counties_with_dc", "population", "population_density_per_km2", "zero_vehicle_household_share", "transit_commute_share", "road_density_km_per_km2", "intersection_density_per_km2", "average_aadt", "lane_miles_per_km2", "freeway_share", "arterial_share", "local_road_share"]
+RANKING_FEATURE_KEYS = frozenset({
+    "annual_precipitation_mm", "annual_snowfall_mm", "hot_days_32c",
+    "mean_commute_minutes", "road_density_km_per_km2",
+    "intersection_density_per_km2", "freeway_share", "arterial_share",
+    "local_road_share", "public_dc_ports_per_100k",
+    "population_share_in_counties_with_dc", "population",
+    "population_density_per_km2", "zero_vehicle_household_share",
+    "transit_commute_share",
+})
+OPTIONAL_INFORMATIONAL_FEATURE_KEYS = frozenset({
+    "average_aadt", "lane_miles_per_km2",
+})
+KNOWN_MEASUREMENT_KEYS = RANKING_FEATURE_KEYS | OPTIONAL_INFORMATIONAL_FEATURE_KEYS
 
 class DTO(BaseModel):
     model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
@@ -66,7 +79,7 @@ class LegalEvidence(DTO):
 
 class CityFeature(DTO):
     versions: VersionStamp
-    city_id: str
+    city_id: Annotated[str, Field(pattern=r"^\d{5}$")]
     display_name: str
     official_name: str
     geography_type: Literal["cbsa"]
@@ -86,8 +99,7 @@ class CityFeature(DTO):
         dangling = {pid for m in self.features.values() for pid in m.provenance_ids} - set(ids)
         if dangling:
             raise ValueError(f"measurements reference absent provenance IDs: {sorted(dangling)}")
-        expected = {"annual_precipitation_mm", "annual_snowfall_mm", "hot_days_32c", "mean_commute_minutes", "public_dc_ports_per_100k", "population_share_in_counties_with_dc", "population", "population_density_per_km2", "zero_vehicle_household_share", "transit_commute_share", "road_density_km_per_km2", "intersection_density_per_km2", "average_aadt", "lane_miles_per_km2", "freeway_share", "arterial_share", "local_road_share"}
-        if set(self.features) != expected:
+        if set(self.features) != KNOWN_MEASUREMENT_KEYS:
             raise ValueError("CityFeature must contain exactly the registered measurements")
         for key, measurement in self.features.items():
             if measurement.value is not None and key in {"annual_precipitation_mm", "annual_snowfall_mm", "hot_days_32c", "public_dc_ports_per_100k", "population", "population_density_per_km2", "mean_commute_minutes", "road_density_km_per_km2", "intersection_density_per_km2", "average_aadt", "lane_miles_per_km2"} and measurement.value < 0:

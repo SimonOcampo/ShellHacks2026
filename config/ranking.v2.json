@@ -1,0 +1,31 @@
+{
+  "model_version": "ranking.v2",
+  "weights": {
+    "familiarity": 0.4,
+    "readiness": 0.2,
+    "opportunity": 0.4
+  },
+  "candidate_cbsa_codes": [
+    "10740", "13820", "18140", "17140", "21340",
+    "25540", "32820", "33340", "31140", "26900",
+    "27260", "28140", "17410", "39580", "47260",
+    "40060", "41620", "46140", "39300", "36420"
+  ],
+  "features": [
+    {"key":"annual_precipitation_mm","label":"Annual precipitation","pillar":"familiarity","unit":"mm/year","transform":"log1p","weight":0.10,"definition":"1991–2020 annual precipitation normal; station proxy."},
+    {"key":"annual_snowfall_mm","label":"Annual snowfall","pillar":"familiarity","unit":"mm/year","transform":"log1p","weight":0.10,"definition":"1991–2020 annual snowfall normal; missing is not zero."},
+    {"key":"hot_days_32c","label":"Days at or above 90°F","pillar":"familiarity","unit":"days/year","transform":"linear","weight":0.10,"maximum":366,"definition":"Days with maximum temperature at least 90°F (32.2°C)."},
+    {"key":"mean_commute_minutes","label":"Mean commute","pillar":"familiarity","unit":"minutes","transform":"linear","weight":0.20,"definition":"Grouped ACS duration estimate; commuting proxy, not measured congestion."},
+    {"key":"road_density_km_per_km2","label":"Road density","pillar":"familiarity","unit":"km/km2","transform":"log1p","weight":0.10,"definition":"TIGER road centerline km per CBSA land km²."},
+    {"key":"intersection_density_per_km2","label":"Intersection density","pillar":"familiarity","unit":"intersections/km2","transform":"log1p","weight":0.10,"definition":"Consolidated TIGER network junctions per CBSA land km²."},
+    {"key":"freeway_share","label":"Freeway share","pillar":"familiarity","unit":"fraction","transform":"linear","weight":0.10,"maximum":1,"definition":"Share of included road length classified as freeway or ramp."},
+    {"key":"arterial_share","label":"Arterial share","pillar":"familiarity","unit":"fraction","transform":"linear","weight":0.10,"maximum":1,"definition":"Share of included road length classified as secondary roads."},
+    {"key":"local_road_share","label":"Local road share","pillar":"familiarity","unit":"fraction","transform":"linear","weight":0.10,"maximum":1,"definition":"Share of included road length classified as local, service, or alley roads."},
+    {"key":"public_dc_ports_per_100k","label":"Public DC charging","pillar":"readiness","unit":"ports/100,000 persons","transform":"log1p","weight":0.70,"definition":"Operational public DC ports divided by population times 100,000. Not secured fleet capacity."},
+    {"key":"population_share_in_counties_with_dc","label":"County charging coverage","pillar":"readiness","unit":"fraction of CBSA population","transform":"linear","weight":0.30,"maximum":1,"definition":"Population share in counties with at least one operational public DC port; not travel-time access."},
+    {"key":"population","label":"Resident population","pillar":"opportunity","unit":"persons","transform":"log1p","weight":0.30,"definition":"ACS resident population; not observed ride-hailing demand."},
+    {"key":"population_density_per_km2","label":"Population density","pillar":"opportunity","unit":"persons/km2","transform":"log1p","weight":0.25,"definition":"Population divided by CBSA land area excluding water."},
+    {"key":"zero_vehicle_household_share","label":"Zero-vehicle households","pillar":"opportunity","unit":"fraction of households","transform":"linear","weight":0.30,"maximum":1,"definition":"Households without an available vehicle divided by all households."},
+    {"key":"transit_commute_share","label":"Transit commute share","pillar":"opportunity","unit":"fraction of workers 16+","transform":"linear","weight":0.15,"maximum":1,"definition":"Public transit commuters divided by applicable workers; transit also competes with ride-hailing."}
+  ]
+}

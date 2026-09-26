@@ -6,12 +6,14 @@ from contracts.models import (
     CityScore,
     DataRelease,
     FactorResult,
+    RANKING_V2_KEYS,
     PillarScores,
     PillarWeights,
     RankingRequest,
     RankingResult,
     ReferenceMatch,
 )
+from odd_ranking.normalization import normalize_value
 
 
 def digest(value) -> str:
@@ -22,11 +24,15 @@ def digest(value) -> str:
     ).hexdigest()[:20]
 
 
-def transform(value: float, method: str) -> float:
-    return math.log1p(value) if method == "log1p" else value
-
-
 def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
+    if release.versions.model_version == "ranking.v2" and {
+        feature.key for feature in release.features
+    } != RANKING_V2_KEYS:
+        raise ValueError("ranking.v2 requires exactly 15 active scoring features")
+    if release.versions.model_version not in {"ranking.v1", "ranking.v2"}:
+        raise ValueError(
+            f"Unsupported ranking model version: {release.versions.model_version}"
+        )
     cities = {c.city_id: c for c in release.cities}
     reference_map = {r.id: r for r in release.references}
     selected = (
@@ -59,22 +65,15 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
     def complete(city):
         return all(
             f.key in city.features and city.features[f.key].value is not None
-            for f in active
+            for f in release.features
         )
 
     def normalized(city, feature):
         b = release.bounds[feature.key]
-        return min(
-            1.0,
-            max(
-                0.0,
-                (
-                    transform(city.features[feature.key].value, feature.transform)
-                    - b.lower
-                )
-                / (b.upper - b.lower),
-            ),
-        )
+        value = normalize_value(city.features[feature.key].value, feature, b)
+        if value is None:
+            raise ValueError(f"Constant feature entered active scoring: {feature.key}")
+        return value
 
     for ref_id in selected:
         if not complete(cities[reference_map[ref_id].city_id]):
@@ -85,7 +84,7 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
         city = cities[city_id]
         missing = [
             f.key
-            for f in active
+            for f in release.features
             if f.key not in city.features or city.features[f.key].value is None
         ]
         reasons = [f"Missing feature: {f}" for f in missing]
@@ -176,7 +175,9 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
                 if reasons
                 else sum(weights[p] * scores[p] for p in weights),
                 pillars=PillarScores(**scores),
-                coverage=(len(active) - len(missing)) / len(active) if active else 0,
+                coverage=(len(release.features) - len(missing)) / len(release.features)
+                if release.features
+                else 0,
                 exclusion_reasons=reasons,
                 factors=factors,
                 reference_matches=matches[:3],

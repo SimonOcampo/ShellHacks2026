@@ -8,31 +8,28 @@ During implementation, the Census API returned a Missing Key page. The old AFDC 
 
 ## Offline pipeline
 
-1. Acquire official raw snapshots; never fetch on page load.
-2. Preserve bytes under content-hashed filenames in `data/raw`.
-3. Record safe URL, dataset, query excluding credentials, period, retrieval time, geography, license notes, hash, and file location in `data/manifests`.
-4. Transform through source adapters. Retain source variable IDs and uncertainty metadata in the prepared record's provenance/assumptions.
-5. Harmonize to a frozen CBSA vintage.
-6. Assemble canonical CityFeature records and dated reference evidence.
-7. Freeze normalization across complete candidates/references.
-8. Publish an immutable, validated release with at least eight ranked candidates.
+The implemented source pipeline builds internal city records from saved public snapshots. It keeps raw data separate from processed values, records provenance, and does not fetch data on page load. Internal IDs use bare five-digit CBSA codes. The release boundary converts them to the canonical API form `cbsa:<code>`.
 
 ```sh
-uv run python -m adapters.acquire acs
-uv run python -m adapters.acquire afdc
-uv run python -m adapters.acquire noaa --station USW00012839
-uv run python -m adapters.publish prepared-release.json data/releases/verified.v1.json
+uv run python -m src.pipeline.run_all --download --process
+uv run python -m src.pipeline.export_release
 ```
 
-Acquisition retries preserve existing content-addressed bytes and manifests. Publisher validates raw evidence hashes, refuses overwrite with changed content, and uses an atomic final rename. Repeating identical publication is a no-op. Failures remain explicit. Changing source meaning requires a new feature/model version, not a silent adapter swap.
+The exporter reads `data/processed/cities/all_city_features.json`, the dated reference-market records, and `config/ranking.v2.json`. It uses the canonical `packages/contracts/models.py` models, freezes transformed bounds across complete candidates and enabled references, and refuses to overwrite a different output file. It requires complete enabled references and at least eight complete ranked candidates. A pipeline run that cannot pass these gates leaves the runtime's current mock release unchanged.
 
-`prepared-release.json` follows DataRelease with CityFeature records; `bounds` and `normalization_cohort` are recomputed by the publisher. No prepared official bundle is provided yet. The adapters expose these pure transforms:
+To inspect current processed data without publishing, run `uv run python -m odd_ranking.publish_v2`. It writes `data/audits/ranking.v2-normalization.json`, an audit-only artifact with cohort IDs, transformed bounds, missing and invalid measurement details, provenance links, and per-city raw-to-normalized rows. It also traces one candidate and one reference through the ranking engine. The audit command does not rewrite processed city files or release files.
+
+Release export fails closed when a measurement has a numeric value but is marked missing, carries a missing reason, or lacks provenance. Audit-only handling treats such a measurement as unavailable in its in-memory release copy, retains the original numeric source value in the audit, and excludes the record under complete-case policy. It never rewrites that processed measurement.
+
+The active registry has 15 required ranking measurements. `average_aadt` and `lane_miles_per_km2` are optional informational fields and do not enter scoring. If present but unavailable, they carry a null value and explicit missing reason. Missing scoring measurements remain incomplete; they are never imputed.
+
+The source adapters expose these pure transforms:
 
 - `acs_features(row, land_area_km2)`: table-specific estimates to five canonical features.
 - `noaa_features(decoded_stations, latitude, longitude)`: three complete nearest stations within 100 km, or an error.
 - `charging_features(joined_stations, county_populations, metro_population)`: operational public DC counts and county coverage.
 
-The remaining data work is official geography acquisition, ACS credential-backed acquisition, NOAA product decoding, point-in-polygon joining, reference-status research, and assembly of the verified bundle. These are not implemented as imaginary data fallbacks. An AFDC snapshot of 82,340 records and a Miami NOAA station CSV were acquired with committed manifests; their raw bytes remain ignored locally. These partial sources do not establish a verified leaderboard.
+The remaining release work is to pass completeness and provenance gates with official geography, ACS, NOAA, AFDC, and dated reference inputs. Missing or incomplete sources remain explicit; the pipeline does not provide imaginary data fallbacks. An AFDC snapshot and NOAA station data are available locally, but partial sources do not establish a verified leaderboard.
 
 ## Source conventions
 
