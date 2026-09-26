@@ -1,0 +1,297 @@
+{
+  "afdc_url_correction": "developer.nrel.gov to developer.nlr.gov; preserved raw hashes, dates, and all charging measurements",
+  "commute_method": "Divide B08013_E001 aggregate travel minutes by B08303_E001 workers. Both ACS universes are workers age 16+ who did not work from home.",
+  "commute_observations": {
+    "10740": {
+      "B08013_E001": 9022405.0,
+      "B08013_M001": 171908.0,
+      "B08303_E001": 363427.0,
+      "B08303_M001": 3968.0,
+      "mean_commute_minutes": 24.825907266108462
+    },
+    "12060": {
+      "B08013_E001": 76506050.0,
+      "B08013_M001": 575684.0,
+      "B08303_E001": 2464155.0,
+      "B08303_M001": 12600.0,
+      "mean_commute_minutes": 31.04758020497899
+    },
+    "12420": {
+      "B08013_E001": 26280460.0,
+      "B08013_M001": 269395.0,
+      "B08303_E001": 963018.0,
+      "B08303_M001": 7015.0,
+      "mean_commute_minutes": 27.289687212492392
+    },
+    "13820": {
+      "B08013_E001": 13005760.0,
+      "B08013_M001": 199599.0,
+      "B08303_E001": 481528.0,
+      "B08303_M001": 4355.0,
+      "mean_commute_minutes": 27.009353557840875
+    },
+    "17140": {
+      "B08013_E001": 23458480.0,
+      "B08013_M001": 263641.0,
+      "B08303_E001": 950029.0,
+      "B08303_M001": 6026.0,
+      "mean_commute_minutes": 24.692383074621933
+    },
+    "17410": {
+      "B08013_E001": 21622590.0,
+      "B08013_M001": 218231.0,
+      "B08303_E001": 894510.0,
+      "B08303_M001": 5321.0,
+      "mean_commute_minutes": 24.172552570681155
+    },
+    "18140": {
+      "B08013_E001": 21045525.0,
+      "B08013_M001": 215071.0,
+      "B08303_E001": 890206.0,
+      "B08303_M001": 5441.0,
+      "mean_commute_minutes": 23.641185298683677
+    },
+    "19100": {
+      "B08013_E001": 92503445.0,
+      "B08013_M001": 507287.0,
+      "B08303_E001": 3313866.0,
+      "B08303_M001": 11694.0,
+      "mean_commute_minutes": 27.9140571767235
+    },
+    "19740": {
+      "B08013_E001": 33969635.0,
+      "B08013_M001": 280471.0,
+      "B08303_E001": 1256847.0,
+      "B08303_M001": 5668.0,
+      "mean_commute_minutes": 27.027661282558658
+    },
+    "21340": {
+      "B08013_E001": 8530145.0,
+      "B08013_M001": 147795.0,
+      "B08303_E001": 353835.0,
+      "B08303_M001": 4087.0,
+      "mean_commute_minutes": 24.10769143809968
+    },
+    "25540": {
+      "B08013_E001": 11623605.0,
+      "B08013_M001": 157256.0,
+      "B08303_E001": 485006.0,
+      "B08303_M001": 3630.0,
+      "mean_commute_minutes": 23.96589939093537
+    },
+    "26420": {
+      "B08013_E001": 90767090.0,
+      "B08013_M001": 553485.0,
+      "B08303_E001": 3032377.0,
+      "B08303_M001": 12758.0,
+      "mean_commute_minutes": 29.932653492623114
+    },
+    "26900": {
+      "B08013_E001": 23008200.0,
+      "B08013_M001": 248543.0,
+      "B08303_E001": 902962.0,
+      "B08303_M001": 5506.0,
+      "mean_commute_minutes": 25.480806501270266
+    },
+    "27260": {
+      "B08013_E001": 17386370.0,
+      "B08013_M001": 214570.0,
+      "B08303_E001": 669967.0,
+      "B08303_M001": 5429.0,
+      "mean_commute_minutes": 25.951084157876434
+    },
+    "28140": {
+      "B08013_E001": 21708695.0,
+      "B08013_M001": 220341.0,
+      "B08303_E001": 935301.0,
+      "B08303_M001": 5247.0,
+      "mean_commute_minutes": 23.2103836091269
+    },
+    "29820": {
+      "B08013_E001": 23799230.0,
+      "B08013_M001": 231541.0,
+      "B08303_E001": 947872.0,
+      "B08303_M001": 5231.0,
+      "mean_commute_minutes": 25.108063114006953
+    },
+    "31080": {
+      "B08013_E001": 152295605.0,
+      "B08013_M001": 584790.0,
+      "B08303_E001": 5160865.0,
+      "B08303_M001": 13640.0,
+      "mean_commute_minutes": 29.509705252898495
+    },
+    "31140": {
+      "B08013_E001": 13955150.0,
+      "B08013_M001": 185249.0,
+      "B08303_E001": 578627.0,
+      "B08303_M001": 4646.0,
+      "mean_commute_minutes": 24.11769585587952
+    },
+    "32820": {
+      "B08013_E001": 13453315.0,
+      "B08013_M001": 194957.0,
+      "B08303_E001": 553545.0,
+      "B08303_M001": 4990.0,
+      "mean_commute_minutes": 24.303922896964114
+    },
+    "33100": {
+      "B08013_E001": 76410570.0,
+      "B08013_M001": 500687.0,
+      "B08303_E001": 2607045.0,
+      "B08303_M001": 9744.0,
+      "mean_commute_minutes": 29.309263936755983
+    },
+    "33340": {
+      "B08013_E001": 15114385.0,
+      "B08013_M001": 154698.0,
+      "B08303_E001": 665030.0,
+      "B08303_M001": 4446.0,
+      "mean_commute_minutes": 22.72737320120897
+    },
+    "34980": {
+      "B08013_E001": 24610775.0,
+      "B08013_M001": 250718.0,
+      "B08303_E001": 885701.0,
+      "B08303_M001": 5667.0,
+      "mean_commute_minutes": 27.786775672602833
+    },
+    "36420": {
+      "B08013_E001": 14667040.0,
+      "B08013_M001": 158963.0,
+      "B08303_E001": 626047.0,
+      "B08303_M001": 3917.0,
+      "mean_commute_minutes": 23.428017385276185
+    },
+    "36740": {
+      "B08013_E001": 33186535.0,
+      "B08013_M001": 342147.0,
+      "B08303_E001": 1137319.0,
+      "B08303_M001": 7476.0,
+      "mean_commute_minutes": 29.179618910789323
+    },
+    "38060": {
+      "B08013_E001": 50963575.0,
+      "B08013_M001": 408707.0,
+      "B08303_E001": 1927852.0,
+      "B08303_M001": 9612.0,
+      "mean_commute_minutes": 26.43541879770854
+    },
+    "39300": {
+      "B08013_E001": 19431550.0,
+      "B08013_M001": 214901.0,
+      "B08303_E001": 731152.0,
+      "B08303_M001": 5330.0,
+      "mean_commute_minutes": 26.576621550648838
+    },
+    "39580": {
+      "B08013_E001": 15176815.0,
+      "B08013_M001": 205566.0,
+      "B08303_E001": 567322.0,
+      "B08303_M001": 5259.0,
+      "mean_commute_minutes": 26.751677178039984
+    },
+    "40060": {
+      "B08013_E001": 13990850.0,
+      "B08013_M001": 173400.0,
+      "B08303_E001": 550249.0,
+      "B08303_M001": 4008.0,
+      "mean_commute_minutes": 25.42639786714742
+    },
+    "41620": {
+      "B08013_E001": 12396050.0,
+      "B08013_M001": 153794.0,
+      "B08303_E001": 543683.0,
+      "B08303_M001": 4576.0,
+      "mean_commute_minutes": 22.800142730230668
+    },
+    "41700": {
+      "B08013_E001": 28747995.0,
+      "B08013_M001": 271097.0,
+      "B08303_E001": 1073303.0,
+      "B08303_M001": 6908.0,
+      "mean_commute_minutes": 26.78460322947015
+    },
+    "41740": {
+      "B08013_E001": 33954335.0,
+      "B08013_M001": 306567.0,
+      "B08303_E001": 1329787.0,
+      "B08303_M001": 8302.0,
+      "mean_commute_minutes": 25.533664413924935
+    },
+    "41860": {
+      "B08013_E001": 54373990.0,
+      "B08013_M001": 403079.0,
+      "B08303_E001": 1753627.0,
+      "B08303_M001": 8509.0,
+      "mean_commute_minutes": 31.00658806006066
+    },
+    "45300": {
+      "B08013_E001": 35542320.0,
+      "B08013_M001": 270542.0,
+      "B08303_E001": 1257786.0,
+      "B08303_M001": 6729.0,
+      "mean_commute_minutes": 28.25784354413231
+    },
+    "46140": {
+      "B08013_E001": 9469470.0,
+      "B08013_M001": 95064.0,
+      "B08303_E001": 429231.0,
+      "B08303_M001": 2363.0,
+      "mean_commute_minutes": 22.06147738630248
+    },
+    "47260": {
+      "B08013_E001": 19536285.0,
+      "B08013_M001": 216039.0,
+      "B08303_E001": 784808.0,
+      "B08303_M001": 4919.0,
+      "mean_commute_minutes": 24.893075758656895
+    }
+  },
+  "default_ranking_id": "e1e3650e5a6a13ca8a48",
+  "enabled_references": 15,
+  "fresh_checks": [
+    "35 matching-universe commute ratios and both input MOEs",
+    "AFDC provenance hostname correction",
+    "canonical contracts",
+    "frozen bounds",
+    "ranking eligibility"
+  ],
+  "inherited_checks": [
+    "demographic ACS estimates and MOEs",
+    "NOAA values, flags, and station selection",
+    "AFDC counts and geographic joins",
+    "dated reference status",
+    "historical raw hashes and provenance resolution"
+  ],
+  "new_sources": [
+    {
+      "bytes": 15207821,
+      "raw_path": "data/data/raw/acs/summary_file/acsdt5y2024-b08013.dat",
+      "sha256": "6939fdfa046fd5bb829ec8da9549e66298cc740f6a3f5dd60e1920a08e3083fb",
+      "source_url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b08013.dat"
+    },
+    {
+      "bytes": 64154309,
+      "raw_path": "data/data/raw/acs/summary_file/acsdt5y2024-b08303.dat",
+      "sha256": "1b9b9243afe6656fa8d760830b0b760e7de759752b49510175fd1853e1c016de",
+      "source_url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b08303.dat"
+    }
+  ],
+  "parent_audit": "data/audits/verified-source-checks.json",
+  "parent_audit_sha256": "a0d0c1e219633e47f08ef015ad045097573bc09bd1d3cf257bb277f88162219e",
+  "parent_manifest_sha256": "00e84d65e2935ee5e202fa03b86be16afb7535ba6ead384e8e0bdbc0439f274f",
+  "parent_release": "data/releases/verified.v1.json",
+  "parent_sha256": "e5099e4612908ced11403498afd6ab62953a44c0b1777c2ef0a19b51dfe737c6",
+  "publication_limitations": [],
+  "ranked_candidates": 20,
+  "release_path": "data/releases/verified.v2.json",
+  "release_sha256": "8533f5fec66352797963cd41a23430642bac6ad0ff0a50569449d013a9445df6",
+  "remaining_limitations": [
+    "Inherited source checks require the original off-repository raw bundle for a full independent replay.",
+    "NOAA station proxies include representative, provisional, and estimated normals, as recorded in the parent audit.",
+    "Input ACS MOEs are not confidence intervals for the derived mean or market score."
+  ],
+  "unranked_candidates": 0,
+  "verification_scope": "Incremental correction; unchanged source checks inherit the hash-matched committed parent audit, not a fresh raw replay."
+}

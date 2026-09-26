@@ -5,8 +5,8 @@ services:
     healthCheckPath: /health
     envVars:
       - key: ODD_DATA_MODE
-        value: mock
+        value: verified
       - key: ODD_DATA_RELEASE
-        value: /app/data/releases/mock.v1.json
+        value: /app/data/releases/verified.v2.json
       - key: ODD_ALLOWED_ORIGINS
         sync: false

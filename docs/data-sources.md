@@ -2,7 +2,27 @@
 
 ## Current status
 
-The only committed release is `mock.v1`. Its ranking measurements are synthetic. A local, uncommitted `data/releases/verified.v1.json` artifact now exists and passes canonical release and ranking eligibility checks; the source-verification status below must be reviewed before selecting it for a deployment.
+The runtime still defaults to synthetic `mock.v1`. The immutable `verified.v1` artifact is retained as a historical release. The corrected `data/releases/verified.v2.json` closes its three publication gaps using fresh Census evidence and the hash-matched prior audit for unchanged sources. It has 20 ranked candidates and 15 enabled references. It has passed local API validation but has not been selected on Render.
+
+## Corrected release, 2026-09-26
+
+`verified.v2` has SHA-256 `8533f5fec66352797963cd41a23430642bac6ad0ff0a50569449d013a9445df6` and default ranking ID `e1e3650e5a6a13ca8a48`. Its data version ends in `__commute-B08013-B08303-r2`; the scoring registry remains `ranking.v2`.
+
+Every candidate and reference now uses 2024 ACS `B08013_E001 / B08303_E001`. Both universes are workers age 16 and over who did not work from home. This also fixes the old summary calculation, which divided aggregate travel minutes by all workers, including home workers. All 35 CBSAs have both input estimates and both reported margins of error. There is no profile fallback or mixture of commute methods. Input MOEs are recorded in `data/audits/verified.v2-source-checks.json`; they are not a calculated confidence interval for the ratio or score. Unrounded ratios can differ from rounded Census profile means.
+
+All AFDC provenance URLs in the new release use `developer.nlr.gov`. Charging measurements, raw hashes, and retrieval dates remain identical to the parent. Normalization bounds were recalculated and frozen for the same 35-city cohort. No other measurement, ranking formula, or reference category changed. The original release bytes remain untouched.
+
+Verification is incremental: the new audit binds the exact parent release, parent audit, parent manifest, and new source files by SHA-256. Existing checks for unchanged ACS demographics, NOAA, charging, geography, and reference evidence are reused from Developer 1's recorded audit. This is not a fresh full replay of the original raw bundle. The old processed city JSON and workbook remain the historical inputs to `verified.v1`; the correction command derives `verified.v2` directly from that immutable release. A future full summary-file build uses the corrected commute transformation as well.
+
+To reproduce the correction or validate an identical existing output from the repository root:
+
+```sh
+uv run --with-editable ./data python -m src.pipeline.correct_release --download
+```
+
+Only two official Census tables are downloaded (about 79 MB combined). Large raw files do not belong in Git and are not required by the API. Retain the original raw/intermediate archive outside Git if a full independent source replay is required. The correction audit includes the 35 selected observations, both input MOEs, source URLs, and hashes. NOAA's lower-completeness station proxies and removed historical road ZIPs remain documented limitations; no new road or climate claims are made.
+
+Local verification passed 78 backend/data tests, with two existing optional tests skipped. Two separate full-source replay tests require the unavailable original raw bundle; they were excluded from the passing run, not counted as passed. The seven API endpoints also passed with the new release, including a request-conserving seven-day simulation. See `docs/verification.md` for commands and results.
 
 During implementation, the Census API returned a Missing Key page. The old AFDC `developer.nrel.gov` hostname failed DNS, while `developer.nlr.gov` returned the public station API successfully. No Census or AFDC secret was available in the local environment. NHTSA access was previously blocked during planning. Do not claim verified data coverage from these access probes.
 
@@ -29,9 +49,9 @@ The source adapters expose these pure transforms:
 - `noaa_features(decoded_stations, latitude, longitude)`: three complete nearest stations within 100 km, or an error.
 - `charging_features(joined_stations, county_populations, metro_population)`: operational public DC counts and county coverage.
 
-The current local release has complete scoring measurements for 20 candidate CBSAs and 15 enabled commercial references. Missing or incomplete sources remain explicit; the pipeline does not provide imaginary data fallbacks. The reproducible source audit is `python -m src.pipeline.verify_release_sources` and its output is `data/audits/verified-source-checks.json`.
+Both historical `verified.v1` and corrected `verified.v2` have complete scoring measurements for 20 candidate CBSAs and 15 enabled commercial references. Missing or incomplete sources remain explicit. The full raw-replay auditor is `python -m src.pipeline.verify_release_sources`; use an explicit `--release` and distinct `--output` when auditing a new version. It requires the original raw/intermediate bundle. The incremental correction command above requires only the two new ACS tables.
 
-## Local release verification, 2026-09-26
+## Historical verified.v1 verification, 2026-09-26
 
 `data/releases/verified.v1.json` is an immutable local artifact with SHA-256 `e5099e4612908ced11403498afd6ab62953a44c0b1777c2ef0a19b51dfe737c6`. The default `RankingResult.ranking_id` is `93edf127d62f0d427f2d`. The canonical `DataRelease` validator and publisher rankability gate pass: 20 ranked candidates, zero unranked candidates, 15 enabled references, and a 35-city frozen normalization cohort. The source audit independently recalculates all 15 transformed feature bounds from that cohort. Re-running the exporter against the current processed JSON leaves the release byte-for-byte unchanged. The local suites pass with 21 ranking tests and 31 data tests. This is local proof, not a deployed API or remote CI result.
 
@@ -41,13 +61,13 @@ The AFDC raw snapshot contains 82,340 unique station IDs. Independent filtering 
 
 All 35 ACS CBSA estimates used for population, vehicle access, and transit shares match the saved 2024 five-year Summary File. Its related MOE columns are present. Census encodes the controlled total-population MOE as `-555555555` for all 35 CBSAs; the auditor records it as controlled, not a numeric MOE. The 30 summary-file aggregate-commute estimates have reported MOEs. The saved profile extract used for Birmingham, El Paso, Memphis, Raleigh, and Tulsa contains `DP03_0025E` estimates but no `DP03_0025M` values. The keyless Census profile endpoint currently returns a Missing Key page, so those five exact commute MOEs remain unverified. The mixed profile-versus-summary commute method also limits direct comparisons. Census documents that the [table-based Summary File](https://www.census.gov/programs-surveys/acs/data/summary-file.html) carries estimates and MOEs together and that [controlled estimates use a special MOE marker](https://www.census.gov/data/developers/data-sets/acs-1year/data-notes.html).
 
-The immutable `verified.v1` release also cites the retired `developer.nrel.gov` AFDC hostname in its provenance, while the saved snapshot was acquired from `developer.nlr.gov`. The pipeline now uses the current host for future exports. Do not rewrite `verified.v1`; publish a new versioned release after the profile MOEs and commute-method decision are resolved. These three items prevent a full source-publication signoff for `verified.v1`.
+The immutable `verified.v1` release also cites the retired `developer.nrel.gov` AFDC hostname in its provenance, while the saved snapshot was acquired from `developer.nlr.gov`. These three items prevent source-publication signoff for `verified.v1` itself. They are corrected in `verified.v2` above; do not rewrite the historical release.
 
 ## Source conventions
 
 **ACS:** [2024 five-year data](https://www.census.gov/programs-surveys/acs/data.html). B01003 population; B08201 household vehicle availability; B08301 commute mode; B08303 commute duration. Acquisition requests estimates and margins of error. Use one matching vintage across metro and county denominators.
 
-Commute bin midpoint assumptions: 2.5, 7, 12, 17, 22, 27, 32, 37, 42, 52, 74.5, and 105 minutes. The >=90-minute bin uses 105 minutes. This is a derived grouped estimate, not an official exact mean.
+For `verified.v2`, commute is the ratio of B08013 aggregate travel minutes to B08303 workers who did not work from home. B08301 remains the denominator for transit mode share, where all workers are the correct universe. No commute bin midpoint approximation is used in this release.
 
 **NOAA:** [1991–2020 normals](https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals). Query standard units and quality attributes; reject invalid reported values or flags. Precipitation and snowfall each use the nearest reporting station within 100 km of the CBSA representative point. Hot days average up to three qualifying stations within 100 km. Record station IDs and distances. Missing snowfall is never interpreted as zero.
 

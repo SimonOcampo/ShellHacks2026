@@ -4,7 +4,7 @@ Made for ShellHacks 2026.
 
 **Public-data market screening and hypothetical fleet simulation. Not an assessment of AV safety or deployment approval.**
 
-Explore candidate U.S. metros, explain transparent scores, and run a reproducible seven-day fleet scenario. The current runnable release contains **20 synthetic candidate metros and five synthetic reference records**. It is visibly marked mock throughout the interface. There is no verified public-data leaderboard yet.
+Explore candidate U.S. metros, explain transparent scores, and run a reproducible seven-day fleet scenario. The default runnable release contains **20 synthetic candidate metros and five synthetic reference records** and is visibly marked mock. The corrected `verified.v2` artifact contains 20 public-data candidates and 15 references and passes local API checks; the deployed backend still uses mock mode.
 
 ## Run locally
 
@@ -61,7 +61,7 @@ uv run python -m contracts.fixtures_export
 
 ## Data status and promotion
 
-Census returned an API-key requirement during implementation. AFDC is accessible through its current NLR host. Source transformations and immutable acquisition/publishing tools exist, but the complete NOAA/geography/ACS/charging harmonization and verified eight-metro release remain outstanding. Do not describe the mock demo as meeting that acceptance criterion.
+Census API requests require a key, but official Summary Files provide a keyless path. The corrected `verified.v2` release resolves the prior commute-method, missing-MOE, and AFDC-host gaps. Its incremental audit reuses Developer 1's hash-matched evidence for unchanged sources. Full raw replay requires the original archive. See [data sources](docs/data-sources.md) for proof, limitations, and the correction command. To select it locally, set `ODD_DATA_MODE=verified` and `ODD_DATA_RELEASE=data/releases/verified.v2.json`.
 
 ```sh
 uv run python -m adapters.acquire acs

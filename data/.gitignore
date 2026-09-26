@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 *.egg-info/
+build/
 
 # Raw government downloads are reproducible inputs and can be very large.
 data/raw/

@@ -2,22 +2,25 @@
 from __future__ import annotations
 from pathlib import Path
 import pandas as pd
+from .commute import read_commutes
 from src.common.http import fetch
 from src.config.settings import ACS_YEAR, RAW, PROCESSED
 
 BASE="https://www2.census.gov/programs-surveys/acs/summary_file/{year}/table-based-SF/data/5YRData/acsdt5y{year}-{table}.dat"
-TABLES={"b01003":["GEO_ID","B01003_E001"],"b08201":["GEO_ID","B08201_E001","B08201_E002"],"b08301":["GEO_ID","B08301_E001","B08301_E010"],"b08136":["GEO_ID","B08136_E001"]}
-TABLE_LABELS={"b01003":"ACS detailed table B01003 population","b08201":"ACS detailed table B08201 households by vehicles available","b08301":"ACS detailed table B08301 commute mode","b08136":"ACS detailed table B08136 aggregate travel time to work"}
+TABLES={"b01003":["GEO_ID","B01003_E001"],"b08201":["GEO_ID","B08201_E001","B08201_E002"],"b08301":["GEO_ID","B08301_E001","B08301_E010"],"b08013":["GEO_ID","B08013_E001"],"b08303":["GEO_ID","B08303_E001"]}
+TABLE_LABELS={"b01003":"ACS detailed table B01003 population","b08201":"ACS detailed table B08201 households by vehicles available","b08301":"ACS detailed table B08301 commute mode","b08013":"ACS detailed table B08013 aggregate travel time excluding home workers","b08303":"ACS detailed table B08303 travel time excluding home workers"}
 MOE_COLUMNS={
     "b01003": ("B01003_E001", "B01003_M001"),
     "b08201": ("B08201_E001", "B08201_M001", "B08201_E002", "B08201_M002"),
     "b08301": ("B08301_E001", "B08301_M001", "B08301_E010", "B08301_M010"),
     "b08136": ("B08136_E001", "B08136_M001"),
+    "b08013": ("B08013_E001", "B08013_M001"),
+    "b08303": ("B08303_E001", "B08303_M001"),
 }
 CONTROLLED_TOTAL_MOE = -555555555
 
 def download(year: int=ACS_YEAR) -> dict[str,Path]:
-    """Download only four required official 5-year summary tables, not the 12 GB archive."""
+    """Download only the required official tables, not the full Summary File archive."""
     out={}
     for table in TABLES:
         url=BASE.format(year=year,table=table)
@@ -42,6 +45,8 @@ def inspect_margins(paths: dict[str, Path], cbsa_codes: set[str]) -> dict[str, d
     """Check the published ACS estimates and MOEs used by configured CBSAs."""
     report = {code: {} for code in cbsa_codes}
     for table, columns in MOE_COLUMNS.items():
+        if table not in paths:
+            continue
         frame = pd.read_csv(paths[table], sep="|", usecols=["GEO_ID", *columns],
                             dtype={"GEO_ID": "string"}, low_memory=False)
         rows = _cbsa_rows(frame)
@@ -88,8 +93,6 @@ def process(paths: dict[str,Path], county_map) -> dict[str,dict]:
             value=_num(row.B01003_E001)
             if value is not None: county_pop[county_to_cbsa[county]][county]=int(value)
     maps={}
-    county_aggregate_minutes={}
-    county_workers={}
     for key,frame in tables.items():
         if key=="b01003":
             cols={"population":"B01003_E001"}
@@ -98,16 +101,10 @@ def process(paths: dict[str,Path], county_map) -> dict[str,dict]:
         elif key=="b08301":
             cols={"workers":"B08301_E001","transit_workers":"B08301_E010"}
         else:
-            cols={"aggregate_commute_minutes":"B08136_E001"}
+            continue
         market=_cbsa_rows(frame)
         maps[key]={row.cbsa_code:{name:_num(getattr(row,col)) for name,col in cols.items()} for row in market.itertuples(index=False)}
-        if key in ("b08136", "b08301"):
-            county_frame=frame[frame.GEO_ID.str.startswith("0500000US")]
-            for row in county_frame.itertuples(index=False):
-                county=str(row.GEO_ID).removeprefix("0500000US")
-                if county not in county_to_cbsa: continue
-                if key=="b08136": county_aggregate_minutes[county]=_num(row.B08136_E001)
-                else: county_workers[county]=_num(row.B08301_E001)
+    commutes = read_commutes(paths, set(county_to_cbsa.values()))
     result={}
     for code in cbsa_codes:
         try:
@@ -116,17 +113,10 @@ def process(paths: dict[str,Path], county_map) -> dict[str,dict]:
             zero=maps["b08201"][code]["zero_vehicle_households"]
             workers=maps["b08301"][code]["workers"]
             transit=maps["b08301"][code]["transit_workers"]
-            total_minutes=maps["b08136"].get(code,{}).get("aggregate_commute_minutes")
         except KeyError:
             continue
         if None in (pop,hh,zero,workers,transit): continue
-        if total_minutes is None:
-            members=[county for county,cbsa in county_to_cbsa.items() if cbsa==code]
-            if members and all(county in county_aggregate_minutes and county_aggregate_minutes[county] is not None and county in county_workers and county_workers[county] is not None for county in members):
-                total_minutes=sum(county_aggregate_minutes[c] for c in members)
-                county_worker_total=sum(county_workers[c] for c in members)
-                if county_worker_total: workers=county_worker_total
-        result[code]={"population":int(pop),"households":int(hh),"zero_vehicle_households":int(zero),"workers":int(workers),"transit_workers":int(transit),"mean_commute_minutes":(total_minutes/workers if total_minutes is not None and workers else None),"zero_vehicle_household_share":zero/hh if hh else None,"transit_commute_share":transit/workers if workers else None,"county_populations":county_pop.get(code,{}),"year":ACS_YEAR,"source_mode":"summary_file"}
+        result[code]={"population":int(pop),"households":int(hh),"zero_vehicle_households":int(zero),"workers":int(workers),"transit_workers":int(transit),"mean_commute_minutes":commutes.get(code,{}).get("mean_commute_minutes"),"zero_vehicle_household_share":zero/hh if hh else None,"transit_commute_share":transit/workers if workers else None,"county_populations":county_pop.get(code,{}),"year":ACS_YEAR,"source_mode":"summary_file"}
     return result
 
 def build_tract_features(paths: dict[str,Path], county_map) -> Path:

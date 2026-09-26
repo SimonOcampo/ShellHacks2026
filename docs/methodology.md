@@ -26,6 +26,8 @@ The expanded scoring model has 15 active variables: 9 Familiarity, 2 Readiness, 
 
 Pillar weights are Familiarity .40, Readiness .20, and Opportunity .40. Two additional road measurements, `average_aadt` and `lane_miles_per_km2`, are optional informational fields. They are not part of the feature registry, normalization bounds, ranking factors, or Expansion Score. They may be absent or null with an explicit missing reason. Missing is never zero.
 
+The corrected `verified.v2` data release uses a single 2024 ACS commute method: `B08013_E001 / B08303_E001`. Both input universes exclude people who worked from home, and both input margins of error are retained in the source audit. This fixes the `verified.v1` source denominator and mixed-method issue without changing the `ranking.v2` registry, weights, or distance formula. The data version and frozen bounds change; historical scores remain tied to their original release. Input MOEs do not establish confidence intervals for the derived ratio or market score.
+
 ## Historical model: `ranking.v1`
 
 The mock `ranking.v1` release records the original ten-variable methodology: four Familiarity climate/commute features, two Readiness features, and four Opportunity features. Its configuration and fixtures remain historical and immutable. The expanded road-network Familiarity variables belong to `ranking.v2`; do not relabel v1 results as v2.

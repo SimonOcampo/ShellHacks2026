@@ -2,6 +2,7 @@
 .venv
 apps
 tests
-data/raw
+data/data/raw
+data/build
 __pycache__
 .env*

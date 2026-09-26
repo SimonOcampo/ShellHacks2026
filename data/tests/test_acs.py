@@ -23,12 +23,13 @@ def test_acs_ratios_use_cbsa_numerators_and_denominators(tmp_path):
     assert result["transit_commute_share"]==0.1
     assert result["mean_commute_minutes"]==24.5
 
-def test_keyless_summary_file_cbsa_geoids_and_county_commute_aggregation(tmp_path):
+def test_keyless_summary_commute_excludes_home_workers_without_changing_transit_denominator(tmp_path):
     rows={
         "b01003":["GEO_ID|B01003_E001", "310M700US12345|1000", "0500000US01001|1000"],
         "b08201":["GEO_ID|B08201_E001|B08201_E002", "310M700US12345|400|40"],
         "b08301":["GEO_ID|B08301_E001|B08301_E010", "310M700US12345|500|50", "0500000US01001|500|50"],
-        "b08136":["GEO_ID|B08136_E001", "0500000US01001|12000"],
+        "b08013":["GEO_ID|B08013_E001|B08013_M001", "310M700US12345|12000|400"],
+        "b08303":["GEO_ID|B08303_E001|B08303_M001", "310M700US12345|400|20"],
     }
     paths={}
     for table,lines in rows.items():
@@ -38,7 +39,25 @@ def test_keyless_summary_file_cbsa_geoids_and_county_commute_aggregation(tmp_pat
     assert result["population"]==1000
     assert result["zero_vehicle_household_share"]==0.1
     assert result["transit_commute_share"]==0.1
-    assert result["mean_commute_minutes"]==24
+    assert result["mean_commute_minutes"]==30
+
+
+@pytest.mark.parametrize("column,value", [
+    ("B08013_M001", ""), ("B08303_M001", "-999999999"),
+    ("B08303_E001", "0"), ("B08013_E001", "nan"),
+])
+def test_commute_rejects_missing_moes_sentinels_and_invalid_denominators(tmp_path, column, value):
+    from src.datasets.acs.commute import read_commutes
+    paths = {}
+    values = {"B08013_E001": "12000", "B08013_M001": "400",
+              "B08303_E001": "400", "B08303_M001": "20", column: value}
+    for table in ("b08013", "b08303"):
+        columns = [f"{table.upper()}_E001", f"{table.upper()}_M001"]
+        paths[table] = tmp_path / f"{table}.dat"
+        paths[table].write_text("GEO_ID|" + "|".join(columns) + "\n310M700US12345|"
+                               + "|".join(values[key] for key in columns) + "\n")
+    with pytest.raises(ValueError):
+        read_commutes(paths, {"12345"})
 
 
 def test_keyless_summary_margins_handle_controlled_population_total(tmp_path):

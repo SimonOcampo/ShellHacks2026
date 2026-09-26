@@ -6,7 +6,7 @@ Use this file as the project checklist. Check an item only after recording its p
 
 ## Current snapshot
 
-- Developer 1 verified release: not published. The keyless official 2024 ACS path, 2024 Census geography, NOAA normals, AFDC snapshot, and dated Waymo reference evidence have produced 35 processed metro records. Only 5 of 20 configured candidates have all 15 ranking measurements; 11 of 15 enabled commercial references are complete. Source validation and publication gates remain open.
+- Developer 1 release artifact: `verified.v2` corrects the commute denominator, uses one ACS method with both input MOEs for all 35 metros, and corrects AFDC provenance URLs. All 20 candidates rank against 15 references. Fresh correction checks and inherited source evidence are recorded in `data/audits/verified.v2-source-checks.json`; a full independent replay still requires the original off-repository raw bundle.
 - Developer 2 contracts and engine: `uv run pytest` passed 45 tests on 2026-09-26 with the new startup test. GitHub Actions run #23 passed on PR commit `9674d85`, including this test.
 - Developer 2 mock deployment: closed for the hackathon demo. Render service `srv-dartlbm0tbcc73d0lmug` runs deployment `dep-darv61avcj2c73acjng0`, commit `329076b`, release `mock.v1`. Owner accepts warm simulation latency above two seconds; this does not pass the original target.
 - Developer 3 connected demo: local flow and browser proof exist. Hosted frontend, exact CORS origin, and deployed rehearsal remain open.
@@ -20,17 +20,17 @@ Paths: `data/`, `packages/ranking/`, ranking/reference configuration, ranking te
 - [x] Use the keyless Census Summary File path for official ACS acquisition. A Census API key is optional and must never enter chat, fixtures, manifests, or commits. Proof: `data/src/datasets/acs/summary_file.py` and the 2024 ACS entries in `data/data/processed/manifests/data_manifest.json`.
 - [x] Ingest official 2024 ACS five-year estimates and matching 2024 CBSA/county geography. Proof: 35 records in `data/data/processed/cities/all_city_features.json` and TIGER/ACS entries in the data manifest.
 - [x] Ingest NOAA 1991–2020 station normals and record station IDs, distances, source hashes, and unit conversions. Proof: `data/src/datasets/noaa/` and NOAA provenance in processed city records.
-- [ ] Finish NOAA source validation: confirm published scale and quality flags, resolve missing precipitation/snowfall normals where defensible, and verify station selection.
+- [x] Finish NOAA source validation. Inherited proof for unchanged measurements: the hash-matched `verified.v1` audit verifies 175 observations, published units and flags, and 105 city-feature station selections. Lower-completeness flags remain documented limitations.
 - [x] Collect an operational public AFDC charging snapshot and filter public, operational DC sites. Proof: AFDC entry in the data manifest and `data/src/datasets/afdc/process.py`.
-- [ ] Deduplicate AFDC station IDs and independently validate port counts and geographic assignments.
-- [x] Record dated public evidence for commercial reference markets. Proof: 15 Waymo records and source provenance in `data/data/processed/reference_markets/`; 11 currently have complete ranking measurements.
+- [x] Deduplicate AFDC station IDs and independently validate port counts and geographic assignments. Inherited proof: the parent audit verifies 4,182 joined sites and 24,739 ports. The adapter rejects conflicting duplicate IDs; `verified.v2` corrects provenance URLs without changing measurements.
+- [x] Record dated public evidence for commercial reference markets. Proof: 15 Waymo records and source provenance in `data/data/processed/reference_markets/`; all 15 references have complete measurements in `verified.v2`.
 - [x] Join processed sources to 2024 CBSA/county geography and record source hashes without overwriting raw snapshots. Proof: data manifest, processed city provenance, and `data/tests/test_city_features.py`. NOAA normals retain their distinct 1991–2020 climate period.
-- [ ] Publish an immutable, provenance-complete release with at least eight fully measured candidate metros, frozen normalization bounds, and eligible commercial references.
+- [x] Publish an immutable release with at least eight fully measured candidate metros, frozen normalization bounds, and eligible references. `verified.v2` contains 20 complete candidates, 15 enabled references, a 35-city frozen cohort, and source hashes resolved through the parent manifest plus the correction audit. Publication proof is local; deployment remains a separate gate.
 - [x] Keep incomplete candidates unranked and reject synthetic evidence in verified releases. Proof: `packages/ranking/odd_ranking/engine.py`, `packages/contracts/models.py`, `data/src/pipeline/export_release.py`, and ranking tests.
 - [x] Add focused tests for geography joins, ACS denominators, NOAA transformations, reference status, missing measurements, and publisher behavior. Proof: `data/tests/` and `tests/ranking/`.
-- [ ] Complete source and release verification: ACS margins of error, NOAA scale and quality flags, AFDC deduplication and counts, reference dates, candidate completeness, and verified-startup behavior. The data test suite still needs its declared dependencies in the test environment.
+- [x] Complete incremental source and release verification. All 35 commutes have fresh estimate/MOE checks; unchanged sources reuse the exact parent audit. Local verified startup and all seven API checks pass. With declared data dependencies, 78 tests pass and two optional tests skip. Two full raw-replay tests remain unavailable without the original bundle; no fresh full-replay pass is claimed.
 - [x] Run ranking tests. `uv run pytest tests/ranking -q`: 21 passed on 2026-09-26.
-- [ ] Record the verified release ID and publication proof in `docs/data-sources.md` after the release passes its gates.
+- [x] Record `verified.v2`, its SHA-256, ranking ID, verification scope, and publication proof in `docs/data-sources.md`.
 
 ### Developer 2 — Keep contracts and engine gates green
 
@@ -45,8 +45,8 @@ Paths: `backend/`, `packages/contracts/`, `tests/contracts/`, `tests/simulation/
 - [x] Test mock/verified separation and verified startup candidate threshold. Threshold test rejects seven ranked candidates and accepts eight without fabricating verified measurements.
 - [x] Run `uv run pytest` after updating from `main`: 45 passed on 2026-09-26. An earlier local full CI run passed 30 tests, OpenAPI and TypeScript generation with no drift, frontend typecheck and build, and Playwright E2E (2 passed).
 - [x] GitHub Actions run #23 passed on PR commit `9674d85`, including the startup test.
-- [ ] Validate startup against Developer 1’s real verified release when available. No verified release exists yet.
-- [ ] Validate production CORS with Developer 3’s exact hosted origin when available.
+- [x] Validate startup against Developer 1’s committed `verified.v1` release. On 2026-09-26, the actual FastAPI lifespan loaded the release and seven local API checks passed: health, config, city list/detail, rankings, explanation, and a default seven-day simulation. All 20 candidates ranked against 15 references. Explicit mock fallback also passed. Proof and release hash: `docs/verification.md`. This validates backend compatibility, not source-publication signoff.
+- [ ] Validate production CORS with Developer 3’s exact hosted origin when available. This remains dependent on the hosted frontend origin.
 
 ### Developer 2 — Deploy backend and measure it
 
@@ -58,7 +58,7 @@ Paths: deployment files and necessary backend configuration only.
 - [x] Record owner acceptance of latency above two seconds for the hackathon mock demo. Do not claim the original two-second target passed.
 - [x] Preserve prior smoke-checked deployment `dep-darunmg473hc73fbpsdg` (commit `23679e6`) in Render deployment history as rollback target. No rollback was performed.
 - [x] Keep local HTTP mode as fallback.
-- [ ] Select a verified release only after Developer 1 publishes and startup validation passes. Keep mock label visible until then.
+- [ ] Select the corrected `verified.v2` release on the backend, rerun deployed smoke checks, and record deployment and rollback identifiers. Local release and startup gates pass; Render remains on mock until this deployment step is completed.
 
 ### Developer 3 — Finish and rehearse connected demo
 
@@ -75,7 +75,7 @@ Paths: `apps/web/`, browser tests, and `docs/demo-runbook.md`.
 ## Shared integration sequence
 
 - [ ] Review the clean `main` scaffold and current contracts across all three owners.
-- [ ] Publish Developer 1’s verified release while Developers 2 and 3 keep mock integration working.
+- [x] Publish Developer 1’s corrected release artifact while Developers 2 and 3 keep mock integration working. `verified.v2` has local source-correction and API proof; deployment is the next gate.
 - [ ] Have Developer 2 validate the verified release at startup and deploy it. Have Developer 3 use the backend URL and rehearse the hosted flow.
 - [ ] For each shared contract or release change, review affected consumers, regenerate artifacts, update fixtures, and rerun relevant gates.
 - [ ] Freeze the verified release; rehearse rollback and local fallback; capture the final demo result.

@@ -18,7 +18,7 @@ Each task names an owner, bounded files, an output, and proof. Start the indepen
 - **Inputs:** official 2024 ACS five-year estimates and matching CBSA/county geography; NOAA 1991–2020 station normals; operational public AFDC charging snapshot; dated public evidence for reference-market status.
 - **Output:** immutable, provenance-complete release with at least eight fully measured candidate metros, eligible commercial reference markets, frozen geographic vintage and normalization bounds. Keep incomplete candidates visibly unranked. Never promote synthetic measurements.
 - **Proof:** verify source hashes, joins, ACS denominators and margins of error, NOAA scale/quality flags and station distances, AFDC deduplication/status/port counts, reference evidence dates, candidate completeness, and ranking formula tests. Run `uv run python -m src.pipeline.export_release` from the repository root to validate canonical `DataRelease` compatibility and publisher gates. Do not select a verified release until at least eight candidates rank against complete enabled references.
-- **Blocker:** obtain the required Census API key through the team's approved local setup. Never paste the key into chat, fixtures, manifests, or commits. If unavailable, report the exact acquisition blocker; keep mock mode and do not claim verified P0.
+- **Source access:** the corrected release uses keyless Census Summary Files for consistent commute estimates and input MOEs. The original raw/intermediate archive remains necessary only for a full independent replay of inherited source checks. Never paste optional API keys into chat, fixtures, manifests, or commits.
 
 **P1. Expand and improve the ranking.**
 
@@ -102,7 +102,7 @@ Developer 1 must not change frontend or simulation. Developer 2 must not change 
 
 **P0 closed — Developer 2 mock backend deployment:** Render service `srv-dartlbm0tbcc73d0lmug` is live on deployment `dep-darv61avcj2c73acjng0`, commit `329076b`, release `mock.v1`. Health and API smoke checks pass. The project owner accepts warm simulation latency above two seconds for the hackathon demo. Prior smoke-checked deployment `dep-darunmg473hc73fbpsdg` remains in Render history as rollback target. Details are recorded in `docs/verification.md`.
 
-**P0 outstanding:** Developer 1 must complete official ingestion/harmonization and publish eight verified candidates. Developer 3 must deploy the frontend, verify its hosted connection, and rehearse the deployed flow. GitHub Actions run #23 passed on PR commit `9674d85`, including the new startup test. Do not claim production readiness before a verified release is selected.
+**P0 outstanding:** `verified.v2` now provides 20 ranked candidates with local correction and backend proof; see `docs/data-sources.md` for inherited audit scope and raw-replay limits. Developer 2 must select the corrected release on Render and validate the exact hosted frontend origin. Developer 3 must deploy the frontend, verify its hosted connection, and rehearse the deployed flow. GitHub Actions run #23 is historical proof for commit `9674d85`, not remote CI proof for this correction. Do not claim production readiness before deployment and hosted integration pass.
 
 **P1/P2:** assigned to owners above. Defer until verified P0 passes.
 

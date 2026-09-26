@@ -16,6 +16,7 @@ from contracts.models import DataRelease, RankingRequest
 from odd_ranking.engine import rank
 from odd_ranking.normalization import freeze_bounds
 from src.datasets.acs.summary_file import inspect_margins
+from src.datasets.acs.commute import TABLES as COMMUTE_TABLES, read_commutes
 from src.datasets.noaa.download import _distance_km, _published_normal
 from src.datasets.census_geography.load import load_layer
 from src.datasets.census_geography.process import resolve_markets
@@ -54,6 +55,10 @@ def verify_manifest() -> dict:
 def verify_release_provenance(release: DataRelease) -> dict:
     manifest = json.loads((PROCESSED / "manifests" / "data_manifest.json").read_text(encoding="utf-8"))
     saved_hashes = {item["sha256"] for item in manifest["datasets"]}
+    for table in COMMUTE_TABLES:
+        path = RAW / "acs" / "summary_file" / f"acsdt5y2024-{table}.dat"
+        if path.exists():
+            saved_hashes.add(hashlib.sha256(path.read_bytes()).hexdigest())
     sources = [source for city in release.cities for source in city.provenance]
     missing = sorted({source.raw_sha256 for source in sources} - saved_hashes)
     if missing:
@@ -194,9 +199,16 @@ def verify_noaa_station_selection(release: DataRelease) -> dict:
 
 
 def verify_acs(release: DataRelease) -> dict:
+    corrected = all(
+        {f"acs_summary_2024_{table}" for table in COMMUTE_TABLES}
+        <= {source.dataset_id for source in city.provenance
+            if source.id in city.features["mean_commute_minutes"].provenance_ids}
+        for city in release.cities
+    )
     paths = {table: RAW / "acs" / "summary_file" / f"acsdt5y2024-{table}.dat"
-             for table in ("b01003", "b08201", "b08301", "b08136")}
+             for table in ("b01003", "b08201", "b08301", *(COMMUTE_TABLES if corrected else ("b08136",)))}
     codes = {city.city_id.removeprefix("cbsa:") for city in release.cities}
+    commutes = read_commutes(paths, codes) if corrected else None
     margins = inspect_margins(paths, codes)
     profile_fallback = []
     for city in release.cities:
@@ -212,7 +224,11 @@ def verify_acs(release: DataRelease) -> dict:
                               ("transit_commute_share", transit / workers)):
             if not math.isclose(city.features[key].value, expected, rel_tol=0, abs_tol=1e-10):
                 raise ValueError(f"ACS estimate mismatch: {city.city_id} {key}")
-        if "b08136" in tables:
+        if commutes is not None:
+            if not math.isclose(city.features["mean_commute_minutes"].value,
+                                commutes[code]["mean_commute_minutes"], rel_tol=0, abs_tol=1e-10):
+                raise ValueError(f"ACS matching-universe commute mismatch: {city.city_id}")
+        elif "b08136" in tables:
             commute = tables["b08136"]["B08136_E001"]["value"] / workers
             if not math.isclose(city.features["mean_commute_minutes"].value, commute,
                                 rel_tol=0, abs_tol=1e-10):
@@ -249,7 +265,8 @@ def verify_acs(release: DataRelease) -> dict:
                 row["b08301"]["B08301_M010"]["value"] /
                 row["b08301"]["B08301_E010"]["value"]
                 for row in margins.values()),
-            "summary_commute_moes_reported": sum("b08136" in row for row in margins.values()),
+            "summary_commute_moes_reported": len(codes) if corrected else sum("b08136" in row for row in margins.values()),
+            "matching_universe_commutes": len(codes) if corrected else 0,
             "profile_commute_estimates_without_saved_moe": sorted(profile_fallback)}
 
 
@@ -359,6 +376,14 @@ def build_report(release_path: Path = RELEASE) -> dict:
     ranking = rank(release, RankingRequest())
     if len(ranking.ranked) < 8 or ranking.unranked:
         raise ValueError("Verified release does not satisfy target ranking gate")
+    acs = verify_acs(release)
+    limitations = []
+    if acs["profile_commute_estimates_without_saved_moe"]:
+        limitations.append("The saved Census DP03 profile extract has estimates but no DP03_0025M MOEs for five fallback commutes.")
+        if acs["summary_commute_moes_reported"]:
+            limitations.append("Five profile commute estimates and 30 summary-file ratios use different methods.")
+    if any("developer.nrel.gov" in source.source_url for city in release.cities for source in city.provenance):
+        limitations.append("The immutable verified.v1 release cites the retired developer.nrel.gov AFDC host; the current source is developer.nlr.gov.")
     return {"release_path": release_path.relative_to(ROOT).as_posix(),
             "release_sha256": hashlib.sha256(release_bytes).hexdigest(),
             "default_ranking_id": ranking.ranking_id,
@@ -369,13 +394,9 @@ def build_report(release_path: Path = RELEASE) -> dict:
             "frozen_bounds": verify_frozen_bounds(release),
             "noaa": verify_noaa(release),
             "noaa_station_selection": verify_noaa_station_selection(release),
-            "acs": verify_acs(release), "afdc": verify_afdc(release),
+            "acs": acs, "afdc": verify_afdc(release),
             "references": verify_references(release),
-            "publication_limitations": [
-                "The saved Census DP03 profile extract has estimates but no DP03_0025M MOEs for five fallback commutes.",
-                "The immutable verified.v1 release cites the retired developer.nrel.gov AFDC host; the current source is developer.nlr.gov.",
-                "Five profile commute estimates and 30 summary-file ratios use different methods."
-            ]}
+            "publication_limitations": limitations}
 
 
 def main() -> None:
