@@ -1,0 +1,7 @@
+"""Authoritative dataset endpoints and identifiers."""
+CENSUS_CBSA = "https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_cbsa_500k.zip"
+CENSUS_COUNTY = "https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_county_500k.zip"
+ACS_URL = "https://api.census.gov/data/{year}/acs/acs5"
+WAYMO_URL = "https://waymo.com/rides/"
+AFDC_DOWNLOAD_URL = "https://afdc.energy.gov/files/u/data/alt_fuel_stations.csv"
+NOAA_NORMALS_BASE = "https://www.ncei.noaa.gov/data/normals-annual/1991-2020/access/"

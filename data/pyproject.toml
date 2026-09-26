@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "odd-scout-data-pipeline"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2.7", "requests>=2.31", "pandas>=2.2", "geopandas>=1.0", "pyarrow>=16", "python-dotenv>=1.0", "pyshp>=2.3", "openpyxl>=3.1"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["src*"]

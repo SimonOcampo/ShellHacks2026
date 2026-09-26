@@ -1,0 +1,16 @@
+{
+  "id": "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+  "source_name": "Waymo Ride Service Locations",
+  "source_url": "https://waymo.com/rides/",
+  "dataset_id": "waymo_rides_markets",
+  "period": "2026-09-26",
+  "retrieved_at": "2026-09-26T07:23:46.844162+00:00",
+  "source_geography": "market list",
+  "target_geography": "Census CBSA reference market",
+  "transformation": "Market status assigned only when the exact requested city name and state abbreviation appear in the official Serving Riders In or Up Next section.",
+  "assumptions": [
+    "A metro label is matched to the official page's city/state label.",
+    "Current page contents represent status at retrieval time."
+  ],
+  "raw_sha256": "d7246fccd5c4ecd9845b7501ab8c653e0db677a71b6d1ddedf0b1f1a0f8bcea8"
+}

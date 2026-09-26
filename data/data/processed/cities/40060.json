@@ -1,0 +1,828 @@
+{
+  "city_id": "40060",
+  "display_name": "Richmond, Virginia",
+  "features": {
+    "annual_precipitation_mm": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "71acf2af-fb92-5446-8b83-cadd35a25fc2",
+        "7958c3ee-dc8c-50f6-be98-b1815a6c35b3"
+      ],
+      "quality": "proxy",
+      "unit": "mm/year",
+      "value": 1175.512
+    },
+    "annual_snowfall_mm": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "71acf2af-fb92-5446-8b83-cadd35a25fc2",
+        "7958c3ee-dc8c-50f6-be98-b1815a6c35b3"
+      ],
+      "quality": "proxy",
+      "unit": "mm/year",
+      "value": 248.92000000000002
+    },
+    "arterial_share": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "7649798b-c54d-5007-a453-caae5a8b54cf",
+        "7854a35c-a9c4-58f5-9895-d1283c5560e0",
+        "e8400038-4ea2-5795-8df0-ba5a779d651d",
+        "66cec5bf-b3dd-5c4f-9126-47794043c643",
+        "8084277b-4ac0-5242-a0ac-12bcf4eb39aa",
+        "2bc27c1d-2ca2-5a84-967d-628deb6fdbca",
+        "03b11eb5-d953-5b26-aaa9-292382874e6e",
+        "8cd250ed-8d4a-50bf-8fc0-3c635230d788",
+        "706244df-c5ad-5c79-8bfd-69a101b655e5",
+        "9865af44-a4d2-55f8-b2d6-12c1f531e9fc",
+        "3455e3d7-6d3a-50bf-b350-85c8c4923a6f",
+        "08872912-f8f5-59fa-b083-64b3a6d2d4aa",
+        "a5b4eba8-6ac8-5c9e-9734-aa99fd68832e",
+        "c2dde24a-7064-55bd-8e3b-f52d8c949eab",
+        "dc875ab8-8b68-5db9-80e7-d68cbb492cad",
+        "740892c8-4fc1-537c-b5f2-729ca9287bfe",
+        "0db70e1a-36de-5a47-9839-73ed09b8fae7"
+      ],
+      "quality": "derived",
+      "unit": "fraction",
+      "value": 0.07713947021814237
+    },
+    "average_aadt": {
+      "missing_reason": "No current, complete segment-level FHWA AADT and through-lane layer was available in the retrieved TIGER snapshots. The public HPMS geospatial release is legacy and coverage-limited; these metrics remain missing rather than being extrapolated.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "vehicles/day",
+      "value": null
+    },
+    "freeway_share": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "7649798b-c54d-5007-a453-caae5a8b54cf",
+        "7854a35c-a9c4-58f5-9895-d1283c5560e0",
+        "e8400038-4ea2-5795-8df0-ba5a779d651d",
+        "66cec5bf-b3dd-5c4f-9126-47794043c643",
+        "8084277b-4ac0-5242-a0ac-12bcf4eb39aa",
+        "2bc27c1d-2ca2-5a84-967d-628deb6fdbca",
+        "03b11eb5-d953-5b26-aaa9-292382874e6e",
+        "8cd250ed-8d4a-50bf-8fc0-3c635230d788",
+        "706244df-c5ad-5c79-8bfd-69a101b655e5",
+        "9865af44-a4d2-55f8-b2d6-12c1f531e9fc",
+        "3455e3d7-6d3a-50bf-b350-85c8c4923a6f",
+        "08872912-f8f5-59fa-b083-64b3a6d2d4aa",
+        "a5b4eba8-6ac8-5c9e-9734-aa99fd68832e",
+        "c2dde24a-7064-55bd-8e3b-f52d8c949eab",
+        "dc875ab8-8b68-5db9-80e7-d68cbb492cad",
+        "740892c8-4fc1-537c-b5f2-729ca9287bfe",
+        "0db70e1a-36de-5a47-9839-73ed09b8fae7"
+      ],
+      "quality": "derived",
+      "unit": "fraction",
+      "value": 0.047775062687845
+    },
+    "hot_days_32c": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "fa81f712-760b-5587-8b21-0f4115201b0e",
+        "7fdc8e54-b590-58ca-84ac-17f338482338",
+        "7525dbe8-2ba3-51c2-910e-01be8687ef27",
+        "777703a6-6b6e-5823-a5a1-7a410d4bd957",
+        "0c35278b-97fb-528a-b54f-96176fc9e386",
+        "1e696dc2-fceb-5fdc-8000-5d14cb04f04a"
+      ],
+      "quality": "proxy",
+      "unit": "days/year",
+      "value": 47.699999999999996
+    },
+    "intersection_density_per_km2": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "7649798b-c54d-5007-a453-caae5a8b54cf",
+        "7854a35c-a9c4-58f5-9895-d1283c5560e0",
+        "e8400038-4ea2-5795-8df0-ba5a779d651d",
+        "66cec5bf-b3dd-5c4f-9126-47794043c643",
+        "8084277b-4ac0-5242-a0ac-12bcf4eb39aa",
+        "2bc27c1d-2ca2-5a84-967d-628deb6fdbca",
+        "03b11eb5-d953-5b26-aaa9-292382874e6e",
+        "8cd250ed-8d4a-50bf-8fc0-3c635230d788",
+        "706244df-c5ad-5c79-8bfd-69a101b655e5",
+        "9865af44-a4d2-55f8-b2d6-12c1f531e9fc",
+        "3455e3d7-6d3a-50bf-b350-85c8c4923a6f",
+        "08872912-f8f5-59fa-b083-64b3a6d2d4aa",
+        "a5b4eba8-6ac8-5c9e-9734-aa99fd68832e",
+        "c2dde24a-7064-55bd-8e3b-f52d8c949eab",
+        "dc875ab8-8b68-5db9-80e7-d68cbb492cad",
+        "740892c8-4fc1-537c-b5f2-729ca9287bfe",
+        "0db70e1a-36de-5a47-9839-73ed09b8fae7"
+      ],
+      "quality": "derived",
+      "unit": "intersections/km2",
+      "value": 5.6537719771845065
+    },
+    "lane_miles_per_km2": {
+      "missing_reason": "No current, complete segment-level FHWA AADT and through-lane layer was available in the retrieved TIGER snapshots. The public HPMS geospatial release is legacy and coverage-limited; these metrics remain missing rather than being extrapolated.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "lane-miles/km2",
+      "value": null
+    },
+    "local_road_share": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "7649798b-c54d-5007-a453-caae5a8b54cf",
+        "7854a35c-a9c4-58f5-9895-d1283c5560e0",
+        "e8400038-4ea2-5795-8df0-ba5a779d651d",
+        "66cec5bf-b3dd-5c4f-9126-47794043c643",
+        "8084277b-4ac0-5242-a0ac-12bcf4eb39aa",
+        "2bc27c1d-2ca2-5a84-967d-628deb6fdbca",
+        "03b11eb5-d953-5b26-aaa9-292382874e6e",
+        "8cd250ed-8d4a-50bf-8fc0-3c635230d788",
+        "706244df-c5ad-5c79-8bfd-69a101b655e5",
+        "9865af44-a4d2-55f8-b2d6-12c1f531e9fc",
+        "3455e3d7-6d3a-50bf-b350-85c8c4923a6f",
+        "08872912-f8f5-59fa-b083-64b3a6d2d4aa",
+        "a5b4eba8-6ac8-5c9e-9734-aa99fd68832e",
+        "c2dde24a-7064-55bd-8e3b-f52d8c949eab",
+        "dc875ab8-8b68-5db9-80e7-d68cbb492cad",
+        "740892c8-4fc1-537c-b5f2-729ca9287bfe",
+        "0db70e1a-36de-5a47-9839-73ed09b8fae7"
+      ],
+      "quality": "derived",
+      "unit": "fraction",
+      "value": 0.8750854670940126
+    },
+    "mean_commute_minutes": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "775c60e8-3d7f-5584-a404-3adb549bf00e"
+      ],
+      "quality": "observed",
+      "unit": "minutes",
+      "value": 20.59883157687064
+    },
+    "population": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+      ],
+      "quality": "observed",
+      "unit": "persons",
+      "value": 1341248.0
+    },
+    "population_density_per_km2": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+      ],
+      "quality": "derived",
+      "unit": "persons/km2",
+      "value": 118.65666828651757
+    },
+    "population_share_in_counties_with_dc": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+      ],
+      "quality": "derived",
+      "unit": "fraction of CBSA population",
+      "value": 0.9216229958963592
+    },
+    "public_dc_ports_per_100k": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+      ],
+      "quality": "derived",
+      "unit": "ports/100,000 persons",
+      "value": 21.845326144009164
+    },
+    "road_density_km_per_km2": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "7649798b-c54d-5007-a453-caae5a8b54cf",
+        "7854a35c-a9c4-58f5-9895-d1283c5560e0",
+        "e8400038-4ea2-5795-8df0-ba5a779d651d",
+        "66cec5bf-b3dd-5c4f-9126-47794043c643",
+        "8084277b-4ac0-5242-a0ac-12bcf4eb39aa",
+        "2bc27c1d-2ca2-5a84-967d-628deb6fdbca",
+        "03b11eb5-d953-5b26-aaa9-292382874e6e",
+        "8cd250ed-8d4a-50bf-8fc0-3c635230d788",
+        "706244df-c5ad-5c79-8bfd-69a101b655e5",
+        "9865af44-a4d2-55f8-b2d6-12c1f531e9fc",
+        "3455e3d7-6d3a-50bf-b350-85c8c4923a6f",
+        "08872912-f8f5-59fa-b083-64b3a6d2d4aa",
+        "a5b4eba8-6ac8-5c9e-9734-aa99fd68832e",
+        "c2dde24a-7064-55bd-8e3b-f52d8c949eab",
+        "dc875ab8-8b68-5db9-80e7-d68cbb492cad",
+        "740892c8-4fc1-537c-b5f2-729ca9287bfe",
+        "0db70e1a-36de-5a47-9839-73ed09b8fae7"
+      ],
+      "quality": "derived",
+      "unit": "km/km2",
+      "value": 2.5758634540107765
+    },
+    "transit_commute_share": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+      ],
+      "quality": "derived",
+      "unit": "fraction of workers 16+",
+      "value": 0.01009413933328033
+    },
+    "zero_vehicle_household_share": {
+      "missing_reason": null,
+      "provenance_ids": [
+        "238b7854-dd37-55ed-9875-1b6f0c682f45"
+      ],
+      "quality": "derived",
+      "unit": "fraction of households",
+      "value": 0.06368783158052603
+    }
+  },
+  "geography_type": "cbsa",
+  "geography_vintage": "2024",
+  "latitude": 37.37763000862322,
+  "legal_evidence": [],
+  "longitude": -77.50400603353086,
+  "official_name": "Richmond, VA",
+  "provenance": [
+    {
+      "assumptions": [
+        "Only published estimates are used; negative sentinel values are unavailable."
+      ],
+      "dataset_id": "acs_summary_2024_b01003",
+      "id": "fe3da0ea-0605-5bf3-b21a-11a76e98b67c",
+      "period": "2024",
+      "raw_sha256": "38d1a992bb058d184009b10b9b34987279aee575e4323165cfb5706c69b6ca90",
+      "retrieved_at": "2026-09-26T07:39:50.798349+00:00",
+      "source_geography": "CBSA, county, and census tract estimates",
+      "source_name": "U.S. Census ACS 5-Year Summary File",
+      "source_url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat",
+      "target_geography": "official CBSA and member counties",
+      "transformation": "Extract GEO_ID estimates from table b01003; calculate ratios from their published universes."
+    },
+    {
+      "assumptions": [
+        "Only published estimates are used; negative sentinel values are unavailable."
+      ],
+      "dataset_id": "acs_summary_2024_b08201",
+      "id": "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "period": "2024",
+      "raw_sha256": "2f64e698223ba83f97b67dde4a34961a02f230e0359ffc69b9657b89a3df6b4d",
+      "retrieved_at": "2026-09-26T07:47:08.750616+00:00",
+      "source_geography": "CBSA, county, and census tract estimates",
+      "source_name": "U.S. Census ACS 5-Year Summary File",
+      "source_url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b08201.dat",
+      "target_geography": "official CBSA and member counties",
+      "transformation": "Extract GEO_ID estimates from table b08201; calculate ratios from their published universes."
+    },
+    {
+      "assumptions": [
+        "Only published estimates are used; negative sentinel values are unavailable."
+      ],
+      "dataset_id": "acs_summary_2024_b08301",
+      "id": "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "period": "2024",
+      "raw_sha256": "552b24c135b6e7c566910914a861cda6fc798ba0cd47801b1eb64295a128c2ee",
+      "retrieved_at": "2026-09-26T07:47:11.705889+00:00",
+      "source_geography": "CBSA, county, and census tract estimates",
+      "source_name": "U.S. Census ACS 5-Year Summary File",
+      "source_url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b08301.dat",
+      "target_geography": "official CBSA and member counties",
+      "transformation": "Extract GEO_ID estimates from table b08301; calculate ratios from their published universes."
+    },
+    {
+      "assumptions": [
+        "Only published estimates are used; negative sentinel values are unavailable."
+      ],
+      "dataset_id": "acs_summary_2024_b08136",
+      "id": "775c60e8-3d7f-5584-a404-3adb549bf00e",
+      "period": "2024",
+      "raw_sha256": "608b6c70ee59a31f34f68e16984fa470e31f15738d8e3d748ca6f021dd08d5dd",
+      "retrieved_at": "2026-09-26T07:47:13.369074+00:00",
+      "source_geography": "CBSA, county, and census tract estimates",
+      "source_name": "U.S. Census ACS 5-Year Summary File",
+      "source_url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b08136.dat",
+      "target_geography": "official CBSA and member counties",
+      "transformation": "Extract GEO_ID estimates from table b08136; calculate ratios from their published universes."
+    },
+    {
+      "assumptions": [
+        "CBSA land area sums Census county ALAND for every county assigned by county representative point.",
+        "Coordinates are a representative point, not a population-weighted centroid."
+      ],
+      "dataset_id": "tiger_cbsa_2024",
+      "id": "92caff5b-840b-5dde-af2d-56e40e657df7",
+      "period": "2024",
+      "raw_sha256": "6b49c0d8caaab77aed9c7c786c4b2af19d1acd9333c76cd702fc117ff2165117",
+      "retrieved_at": "2026-09-26T07:15:04.289282+00:00",
+      "source_geography": "CBSA polygon",
+      "source_name": "U.S. Census TIGER/Line CBSA",
+      "source_url": "https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_cbsa_500k.zip",
+      "target_geography": "official CBSA",
+      "transformation": "TIGER/Line CBSA code and polygon; representative point on surface in EPSG:5070 transformed to WGS84."
+    },
+    {
+      "assumptions": [
+        "CBSAs are composed of whole counties."
+      ],
+      "dataset_id": "tiger_county_2024",
+      "id": "36cd8b89-1cdf-50b6-b40b-34725f833994",
+      "period": "2024",
+      "raw_sha256": "da4051717caec55c75e3748c3608c2a3dbde8d1ff401bbaf4f952e3c3fb63ef1",
+      "retrieved_at": "2026-09-26T07:15:05.108348+00:00",
+      "source_geography": "County polygons and ALAND",
+      "source_name": "U.S. Census TIGER/Line Counties",
+      "source_url": "https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_county_500k.zip",
+      "target_geography": "CBSA county membership",
+      "transformation": "County representative point spatially joined to official CBSA polygons; county ALAND summed for land area."
+    },
+    {
+      "assumptions": [
+        "Station status must be E and access must be public.",
+        "Only reported DC fast port counts are used; stations with no reported port count are excluded."
+      ],
+      "dataset_id": "afdc_active_public_electric",
+      "id": "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "period": "2026-09-26",
+      "raw_sha256": "93a376e2e204ad2f0fb8a93b62fb9b7782c5d8f103adcd546ad2019bea8f4eaa",
+      "retrieved_at": "2026-09-26T08:42:57.437515+00:00",
+      "source_geography": "Station coordinates",
+      "source_name": "U.S. DOE Alternative Fuels Data Center",
+      "source_url": "https://developer.nrel.gov/api/alt-fuel-stations/v1.json",
+      "target_geography": "Census CBSA and counties",
+      "transformation": "Count active public stations' reported DC fast ports after point-in-polygon joins to CBSA and counties."
+    },
+    {
+      "assumptions": [
+        "A metro label is matched to the official page's city/state label.",
+        "Current page contents represent status at retrieval time."
+      ],
+      "dataset_id": "waymo_rides_markets",
+      "id": "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "period": "2026-09-26",
+      "raw_sha256": "d7246fccd5c4ecd9845b7501ab8c653e0db677a71b6d1ddedf0b1f1a0f8bcea8",
+      "retrieved_at": "2026-09-26T07:23:46.844162+00:00",
+      "source_geography": "market list",
+      "source_name": "Waymo Ride Service Locations",
+      "source_url": "https://waymo.com/rides/",
+      "target_geography": "Census CBSA reference market",
+      "transformation": "Market status assigned only when the exact requested city name and state abbreviation appear in the official Serving Riders In or Up Next section."
+    },
+    {
+      "assumptions": [
+        "Selected station is 13.67 km from the CBSA representative point."
+      ],
+      "dataset_id": "noaa_normals_stations_1991-2020",
+      "id": "71acf2af-fb92-5446-8b83-cadd35a25fc2",
+      "period": "1991-2020",
+      "raw_sha256": "36dcb1db964e3938ec9d10fdbc6ec63ce5905b1e3fdc1d265914b5b85bb71180",
+      "retrieved_at": "2026-09-26T07:34:19.600407+00:00",
+      "source_geography": "NOAA normals station points",
+      "source_name": "NOAA NCEI Annual Normals Station Inventory",
+      "source_url": "https://services2.arcgis.com/C8EMgrsFcRFL6LrL/ArcGIS/rest/services/stations_ncei/FeatureServer/20/query",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select station USC00449213 nearest to the CBSA representative point using great-circle distance."
+    },
+    {
+      "assumptions": [
+        "NOAA station annual precipitation and snowfall normals are in inches."
+      ],
+      "dataset_id": "normals-annualseasonal-1991-2020",
+      "id": "7958c3ee-dc8c-50f6-be98-b1815a6c35b3",
+      "period": "1991-2020",
+      "raw_sha256": "dd4afcb664749930434c42256ef479871720b7445d8858dff7e0b9bacff6430f",
+      "retrieved_at": "2026-09-26T07:34:34.021154+00:00",
+      "source_geography": "NOAA station USC00449213",
+      "source_name": "NOAA NCEI U.S. Climate Normals",
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USC00449213&dataTypes=ANN-PRCP-NORMAL%2CANN-SNOW-NORMAL&format=json",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Convert annual precipitation and snowfall from inches to millimeters."
+    },
+    {
+      "assumptions": [
+        "Station is 18.31 km from the CBSA representative point."
+      ],
+      "dataset_id": "noaa_normals_stations_1991-2020",
+      "id": "fa81f712-760b-5587-8b21-0f4115201b0e",
+      "period": "1991-2020",
+      "raw_sha256": "36dcb1db964e3938ec9d10fdbc6ec63ce5905b1e3fdc1d265914b5b85bb71180",
+      "retrieved_at": "2026-09-26T07:34:19.600407+00:00",
+      "source_geography": "NOAA normals station points",
+      "source_name": "NOAA NCEI 1991-2020 Normals Station Inventory",
+      "source_url": "https://services2.arcgis.com/C8EMgrsFcRFL6LrL/ArcGIS/rest/services/stations_ncei/FeatureServer/20/query",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select NOAA station USC00446656 within 100 km of the existing CBSA representative point using great-circle distance."
+    },
+    {
+      "assumptions": [
+        "Threshold is exactly 90 F (32.222... C), not a rounded 32.0 C threshold.",
+        "Station eligibility and climate-normal completeness follow NOAA's published normals product."
+      ],
+      "dataset_id": "normals_annualseasonal_1991-2020_ann_tmax_avgn_day_ge90f",
+      "id": "7fdc8e54-b590-58ca-84ac-17f338482338",
+      "period": "1991-2020",
+      "raw_sha256": "5b85a30a9bb2660b7427f210ab74d4a41fbf2283804887410d15b8105de9dbb8",
+      "retrieved_at": "2026-09-26T10:14:15.265866+00:00",
+      "source_geography": "NOAA station USC00446656",
+      "source_name": "NOAA NCEI U.S. Climate Normals",
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USC00446656&dataTypes=ANN-TMAX-AVGNDS-GRTH090&format=json",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Use ANN-TMAX-AVGNDS-GRTH090, NOAA's 1991-2020 mean annual number of days with daily maximum temperature >= 90 F; average qualifying station counts for the CBSA proxy."
+    },
+    {
+      "assumptions": [
+        "Station is 21.53 km from the CBSA representative point."
+      ],
+      "dataset_id": "noaa_normals_stations_1991-2020",
+      "id": "7525dbe8-2ba3-51c2-910e-01be8687ef27",
+      "period": "1991-2020",
+      "raw_sha256": "668e145e434e656c25035bc443f1159aef21a9ae8d0880d7e33afb7e3d9f4cea",
+      "retrieved_at": "2026-09-26T07:34:20.474755+00:00",
+      "source_geography": "NOAA normals station points",
+      "source_name": "NOAA NCEI 1991-2020 Normals Station Inventory",
+      "source_url": "https://services2.arcgis.com/C8EMgrsFcRFL6LrL/ArcGIS/rest/services/stations_ncei/FeatureServer/20/query",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select NOAA station USW00013740 within 100 km of the existing CBSA representative point using great-circle distance."
+    },
+    {
+      "assumptions": [
+        "Threshold is exactly 90 F (32.222... C), not a rounded 32.0 C threshold.",
+        "Station eligibility and climate-normal completeness follow NOAA's published normals product."
+      ],
+      "dataset_id": "normals_annualseasonal_1991-2020_ann_tmax_avgn_day_ge90f",
+      "id": "777703a6-6b6e-5823-a5a1-7a410d4bd957",
+      "period": "1991-2020",
+      "raw_sha256": "de2c69d7fcb96512ae03799efa9d9d66980ed1b52d70a3f7b82ce9fb1aa05b9c",
+      "retrieved_at": "2026-09-26T10:14:15.787575+00:00",
+      "source_geography": "NOAA station USW00013740",
+      "source_name": "NOAA NCEI U.S. Climate Normals",
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USW00013740&dataTypes=ANN-TMAX-AVGNDS-GRTH090&format=json",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Use ANN-TMAX-AVGNDS-GRTH090, NOAA's 1991-2020 mean annual number of days with daily maximum temperature >= 90 F; average qualifying station counts for the CBSA proxy."
+    },
+    {
+      "assumptions": [
+        "Station is 21.84 km from the CBSA representative point."
+      ],
+      "dataset_id": "noaa_normals_stations_1991-2020",
+      "id": "0c35278b-97fb-528a-b54f-96176fc9e386",
+      "period": "1991-2020",
+      "raw_sha256": "36dcb1db964e3938ec9d10fdbc6ec63ce5905b1e3fdc1d265914b5b85bb71180",
+      "retrieved_at": "2026-09-26T07:34:19.600407+00:00",
+      "source_geography": "NOAA normals station points",
+      "source_name": "NOAA NCEI 1991-2020 Normals Station Inventory",
+      "source_url": "https://services2.arcgis.com/C8EMgrsFcRFL6LrL/ArcGIS/rest/services/stations_ncei/FeatureServer/20/query",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select NOAA station USC00444101 within 100 km of the existing CBSA representative point using great-circle distance."
+    },
+    {
+      "assumptions": [
+        "Threshold is exactly 90 F (32.222... C), not a rounded 32.0 C threshold.",
+        "Station eligibility and climate-normal completeness follow NOAA's published normals product."
+      ],
+      "dataset_id": "normals_annualseasonal_1991-2020_ann_tmax_avgn_day_ge90f",
+      "id": "1e696dc2-fceb-5fdc-8000-5d14cb04f04a",
+      "period": "1991-2020",
+      "raw_sha256": "75ee1d38622ecc0e9781db11edc667ad48dd5dc7a004d09e88e5ff6df05797a8",
+      "retrieved_at": "2026-09-26T10:14:16.317178+00:00",
+      "source_geography": "NOAA station USC00444101",
+      "source_name": "NOAA NCEI U.S. Climate Normals",
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USC00444101&dataTypes=ANN-TMAX-AVGNDS-GRTH090&format=json",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Use ANN-TMAX-AVGNDS-GRTH090, NOAA's 1991-2020 mean annual number of days with daily maximum temperature >= 90 F; average qualifying station counts for the CBSA proxy."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51007",
+      "id": "7649798b-c54d-5007-a453-caae5a8b54cf",
+      "period": "2024",
+      "raw_sha256": "4b5732b5ccc32827b06c379fec18945953d54ddce4c72c9d6fc0e6b8ce74680f",
+      "retrieved_at": "2026-09-26T09:37:24.019876+00:00",
+      "source_geography": "Census county 51007",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51007_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51036",
+      "id": "7854a35c-a9c4-58f5-9895-d1283c5560e0",
+      "period": "2024",
+      "raw_sha256": "ae1b9cbdb6de51eedb0844ea6a1fccf080ca21c93a8657f9fea248bc0df031c3",
+      "retrieved_at": "2026-09-26T09:37:24.132236+00:00",
+      "source_geography": "Census county 51036",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51036_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51041",
+      "id": "e8400038-4ea2-5795-8df0-ba5a779d651d",
+      "period": "2024",
+      "raw_sha256": "31c0c0cdbb6f08fd80f6d33da59098bdc45faf0f35e2063b43d1950dcff70780",
+      "retrieved_at": "2026-09-26T09:37:24.656522+00:00",
+      "source_geography": "Census county 51041",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51041_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51053",
+      "id": "66cec5bf-b3dd-5c4f-9126-47794043c643",
+      "period": "2024",
+      "raw_sha256": "6268931cb41927085a5fdec3a15687a009e2d3fda395fcb17a5423bd6de41954",
+      "retrieved_at": "2026-09-26T09:37:25.220873+00:00",
+      "source_geography": "Census county 51053",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51053_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51075",
+      "id": "8084277b-4ac0-5242-a0ac-12bcf4eb39aa",
+      "period": "2024",
+      "raw_sha256": "3845cbbd659ff262d43e69b75a4678e4a4eb0f00ce433005d8d552852a6ba00c",
+      "retrieved_at": "2026-09-26T09:37:25.477567+00:00",
+      "source_geography": "Census county 51075",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51075_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51085",
+      "id": "2bc27c1d-2ca2-5a84-967d-628deb6fdbca",
+      "period": "2024",
+      "raw_sha256": "cc1d499abea03912ff5600e9513d546efe7939a148defeb75f7c7c6dd62c05a5",
+      "retrieved_at": "2026-09-26T09:37:25.688873+00:00",
+      "source_geography": "Census county 51085",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51085_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51087",
+      "id": "03b11eb5-d953-5b26-aaa9-292382874e6e",
+      "period": "2024",
+      "raw_sha256": "63abaed715779b8dae3f0b252c1cac98f0c4ac527e98eb8bd333ac1b79cf93e2",
+      "retrieved_at": "2026-09-26T09:37:25.774472+00:00",
+      "source_geography": "Census county 51087",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51087_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51097",
+      "id": "8cd250ed-8d4a-50bf-8fc0-3c635230d788",
+      "period": "2024",
+      "raw_sha256": "ae2d41c2f147e19eaa3e19a25d753c66cb57e7acea57ec31915c1a0145e295da",
+      "retrieved_at": "2026-09-26T09:37:26.202832+00:00",
+      "source_geography": "Census county 51097",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51097_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51101",
+      "id": "706244df-c5ad-5c79-8bfd-69a101b655e5",
+      "period": "2024",
+      "raw_sha256": "762a6de353096e00444634c9814a6d15ea46f34d05d49299c5d5f8bc8f40d161",
+      "retrieved_at": "2026-09-26T09:37:26.157230+00:00",
+      "source_geography": "Census county 51101",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51101_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51127",
+      "id": "9865af44-a4d2-55f8-b2d6-12c1f531e9fc",
+      "period": "2024",
+      "raw_sha256": "cca62b94b3fa281931e2d3acd3b1cd751a685385889904db672604bcd079f2b6",
+      "retrieved_at": "2026-09-26T09:37:26.299068+00:00",
+      "source_geography": "Census county 51127",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51127_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51145",
+      "id": "3455e3d7-6d3a-50bf-b350-85c8c4923a6f",
+      "period": "2024",
+      "raw_sha256": "957ce5dec117404171e6e82cfd8c3b9b74189a391ab1cf80d74e5d1d0474064f",
+      "retrieved_at": "2026-09-26T09:37:26.738533+00:00",
+      "source_geography": "Census county 51145",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51145_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51149",
+      "id": "08872912-f8f5-59fa-b083-64b3a6d2d4aa",
+      "period": "2024",
+      "raw_sha256": "3489d1f59109de6826ef085c90b8c7ddbc5a301c6e7e61547fc02c84be99737d",
+      "retrieved_at": "2026-09-26T09:37:26.630691+00:00",
+      "source_geography": "Census county 51149",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51149_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51183",
+      "id": "a5b4eba8-6ac8-5c9e-9734-aa99fd68832e",
+      "period": "2024",
+      "raw_sha256": "e9b28dc9441d158980138216ec9a36b89f7d6daca6a68ea4c671003396f7781d",
+      "retrieved_at": "2026-09-26T09:37:27.182207+00:00",
+      "source_geography": "Census county 51183",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51183_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51570",
+      "id": "c2dde24a-7064-55bd-8e3b-f52d8c949eab",
+      "period": "2024",
+      "raw_sha256": "7018c88019c5935f8363c29d4a0dde7d69665d12e44d111e31cf18890e1f9f8a",
+      "retrieved_at": "2026-09-26T09:37:27.311155+00:00",
+      "source_geography": "Census county 51570",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51570_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51670",
+      "id": "dc875ab8-8b68-5db9-80e7-d68cbb492cad",
+      "period": "2024",
+      "raw_sha256": "c08c2755e4405ce5f098e7e77a3ebed67c0d4ba267dcb1e26e2b49708999e988",
+      "retrieved_at": "2026-09-26T09:37:27.278926+00:00",
+      "source_geography": "Census county 51670",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51670_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51730",
+      "id": "740892c8-4fc1-537c-b5f2-729ca9287bfe",
+      "period": "2024",
+      "raw_sha256": "0485a5c999342b153d313cdeca72ff400955838e68244d3a206a7ad70115031e",
+      "retrieved_at": "2026-09-26T09:37:28.266548+00:00",
+      "source_geography": "Census county 51730",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51730_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "TIGER All Lines contains unique topological edges rather than duplicate named road features.",
+        "CBSAs are composed of whole member counties, so no within-county polygon clipping is applied.",
+        "Freeway proxy=S1100+S1630; arterial proxy=S1200; local/residual=S1400+S1640+S1730.",
+        "Intersections count distinct endpoint TNIDs with degree >=3; nearby qualifying nodes within 20 m are merged; nodes within 5 m of the CBSA boundary are excluded.",
+        "All member counties must be present for the CBSA network to be complete."
+      ],
+      "dataset_id": "tiger_edges_2024_51760",
+      "id": "0db70e1a-36de-5a47-9839-73ed09b8fae7",
+      "period": "2024",
+      "raw_sha256": "da90563834bfb0f6dd7f1ecac405019e50ff1273ee054c020a22d26422c0a29e",
+      "retrieved_at": "2026-09-26T09:37:28.753966+00:00",
+      "source_geography": "Census county 51760",
+      "source_name": "U.S. Census TIGER/Line All Lines county edges",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_51760_edges.zip",
+      "target_geography": "Census CBSA 40060",
+      "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32618, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    }
+  ],
+  "state_codes": [
+    "VA"
+  ],
+  "versions": {
+    "data_mode": "verified",
+    "data_version": "2024-acs5__2024-tiger__NOAA-1991-2020__TIGER-edges-2024__AFDC-current",
+    "model_version": "city-feature-v1",
+    "schema_version": "1"
+  }
+}

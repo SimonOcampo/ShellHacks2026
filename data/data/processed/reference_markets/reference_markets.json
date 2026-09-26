@@ -1,0 +1,167 @@
+[
+  {
+    "id": "waymo-phoenix",
+    "city_id": "38060",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-san_francisco_bay_area",
+    "city_id": "41860",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-los_angeles",
+    "city_id": "31080",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-austin",
+    "city_id": "12420",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-atlanta",
+    "city_id": "12060",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-dallas",
+    "city_id": "19100",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-denver",
+    "city_id": "19740",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-houston",
+    "city_id": "26420",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-miami",
+    "city_id": "33100",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-nashville",
+    "city_id": "34980",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-orlando",
+    "city_id": "36740",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-san_antonio",
+    "city_id": "41700",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-san_diego",
+    "city_id": "41740",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-tampa",
+    "city_id": "45300",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  },
+  {
+    "id": "waymo-las_vegas",
+    "city_id": "29820",
+    "operator": "Waymo",
+    "category": "commercial",
+    "status_as_of": "2026-09-26T07:23:46.844162+00:00",
+    "enabled": true,
+    "provenance_ids": [
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd"
+    ]
+  }
+]
