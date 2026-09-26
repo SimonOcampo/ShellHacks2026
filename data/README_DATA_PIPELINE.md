@@ -44,11 +44,21 @@ python -m src.datasets.acs.download --year 2024
 python -m src.pipeline.build_city_features --validate
 ```
 
+After processing, validate and publish a separate immutable API-compatible release:
+
+```bash
+uv run python -m src.pipeline.export_release
+```
+
+The exporter applies `config/ranking.v2.json`, freezes normalization over complete candidates and enabled references, converts five-digit internal CBSA codes to canonical `cbsa:<code>` IDs, and validates the result through `packages/contracts/models.py`. It also requires complete enabled references and at least eight ranked candidates. It refuses to overwrite a different release. A successful city-feature build alone does not qualify a release for API selection.
+
 The downloader keeps raw files under `data/raw/`; existing snapshots are reused and never overwritten. Raw inputs can be removed after release generation to reclaim disk space; source hashes and provenance remain in the release manifest. A subsequent full rebuild will download missing snapshots again. The data manifest records source paths, hashes, byte sizes, outputs, and warnings.
 
 ## CBSA resolution and feature definitions
 
-Candidate display labels and Waymo reference labels are resolved against the official TIGER/Line CBSA name and code. `city_id` is the five-digit CBSA GEOID. County membership uses county representative points against CBSA polygons, so multi-state CBSAs include all their constituent counties. CBSA land area is the sum of Census county `ALAND` values, excluding water. Coordinates are a representative point on the CBSA geometry, not a downtown coordinate.
+Candidate display labels and Waymo reference labels are resolved against the official TIGER/Line CBSA name and code. Processed internal `city_id` values retain the five-digit CBSA GEOID. The release exporter adds the API-required `cbsa:` prefix once, producing IDs such as `cbsa:33100`; it rejects malformed and double-prefixed IDs. County membership uses county representative points against CBSA polygons, so multi-state CBSAs include all their constituent counties. CBSA land area is the sum of Census county `ALAND` values, excluding water. Coordinates are a representative point on the CBSA geometry, not a downtown coordinate.
+
+The active expanded `ranking.v2` model scores 15 variables: nine Familiarity, two Readiness, and four Opportunity. `average_aadt` and `lane_miles_per_km2` remain optional informational measurements. They may be unavailable with an explicit reason and do not affect ranking completeness or scores. The historical ten-variable `ranking.v1` mock release remains separate and immutable.
 
 The ACS 5-Year detailed estimates provide population, household universe/zero-vehicle households, and worker universe/transit commuters. Shares are ratios of the corresponding CBSA numerators and denominators. Census profile `DP03_0025E` supplies mean commute time. Population density is ACS population divided by summed county land area. AFDC DC ports are counted at station coordinates after point-in-CBSA and point-in-county joins; county population coverage uses ACS county populations. NOAA precipitation and snowfall are converted explicitly to millimeters. The 1991–2020 NOAA annual normals source also supplies its exact annual Tmax >=90°F count for the hot-day metric.
 
@@ -73,7 +83,7 @@ These road measures describe public road-environment characteristics and network
 
 Every available nonmissing measurement references provenance containing its source URL, dataset/vintage, source and target geography, transformation, assumptions, retrieval time, and real SHA-256 of the saved raw artifact. Missing measurements include an explicit reason. Legal evidence remains empty until a suitable authoritative source is implemented.
 
-The primary outputs are:
+The processed pipeline outputs are:
 
 ```text
 data/processed/cities/{cbsa_code}.json
@@ -88,6 +98,8 @@ data/processed/intermediate/cbsa_counties.parquet
 data/processed/intermediate/charging_sites.parquet
 ```
 
+The API-compatible output is a separate immutable file under `data/releases/`, such as `verified.v2.json`. It is created only after canonical contract validation and ranking eligibility checks. Existing processed JSON datapoints are inputs and are not rewritten by this exporter.
+
 Further intermediates are dataset-specific and are emitted when their source is retrieved and processed. The road network summary is `data/processed/intermediate/road_network_features.parquet`; the 270 raw county ZIPs used to calculate it were removed after processing, with hashes preserved in the manifest. A full rebuild downloads missing inputs again. OSM, LODES, FARS, transit, airport, FRA, WOMD, NGSIM, and WZDx adapters are not required for the current `CityFeature` contract; see module docstrings and TODO markers for their status.
 
 ## Known limitations and future simulation use
@@ -98,4 +110,4 @@ The contract includes the existing city measures plus `hot_days_32c` and the sev
 
 ## Verified build status
 
-The keyless ACS path downloads four official Census Summary File tables and resolves all 35 configured markets to TIGER/Line CBSAs. The verified release includes NOAA >=90°F normals and CBSA road-network summaries for the configured markets. A Census API error falls back to the official ACS Summary Files. AFDC requires its configured API credentials; absent or rejected credentials produce explicit missing charging measurements. The current main CLI does not yet download/process LODES, OSM, FARS, GTFS, BTS T-100, or FRA feeds: those dataset adapters are partial and their intermediates are not present unless invoked separately. WOMD, NGSIM, and WZDx remain scaffolds.
+The keyless ACS path downloads official Census Summary File tables and resolves configured markets to TIGER/Line CBSAs. Processed city output may contain NOAA normals and CBSA road-network summaries, but these data alone do not establish a canonical verified release or a ranked leaderboard. AFDC requires configured API credentials; absent or rejected credentials produce explicit missing charging measurements. The API release exporter will fail when enabled references or the minimum eight candidates are incomplete. The main source-build CLI does not yet download/process LODES, OSM, FARS, GTFS, BTS T-100, or FRA feeds; those dataset adapters are partial and their intermediates are not present unless invoked separately. WOMD, NGSIM, and WZDx remain scaffolds.

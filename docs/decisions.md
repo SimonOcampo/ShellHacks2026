@@ -70,10 +70,10 @@ Their exclusion from scoring allows the project to preserve the data for analysi
 
 There was no preexisting application, data, or deployed consumer. The initial contract is v1.
 
-The feature-contract expansion must be implemented as a compatible extension before dependent clients are migrated. Official data is promoted through an immutable release and matching environment variables.
+`ranking.v1` remains the immutable mock methodology. The expanded `ranking.v2` registry has 15 active scoring variables; `average_aadt` and `lane_miles_per_km2` remain optional informational measurements. The pipeline export boundary adapts internal five-digit CBSA codes to canonical `cbsa:<code>` IDs and validates against the API contract. A verified release is selected only after completeness, provenance, compatibility, and ranking gates pass.
 
 Preserve old releases and deployments; rollback changes the selected release/configuration rather than mutating historical releases.
 
 Add compatible contract fields before migrating clients. No destructive migration or contract removal is authorized implicitly.
 
-Ranking methodology and configuration changes must be versioned so results produced by the original ten-variable model remain distinguishable from results produced by the expanded fifteen-variable model.
+Ranking methodology and configuration changes are versioned so results from the original ten-variable `ranking.v1` model remain distinguishable from the expanded fifteen-variable `ranking.v2` model. The v2 configuration does not switch the running API from its mock v1 release.

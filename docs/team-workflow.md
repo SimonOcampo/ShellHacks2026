@@ -14,16 +14,16 @@ Each task names an owner, bounded files, an output, and proof. Start the indepen
 
 **P0. Publish the first verified release.**
 
-- **Paths:** `data/`, `packages/ranking/`, `config/ranking.v1.json`, `config/references.v1.json`, ranking tests, and `docs/data-sources.md`.
+- **Paths:** `data/`, `packages/ranking/`, `config/ranking.v1.json`, `config/ranking.v2.json`, `config/references.v1.json`, ranking tests, and `docs/data-sources.md`.
 - **Inputs:** official 2024 ACS five-year estimates and matching CBSA/county geography; NOAA 1991–2020 station normals; operational public AFDC charging snapshot; dated public evidence for reference-market status.
 - **Output:** immutable, provenance-complete release with at least eight fully measured candidate metros, eligible commercial reference markets, frozen geographic vintage and normalization bounds. Keep incomplete candidates visibly unranked. Never promote synthetic measurements.
-- **Proof:** verify source hashes, joins, ACS denominators and margins of error, NOAA scale/quality flags and station distances, AFDC deduplication/status/port counts, reference evidence dates, candidate completeness, and ranking formula tests. Run publisher and verified-startup checks.
+- **Proof:** verify source hashes, joins, ACS denominators and margins of error, NOAA scale/quality flags and station distances, AFDC deduplication/status/port counts, reference evidence dates, candidate completeness, and ranking formula tests. Run `uv run python -m src.pipeline.export_release` from the repository root to validate canonical `DataRelease` compatibility and publisher gates. Do not select a verified release until at least eight candidates rank against complete enabled references.
 - **Blocker:** obtain the required Census API key through the team's approved local setup. Never paste the key into chat, fixtures, manifests, or commits. If unavailable, report the exact acquisition blocker; keep mock mode and do not claim verified P0.
 
 **P1. Expand and improve the ranking.**
 
 - Grow verified coverage toward twenty metros; document exclusions and uncertainty.
-- Add road and intersection features in a versioned release, after checking network completeness and geography joins. Coordinate a model-version change before updating the frontend feature display.
+- The five network Familiarity features are versioned in `ranking.v2`; do not include the optional `average_aadt` or `lane_miles_per_km2` measurements in the score. Coordinate release/model changes before updating the frontend feature display.
 - Add explicit reference-category selection and weight-sensitivity comparisons with deterministic ranking tests.
 - Add crash context only as unscored public context after validating the NHTSA source and denominators. Keep it out of safety or readiness claims.
 

@@ -31,6 +31,28 @@ ScoredFeatureKey = Literal[
     "transit_commute_share",
 ]
 FeatureKey = ScoredFeatureKey | Literal["average_aadt", "lane_miles_per_km2"]
+RANKING_V2_KEYS = frozenset(
+    {
+        "annual_precipitation_mm",
+        "annual_snowfall_mm",
+        "hot_days_32c",
+        "mean_commute_minutes",
+        "road_density_km_per_km2",
+        "intersection_density_per_km2",
+        "freeway_share",
+        "arterial_share",
+        "local_road_share",
+        "public_dc_ports_per_100k",
+        "population_share_in_counties_with_dc",
+        "population",
+        "population_density_per_km2",
+        "zero_vehicle_household_share",
+        "transit_commute_share",
+    }
+)
+OPTIONAL_INFORMATIONAL_FEATURE_KEYS = frozenset(
+    {"average_aadt", "lane_miles_per_km2"}
+)
 
 EXPANDED_SCORING_KEYS = frozenset(
     {
@@ -384,6 +406,15 @@ class DataRelease(DTO):
             raise ValueError("Registry and bounds must match")
         if self.versions.model_version == "ranking.v1" and keys & EXPANDED_SCORING_KEYS:
             raise ValueError("Expanded scoring features require a new model version")
+        if self.versions.model_version == "ranking.v2":
+            if len(keys) != 15:
+                raise ValueError("ranking.v2 requires exactly 15 active scoring features")
+            if len(set(self.normalization_cohort)) != len(self.normalization_cohort):
+                raise ValueError("Normalization cohort IDs must be unique")
+            if self.normalization_cohort != sorted(self.normalization_cohort):
+                raise ValueError("ranking.v2 normalization cohort must be sorted")
+        if self.versions.model_version == "ranking.v2" and keys != RANKING_V2_KEYS:
+            raise ValueError("ranking.v2 requires exactly 15 active scoring features")
         if len({r.id for r in self.references}) != len(self.references):
             raise ValueError("Duplicate reference ID")
         for b in self.bounds.values():
@@ -420,6 +451,40 @@ class DataRelease(DTO):
                 <= {p.id for p in cities[ref.city_id].provenance}
             ):
                 raise ValueError("Reference evidence must resolve")
+        if self.versions.model_version == "ranking.v2":
+            def complete(city_id: str) -> bool:
+                city = cities[city_id]
+                return all(
+                    (measurement := city.features.get(spec.key)) is not None
+                    and measurement.value is not None
+                    for spec in self.features
+                )
+
+            incomplete_enabled = [
+                ref.id
+                for ref in self.references
+                if ref.enabled and not complete(ref.city_id)
+            ]
+            if incomplete_enabled:
+                raise ValueError(
+                    "Enabled ranking.v2 references must be complete: "
+                    + ", ".join(sorted(incomplete_enabled))
+                )
+            expected_cohort = sorted(
+                {
+                    city_id
+                    for city_id in self.candidate_ids
+                    if complete(city_id)
+                }
+                | {
+                    ref.city_id for ref in self.references if ref.enabled
+                }
+            )
+            if self.normalization_cohort != expected_cohort:
+                raise ValueError(
+                    "ranking.v2 normalization cohort must contain complete "
+                    "candidates and enabled references"
+                )
         return self
 
 

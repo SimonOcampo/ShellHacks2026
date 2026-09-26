@@ -1,5 +1,7 @@
 # ODD Scout Data Pipeline Specification
 
+> Current implementation note: the pipeline's internal CityFeature representation recognizes 17 measurement keys. The canonical API release uses 15 required `ranking.v2` scoring features plus two optional informational road measurements. Pipeline IDs stay as five-digit CBSA codes until export; canonical IDs use `cbsa:<code>`. `data/src/pipeline/export_release.py` performs this boundary validation.
+
 ## 1. Project Purpose
 
 ODD Scout is an AI-assisted expansion analysis and simulation project for autonomous-vehicle markets.
@@ -9,7 +11,7 @@ The data pipeline must support:
 1. **Part 1 — City Ranking / ODD Analysis**
 2. **Part 2 — 7-Day Fleet Simulation**
 
-The immediate goal is to build a reliable Python ingestion and processing layer that:
+The data pipeline builds a reliable Python ingestion, processing, and release-validation layer that:
 
 - downloads or loads public datasets,
 - preserves raw source files,
@@ -19,10 +21,10 @@ The immediate goal is to build a reliable Python ingestion and processing layer 
 - records detailed provenance,
 - handles missing values correctly,
 - validates outputs through Pydantic schemas,
-- exports one `CityFeature` JSON file per metro plus combined outputs,
-- preserves tract/road/OD detail for the future simulation engine.
+- exports one internal `CityFeature` JSON file per metro plus combined outputs and can validate an API-compatible immutable release,
+- preserves tract/road/OD detail for future analysis and simulation.
 
-Do **not** implement the full ranking algorithm or fleet simulation unless small helpers are needed to validate processed outputs.
+Ranking and simulation engines remain separate deterministic project components. The data package adapts its internal models to the canonical release contract without replacing that contract.
 
 ---
 
@@ -44,17 +46,17 @@ Pillar = Literal["familiarity", "readiness", "opportunity"]
 DataMode = Literal["mock", "verified"]
 
 FeatureKey = Literal[
-    "annual_precipitation_mm",
-    "annual_snowfall_mm",
-    "hot_days_32c",
-    "mean_commute_minutes",
-    "public_dc_ports_per_100k",
-    "population_share_in_counties_with_dc",
-    "population",
-    "population_density_per_km2",
-    "zero_vehicle_household_share",
-    "transit_commute_share",
+    "annual_precipitation_mm", "annual_snowfall_mm", "hot_days_32c",
+    "mean_commute_minutes", "road_density_km_per_km2",
+    "intersection_density_per_km2", "freeway_share", "arterial_share",
+    "local_road_share", "public_dc_ports_per_100k",
+    "population_share_in_counties_with_dc", "population",
+    "population_density_per_km2", "zero_vehicle_household_share",
+    "transit_commute_share", "average_aadt", "lane_miles_per_km2",
 ]
+
+# `ranking.v2` scores the first 15 keys. `average_aadt` and
+# `lane_miles_per_km2` are optional informational measurements only.
 
 class DTO(BaseModel):
     model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
@@ -279,7 +281,7 @@ Target candidate markets:
 - Providence, Rhode Island
 - Hartford, Connecticut
 
-Use the official Census CBSA code as `city_id`.
+Use the official five-digit Census CBSA code internally. At the canonical release boundary serialize it as `cbsa:<five-digit code>`; reject malformed or double-prefixed IDs.
 
 Do not use municipal boundaries for ranking.
 
@@ -319,12 +321,17 @@ Do not infer `category` from memory. Verify current status from authoritative Wa
 
 ## 5. Required Feature Outputs
 
-The current `FeatureKey` contract supports exactly:
+The internal CityFeature record recognizes 17 measurements. The active `ranking.v2` scoring registry requires exactly 15:
 
 - `annual_precipitation_mm`
 - `annual_snowfall_mm`
 - `hot_days_32c`
 - `mean_commute_minutes`
+- `road_density_km_per_km2`
+- `intersection_density_per_km2`
+- `freeway_share`
+- `arterial_share`
+- `local_road_share`
 - `public_dc_ports_per_100k`
 - `population_share_in_counties_with_dc`
 - `population`
@@ -332,7 +339,12 @@ The current `FeatureKey` contract supports exactly:
 - `zero_vehicle_household_share`
 - `transit_commute_share`
 
-Do not insert unsupported feature keys into `CityFeature.features`.
+The two additional recognized measurements are informational and excluded from scoring:
+
+- `average_aadt`
+- `lane_miles_per_km2`
+
+They may be null with an explicit missing reason. Their absence does not make a city unrankable. Missing any of the 15 scoring measurements does.
 
 Additional processed datasets must be stored as intermediate outputs for later schema expansion and simulation.
 

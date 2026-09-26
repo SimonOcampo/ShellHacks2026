@@ -1,7 +1,15 @@
 from datetime import datetime, timezone
 import pytest
 from pydantic import ValidationError
-from src.contracts.models import CityFeature, Measurement, Provenance, VersionStamp
+from src.contracts.models import (
+    CityFeature,
+    KNOWN_MEASUREMENT_KEYS,
+    Measurement,
+    OPTIONAL_INFORMATIONAL_FEATURE_KEYS,
+    Provenance,
+    RANKING_FEATURE_KEYS,
+    VersionStamp,
+)
 
 def _record(tmp_path):
     raw = tmp_path / "source.csv"; raw.write_bytes(b"source artifact\n")
@@ -33,3 +41,8 @@ def test_fraction_range_enforced(tmp_path):
     city["features"]["transit_commute_share"] = {"value":1.2,"unit":"fraction","quality":"derived","missing_reason":None,"provenance_ids":["p1"]}
     with pytest.raises(ValidationError):
         CityFeature.model_validate(city)
+
+def test_pipeline_registry_distinguishes_scoring_and_informational_features():
+    assert len(RANKING_FEATURE_KEYS) == 15
+    assert OPTIONAL_INFORMATIONAL_FEATURE_KEYS == {"average_aadt", "lane_miles_per_km2"}
+    assert len(KNOWN_MEASUREMENT_KEYS) == 17
