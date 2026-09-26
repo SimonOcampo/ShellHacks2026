@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { geoAlbersUsa, geoArea, geoPath } from "d3-geo";
 import type { FeatureCollection, Position } from "geojson";
 import type { CityList, Ranking } from "@/lib/api/types";
+import { Button } from "@/components/ui/button";
 
 export default function MarketMap({
   cities,
@@ -16,9 +17,19 @@ export default function MarketMap({
   onSelect: (id: string) => void;
 }) {
   const [states, setStates] = useState<FeatureCollection | null>(null);
+  const [mapLoading, setMapLoading] = useState(true);
+  const [mapError, setMapError] = useState("");
+  const [mapRetry, setMapRetry] = useState(0);
   useEffect(() => {
-    fetch("/us-states.json")
-      .then((r) => r.json())
+    const controller = new AbortController();
+    setMapLoading(true);
+    setMapError("");
+    fetch("/us-states.json", { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok)
+          throw new Error(`Map outline request failed (${response.status})`);
+        return response.json();
+      })
       .then((data: FeatureCollection) => {
         // D3 uses spherical clockwise exteriors; upstream GeoJSON mixes winding.
         const orient = (rings: Position[][]) =>
@@ -32,10 +43,21 @@ export default function MarketMap({
             feature.geometry.coordinates =
               feature.geometry.coordinates.map(orient);
         }
-        setStates(data);
+        if (!controller.signal.aborted) setStates(data);
       })
-      .catch(() => setStates(null));
-  }, []);
+      .catch((error: unknown) => {
+        if (!controller.signal.aborted)
+          setMapError(
+            error instanceof Error
+              ? error.message
+              : "Map outlines could not load.",
+          );
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setMapLoading(false);
+      });
+    return () => controller.abort();
+  }, [mapRetry]);
   const projection = geoAlbersUsa().scale(940).translate([420, 240]);
   const path = geoPath(projection);
   const ranks = new Map(ranking.ranked.map((r) => [r.city_id, r.rank ?? 99]));
@@ -43,8 +65,8 @@ export default function MarketMap({
     <div className="map-wrap">
       <svg
         viewBox="0 0 840 490"
-        role="img"
-        aria-label="U.S. candidate metro map. Select a metro using the ranking list."
+        role="group"
+        aria-label="U.S. candidate metro map. Each metro marker is keyboard-operable; the ranked list is an alternate selection method."
       >
         <defs>
           <radialGradient id="map-glow">
@@ -52,7 +74,14 @@ export default function MarketMap({
             <stop offset="1" stopColor="#28c5ae" stopOpacity="0" />
           </radialGradient>
         </defs>
-        <ellipse cx="420" cy="250" rx="380" ry="220" fill="url(#map-glow)" />
+        <ellipse
+          cx="420"
+          cy="250"
+          rx="380"
+          ry="220"
+          fill="url(#map-glow)"
+          aria-hidden="true"
+        />
         {[100, 200, 300, 400].map((y) => (
           <line
             key={`y${y}`}
@@ -61,6 +90,7 @@ export default function MarketMap({
             y1={y}
             y2={y}
             className="map-grid"
+            aria-hidden="true"
           />
         ))}
         {[100, 200, 300, 400, 500, 600, 700].map((x) => (
@@ -71,6 +101,7 @@ export default function MarketMap({
             x1={x}
             x2={x}
             className="map-grid"
+            aria-hidden="true"
           />
         ))}
         {states?.features
@@ -79,7 +110,12 @@ export default function MarketMap({
               !["Alaska", "Hawaii", "Puerto Rico"].includes(f.properties?.name),
           )
           .map((f, i) => (
-            <path key={i} d={path(f) ?? ""} className="state-path" />
+            <path
+              key={i}
+              d={path(f) ?? ""}
+              className="state-path"
+              aria-hidden="true"
+            />
           ))}
         {cities.map((city) => {
           const point = projection([city.longitude, city.latitude]);
@@ -91,7 +127,17 @@ export default function MarketMap({
               key={city.city_id}
               className={`map-marker ${active ? "active" : ""} ${rank <= 3 ? "top" : ""}`}
               transform={`translate(${point[0]},${point[1]})`}
+              role="button"
+              tabIndex={0}
+              aria-pressed={active}
+              aria-label={`${city.display_name}, ${rank < 99 ? `rank ${rank}` : "unranked"}`}
               onClick={() => onSelect(city.city_id)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  onSelect(city.city_id);
+                }
+              }}
               style={{ cursor: "pointer" }}
             >
               <title>
@@ -111,10 +157,28 @@ export default function MarketMap({
           CONTIGUOUS UNITED STATES · CBSA MARKERS
         </text>
       </svg>
-      {!states && (
-        <span className="map-fallback">
-          Map outline loading · city list remains available
+      {!states && mapLoading && (
+        <span className="map-fallback" role="status" aria-live="polite">
+          Map outlines loading · ranked list remains available
         </span>
+      )}
+      {!states && mapError && (
+        <div className="map-fallback map-error" role="alert">
+          <span>
+            Map outlines failed: {mapError}. City ranking remains available.
+          </span>
+          <Button
+            variant="outline"
+            onClick={() => setMapRetry((value) => value + 1)}
+          >
+            Retry map
+          </Button>
+        </div>
+      )}
+      {cities.length === 0 && (
+        <p className="empty" role="status">
+          No metro locations were returned for this release.
+        </p>
       )}
       <div className="map-legend">
         <span>

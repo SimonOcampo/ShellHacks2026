@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./experience.css";
 export const metadata: Metadata = {
-  title: "ODD Scout — Explore the next market",
+  title: "ODD Scout — Expansion starts with a better question",
   description:
-    "Public-data market screening and hypothetical fleet operations. Not an AV safety or deployment approval assessment.",
+    "Explore public-data market signals and hypothetical fleet scenarios. Not an assessment of AV safety or deployment approval.",
 };
 export default function RootLayout({
   children,
