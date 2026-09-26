@@ -1,0 +1,1 @@
+"""Pure, release-based ranking."""

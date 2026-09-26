@@ -1,0 +1,18 @@
+{
+  "ranking_id": "a263dbcc99f345e28f3e",
+  "city_id": "cbsa:42660",
+  "mode": "template",
+  "summary": "Illustrative mock ranking. Seattle ranks #4 with a screening score of 78.0. Phoenix is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+  "advantages": [
+    "County charging coverage contributes 30.0 points to readiness.",
+    "Annual snowfall: 747.00 mm/year; comparison reference 760.00."
+  ],
+  "tradeoffs": [
+    "Lower relative factors: transit commute share, public dc charging.",
+    "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+  ],
+  "evidence_ids": [
+    "synthetic:38060",
+    "synthetic:42660"
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "versions": {
+    "schema_version": "1",
+    "data_version": "mock.v1",
+    "model_version": "ranking.v1",
+    "data_mode": "mock"
+  },
+  "city_id": "cbsa:33460",
+  "display_name": "Minneapolis\u2013St. Paul",
+  "official_name": "Minneapolis\u2013St. Paul metro (mock label; official name pending ingestion)",
+  "geography_type": "cbsa",
+  "geography_vintage": "synthetic-mock",
+  "state_codes": [
+    "MN"
+  ],
+  "latitude": 44.98,
+  "longitude": -93.27,
+  "features": {
+    "annual_precipitation_mm": {
+      "value": 1553.0,
+      "unit": "mm/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:33460"
+      ]
+    },
+    "annual_snowfall_mm": {
+      "value": 677.0,
+      "unit": "mm/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:33460"
+      ]
+    },
+    "hot_days_32c": {
+      "value": 79.0,
+      "unit": "days/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:33460"
+      ]
+    },
+    "mean_commute_minutes": {
+      "value": 27.0,
+      "unit": "minutes",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:33460"
+      ]
+    },
+    "public_dc_ports_per_100k": {
+      "value": 85.0,
+      "unit": "ports/100k residents",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:33460"
+      ]
+    },
+    "population_share_in_counties_with_dc": {
+      "value": 0.9550000000000001,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:33460"
+      ]
+    },
+    "population": {
+      "value": 14449337.0,
+      "unit": "residents",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:33460"
+      ]
+    },
+    "population_density_per_km2": {
+      "value": 827.0,
+      "unit": "residents/km\u00c2\u00b2",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:33460"
+      ]
+    },
+    "zero_vehicle_household_share": {
+      "value": 0.138,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:33460"
+      ]
+    },
+    "transit_commute_share": {
+      "value": 0.03899999999999999,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:33460"
+      ]
+    }
+  },
+  "legal_evidence": [
+    {
+      "jurisdiction": "MN",
+      "category": "unresolved",
+      "summary": "Regulatory review unresolved; no approval inferred.",
+      "checked_at": "2026-09-26",
+      "provenance_ids": []
+    }
+  ],
+  "provenance": [
+    {
+      "id": "synthetic:33460",
+      "source_name": "Synthetic fixture generator",
+      "source_url": "synthetic://odd-scout/mock.v1",
+      "dataset_id": "synthetic-mock.v1",
+      "period": "Not observed",
+      "retrieved_at": "2026-09-26",
+      "source_geography": "synthetic",
+      "target_geography": "cbsa:33460",
+      "transformation": "Deterministic illustrative values; no public observations.",
+      "assumptions": [
+        "All ranking measurements are synthetic. Display markers approximate principal city locations."
+      ],
+      "raw_sha256": "475156e4100e8e9ca53414919f3fc5d6e09ce3b8843a484740ecafe343fd2052"
+    }
+  ]
+}

@@ -1,0 +1,3264 @@
+{
+  "versions": {
+    "schema_version": "1",
+    "data_version": "mock.v1",
+    "model_version": "ranking.v1",
+    "data_mode": "mock"
+  },
+  "ranking_id": "a263dbcc99f345e28f3e",
+  "normalized_weights": {
+    "familiarity": 0.4,
+    "readiness": 0.2,
+    "opportunity": 0.4
+  },
+  "reference_ids": [
+    "mock-reference:12060",
+    "mock-reference:12420",
+    "mock-reference:31080",
+    "mock-reference:38060",
+    "mock-reference:41860"
+  ],
+  "ranked": [
+    {
+      "city_id": "cbsa:14460",
+      "rank": 1,
+      "expansion_score": 81.1942646703286,
+      "pillars": {
+        "familiarity": 75.23936894198769,
+        "readiness": 72.15342983168559,
+        "opportunity": 91.66957781799098
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 594.0,
+          "normalized_value": 0.33196026348689256,
+          "reference_value": 838.0,
+          "distance_component": 0.009344050952692043,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:14460"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 96.0,
+          "normalized_value": 0.6789266022358994,
+          "reference_value": 192.0,
+          "distance_component": 0.0020849658894648623,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:14460"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 2.0,
+          "normalized_value": 0.016260162601626018,
+          "reference_value": 4.0,
+          "distance_component": 5.2878577566263476e-05,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:14460"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 32.0,
+          "normalized_value": 0.7058823529411765,
+          "reference_value": 26.0,
+          "distance_component": 0.04982698961937718,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:14460"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 79.0,
+          "normalized_value": 0.935525188071699,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 65.48676316501893,
+          "provenance_ids": [
+            "synthetic:14460"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.64,
+          "normalized_value": 0.22222222222222213,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 6.666666666666663,
+          "provenance_ids": [
+            "synthetic:14460"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 9457476.0,
+          "normalized_value": 0.8473192605996992,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 25.419577817990977,
+          "provenance_ids": [
+            "synthetic:14460"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 1436.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 25.0,
+          "provenance_ids": [
+            "synthetic:14460"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.229,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "synthetic:14460"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.168,
+          "normalized_value": 0.75,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 11.25,
+          "provenance_ids": [
+            "synthetic:14460"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.24760631058012303,
+          "similarity": 75.23936894198769
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.41582485530231145,
+          "similarity": 58.41751446976886
+        },
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.4614382398519283,
+          "similarity": 53.85617601480717
+        }
+      ],
+      "strongest_factor_ids": [
+        "zero_vehicle_household_share",
+        "population_density_per_km2"
+      ],
+      "weakest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "transit_commute_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:16980",
+      "rank": 2,
+      "expansion_score": 79.26470265529514,
+      "pillars": {
+        "familiarity": 79.73650856402914,
+        "readiness": 63.50472679658375,
+        "opportunity": 86.67288467591683
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 457.0,
+          "normalized_value": 0.16736097627424865,
+          "reference_value": 564.0,
+          "distance_component": 0.0034878926663089744,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:16980"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 13.0,
+          "normalized_value": 0.3916588904349968,
+          "reference_value": 26.0,
+          "distance_component": 0.0019001485309731482,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:16980"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 121.0,
+          "normalized_value": 0.983739837398374,
+          "reference_value": 112.0,
+          "distance_component": 0.0010707911957168372,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:16980"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 25.0,
+          "normalized_value": 0.29411764705882354,
+          "reference_value": 30.0,
+          "distance_component": 0.03460207612456748,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:16980"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 66.0,
+          "normalized_value": 0.8595913351892916,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 60.17139346325042,
+          "provenance_ids": [
+            "synthetic:16980"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.5950000000000001,
+          "normalized_value": 0.1111111111111112,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 3.333333333333336,
+          "provenance_ids": [
+            "synthetic:16980"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 8744353.0,
+          "normalized_value": 0.8190781998777964,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 24.57234599633389,
+          "provenance_ids": [
+            "synthetic:16980"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 1323.0,
+          "normalized_value": 0.9715215471833174,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 24.288038679582936,
+          "provenance_ids": [
+            "synthetic:16980"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.212,
+          "normalized_value": 0.9166666666666666,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 27.5,
+          "provenance_ids": [
+            "synthetic:16980"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.155,
+          "normalized_value": 0.6875,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 10.3125,
+          "provenance_ids": [
+            "synthetic:16980"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.2026349143597086,
+          "similarity": 79.73650856402914
+        },
+        {
+          "reference_id": "mock-reference:41860",
+          "distance": 0.2918957156866034,
+          "similarity": 70.81042843133967
+        },
+        {
+          "reference_id": "mock-reference:12420",
+          "distance": 0.48219357301093374,
+          "similarity": 51.78064269890663
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_density_per_km2",
+        "hot_days_32c"
+      ],
+      "weakest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "transit_commute_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:38900",
+      "rank": 3,
+      "expansion_score": 79.18454782558975,
+      "pillars": {
+        "familiarity": 89.56794919699796,
+        "readiness": 53.70579344519689,
+        "opportunity": 81.54052364437796
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1720.0,
+          "normalized_value": 1.0,
+          "reference_value": 1690.0,
+          "distance_component": 2.4468711922905454e-05,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:38900"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 830.0,
+          "normalized_value": 0.9976962973525817,
+          "reference_value": 760.0,
+          "distance_component": 3.4109747161515425e-05,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:38900"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 110.0,
+          "normalized_value": 0.8943089430894309,
+          "reference_value": 90.0,
+          "distance_component": 0.005287857756626347,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:38900"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 36.0,
+          "normalized_value": 0.9411764705882353,
+          "reference_value": 34.0,
+          "distance_component": 0.005536332179930798,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:38900"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 53.0,
+          "normalized_value": 0.7672256206456698,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 53.70579344519689,
+          "provenance_ids": [
+            "synthetic:38900"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.55,
+          "normalized_value": 0.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.0,
+          "provenance_ids": [
+            "synthetic:38900"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 8031230.0,
+          "normalized_value": 0.7884333247641983,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 23.652999742925946,
+          "provenance_ids": [
+            "synthetic:38900"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 1210.0,
+          "normalized_value": 0.9405009560580805,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 23.512523901452013,
+          "provenance_ids": [
+            "synthetic:38900"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.195,
+          "normalized_value": 0.8333333333333334,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 25.0,
+          "provenance_ids": [
+            "synthetic:38900"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.14200000000000002,
+          "normalized_value": 0.625,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 9.375,
+          "provenance_ids": [
+            "synthetic:38900"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.10432050803002046,
+          "similarity": 89.56794919699796
+        },
+        {
+          "reference_id": "mock-reference:12420",
+          "distance": 0.29198518478895635,
+          "similarity": 70.80148152110436
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.44695667598516275,
+          "similarity": 55.30433240148373
+        }
+      ],
+      "strongest_factor_ids": [
+        "annual_precipitation_mm",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "transit_commute_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:42660",
+      "rank": 4,
+      "expansion_score": 77.99801267703253,
+      "pillars": {
+        "familiarity": 81.02310502885686,
+        "readiness": 75.45065699595875,
+        "opportunity": 76.2465981657451
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1583.0,
+          "normalized_value": 0.9478246741855166,
+          "reference_value": 1690.0,
+          "distance_component": 0.0003380791642418764,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:42660"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 747.0,
+          "normalized_value": 0.9820797293147756,
+          "reference_value": 760.0,
+          "distance_component": 1.3077900535963428e-06,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:42660"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 99.0,
+          "normalized_value": 0.8048780487804879,
+          "reference_value": 90.0,
+          "distance_component": 0.0010707911957168372,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:42660"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 29.0,
+          "normalized_value": 0.5294117647058824,
+          "reference_value": 34.0,
+          "distance_component": 0.03460207612456747,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:42660"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 40.0,
+          "normalized_value": 0.649295099942268,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 45.45065699595876,
+          "provenance_ids": [
+            "synthetic:42660"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.9550000000000001,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "synthetic:42660"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 7318107.0,
+          "normalized_value": 0.7549370266444505,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 22.648110799333516,
+          "provenance_ids": [
+            "synthetic:42660"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 1097.0,
+          "normalized_value": 0.9064394946564633,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 22.660987366411582,
+          "provenance_ids": [
+            "synthetic:42660"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.17800000000000002,
+          "normalized_value": 0.7500000000000001,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 22.500000000000004,
+          "provenance_ids": [
+            "synthetic:42660"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.129,
+          "normalized_value": 0.5625000000000001,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 8.437500000000002,
+          "provenance_ids": [
+            "synthetic:42660"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.1897689497114314,
+          "similarity": 81.02310502885686
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.36919345564577716,
+          "similarity": 63.080654435422275
+        },
+        {
+          "reference_id": "mock-reference:12420",
+          "distance": 0.4059314092474308,
+          "similarity": 59.40685907525691
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "public_dc_ports_per_100k"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:33460",
+      "rank": 5,
+      "expansion_score": 76.45354403559577,
+      "pillars": {
+        "familiarity": 73.53432539554544,
+        "readiness": 97.65448633284387,
+        "opportunity": 68.77229152702205
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1553.0,
+          "normalized_value": 0.9357979132230106,
+          "reference_value": 1690.0,
+          "distance_component": 0.000564797097596143,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:33460"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 677.0,
+          "normalized_value": 0.9674977366820942,
+          "reference_value": 760.0,
+          "distance_component": 5.87499537593085e-05,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:33460"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 79.0,
+          "normalized_value": 0.6422764227642277,
+          "reference_value": 90.0,
+          "distance_component": 0.0015995769713794677,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:33460"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 27.0,
+          "normalized_value": 0.4117647058823529,
+          "reference_value": 34.0,
+          "distance_component": 0.06782006920415225,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:33460"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 85.0,
+          "normalized_value": 0.9664926618977697,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 67.65448633284387,
+          "provenance_ids": [
+            "synthetic:33460"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.9550000000000001,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "synthetic:33460"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 14449337.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "synthetic:33460"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 827.0,
+          "normalized_value": 0.8083011633433256,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 20.20752908358314,
+          "provenance_ids": [
+            "synthetic:33460"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.138,
+          "normalized_value": 0.553921568627451,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 16.61764705882353,
+          "provenance_ids": [
+            "synthetic:33460"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.03899999999999999,
+          "normalized_value": 0.1298076923076923,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 1.9471153846153844,
+          "provenance_ids": [
+            "synthetic:33460"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.2646567460445457,
+          "similarity": 73.53432539554544
+        },
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.33579647518341155,
+          "similarity": 66.42035248165885
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.39193806012634164,
+          "similarity": 60.806193987365845
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "population"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:16740",
+      "rank": 6,
+      "expansion_score": 73.19226774202744,
+      "pillars": {
+        "familiarity": 80.19320459842729,
+        "readiness": 69.54434122012876,
+        "opportunity": 68.01529414657692
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1142.0,
+          "normalized_value": 0.7425903027620814,
+          "reference_value": 838.0,
+          "distance_component": 0.007564599299656462,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:16740"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 428.0,
+          "normalized_value": 0.8995725347251112,
+          "reference_value": 192.0,
+          "distance_component": 0.002810530221666783,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:16740"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 46.0,
+          "normalized_value": 0.37398373983739835,
+          "reference_value": 4.0,
+          "distance_component": 0.023319452706722185,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:16740"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 24.0,
+          "normalized_value": 0.23529411764705882,
+          "reference_value": 26.0,
+          "distance_component": 0.005536332179930798,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:16740"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 46.0,
+          "normalized_value": 0.7077763031446964,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 49.54434122012875,
+          "provenance_ids": [
+            "synthetic:16740"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.8200000000000001,
+          "normalized_value": 0.6666666666666666,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 20.0,
+          "provenance_ids": [
+            "synthetic:16740"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 12309968.0,
+          "normalized_value": 0.9422771194601915,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 28.268313583805746,
+          "provenance_ids": [
+            "synthetic:16740"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 488.0,
+          "normalized_value": 0.6251733401579056,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 15.62933350394764,
+          "provenance_ids": [
+            "synthetic:16740"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.08700000000000002,
+          "normalized_value": 0.30392156862745107,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 9.117647058823533,
+          "provenance_ids": [
+            "synthetic:16740"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.22,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 15.0,
+          "provenance_ids": [
+            "synthetic:16740"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.19806795401572722,
+          "similarity": 80.19320459842729
+        },
+        {
+          "reference_id": "mock-reference:41860",
+          "distance": 0.34602883103233845,
+          "similarity": 65.39711689676615
+        },
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.42140985975663875,
+          "similarity": 57.85901402433613
+        }
+      ],
+      "strongest_factor_ids": [
+        "transit_commute_share",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "zero_vehicle_household_share",
+        "population_density_per_km2"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:39580",
+      "rank": 7,
+      "expansion_score": 71.89988381676909,
+      "pillars": {
+        "familiarity": 81.6478850487083,
+        "readiness": 80.19717906645059,
+        "opportunity": 58.00323495998912
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1279.0,
+          "normalized_value": 0.8137932108778786,
+          "reference_value": 1690.0,
+          "distance_component": 0.00613521633438095,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:39580"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 511.0,
+          "normalized_value": 0.9258212291934154,
+          "reference_value": 760.0,
+          "distance_component": 0.0006918558369019577,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:39580"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 57.0,
+          "normalized_value": 0.4634146341463415,
+          "reference_value": 90.0,
+          "distance_component": 0.014396192742415227,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:39580"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 31.0,
+          "normalized_value": 0.6470588235294118,
+          "reference_value": 34.0,
+          "distance_component": 0.01245674740484428,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:39580"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 59.0,
+          "normalized_value": 0.8123406533302464,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 56.86384573311725,
+          "provenance_ids": [
+            "synthetic:39580"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.865,
+          "normalized_value": 0.7777777777777776,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 23.33333333333333,
+          "provenance_ids": [
+            "synthetic:39580"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 13023091.0,
+          "normalized_value": 0.9625633244603822,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 28.876899733811467,
+          "provenance_ids": [
+            "synthetic:39580"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 601.0,
+          "normalized_value": 0.6974629113095495,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 17.43657278273874,
+          "provenance_ids": [
+            "synthetic:39580"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.10400000000000004,
+          "normalized_value": 0.3872549019607845,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 11.617647058823534,
+          "provenance_ids": [
+            "synthetic:39580"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.013000000000000001,
+          "normalized_value": 0.004807692307692312,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.07211538461538468,
+          "provenance_ids": [
+            "synthetic:39580"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.18352114951291695,
+          "similarity": 81.6478850487083
+        },
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.30007775713644663,
+          "similarity": 69.99222428635534
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.36390836239955465,
+          "similarity": 63.60916376004453
+        }
+      ],
+      "strongest_factor_ids": [
+        "annual_snowfall_mm",
+        "population"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:41700",
+      "rank": 8,
+      "expansion_score": 71.10144958821192,
+      "pillars": {
+        "familiarity": 74.76578899665527,
+        "readiness": 88.00100781108466,
+        "opportunity": 58.987331068332196
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1172.0,
+          "normalized_value": 0.7588860441386623,
+          "reference_value": 838.0,
+          "distance_component": 0.008885396666692134,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:41700"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 498.0,
+          "normalized_value": 0.9220043774215662,
+          "reference_value": 192.0,
+          "distance_component": 0.00397483078826109,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:41700"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 66.0,
+          "normalized_value": 0.5365853658536586,
+          "reference_value": 4.0,
+          "distance_component": 0.05081631304117921,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:41700"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 26.0,
+          "normalized_value": 0.35294117647058826,
+          "reference_value": 26.0,
+          "distance_component": 0.0,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:41700"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 86.0,
+          "normalized_value": 0.9714429687297809,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 68.00100781108466,
+          "provenance_ids": [
+            "synthetic:41700"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.8200000000000001,
+          "normalized_value": 0.6666666666666666,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 20.0,
+          "provenance_ids": [
+            "synthetic:41700"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 5178738.0,
+          "normalized_value": 0.6303731804073649,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 18.91119541222095,
+          "provenance_ids": [
+            "synthetic:41700"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 758.0,
+          "normalized_value": 0.77804542624445,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 19.451135656111248,
+          "provenance_ids": [
+            "synthetic:41700"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.127,
+          "normalized_value": 0.5,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 15.0,
+          "provenance_ids": [
+            "synthetic:41700"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.09,
+          "normalized_value": 0.375,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 5.625,
+          "provenance_ids": [
+            "synthetic:41700"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.2523421100334473,
+          "similarity": 74.76578899665527
+        },
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.3279714580194625,
+          "similarity": 67.20285419805376
+        },
+        {
+          "reference_id": "mock-reference:41860",
+          "distance": 0.3321041413409257,
+          "similarity": 66.78958586590743
+        }
+      ],
+      "strongest_factor_ids": [
+        "mean_commute_minutes",
+        "public_dc_ports_per_100k"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:29820",
+      "rank": 9,
+      "expansion_score": 69.92511300718189,
+      "pillars": {
+        "familiarity": 90.46491071378432,
+        "readiness": 38.644705148384865,
+        "opportunity": 65.02551922997799
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1309.0,
+          "normalized_value": 0.8283648378971883,
+          "reference_value": 1690.0,
+          "distance_component": 0.005156818582463729,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:29820"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 581.0,
+          "normalized_value": 0.9448391755510712,
+          "reference_value": 760.0,
+          "distance_component": 0.0003167712399894487,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:29820"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 77.0,
+          "normalized_value": 0.6260162601626016,
+          "reference_value": 90.0,
+          "distance_component": 0.0022341199021746324,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:29820"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 33.0,
+          "normalized_value": 0.7647058823529411,
+          "reference_value": 34.0,
+          "distance_component": 0.0013840830449826996,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:29820"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 14.0,
+          "normalized_value": 0.21873388307216482,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 15.311371815051537,
+          "provenance_ids": [
+            "synthetic:29820"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.865,
+          "normalized_value": 0.7777777777777776,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 23.33333333333333,
+          "provenance_ids": [
+            "synthetic:29820"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 5891861.0,
+          "normalized_value": 0.6768465645499532,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 20.305396936498596,
+          "provenance_ids": [
+            "synthetic:29820"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 871.0,
+          "normalized_value": 0.8263048917391757,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 20.657622293479392,
+          "provenance_ids": [
+            "synthetic:29820"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.14400000000000002,
+          "normalized_value": 0.5833333333333334,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 17.5,
+          "provenance_ids": [
+            "synthetic:29820"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.103,
+          "normalized_value": 0.4375,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 6.5625,
+          "provenance_ids": [
+            "synthetic:29820"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.09535089286215682,
+          "similarity": 90.46491071378432
+        },
+        {
+          "reference_id": "mock-reference:12420",
+          "distance": 0.30518541975221214,
+          "similarity": 69.48145802477879
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.3551640344749966,
+          "similarity": 64.48359655250033
+        }
+      ],
+      "strongest_factor_ids": [
+        "annual_snowfall_mm",
+        "mean_commute_minutes"
+      ],
+      "weakest_factor_ids": [
+        "public_dc_ports_per_100k",
+        "transit_commute_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:34980",
+      "rank": 10,
+      "expansion_score": 68.79304275658352,
+      "pillars": {
+        "familiarity": 63.765909776036686,
+        "readiness": 89.40881546447088,
+        "opportunity": 63.51228938318667
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1416.0,
+          "normalized_value": 0.8777491257154973,
+          "reference_value": 838.0,
+          "distance_component": 0.021732529064101596,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:34980"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 594.0,
+          "normalized_value": 0.9481176643997443,
+          "reference_value": 192.0,
+          "distance_component": 0.005583747324498764,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:34980"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 68.0,
+          "normalized_value": 0.5528455284552846,
+          "reference_value": 4.0,
+          "distance_component": 0.0541476634278538,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:34980"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 20.0,
+          "normalized_value": 0.0,
+          "reference_value": 26.0,
+          "distance_component": 0.04982698961937718,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:34980"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 72.0,
+          "normalized_value": 0.896316411397203,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 62.742148797804205,
+          "provenance_ids": [
+            "synthetic:34980"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.91,
+          "normalized_value": 0.8888888888888888,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 26.666666666666664,
+          "provenance_ids": [
+            "synthetic:34980"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 13736214.0,
+          "normalized_value": 0.9817677670606425,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 29.453033011819276,
+          "provenance_ids": [
+            "synthetic:34980"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 714.0,
+          "normalized_value": 0.757279757117139,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 18.931993927928474,
+          "provenance_ids": [
+            "synthetic:34980"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.12100000000000005,
+          "normalized_value": 0.4705882352941179,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 14.117647058823538,
+          "provenance_ids": [
+            "synthetic:34980"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.025999999999999985,
+          "normalized_value": 0.06730769230769224,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 1.0096153846153835,
+          "provenance_ids": [
+            "synthetic:34980"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.3623409022396331,
+          "similarity": 63.765909776036686
+        },
+        {
+          "reference_id": "mock-reference:41860",
+          "distance": 0.3752236794054501,
+          "similarity": 62.47763205945499
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.522521172635695,
+          "similarity": 47.747882736430505
+        }
+      ],
+      "strongest_factor_ids": [
+        "population",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:19100",
+      "rank": 11,
+      "expansion_score": 68.10522447112363,
+      "pillars": {
+        "familiarity": 77.807341763709,
+        "readiness": 79.81662820470979,
+        "opportunity": 52.54740531174519
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1035.0,
+          "normalized_value": 0.6807682932398843,
+          "reference_value": 1690.0,
+          "distance_component": 0.018993848944740335,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:19100"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 415.0,
+          "normalized_value": 0.8950057549302888,
+          "reference_value": 760.0,
+          "distance_component": 0.001606747230028629,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:19100"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 55.0,
+          "normalized_value": 0.44715447154471544,
+          "reference_value": 90.0,
+          "distance_component": 0.016194064379668187,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:19100"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 37.0,
+          "normalized_value": 1.0,
+          "reference_value": 34.0,
+          "distance_component": 0.012456747404844296,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:19100"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 73.0,
+          "normalized_value": 0.9021423076863302,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 63.149961538043115,
+          "provenance_ids": [
+            "synthetic:19100"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.775,
+          "normalized_value": 0.5555555555555555,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 16.666666666666664,
+          "provenance_ids": [
+            "synthetic:19100"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 4465615.0,
+          "normalized_value": 0.5770035851677489,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 17.310107555032467,
+          "provenance_ids": [
+            "synthetic:19100"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 645.0,
+          "normalized_value": 0.7219919102685088,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 18.04979775671272,
+          "provenance_ids": [
+            "synthetic:19100"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.11000000000000001,
+          "normalized_value": 0.41666666666666674,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 12.500000000000002,
+          "provenance_ids": [
+            "synthetic:19100"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.077,
+          "normalized_value": 0.3125,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 4.6875,
+          "provenance_ids": [
+            "synthetic:19100"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.22192658236290994,
+          "similarity": 77.807341763709
+        },
+        {
+          "reference_id": "mock-reference:12420",
+          "distance": 0.28444109468770795,
+          "similarity": 71.55589053122921
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.4156957900823588,
+          "similarity": 58.43042099176412
+        }
+      ],
+      "strongest_factor_ids": [
+        "annual_snowfall_mm",
+        "public_dc_ports_per_100k"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:19740",
+      "rank": 12,
+      "expansion_score": 66.51030614088644,
+      "pillars": {
+        "familiarity": 65.17561587362525,
+        "readiness": 60.68629870118032,
+        "opportunity": 70.7570001280007
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1446.0,
+          "normalized_value": 0.8909265721002283,
+          "reference_value": 427.0,
+          "distance_component": 0.11740528495615175,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:19740"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 664.0,
+          "normalized_value": 0.9646245088499743,
+          "reference_value": 843.0,
+          "distance_component": 0.00025028507482110926,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:19740"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 88.0,
+          "normalized_value": 0.7154471544715447,
+          "reference_value": 101.0,
+          "distance_component": 0.0022341199021746324,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:19740"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 22.0,
+          "normalized_value": 0.11764705882352941,
+          "reference_value": 23.0,
+          "distance_component": 0.0013840830449826996,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:19740"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 27.0,
+          "normalized_value": 0.4859947433501951,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 34.019632034513656,
+          "provenance_ids": [
+            "synthetic:19740"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.91,
+          "normalized_value": 0.8888888888888888,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 26.666666666666664,
+          "provenance_ids": [
+            "synthetic:19740"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 6604984.0,
+          "normalized_value": 0.7180037190053503,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 21.54011157016051,
+          "provenance_ids": [
+            "synthetic:19740"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 984.0,
+          "normalized_value": 0.8686755423136072,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 21.716888557840182,
+          "provenance_ids": [
+            "synthetic:19740"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.161,
+          "normalized_value": 0.6666666666666666,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 20.0,
+          "provenance_ids": [
+            "synthetic:19740"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.11599999999999999,
+          "normalized_value": 0.5,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 7.5,
+          "provenance_ids": [
+            "synthetic:19740"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:41860",
+          "distance": 0.3482438412637475,
+          "similarity": 65.17561587362525
+        },
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.38166662329657325,
+          "similarity": 61.83333767034267
+        },
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.4487340269929904,
+          "similarity": 55.12659730070095
+        }
+      ],
+      "strongest_factor_ids": [
+        "annual_snowfall_mm",
+        "mean_commute_minutes"
+      ],
+      "weakest_factor_ids": [
+        "public_dc_ports_per_100k",
+        "transit_commute_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:47900",
+      "rank": 13,
+      "expansion_score": 66.4352469147934,
+      "pillars": {
+        "familiarity": 80.72124874723892,
+        "readiness": 80.0,
+        "opportunity": 45.36686853974459
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 731.0,
+          "normalized_value": 0.4622970283914466,
+          "reference_value": 838.0,
+          "distance_component": 0.0014727371845507896,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:47900"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 179.0,
+          "normalized_value": 0.7706796269533817,
+          "reference_value": 192.0,
+          "distance_component": 2.142048174862379e-05,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:47900"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 13.0,
+          "normalized_value": 0.10569105691056911,
+          "reference_value": 4.0,
+          "distance_component": 0.0010707911957168355,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:47900"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 21.0,
+          "normalized_value": 0.058823529411764705,
+          "reference_value": 26.0,
+          "distance_component": 0.03460207612456748,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:47900"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 92.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 70.0,
+          "provenance_ids": [
+            "synthetic:47900"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.685,
+          "normalized_value": 0.3333333333333333,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 10.0,
+          "provenance_ids": [
+            "synthetic:47900"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 10170599.0,
+          "normalized_value": 0.8735063463905474,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 26.20519039171642,
+          "provenance_ids": [
+            "synthetic:47900"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 149.0,
+          "normalized_value": 0.21426124356818518,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 5.35653108920463,
+          "provenance_ids": [
+            "synthetic:47900"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.03600000000000004,
+          "normalized_value": 0.053921568627451164,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 1.617647058823535,
+          "provenance_ids": [
+            "synthetic:47900"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.181,
+          "normalized_value": 0.8125,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 12.1875,
+          "provenance_ids": [
+            "synthetic:47900"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.1927875125276109,
+          "similarity": 80.72124874723892
+        },
+        {
+          "reference_id": "mock-reference:41860",
+          "distance": 0.37578506383593396,
+          "similarity": 62.42149361640661
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.5126755726665801,
+          "similarity": 48.73244273334198
+        }
+      ],
+      "strongest_factor_ids": [
+        "public_dc_ports_per_100k",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "zero_vehicle_household_share",
+        "population_density_per_km2"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:35620",
+      "rank": 14,
+      "expansion_score": 65.72728160417766,
+      "pillars": {
+        "familiarity": 74.41668007745577,
+        "readiness": 56.50588720443022,
+        "opportunity": 61.648580330773264
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1005.0,
+          "normalized_value": 0.6622856577770149,
+          "reference_value": 1690.0,
+          "distance_component": 0.02134049396315049,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:35620"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 345.0,
+          "normalized_value": 0.8676619859444569,
+          "reference_value": 760.0,
+          "distance_component": 0.0027366245333049744,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:35620"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 35.0,
+          "normalized_value": 0.2845528455284553,
+          "reference_value": 90.0,
+          "distance_component": 0.03998942428448675,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:35620"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 35.0,
+          "normalized_value": 0.8823529411764706,
+          "reference_value": 34.0,
+          "distance_component": 0.0013840830449826996,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:35620"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 33.0,
+          "normalized_value": 0.5691317219680508,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 39.83922053776356,
+          "provenance_ids": [
+            "synthetic:35620"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.775,
+          "normalized_value": 0.5555555555555555,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 16.666666666666664,
+          "provenance_ids": [
+            "synthetic:35620"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 11596845.0,
+          "normalized_value": 0.920779970597564,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 27.62339911792692,
+          "provenance_ids": [
+            "synthetic:35620"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 375.0,
+          "normalized_value": 0.5338013661609127,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 13.345034154022816,
+          "provenance_ids": [
+            "synthetic:35620"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.07,
+          "normalized_value": 0.22058823529411767,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 6.61764705882353,
+          "provenance_ids": [
+            "synthetic:35620"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.207,
+          "normalized_value": 0.9374999999999999,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 14.062499999999998,
+          "provenance_ids": [
+            "synthetic:35620"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.2558331992254424,
+          "similarity": 74.41668007745577
+        },
+        {
+          "reference_id": "mock-reference:12420",
+          "distance": 0.3520472105202887,
+          "similarity": 64.79527894797113
+        },
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.35905868012831654,
+          "similarity": 64.09413198716834
+        }
+      ],
+      "strongest_factor_ids": [
+        "mean_commute_minutes",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "zero_vehicle_household_share",
+        "population_density_per_km2"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:37980",
+      "rank": 15,
+      "expansion_score": 65.25294557876553,
+      "pillars": {
+        "familiarity": 89.34931430892506,
+        "readiness": 38.7300479359453,
+        "opportunity": 54.41802567001613
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 868.0,
+          "normalized_value": 0.5702065542402666,
+          "reference_value": 838.0,
+          "distance_component": 9.766082095283698e-05,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:37980"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 262.0,
+          "normalized_value": 0.8269557622280987,
+          "reference_value": 192.0,
+          "distance_component": 0.0004218598114968581,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:37980"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 24.0,
+          "normalized_value": 0.1951219512195122,
+          "reference_value": 4.0,
+          "distance_component": 0.005287857756626347,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:37980"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 28.0,
+          "normalized_value": 0.47058823529411764,
+          "reference_value": 26.0,
+          "distance_component": 0.005536332179930794,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:37980"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 20.0,
+          "normalized_value": 0.36281020860874247,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 25.396714602611972,
+          "provenance_ids": [
+            "synthetic:37980"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.73,
+          "normalized_value": 0.44444444444444425,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 13.333333333333327,
+          "provenance_ids": [
+            "synthetic:37980"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 10883722.0,
+          "normalized_value": 0.8979180789593464,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 26.93754236878039,
+          "provenance_ids": [
+            "synthetic:37980"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 262.0,
+          "normalized_value": 0.4095134496964882,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 10.237836242412204,
+          "provenance_ids": [
+            "synthetic:37980"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.053000000000000026,
+          "normalized_value": 0.13725490196078444,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 4.117647058823533,
+          "provenance_ids": [
+            "synthetic:37980"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.194,
+          "normalized_value": 0.875,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 13.125,
+          "provenance_ids": [
+            "synthetic:37980"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.10650685691074935,
+          "similarity": 89.34931430892506
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.38131291914220367,
+          "similarity": 61.86870808577963
+        },
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.3839945511397855,
+          "similarity": 61.600544886021446
+        }
+      ],
+      "strongest_factor_ids": [
+        "annual_precipitation_mm",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "zero_vehicle_household_share",
+        "public_dc_ports_per_100k"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:26420",
+      "rank": 16,
+      "expansion_score": 63.87794157476135,
+      "pillars": {
+        "familiarity": 78.79037227103133,
+        "readiness": 70.69262462799544,
+        "opportunity": 45.55816935187431
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 898.0,
+          "normalized_value": 0.5915540930889535,
+          "reference_value": 838.0,
+          "distance_component": 0.00037749608830281597,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:26420"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 332.0,
+          "normalized_value": 0.8619784866309589,
+          "reference_value": 192.0,
+          "distance_component": 0.0013105750056122897,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:26420"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 44.0,
+          "normalized_value": 0.35772357723577236,
+          "reference_value": 4.0,
+          "distance_component": 0.021151431026505386,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:26420"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 30.0,
+          "normalized_value": 0.5882352941176471,
+          "reference_value": 26.0,
+          "distance_component": 0.022145328719723186,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:26420"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 60.0,
+          "normalized_value": 0.8194184470666016,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 57.359291294662114,
+          "provenance_ids": [
+            "synthetic:26420"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.73,
+          "normalized_value": 0.44444444444444425,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 13.333333333333327,
+          "provenance_ids": [
+            "synthetic:26420"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 3752492.0,
+          "normalized_value": 0.5143284245304549,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 15.429852735913647,
+          "provenance_ids": [
+            "synthetic:26420"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 532.0,
+          "normalized_value": 0.6551326646384267,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 16.378316615960667,
+          "provenance_ids": [
+            "synthetic:26420"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.093,
+          "normalized_value": 0.3333333333333333,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 10.0,
+          "provenance_ids": [
+            "synthetic:26420"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.064,
+          "normalized_value": 0.25000000000000006,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 3.750000000000001,
+          "provenance_ids": [
+            "synthetic:26420"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.21209627728968672,
+          "similarity": 78.79037227103133
+        },
+        {
+          "reference_id": "mock-reference:38060",
+          "distance": 0.29104996179032827,
+          "similarity": 70.89500382096718
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.32557527288551985,
+          "similarity": 67.442472711448
+        }
+      ],
+      "strongest_factor_ids": [
+        "annual_precipitation_mm",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:27260",
+      "rank": 17,
+      "expansion_score": 60.869639843118144,
+      "pillars": {
+        "familiarity": 84.31476573277213,
+        "readiness": 60.17539134996741,
+        "opportunity": 37.771638200039504
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 761.0,
+          "normalized_value": 0.48756068277895565,
+          "reference_value": 838.0,
+          "distance_component": 0.0007332185372948656,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:27260"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 249.0,
+          "normalized_value": 0.8194324664350494,
+          "reference_value": 192.0,
+          "distance_component": 0.0002949705263358728,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:27260"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 33.0,
+          "normalized_value": 0.2682926829268293,
+          "reference_value": 4.0,
+          "distance_component": 0.011117720933306895,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:27260"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 23.0,
+          "normalized_value": 0.17647058823529413,
+          "reference_value": 26.0,
+          "distance_component": 0.012456747404844294,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:27260"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 47.0,
+          "normalized_value": 0.7167913049995345,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 50.17539134996741,
+          "provenance_ids": [
+            "synthetic:27260"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.685,
+          "normalized_value": 0.3333333333333333,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 10.0,
+          "provenance_ids": [
+            "synthetic:27260"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 3039369.0,
+          "normalized_value": 0.43840279260555465,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 13.15208377816664,
+          "provenance_ids": [
+            "synthetic:27260"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 419.0,
+          "normalized_value": 0.5722821768749143,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 14.30705442187286,
+          "provenance_ids": [
+            "synthetic:27260"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.07600000000000001,
+          "normalized_value": 0.25000000000000006,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 7.500000000000002,
+          "provenance_ids": [
+            "synthetic:27260"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.051000000000000004,
+          "normalized_value": 0.18750000000000006,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 2.812500000000001,
+          "provenance_ids": [
+            "synthetic:27260"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.15685234267227866,
+          "similarity": 84.31476573277213
+        },
+        {
+          "reference_id": "mock-reference:41860",
+          "distance": 0.30655320897415306,
+          "similarity": 69.34467910258469
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.4233475485653985,
+          "similarity": 57.66524514346014
+        }
+      ],
+      "strongest_factor_ids": [
+        "annual_snowfall_mm",
+        "annual_precipitation_mm"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:45300",
+      "rank": 18,
+      "expansion_score": 48.325400638294695,
+      "pillars": {
+        "familiarity": 68.40614276397096,
+        "readiness": 47.37475308433017,
+        "opportunity": 28.719982289600676
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 624.0,
+          "normalized_value": 0.3628999646645903,
+          "reference_value": 838.0,
+          "distance_component": 0.006860473663867221,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:45300"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 166.0,
+          "normalized_value": 0.7595544648954472,
+          "reference_value": 192.0,
+          "distance_component": 9.222817943114336e-05,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:45300"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 22.0,
+          "normalized_value": 0.17886178861788618,
+          "reference_value": 4.0,
+          "distance_component": 0.00428316478286734,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:45300"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 34.0,
+          "normalized_value": 0.8235294117647058,
+          "reference_value": 26.0,
+          "distance_component": 0.08858131487889272,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:45300"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 34.0,
+          "normalized_value": 0.5815440916809073,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 40.70808641766351,
+          "provenance_ids": [
+            "synthetic:45300"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.64,
+          "normalized_value": 0.22222222222222213,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 6.666666666666663,
+          "provenance_ids": [
+            "synthetic:45300"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 2326246.0,
+          "normalized_value": 0.34207957693667584,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 10.262387308100275,
+          "provenance_ids": [
+            "synthetic:45300"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 306.0,
+          "normalized_value": 0.4633037992600161,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 11.582594981500401,
+          "provenance_ids": [
+            "synthetic:45300"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.059000000000000004,
+          "normalized_value": 0.16666666666666666,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 5.0,
+          "provenance_ids": [
+            "synthetic:45300"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.038,
+          "normalized_value": 0.125,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 1.875,
+          "provenance_ids": [
+            "synthetic:45300"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.3159385723602903,
+          "similarity": 68.40614276397096
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.3803369688494753,
+          "similarity": 61.96630311505247
+        },
+        {
+          "reference_id": "mock-reference:12420",
+          "distance": 0.38619455514677475,
+          "similarity": 61.38054448532253
+        }
+      ],
+      "strongest_factor_ids": [
+        "annual_snowfall_mm",
+        "hot_days_32c"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:36740",
+      "rank": 19,
+      "expansion_score": 46.22858571530301,
+      "pillars": {
+        "familiarity": 83.17300602596497,
+        "readiness": 30.12442837241722,
+        "opportunity": 17.336244076083954
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 487.0,
+          "normalized_value": 0.20726740840832078,
+          "reference_value": 838.0,
+          "distance_component": 0.023234591320816796,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:36740"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 83.0,
+          "normalized_value": 0.6575714637501685,
+          "reference_value": 192.0,
+          "distance_component": 0.0030483356792349115,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:36740"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 11.0,
+          "normalized_value": 0.08943089430894309,
+          "reference_value": 4.0,
+          "distance_component": 0.0006477625751867274,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:36740"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 27.0,
+          "normalized_value": 0.4117647058823529,
+          "reference_value": 26.0,
+          "distance_component": 0.001384083044982697,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:36740"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 21.0,
+          "normalized_value": 0.3827299291297698,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 26.791095039083885,
+          "provenance_ids": [
+            "synthetic:36740"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.5950000000000001,
+          "normalized_value": 0.1111111111111112,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 3.333333333333336,
+          "provenance_ids": [
+            "synthetic:36740"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 1613123.0,
+          "normalized_value": 0.2102054731440004,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 6.3061641943200115,
+          "provenance_ids": [
+            "synthetic:36740"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 193.0,
+          "normalized_value": 0.3037031952705577,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 7.592579881763943,
+          "provenance_ids": [
+            "synthetic:36740"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.042,
+          "normalized_value": 0.08333333333333333,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 2.5,
+          "provenance_ids": [
+            "synthetic:36740"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.025,
+          "normalized_value": 0.06250000000000001,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.9375000000000002,
+          "provenance_ids": [
+            "synthetic:36740"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.16826993974035032,
+          "similarity": 83.17300602596497
+        },
+        {
+          "reference_id": "mock-reference:41860",
+          "distance": 0.3924764080083816,
+          "similarity": 60.752359199161845
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.3932978575685831,
+          "similarity": 60.67021424314169
+        }
+      ],
+      "strongest_factor_ids": [
+        "hot_days_32c",
+        "mean_commute_minutes"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    },
+    {
+      "city_id": "cbsa:33100",
+      "rank": 20,
+      "expansion_score": 20.728286403847264,
+      "pillars": {
+        "familiarity": 51.82071600961815,
+        "readiness": 0.0,
+        "opportunity": 0.0
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 350.0,
+          "normalized_value": 0.0,
+          "reference_value": 838.0,
+          "distance_component": 0.06008468425566771,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:33100"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 0.0,
+          "normalized_value": 0.0,
+          "reference_value": 192.0,
+          "distance_component": 0.12200115239727655,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:33100"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 0.0,
+          "normalized_value": 0.0,
+          "reference_value": 4.0,
+          "distance_component": 0.0002115143102650539,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:33100"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 20.0,
+          "normalized_value": 0.0,
+          "reference_value": 26.0,
+          "distance_component": 0.04982698961937718,
+          "score_points": null,
+          "provenance_ids": [
+            "synthetic:33100"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 8.0,
+          "normalized_value": 0.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.0,
+          "provenance_ids": [
+            "synthetic:33100"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.55,
+          "normalized_value": 0.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.0,
+          "provenance_ids": [
+            "synthetic:33100"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 900000.0,
+          "normalized_value": 0.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.0,
+          "provenance_ids": [
+            "synthetic:33100"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 80.0,
+          "normalized_value": 0.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.0,
+          "provenance_ids": [
+            "synthetic:33100"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.025,
+          "normalized_value": 0.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.0,
+          "provenance_ids": [
+            "synthetic:33100"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.012,
+          "normalized_value": 0.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.0,
+          "provenance_ids": [
+            "synthetic:33100"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "mock-reference:12060",
+          "distance": 0.4817928399038185,
+          "similarity": 51.82071600961815
+        },
+        {
+          "reference_id": "mock-reference:41860",
+          "distance": 0.5919652490504529,
+          "similarity": 40.80347509495471
+        },
+        {
+          "reference_id": "mock-reference:31080",
+          "distance": 0.6082891523003896,
+          "similarity": 39.17108476996104
+        }
+      ],
+      "strongest_factor_ids": [
+        "hot_days_32c",
+        "mean_commute_minutes"
+      ],
+      "weakest_factor_ids": [
+        "population",
+        "population_density_per_km2"
+      ],
+      "legal_flags": [
+        "Regulatory review unresolved; no approval inferred."
+      ]
+    }
+  ],
+  "unranked": []
+}

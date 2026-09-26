@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: odd-scout-api
+    runtime: docker
+    healthCheckPath: /health
+    envVars:
+      - key: ODD_DATA_MODE
+        value: mock
+      - key: ODD_DATA_RELEASE
+        value: /app/data/releases/mock.v1.json
+      - key: ODD_ALLOWED_ORIGINS
+        sync: false

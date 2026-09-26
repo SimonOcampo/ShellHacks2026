@@ -1,0 +1,1601 @@
+{
+  "versions": {
+    "schema_version": "1",
+    "data_version": "mock.v1",
+    "model_version": "simulation.v1",
+    "data_mode": "mock"
+  },
+  "simulation_id": "039e23cc452449dc981a",
+  "request": {
+    "city_id": "cbsa:36740",
+    "fleet_size": 50,
+    "days": 7,
+    "demand_multiplier": 1.0,
+    "base_fare_usd": 3.0,
+    "price_per_mile_usd": 1.75,
+    "price_per_minute_usd": 0.3,
+    "seed": 42
+  },
+  "assumptions": {
+    "profile_id": "synthetic-zone.v1",
+    "base_requests_per_day": 1000.0,
+    "service_zone_radius_miles": 5.0,
+    "average_speed_mph": 20.0,
+    "road_distance_multiplier": 1.3,
+    "hourly_demand_weights": [
+      0.3,
+      0.2,
+      0.15,
+      0.15,
+      0.2,
+      0.4,
+      0.8,
+      1.4,
+      1.5,
+      1.1,
+      0.9,
+      1.0,
+      1.1,
+      1.0,
+      1.0,
+      1.1,
+      1.5,
+      1.8,
+      1.7,
+      1.4,
+      1.2,
+      1.0,
+      0.7,
+      0.5
+    ],
+    "battery_range_miles": 250.0,
+    "reserve_fraction": 0.1,
+    "charge_trigger_fraction": 0.2,
+    "charge_target_fraction": 0.8,
+    "charge_range_miles_per_minute": 2.5,
+    "charger_count": 5,
+    "max_pickup_wait_minutes": 15.0,
+    "pickup_dwell_minutes": 1.0,
+    "dropoff_dwell_minutes": 1.0
+  },
+  "metrics": {
+    "total_requests": 6941,
+    "rides_completed": 6802,
+    "rejected_requests": 133,
+    "unfinished_requests": 6,
+    "average_wait_minutes": 4.677210353885815,
+    "p95_wait_minutes": 10.68902324759406,
+    "utilization_pct": 32.75285434630403,
+    "passenger_utilization_pct": 25.08502167028001,
+    "paid_miles": 39875.4598894812,
+    "empty_miles": 11987.110192581538,
+    "empty_mile_pct": 23.113220524193455,
+    "charging_vehicle_hours": 309.6315599800861,
+    "charging_queue_vehicle_hours": 26.21094663251064,
+    "gross_revenue_usd": 126031.47,
+    "revenue_per_vehicle_usd": 2520.6294,
+    "rides_per_vehicle": 136.04
+  },
+  "hourly": [
+    {
+      "hour": 0,
+      "requests": 19,
+      "completed_rides": 3,
+      "rejected_requests": 10,
+      "average_wait_minutes": 9.250437205670378,
+      "utilization_pct": 5.355111310632388,
+      "gross_revenue_usd": 48.58
+    },
+    {
+      "hour": 1,
+      "requests": 10,
+      "completed_rides": 13,
+      "rejected_requests": 0,
+      "average_wait_minutes": 9.670227989320203,
+      "utilization_pct": 11.547278116991654,
+      "gross_revenue_usd": 264.27
+    },
+    {
+      "hour": 2,
+      "requests": 2,
+      "completed_rides": 4,
+      "rejected_requests": 0,
+      "average_wait_minutes": 8.331152519075136,
+      "utilization_pct": 3.6506708835268133,
+      "gross_revenue_usd": 90.06
+    },
+    {
+      "hour": 3,
+      "requests": 7,
+      "completed_rides": 4,
+      "rejected_requests": 0,
+      "average_wait_minutes": 6.572574264299028,
+      "utilization_pct": 5.184637641548317,
+      "gross_revenue_usd": 45.87
+    },
+    {
+      "hour": 4,
+      "requests": 10,
+      "completed_rides": 12,
+      "rejected_requests": 0,
+      "average_wait_minutes": 6.240632075221271,
+      "utilization_pct": 9.000107437435007,
+      "gross_revenue_usd": 213.89
+    },
+    {
+      "hour": 5,
+      "requests": 24,
+      "completed_rides": 15,
+      "rejected_requests": 0,
+      "average_wait_minutes": 6.052434718989556,
+      "utilization_pct": 15.925660293818433,
+      "gross_revenue_usd": 238.6
+    },
+    {
+      "hour": 6,
+      "requests": 24,
+      "completed_rides": 23,
+      "rejected_requests": 0,
+      "average_wait_minutes": 6.161407049063818,
+      "utilization_pct": 18.187053640843427,
+      "gross_revenue_usd": 398.08
+    },
+    {
+      "hour": 7,
+      "requests": 74,
+      "completed_rides": 45,
+      "rejected_requests": 12,
+      "average_wait_minutes": 6.799176523032947,
+      "utilization_pct": 47.07421882554234,
+      "gross_revenue_usd": 797.93
+    },
+    {
+      "hour": 8,
+      "requests": 57,
+      "completed_rides": 55,
+      "rejected_requests": 0,
+      "average_wait_minutes": 6.480653328893284,
+      "utilization_pct": 47.83175157405583,
+      "gross_revenue_usd": 1049.89
+    },
+    {
+      "hour": 9,
+      "requests": 56,
+      "completed_rides": 64,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.575947732265053,
+      "utilization_pct": 52.21305068023643,
+      "gross_revenue_usd": 1204.48
+    },
+    {
+      "hour": 10,
+      "requests": 24,
+      "completed_rides": 42,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.550698942080349,
+      "utilization_pct": 27.526162901387135,
+      "gross_revenue_usd": 927.26
+    },
+    {
+      "hour": 11,
+      "requests": 45,
+      "completed_rides": 30,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.706858807905174,
+      "utilization_pct": 30.409194871295504,
+      "gross_revenue_usd": 573.72
+    },
+    {
+      "hour": 12,
+      "requests": 44,
+      "completed_rides": 47,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.149776881156703,
+      "utilization_pct": 38.59185248798423,
+      "gross_revenue_usd": 883.97
+    },
+    {
+      "hour": 13,
+      "requests": 48,
+      "completed_rides": 46,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.409972352753149,
+      "utilization_pct": 36.47694027683745,
+      "gross_revenue_usd": 858.01
+    },
+    {
+      "hour": 14,
+      "requests": 58,
+      "completed_rides": 56,
+      "rejected_requests": 4,
+      "average_wait_minutes": 3.9288678604988934,
+      "utilization_pct": 42.1219079845692,
+      "gross_revenue_usd": 1040.85
+    },
+    {
+      "hour": 15,
+      "requests": 48,
+      "completed_rides": 48,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.418125592304537,
+      "utilization_pct": 38.72432553933315,
+      "gross_revenue_usd": 875.51
+    },
+    {
+      "hour": 16,
+      "requests": 69,
+      "completed_rides": 53,
+      "rejected_requests": 3,
+      "average_wait_minutes": 5.421341365460689,
+      "utilization_pct": 50.041232726459626,
+      "gross_revenue_usd": 909.32
+    },
+    {
+      "hour": 17,
+      "requests": 66,
+      "completed_rides": 69,
+      "rejected_requests": 1,
+      "average_wait_minutes": 5.7599225239760905,
+      "utilization_pct": 56.90903239361816,
+      "gross_revenue_usd": 1318.95
+    },
+    {
+      "hour": 18,
+      "requests": 70,
+      "completed_rides": 63,
+      "rejected_requests": 2,
+      "average_wait_minutes": 4.743527623922373,
+      "utilization_pct": 55.041501475928165,
+      "gross_revenue_usd": 1180.89
+    },
+    {
+      "hour": 19,
+      "requests": 61,
+      "completed_rides": 72,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.8735366792035455,
+      "utilization_pct": 51.60095193407638,
+      "gross_revenue_usd": 1398.55
+    },
+    {
+      "hour": 20,
+      "requests": 43,
+      "completed_rides": 50,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.2841870063128455,
+      "utilization_pct": 39.16169292685479,
+      "gross_revenue_usd": 956.42
+    },
+    {
+      "hour": 21,
+      "requests": 45,
+      "completed_rides": 38,
+      "rejected_requests": 1,
+      "average_wait_minutes": 3.2612776912587473,
+      "utilization_pct": 33.486675615319264,
+      "gross_revenue_usd": 721.61
+    },
+    {
+      "hour": 22,
+      "requests": 36,
+      "completed_rides": 41,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.579954188400922,
+      "utilization_pct": 32.392109945908345,
+      "gross_revenue_usd": 772.67
+    },
+    {
+      "hour": 23,
+      "requests": 28,
+      "completed_rides": 29,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.4420739619320573,
+      "utilization_pct": 19.950759395245353,
+      "gross_revenue_usd": 512.17
+    },
+    {
+      "hour": 24,
+      "requests": 7,
+      "completed_rides": 17,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.9538542601359334,
+      "utilization_pct": 8.580458784837068,
+      "gross_revenue_usd": 354.31
+    },
+    {
+      "hour": 25,
+      "requests": 9,
+      "completed_rides": 8,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.9928831438385544,
+      "utilization_pct": 7.248777600811717,
+      "gross_revenue_usd": 160.37
+    },
+    {
+      "hour": 26,
+      "requests": 6,
+      "completed_rides": 9,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.3228703733201304,
+      "utilization_pct": 3.8349928299482596,
+      "gross_revenue_usd": 118.9
+    },
+    {
+      "hour": 27,
+      "requests": 10,
+      "completed_rides": 7,
+      "rejected_requests": 0,
+      "average_wait_minutes": 1.7441437981443804,
+      "utilization_pct": 6.366093014221883,
+      "gross_revenue_usd": 127.64
+    },
+    {
+      "hour": 28,
+      "requests": 14,
+      "completed_rides": 12,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.8946054841305036,
+      "utilization_pct": 9.429716642921766,
+      "gross_revenue_usd": 196.44
+    },
+    {
+      "hour": 29,
+      "requests": 22,
+      "completed_rides": 18,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.7668548758084373,
+      "utilization_pct": 15.600795057842712,
+      "gross_revenue_usd": 366.34
+    },
+    {
+      "hour": 30,
+      "requests": 42,
+      "completed_rides": 39,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.766506789789918,
+      "utilization_pct": 33.79658138363582,
+      "gross_revenue_usd": 751.0
+    },
+    {
+      "hour": 31,
+      "requests": 70,
+      "completed_rides": 50,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.553195138961046,
+      "utilization_pct": 52.136865123984954,
+      "gross_revenue_usd": 980.69
+    },
+    {
+      "hour": 32,
+      "requests": 72,
+      "completed_rides": 73,
+      "rejected_requests": 0,
+      "average_wait_minutes": 5.148320648757958,
+      "utilization_pct": 56.744722820348834,
+      "gross_revenue_usd": 1372.25
+    },
+    {
+      "hour": 33,
+      "requests": 65,
+      "completed_rides": 67,
+      "rejected_requests": 5,
+      "average_wait_minutes": 4.893648082243324,
+      "utilization_pct": 54.544833566320996,
+      "gross_revenue_usd": 1277.91
+    },
+    {
+      "hour": 34,
+      "requests": 43,
+      "completed_rides": 48,
+      "rejected_requests": 0,
+      "average_wait_minutes": 5.287898399217899,
+      "utilization_pct": 37.91219376198203,
+      "gross_revenue_usd": 888.44
+    },
+    {
+      "hour": 35,
+      "requests": 51,
+      "completed_rides": 50,
+      "rejected_requests": 2,
+      "average_wait_minutes": 4.996143739752852,
+      "utilization_pct": 40.033486761625724,
+      "gross_revenue_usd": 865.15
+    },
+    {
+      "hour": 36,
+      "requests": 51,
+      "completed_rides": 44,
+      "rejected_requests": 1,
+      "average_wait_minutes": 5.420194561677539,
+      "utilization_pct": 36.608833792902544,
+      "gross_revenue_usd": 797.37
+    },
+    {
+      "hour": 37,
+      "requests": 45,
+      "completed_rides": 56,
+      "rejected_requests": 1,
+      "average_wait_minutes": 5.00981615473339,
+      "utilization_pct": 39.00569165976081,
+      "gross_revenue_usd": 967.66
+    },
+    {
+      "hour": 38,
+      "requests": 49,
+      "completed_rides": 44,
+      "rejected_requests": 1,
+      "average_wait_minutes": 5.05617326025575,
+      "utilization_pct": 39.23293563549402,
+      "gross_revenue_usd": 846.14
+    },
+    {
+      "hour": 39,
+      "requests": 58,
+      "completed_rides": 53,
+      "rejected_requests": 0,
+      "average_wait_minutes": 5.342900864116559,
+      "utilization_pct": 48.84669032660545,
+      "gross_revenue_usd": 989.45
+    },
+    {
+      "hour": 40,
+      "requests": 71,
+      "completed_rides": 63,
+      "rejected_requests": 2,
+      "average_wait_minutes": 5.901686871450621,
+      "utilization_pct": 51.421439182192174,
+      "gross_revenue_usd": 1142.34
+    },
+    {
+      "hour": 41,
+      "requests": 75,
+      "completed_rides": 71,
+      "rejected_requests": 0,
+      "average_wait_minutes": 6.168740162704331,
+      "utilization_pct": 60.08267699887453,
+      "gross_revenue_usd": 1276.89
+    },
+    {
+      "hour": 42,
+      "requests": 74,
+      "completed_rides": 70,
+      "rejected_requests": 4,
+      "average_wait_minutes": 5.791490483252483,
+      "utilization_pct": 61.7235530339214,
+      "gross_revenue_usd": 1242.36
+    },
+    {
+      "hour": 43,
+      "requests": 57,
+      "completed_rides": 68,
+      "rejected_requests": 1,
+      "average_wait_minutes": 5.680784255417928,
+      "utilization_pct": 47.64087702919399,
+      "gross_revenue_usd": 1240.75
+    },
+    {
+      "hour": 44,
+      "requests": 52,
+      "completed_rides": 50,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.703458018266483,
+      "utilization_pct": 42.02536558600224,
+      "gross_revenue_usd": 868.59
+    },
+    {
+      "hour": 45,
+      "requests": 44,
+      "completed_rides": 47,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.9037403994723023,
+      "utilization_pct": 36.92365049174959,
+      "gross_revenue_usd": 994.75
+    },
+    {
+      "hour": 46,
+      "requests": 25,
+      "completed_rides": 36,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.022923235593099,
+      "utilization_pct": 26.831482166562832,
+      "gross_revenue_usd": 755.64
+    },
+    {
+      "hour": 47,
+      "requests": 25,
+      "completed_rides": 20,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.579721448338387,
+      "utilization_pct": 18.38994140799632,
+      "gross_revenue_usd": 350.56
+    },
+    {
+      "hour": 48,
+      "requests": 16,
+      "completed_rides": 25,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.8915589498069676,
+      "utilization_pct": 15.136719613244063,
+      "gross_revenue_usd": 475.35
+    },
+    {
+      "hour": 49,
+      "requests": 10,
+      "completed_rides": 12,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.072555131087673,
+      "utilization_pct": 9.413558653409124,
+      "gross_revenue_usd": 241.37
+    },
+    {
+      "hour": 50,
+      "requests": 5,
+      "completed_rides": 5,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.9015686723249017,
+      "utilization_pct": 3.100226510342478,
+      "gross_revenue_usd": 73.9
+    },
+    {
+      "hour": 51,
+      "requests": 4,
+      "completed_rides": 4,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.0589828423172776,
+      "utilization_pct": 3.03980981115692,
+      "gross_revenue_usd": 63.42
+    },
+    {
+      "hour": 52,
+      "requests": 8,
+      "completed_rides": 7,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.320143803816206,
+      "utilization_pct": 4.551527243928012,
+      "gross_revenue_usd": 126.21
+    },
+    {
+      "hour": 53,
+      "requests": 17,
+      "completed_rides": 11,
+      "rejected_requests": 0,
+      "average_wait_minutes": 1.9860098719595953,
+      "utilization_pct": 9.935555095541243,
+      "gross_revenue_usd": 154.42
+    },
+    {
+      "hour": 54,
+      "requests": 45,
+      "completed_rides": 37,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.8325251893515015,
+      "utilization_pct": 26.78674836938779,
+      "gross_revenue_usd": 597.9
+    },
+    {
+      "hour": 55,
+      "requests": 56,
+      "completed_rides": 48,
+      "rejected_requests": 3,
+      "average_wait_minutes": 5.12798914602529,
+      "utilization_pct": 44.901188664445776,
+      "gross_revenue_usd": 926.78
+    },
+    {
+      "hour": 56,
+      "requests": 84,
+      "completed_rides": 65,
+      "rejected_requests": 4,
+      "average_wait_minutes": 5.718831047319747,
+      "utilization_pct": 59.87249729710851,
+      "gross_revenue_usd": 1110.51
+    },
+    {
+      "hour": 57,
+      "requests": 49,
+      "completed_rides": 69,
+      "rejected_requests": 0,
+      "average_wait_minutes": 5.822164216890825,
+      "utilization_pct": 46.429762988488605,
+      "gross_revenue_usd": 1287.33
+    },
+    {
+      "hour": 58,
+      "requests": 36,
+      "completed_rides": 42,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.826285516467893,
+      "utilization_pct": 31.488955479991333,
+      "gross_revenue_usd": 724.96
+    },
+    {
+      "hour": 59,
+      "requests": 46,
+      "completed_rides": 35,
+      "rejected_requests": 1,
+      "average_wait_minutes": 3.4730670192342847,
+      "utilization_pct": 31.582832609311783,
+      "gross_revenue_usd": 669.09
+    },
+    {
+      "hour": 60,
+      "requests": 65,
+      "completed_rides": 56,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.433664093001661,
+      "utilization_pct": 49.32163616858318,
+      "gross_revenue_usd": 1033.76
+    },
+    {
+      "hour": 61,
+      "requests": 50,
+      "completed_rides": 62,
+      "rejected_requests": 1,
+      "average_wait_minutes": 5.047626620183865,
+      "utilization_pct": 44.14224444943012,
+      "gross_revenue_usd": 1193.34
+    },
+    {
+      "hour": 62,
+      "requests": 42,
+      "completed_rides": 42,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.783741329869989,
+      "utilization_pct": 30.224813980215608,
+      "gross_revenue_usd": 698.09
+    },
+    {
+      "hour": 63,
+      "requests": 52,
+      "completed_rides": 46,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.006821635547666,
+      "utilization_pct": 34.487537283014674,
+      "gross_revenue_usd": 812.37
+    },
+    {
+      "hour": 64,
+      "requests": 69,
+      "completed_rides": 61,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.448697555648576,
+      "utilization_pct": 55.955473643430494,
+      "gross_revenue_usd": 1102.39
+    },
+    {
+      "hour": 65,
+      "requests": 71,
+      "completed_rides": 70,
+      "rejected_requests": 1,
+      "average_wait_minutes": 6.461776289187959,
+      "utilization_pct": 63.807506798604905,
+      "gross_revenue_usd": 1354.65
+    },
+    {
+      "hour": 66,
+      "requests": 78,
+      "completed_rides": 69,
+      "rejected_requests": 1,
+      "average_wait_minutes": 5.860324544379577,
+      "utilization_pct": 61.220991159617896,
+      "gross_revenue_usd": 1302.77
+    },
+    {
+      "hour": 67,
+      "requests": 65,
+      "completed_rides": 71,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.79603402401257,
+      "utilization_pct": 57.556653401019354,
+      "gross_revenue_usd": 1372.95
+    },
+    {
+      "hour": 68,
+      "requests": 58,
+      "completed_rides": 64,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.793997771670028,
+      "utilization_pct": 50.806064994038316,
+      "gross_revenue_usd": 1273.51
+    },
+    {
+      "hour": 69,
+      "requests": 39,
+      "completed_rides": 45,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.997776320147548,
+      "utilization_pct": 30.974282252145528,
+      "gross_revenue_usd": 812.64
+    },
+    {
+      "hour": 70,
+      "requests": 28,
+      "completed_rides": 33,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.332676935719946,
+      "utilization_pct": 21.02939091393834,
+      "gross_revenue_usd": 581.69
+    },
+    {
+      "hour": 71,
+      "requests": 26,
+      "completed_rides": 26,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.026603875943133,
+      "utilization_pct": 20.190658632768283,
+      "gross_revenue_usd": 471.24
+    },
+    {
+      "hour": 72,
+      "requests": 19,
+      "completed_rides": 27,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.3625397339399368,
+      "utilization_pct": 15.323127029285752,
+      "gross_revenue_usd": 468.88
+    },
+    {
+      "hour": 73,
+      "requests": 6,
+      "completed_rides": 8,
+      "rejected_requests": 0,
+      "average_wait_minutes": 1.6915066729073942,
+      "utilization_pct": 4.046436060265175,
+      "gross_revenue_usd": 127.6
+    },
+    {
+      "hour": 74,
+      "requests": 8,
+      "completed_rides": 6,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.7166802368913827,
+      "utilization_pct": 5.719119217792619,
+      "gross_revenue_usd": 109.95
+    },
+    {
+      "hour": 75,
+      "requests": 9,
+      "completed_rides": 10,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.6303348540832303,
+      "utilization_pct": 7.194078189648856,
+      "gross_revenue_usd": 180.82
+    },
+    {
+      "hour": 76,
+      "requests": 7,
+      "completed_rides": 7,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.960431721956801,
+      "utilization_pct": 4.917961409283483,
+      "gross_revenue_usd": 122.53
+    },
+    {
+      "hour": 77,
+      "requests": 19,
+      "completed_rides": 15,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.4436770150736873,
+      "utilization_pct": 13.305971333536219,
+      "gross_revenue_usd": 299.14
+    },
+    {
+      "hour": 78,
+      "requests": 34,
+      "completed_rides": 30,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.2611809042598603,
+      "utilization_pct": 23.72714054161749,
+      "gross_revenue_usd": 514.61
+    },
+    {
+      "hour": 79,
+      "requests": 77,
+      "completed_rides": 57,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.482613724922231,
+      "utilization_pct": 46.155440490001574,
+      "gross_revenue_usd": 900.15
+    },
+    {
+      "hour": 80,
+      "requests": 54,
+      "completed_rides": 62,
+      "rejected_requests": 1,
+      "average_wait_minutes": 5.008950855967317,
+      "utilization_pct": 45.13330926915572,
+      "gross_revenue_usd": 1092.71
+    },
+    {
+      "hour": 81,
+      "requests": 49,
+      "completed_rides": 55,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.344005548240255,
+      "utilization_pct": 41.62554609834599,
+      "gross_revenue_usd": 1001.58
+    },
+    {
+      "hour": 82,
+      "requests": 42,
+      "completed_rides": 42,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.238081425689632,
+      "utilization_pct": 29.685623728480703,
+      "gross_revenue_usd": 761.59
+    },
+    {
+      "hour": 83,
+      "requests": 52,
+      "completed_rides": 42,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.4148034655767807,
+      "utilization_pct": 36.028438940377086,
+      "gross_revenue_usd": 694.46
+    },
+    {
+      "hour": 84,
+      "requests": 50,
+      "completed_rides": 56,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.517617917782478,
+      "utilization_pct": 38.92275434009064,
+      "gross_revenue_usd": 996.23
+    },
+    {
+      "hour": 85,
+      "requests": 44,
+      "completed_rides": 43,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.9817255150642796,
+      "utilization_pct": 32.85222027693089,
+      "gross_revenue_usd": 766.73
+    },
+    {
+      "hour": 86,
+      "requests": 55,
+      "completed_rides": 53,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.428167346561442,
+      "utilization_pct": 43.17764104302096,
+      "gross_revenue_usd": 973.54
+    },
+    {
+      "hour": 87,
+      "requests": 55,
+      "completed_rides": 52,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.611326775960169,
+      "utilization_pct": 45.234205228678306,
+      "gross_revenue_usd": 988.64
+    },
+    {
+      "hour": 88,
+      "requests": 67,
+      "completed_rides": 71,
+      "rejected_requests": 2,
+      "average_wait_minutes": 5.296047736588047,
+      "utilization_pct": 53.259050364472905,
+      "gross_revenue_usd": 1300.65
+    },
+    {
+      "hour": 89,
+      "requests": 69,
+      "completed_rides": 53,
+      "rejected_requests": 2,
+      "average_wait_minutes": 4.49342243920522,
+      "utilization_pct": 51.190224905083205,
+      "gross_revenue_usd": 963.32
+    },
+    {
+      "hour": 90,
+      "requests": 74,
+      "completed_rides": 72,
+      "rejected_requests": 1,
+      "average_wait_minutes": 5.036338407777596,
+      "utilization_pct": 57.731586287365275,
+      "gross_revenue_usd": 1359.1
+    },
+    {
+      "hour": 91,
+      "requests": 64,
+      "completed_rides": 76,
+      "rejected_requests": 3,
+      "average_wait_minutes": 4.340423058877485,
+      "utilization_pct": 53.84497864488031,
+      "gross_revenue_usd": 1420.82
+    },
+    {
+      "hour": 92,
+      "requests": 47,
+      "completed_rides": 45,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.589097623896285,
+      "utilization_pct": 34.694341168049895,
+      "gross_revenue_usd": 762.15
+    },
+    {
+      "hour": 93,
+      "requests": 45,
+      "completed_rides": 39,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.228560126747862,
+      "utilization_pct": 32.37119279262124,
+      "gross_revenue_usd": 675.54
+    },
+    {
+      "hour": 94,
+      "requests": 27,
+      "completed_rides": 39,
+      "rejected_requests": 1,
+      "average_wait_minutes": 3.454070602790918,
+      "utilization_pct": 24.139437272457297,
+      "gross_revenue_usd": 762.85
+    },
+    {
+      "hour": 95,
+      "requests": 23,
+      "completed_rides": 28,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.9419109647667807,
+      "utilization_pct": 21.724698961778905,
+      "gross_revenue_usd": 543.94
+    },
+    {
+      "hour": 96,
+      "requests": 8,
+      "completed_rides": 8,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.179190323283592,
+      "utilization_pct": 4.81412038534069,
+      "gross_revenue_usd": 145.77
+    },
+    {
+      "hour": 97,
+      "requests": 6,
+      "completed_rides": 9,
+      "rejected_requests": 0,
+      "average_wait_minutes": 5.458474929280379,
+      "utilization_pct": 8.69817950520443,
+      "gross_revenue_usd": 181.51
+    },
+    {
+      "hour": 98,
+      "requests": 6,
+      "completed_rides": 5,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.236916877004115,
+      "utilization_pct": 3.304795568710809,
+      "gross_revenue_usd": 115.61
+    },
+    {
+      "hour": 99,
+      "requests": 10,
+      "completed_rides": 9,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.181885468637221,
+      "utilization_pct": 8.062577989585163,
+      "gross_revenue_usd": 178.77
+    },
+    {
+      "hour": 100,
+      "requests": 7,
+      "completed_rides": 9,
+      "rejected_requests": 0,
+      "average_wait_minutes": 7.567700108128014,
+      "utilization_pct": 8.204768397513787,
+      "gross_revenue_usd": 175.1
+    },
+    {
+      "hour": 101,
+      "requests": 18,
+      "completed_rides": 13,
+      "rejected_requests": 1,
+      "average_wait_minutes": 3.5925826557811606,
+      "utilization_pct": 9.790219181943668,
+      "gross_revenue_usd": 214.41
+    },
+    {
+      "hour": 102,
+      "requests": 40,
+      "completed_rides": 35,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.228799058866857,
+      "utilization_pct": 29.996870275974985,
+      "gross_revenue_usd": 641.4
+    },
+    {
+      "hour": 103,
+      "requests": 40,
+      "completed_rides": 35,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.334285777265567,
+      "utilization_pct": 31.540729184683457,
+      "gross_revenue_usd": 672.27
+    },
+    {
+      "hour": 104,
+      "requests": 69,
+      "completed_rides": 58,
+      "rejected_requests": 3,
+      "average_wait_minutes": 4.587308287790824,
+      "utilization_pct": 49.696167577008175,
+      "gross_revenue_usd": 1090.01
+    },
+    {
+      "hour": 105,
+      "requests": 57,
+      "completed_rides": 59,
+      "rejected_requests": 2,
+      "average_wait_minutes": 5.176229989562656,
+      "utilization_pct": 46.53416562862785,
+      "gross_revenue_usd": 1059.29
+    },
+    {
+      "hour": 106,
+      "requests": 39,
+      "completed_rides": 39,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.910757884300251,
+      "utilization_pct": 32.00990764825956,
+      "gross_revenue_usd": 760.58
+    },
+    {
+      "hour": 107,
+      "requests": 48,
+      "completed_rides": 49,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.731977906499085,
+      "utilization_pct": 45.47883309956675,
+      "gross_revenue_usd": 983.2
+    },
+    {
+      "hour": 108,
+      "requests": 34,
+      "completed_rides": 40,
+      "rejected_requests": 0,
+      "average_wait_minutes": 5.110858317404018,
+      "utilization_pct": 25.932093294155557,
+      "gross_revenue_usd": 700.49
+    },
+    {
+      "hour": 109,
+      "requests": 51,
+      "completed_rides": 38,
+      "rejected_requests": 2,
+      "average_wait_minutes": 4.342131794566836,
+      "utilization_pct": 38.41786885796855,
+      "gross_revenue_usd": 757.42
+    },
+    {
+      "hour": 110,
+      "requests": 42,
+      "completed_rides": 48,
+      "rejected_requests": 0,
+      "average_wait_minutes": 5.605849522159285,
+      "utilization_pct": 37.611360221473845,
+      "gross_revenue_usd": 864.66
+    },
+    {
+      "hour": 111,
+      "requests": 44,
+      "completed_rides": 47,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.9481575695896183,
+      "utilization_pct": 35.24405717672329,
+      "gross_revenue_usd": 852.91
+    },
+    {
+      "hour": 112,
+      "requests": 94,
+      "completed_rides": 70,
+      "rejected_requests": 5,
+      "average_wait_minutes": 4.739061183149572,
+      "utilization_pct": 58.933787340379,
+      "gross_revenue_usd": 1195.16
+    },
+    {
+      "hour": 113,
+      "requests": 85,
+      "completed_rides": 76,
+      "rejected_requests": 3,
+      "average_wait_minutes": 5.423745881117467,
+      "utilization_pct": 64.16184642333813,
+      "gross_revenue_usd": 1370.81
+    },
+    {
+      "hour": 114,
+      "requests": 69,
+      "completed_rides": 82,
+      "rejected_requests": 4,
+      "average_wait_minutes": 6.426362752671505,
+      "utilization_pct": 64.232177215154,
+      "gross_revenue_usd": 1483.37
+    },
+    {
+      "hour": 115,
+      "requests": 61,
+      "completed_rides": 53,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.504715615058215,
+      "utilization_pct": 45.6473224538148,
+      "gross_revenue_usd": 994.93
+    },
+    {
+      "hour": 116,
+      "requests": 49,
+      "completed_rides": 62,
+      "rejected_requests": 1,
+      "average_wait_minutes": 5.19011360090791,
+      "utilization_pct": 47.779093251896185,
+      "gross_revenue_usd": 1267.73
+    },
+    {
+      "hour": 117,
+      "requests": 44,
+      "completed_rides": 41,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.9010538899351226,
+      "utilization_pct": 34.54613213396936,
+      "gross_revenue_usd": 749.4
+    },
+    {
+      "hour": 118,
+      "requests": 30,
+      "completed_rides": 40,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.247638979788394,
+      "utilization_pct": 27.110634717963904,
+      "gross_revenue_usd": 775.29
+    },
+    {
+      "hour": 119,
+      "requests": 27,
+      "completed_rides": 23,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.115777450633726,
+      "utilization_pct": 20.692929319518832,
+      "gross_revenue_usd": 409.91
+    },
+    {
+      "hour": 120,
+      "requests": 8,
+      "completed_rides": 19,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.7297800524484046,
+      "utilization_pct": 10.045335986988782,
+      "gross_revenue_usd": 381.34
+    },
+    {
+      "hour": 121,
+      "requests": 17,
+      "completed_rides": 11,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.9317495470392134,
+      "utilization_pct": 9.166840480536484,
+      "gross_revenue_usd": 170.54
+    },
+    {
+      "hour": 122,
+      "requests": 6,
+      "completed_rides": 11,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.6287492290347556,
+      "utilization_pct": 7.676019564303352,
+      "gross_revenue_usd": 207.74
+    },
+    {
+      "hour": 123,
+      "requests": 7,
+      "completed_rides": 5,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.282157574940902,
+      "utilization_pct": 5.771403679077957,
+      "gross_revenue_usd": 119.67
+    },
+    {
+      "hour": 124,
+      "requests": 6,
+      "completed_rides": 8,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.7274079675725034,
+      "utilization_pct": 4.214263206194058,
+      "gross_revenue_usd": 153.34
+    },
+    {
+      "hour": 125,
+      "requests": 15,
+      "completed_rides": 12,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.2971844866669926,
+      "utilization_pct": 8.336934428090414,
+      "gross_revenue_usd": 176.83
+    },
+    {
+      "hour": 126,
+      "requests": 37,
+      "completed_rides": 32,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.371848854256257,
+      "utilization_pct": 27.03762558867587,
+      "gross_revenue_usd": 592.15
+    },
+    {
+      "hour": 127,
+      "requests": 65,
+      "completed_rides": 54,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.8666637238306807,
+      "utilization_pct": 45.08357521067767,
+      "gross_revenue_usd": 988.36
+    },
+    {
+      "hour": 128,
+      "requests": 79,
+      "completed_rides": 68,
+      "rejected_requests": 2,
+      "average_wait_minutes": 4.95820675885748,
+      "utilization_pct": 57.979186072447305,
+      "gross_revenue_usd": 1130.95
+    },
+    {
+      "hour": 129,
+      "requests": 46,
+      "completed_rides": 57,
+      "rejected_requests": 0,
+      "average_wait_minutes": 5.58923523988804,
+      "utilization_pct": 41.6917140014942,
+      "gross_revenue_usd": 1058.48
+    },
+    {
+      "hour": 130,
+      "requests": 33,
+      "completed_rides": 40,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.046689507364681,
+      "utilization_pct": 30.17353627601475,
+      "gross_revenue_usd": 769.66
+    },
+    {
+      "hour": 131,
+      "requests": 41,
+      "completed_rides": 38,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.6527269436211864,
+      "utilization_pct": 30.762369051655487,
+      "gross_revenue_usd": 682.59
+    },
+    {
+      "hour": 132,
+      "requests": 48,
+      "completed_rides": 42,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.333243770704463,
+      "utilization_pct": 41.68435002791172,
+      "gross_revenue_usd": 928.99
+    },
+    {
+      "hour": 133,
+      "requests": 46,
+      "completed_rides": 44,
+      "rejected_requests": 0,
+      "average_wait_minutes": 5.567183613899673,
+      "utilization_pct": 38.453169653781025,
+      "gross_revenue_usd": 875.88
+    },
+    {
+      "hour": 134,
+      "requests": 40,
+      "completed_rides": 46,
+      "rejected_requests": 0,
+      "average_wait_minutes": 5.024592548397441,
+      "utilization_pct": 35.003529497144214,
+      "gross_revenue_usd": 868.22
+    },
+    {
+      "hour": 135,
+      "requests": 44,
+      "completed_rides": 44,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.748858972069353,
+      "utilization_pct": 32.84394575181332,
+      "gross_revenue_usd": 815.88
+    },
+    {
+      "hour": 136,
+      "requests": 66,
+      "completed_rides": 56,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.108883998251405,
+      "utilization_pct": 46.9873186599975,
+      "gross_revenue_usd": 1004.95
+    },
+    {
+      "hour": 137,
+      "requests": 86,
+      "completed_rides": 59,
+      "rejected_requests": 8,
+      "average_wait_minutes": 5.333573333443506,
+      "utilization_pct": 57.91576669040914,
+      "gross_revenue_usd": 1063.67
+    },
+    {
+      "hour": 138,
+      "requests": 71,
+      "completed_rides": 84,
+      "rejected_requests": 2,
+      "average_wait_minutes": 5.629494940008347,
+      "utilization_pct": 68.10991265482365,
+      "gross_revenue_usd": 1531.78
+    },
+    {
+      "hour": 139,
+      "requests": 63,
+      "completed_rides": 65,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.5541607299426685,
+      "utilization_pct": 48.08345125506167,
+      "gross_revenue_usd": 1228.26
+    },
+    {
+      "hour": 140,
+      "requests": 55,
+      "completed_rides": 55,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.362248313715496,
+      "utilization_pct": 43.848019570463414,
+      "gross_revenue_usd": 1063.98
+    },
+    {
+      "hour": 141,
+      "requests": 31,
+      "completed_rides": 44,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.398915004618547,
+      "utilization_pct": 35.120553068406,
+      "gross_revenue_usd": 939.55
+    },
+    {
+      "hour": 142,
+      "requests": 33,
+      "completed_rides": 31,
+      "rejected_requests": 1,
+      "average_wait_minutes": 3.2388107537496373,
+      "utilization_pct": 22.207038055819734,
+      "gross_revenue_usd": 518.03
+    },
+    {
+      "hour": 143,
+      "requests": 19,
+      "completed_rides": 28,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.59311611232189,
+      "utilization_pct": 20.91957361654252,
+      "gross_revenue_usd": 582.03
+    },
+    {
+      "hour": 144,
+      "requests": 13,
+      "completed_rides": 12,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.2754801396804396,
+      "utilization_pct": 9.491927938075301,
+      "gross_revenue_usd": 254.7
+    },
+    {
+      "hour": 145,
+      "requests": 8,
+      "completed_rides": 16,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.959617478770383,
+      "utilization_pct": 8.157265783636527,
+      "gross_revenue_usd": 283.1
+    },
+    {
+      "hour": 146,
+      "requests": 8,
+      "completed_rides": 6,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.311792647246572,
+      "utilization_pct": 5.897809681870543,
+      "gross_revenue_usd": 115.66
+    },
+    {
+      "hour": 147,
+      "requests": 10,
+      "completed_rides": 9,
+      "rejected_requests": 0,
+      "average_wait_minutes": 2.386252377784937,
+      "utilization_pct": 6.355990590260443,
+      "gross_revenue_usd": 157.76
+    },
+    {
+      "hour": 148,
+      "requests": 11,
+      "completed_rides": 10,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.073306774302728,
+      "utilization_pct": 8.551838657355741,
+      "gross_revenue_usd": 211.87
+    },
+    {
+      "hour": 149,
+      "requests": 27,
+      "completed_rides": 18,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.9802525370343775,
+      "utilization_pct": 17.191448194590215,
+      "gross_revenue_usd": 341.06
+    },
+    {
+      "hour": 150,
+      "requests": 42,
+      "completed_rides": 38,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.130077759931881,
+      "utilization_pct": 32.26053815497465,
+      "gross_revenue_usd": 675.25
+    },
+    {
+      "hour": 151,
+      "requests": 55,
+      "completed_rides": 52,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.942554805831605,
+      "utilization_pct": 40.737225342676055,
+      "gross_revenue_usd": 883.22
+    },
+    {
+      "hour": 152,
+      "requests": 66,
+      "completed_rides": 62,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.479630497611945,
+      "utilization_pct": 47.89134222146568,
+      "gross_revenue_usd": 1154.15
+    },
+    {
+      "hour": 153,
+      "requests": 47,
+      "completed_rides": 51,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.694589683411038,
+      "utilization_pct": 42.99611576271503,
+      "gross_revenue_usd": 992.65
+    },
+    {
+      "hour": 154,
+      "requests": 49,
+      "completed_rides": 45,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.23494435776726,
+      "utilization_pct": 37.271599364254385,
+      "gross_revenue_usd": 849.62
+    },
+    {
+      "hour": 155,
+      "requests": 44,
+      "completed_rides": 47,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.740233266487307,
+      "utilization_pct": 38.3371668897092,
+      "gross_revenue_usd": 902.65
+    },
+    {
+      "hour": 156,
+      "requests": 42,
+      "completed_rides": 42,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.978319644522647,
+      "utilization_pct": 35.20680133203957,
+      "gross_revenue_usd": 781.61
+    },
+    {
+      "hour": 157,
+      "requests": 38,
+      "completed_rides": 45,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.893241602082061,
+      "utilization_pct": 30.87767570383197,
+      "gross_revenue_usd": 836.46
+    },
+    {
+      "hour": 158,
+      "requests": 50,
+      "completed_rides": 42,
+      "rejected_requests": 0,
+      "average_wait_minutes": 3.536583632895816,
+      "utilization_pct": 36.75366447045478,
+      "gross_revenue_usd": 803.1
+    },
+    {
+      "hour": 159,
+      "requests": 49,
+      "completed_rides": 48,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.274280635215177,
+      "utilization_pct": 40.987737340787014,
+      "gross_revenue_usd": 924.08
+    },
+    {
+      "hour": 160,
+      "requests": 79,
+      "completed_rides": 54,
+      "rejected_requests": 9,
+      "average_wait_minutes": 4.771665840216648,
+      "utilization_pct": 57.70465068962203,
+      "gross_revenue_usd": 1034.83
+    },
+    {
+      "hour": 161,
+      "requests": 82,
+      "completed_rides": 81,
+      "rejected_requests": 2,
+      "average_wait_minutes": 7.010328952507678,
+      "utilization_pct": 62.74702908732125,
+      "gross_revenue_usd": 1429.61
+    },
+    {
+      "hour": 162,
+      "requests": 63,
+      "completed_rides": 72,
+      "rejected_requests": 0,
+      "average_wait_minutes": 5.326474803210481,
+      "utilization_pct": 53.88520036255947,
+      "gross_revenue_usd": 1339.26
+    },
+    {
+      "hour": 163,
+      "requests": 56,
+      "completed_rides": 60,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.607306590144102,
+      "utilization_pct": 50.686902905785125,
+      "gross_revenue_usd": 1101.39
+    },
+    {
+      "hour": 164,
+      "requests": 47,
+      "completed_rides": 51,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.933048257977812,
+      "utilization_pct": 40.720994222561366,
+      "gross_revenue_usd": 1007.03
+    },
+    {
+      "hour": 165,
+      "requests": 32,
+      "completed_rides": 34,
+      "rejected_requests": 1,
+      "average_wait_minutes": 4.918350294515542,
+      "utilization_pct": 25.47510911604495,
+      "gross_revenue_usd": 612.92
+    },
+    {
+      "hour": 166,
+      "requests": 43,
+      "completed_rides": 40,
+      "rejected_requests": 0,
+      "average_wait_minutes": 4.172825860712237,
+      "utilization_pct": 35.89351710876369,
+      "gross_revenue_usd": 808.29
+    },
+    {
+      "hour": 167,
+      "requests": 20,
+      "completed_rides": 31,
+      "rejected_requests": 1,
+      "average_wait_minutes": 3.669504727483664,
+      "utilization_pct": 17.516215215053734,
+      "gross_revenue_usd": 576.67
+    }
+  ],
+  "warnings": [
+    "Hypothetical fleet operations, not autonomous driving.",
+    "Demand is assumed: same baseline across metros; no observed local ride-hailing demand.",
+    "Synthetic service zone; no street routing. No passenger queue; immediate assignment policy.",
+    "Gross revenue excludes all operating costs and is not profit. Wait metrics cover completed rides only.",
+    "Passenger miles include unfinished trips within the window; revenue is recognized only at completed dropoff.",
+    "Charging uses an assumed private depot, not measured public charging capacity."
+  ]
+}

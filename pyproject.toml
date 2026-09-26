@@ -1,0 +1,32 @@
+[project]
+name = "odd-scout"
+version = "0.1.0"
+description = "Public-data market screening and hypothetical fleet operations"
+requires-python = ">=3.12,<3.14"
+dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1", "pydantic>=2.10,<3", "numpy>=2.2,<3", "pandas>=2.2,<3", "httpx>=0.28,<1"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3,<10",
+    "ruff>=0.16.9",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend/odd_scout", "packages/contracts", "packages/ranking/odd_ranking", "data/adapters"]
+
+[tool.hatch.build]
+dev-mode-dirs = ["backend", "packages", "packages/ranking", "data"]
+
+[tool.hatch.build.targets.wheel.sources]
+"backend/odd_scout" = "odd_scout"
+"packages/contracts" = "contracts"
+"packages/ranking/odd_ranking" = "odd_ranking"
+"data/adapters" = "adapters"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"

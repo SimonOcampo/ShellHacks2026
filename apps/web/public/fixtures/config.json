@@ -1,0 +1,259 @@
+{
+  "versions": {
+    "schema_version": "1",
+    "data_version": "mock.v1",
+    "model_version": "ranking.v1",
+    "data_mode": "mock"
+  },
+  "weights": {
+    "familiarity": 0.4,
+    "readiness": 0.2,
+    "opportunity": 0.4
+  },
+  "features": [
+    {
+      "key": "annual_precipitation_mm",
+      "label": "Annual precipitation",
+      "pillar": "familiarity",
+      "unit": "mm/year",
+      "transform": "log1p",
+      "weight": 0.2,
+      "maximum": null,
+      "definition": "1991\u00e2\u20ac\u201c2020 annual precipitation normal; station proxy."
+    },
+    {
+      "key": "annual_snowfall_mm",
+      "label": "Annual snowfall",
+      "pillar": "familiarity",
+      "unit": "mm/year",
+      "transform": "log1p",
+      "weight": 0.2,
+      "maximum": null,
+      "definition": "1991\u00e2\u20ac\u201c2020 annual snowfall normal; missing is not zero."
+    },
+    {
+      "key": "hot_days_32c",
+      "label": "Days at or above 90\u00c2\u00b0F",
+      "pillar": "familiarity",
+      "unit": "days/year",
+      "transform": "linear",
+      "weight": 0.2,
+      "maximum": 366.0,
+      "definition": "Days with maximum temperature at least 90\u00c2\u00b0F (32.2\u00c2\u00b0C)."
+    },
+    {
+      "key": "mean_commute_minutes",
+      "label": "Mean commute",
+      "pillar": "familiarity",
+      "unit": "minutes",
+      "transform": "linear",
+      "weight": 0.4,
+      "maximum": null,
+      "definition": "Grouped ACS duration estimate; commuting proxy, not measured congestion."
+    },
+    {
+      "key": "public_dc_ports_per_100k",
+      "label": "Public DC charging",
+      "pillar": "readiness",
+      "unit": "ports/100k residents",
+      "transform": "log1p",
+      "weight": 0.7,
+      "maximum": null,
+      "definition": "Operational public DC ports divided by population times 100,000. Not secured fleet capacity."
+    },
+    {
+      "key": "population_share_in_counties_with_dc",
+      "label": "County charging coverage",
+      "pillar": "readiness",
+      "unit": "fraction",
+      "transform": "linear",
+      "weight": 0.3,
+      "maximum": 1.0,
+      "definition": "Population share in counties with at least one operational public DC port; not travel-time access."
+    },
+    {
+      "key": "population",
+      "label": "Resident population",
+      "pillar": "opportunity",
+      "unit": "residents",
+      "transform": "log1p",
+      "weight": 0.3,
+      "maximum": null,
+      "definition": "ACS resident population; not observed ride-hailing demand."
+    },
+    {
+      "key": "population_density_per_km2",
+      "label": "Population density",
+      "pillar": "opportunity",
+      "unit": "residents/km\u00c2\u00b2",
+      "transform": "log1p",
+      "weight": 0.25,
+      "maximum": null,
+      "definition": "Population divided by CBSA land area excluding water."
+    },
+    {
+      "key": "zero_vehicle_household_share",
+      "label": "Zero-vehicle households",
+      "pillar": "opportunity",
+      "unit": "fraction",
+      "transform": "linear",
+      "weight": 0.3,
+      "maximum": 1.0,
+      "definition": "Households without an available vehicle divided by all households."
+    },
+    {
+      "key": "transit_commute_share",
+      "label": "Transit commute share",
+      "pillar": "opportunity",
+      "unit": "fraction",
+      "transform": "linear",
+      "weight": 0.15,
+      "maximum": 1.0,
+      "definition": "Public transit commuters divided by applicable workers; transit also competes with ride-hailing."
+    }
+  ],
+  "bounds": {
+    "annual_precipitation_mm": {
+      "lower": 5.860786223465865,
+      "upper": 7.450660796211539
+    },
+    "annual_snowfall_mm": {
+      "lower": 0.0,
+      "upper": 6.738152494595957
+    },
+    "hot_days_32c": {
+      "lower": 0.0,
+      "upper": 123.0
+    },
+    "mean_commute_minutes": {
+      "lower": 20.0,
+      "upper": 37.0
+    },
+    "public_dc_ports_per_100k": {
+      "lower": 2.1972245773362196,
+      "upper": 4.532599493153256
+    },
+    "population_share_in_counties_with_dc": {
+      "lower": 0.55,
+      "upper": 0.9550000000000001
+    },
+    "population": {
+      "lower": 13.710151153416941,
+      "upper": 16.486159158324472
+    },
+    "population_density_per_km2": {
+      "lower": 4.394449154672439,
+      "upper": 7.270312886079025
+    },
+    "zero_vehicle_household_share": {
+      "lower": 0.025,
+      "upper": 0.229
+    },
+    "transit_commute_share": {
+      "lower": 0.012,
+      "upper": 0.22
+    }
+  },
+  "references": [
+    {
+      "id": "mock-reference:38060",
+      "city_id": "cbsa:38060",
+      "operator": "Illustrative reference (not verified status)",
+      "category": "commercial",
+      "status_as_of": "2026-09-26",
+      "enabled": true,
+      "provenance_ids": [
+        "synthetic:38060"
+      ]
+    },
+    {
+      "id": "mock-reference:41860",
+      "city_id": "cbsa:41860",
+      "operator": "Illustrative reference (not verified status)",
+      "category": "commercial",
+      "status_as_of": "2026-09-26",
+      "enabled": true,
+      "provenance_ids": [
+        "synthetic:41860"
+      ]
+    },
+    {
+      "id": "mock-reference:31080",
+      "city_id": "cbsa:31080",
+      "operator": "Illustrative reference (not verified status)",
+      "category": "commercial",
+      "status_as_of": "2026-09-26",
+      "enabled": true,
+      "provenance_ids": [
+        "synthetic:31080"
+      ]
+    },
+    {
+      "id": "mock-reference:12420",
+      "city_id": "cbsa:12420",
+      "operator": "Illustrative reference (not verified status)",
+      "category": "commercial",
+      "status_as_of": "2026-09-26",
+      "enabled": true,
+      "provenance_ids": [
+        "synthetic:12420"
+      ]
+    },
+    {
+      "id": "mock-reference:12060",
+      "city_id": "cbsa:12060",
+      "operator": "Illustrative reference (not verified status)",
+      "category": "commercial",
+      "status_as_of": "2026-09-26",
+      "enabled": true,
+      "provenance_ids": [
+        "synthetic:12060"
+      ]
+    }
+  ],
+  "simulation_defaults": {
+    "profile_id": "synthetic-zone.v1",
+    "base_requests_per_day": 1000.0,
+    "service_zone_radius_miles": 5.0,
+    "average_speed_mph": 20.0,
+    "road_distance_multiplier": 1.3,
+    "hourly_demand_weights": [
+      0.3,
+      0.2,
+      0.15,
+      0.15,
+      0.2,
+      0.4,
+      0.8,
+      1.4,
+      1.5,
+      1.1,
+      0.9,
+      1.0,
+      1.1,
+      1.0,
+      1.0,
+      1.1,
+      1.5,
+      1.8,
+      1.7,
+      1.4,
+      1.2,
+      1.0,
+      0.7,
+      0.5
+    ],
+    "battery_range_miles": 250.0,
+    "reserve_fraction": 0.1,
+    "charge_trigger_fraction": 0.2,
+    "charge_target_fraction": 0.8,
+    "charge_range_miles_per_minute": 2.5,
+    "charger_count": 5,
+    "max_pickup_wait_minutes": 15.0,
+    "pickup_dwell_minutes": 1.0,
+    "dropoff_dwell_minutes": 1.0
+  },
+  "exclusions": [
+    "No verified public-data release has been published. All displayed ranking measurements are synthetic."
+  ]
+}

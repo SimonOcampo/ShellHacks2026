@@ -1,0 +1,136 @@
+{
+  "versions": {
+    "schema_version": "1",
+    "data_version": "mock.v1",
+    "model_version": "ranking.v1",
+    "data_mode": "mock"
+  },
+  "city_id": "cbsa:29820",
+  "display_name": "Las Vegas",
+  "official_name": "Las Vegas metro (mock label; official name pending ingestion)",
+  "geography_type": "cbsa",
+  "geography_vintage": "synthetic-mock",
+  "state_codes": [
+    "NV"
+  ],
+  "latitude": 36.17,
+  "longitude": -115.14,
+  "features": {
+    "annual_precipitation_mm": {
+      "value": 1309.0,
+      "unit": "mm/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:29820"
+      ]
+    },
+    "annual_snowfall_mm": {
+      "value": 581.0,
+      "unit": "mm/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:29820"
+      ]
+    },
+    "hot_days_32c": {
+      "value": 77.0,
+      "unit": "days/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:29820"
+      ]
+    },
+    "mean_commute_minutes": {
+      "value": 33.0,
+      "unit": "minutes",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:29820"
+      ]
+    },
+    "public_dc_ports_per_100k": {
+      "value": 14.0,
+      "unit": "ports/100k residents",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:29820"
+      ]
+    },
+    "population_share_in_counties_with_dc": {
+      "value": 0.865,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:29820"
+      ]
+    },
+    "population": {
+      "value": 5891861.0,
+      "unit": "residents",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:29820"
+      ]
+    },
+    "population_density_per_km2": {
+      "value": 871.0,
+      "unit": "residents/km\u00c2\u00b2",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:29820"
+      ]
+    },
+    "zero_vehicle_household_share": {
+      "value": 0.14400000000000002,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:29820"
+      ]
+    },
+    "transit_commute_share": {
+      "value": 0.103,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:29820"
+      ]
+    }
+  },
+  "legal_evidence": [
+    {
+      "jurisdiction": "NV",
+      "category": "unresolved",
+      "summary": "Regulatory review unresolved; no approval inferred.",
+      "checked_at": "2026-09-26",
+      "provenance_ids": []
+    }
+  ],
+  "provenance": [
+    {
+      "id": "synthetic:29820",
+      "source_name": "Synthetic fixture generator",
+      "source_url": "synthetic://odd-scout/mock.v1",
+      "dataset_id": "synthetic-mock.v1",
+      "period": "Not observed",
+      "retrieved_at": "2026-09-26",
+      "source_geography": "synthetic",
+      "target_geography": "cbsa:29820",
+      "transformation": "Deterministic illustrative values; no public observations.",
+      "assumptions": [
+        "All ranking measurements are synthetic. Display markers approximate principal city locations."
+      ],
+      "raw_sha256": "475156e4100e8e9ca53414919f3fc5d6e09ce3b8843a484740ecafe343fd2052"
+    }
+  ]
+}

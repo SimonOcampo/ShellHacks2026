@@ -1,0 +1,18 @@
+{
+  "ranking_id": "a263dbcc99f345e28f3e",
+  "city_id": "cbsa:33100",
+  "mode": "template",
+  "summary": "Illustrative mock ranking. Miami ranks #20 with a screening score of 20.7. Atlanta is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+  "advantages": [
+    "Days at or above 90\u00c2\u00b0F: 0.00 days/year; comparison reference 4.00.",
+    "Mean commute: 20.00 minutes; comparison reference 26.00."
+  ],
+  "tradeoffs": [
+    "Lower relative factors: resident population, population density.",
+    "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+  ],
+  "evidence_ids": [
+    "synthetic:12060",
+    "synthetic:33100"
+  ]
+}

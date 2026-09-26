@@ -1,0 +1,150 @@
+{
+  "versions": {
+    "schema_version": "1",
+    "data_version": "mock.v1",
+    "model_version": "ranking.v1",
+    "data_mode": "mock"
+  },
+  "cities": [
+    {
+      "city_id": "cbsa:33100",
+      "display_name": "Miami",
+      "official_name": "Miami metro (mock label; official name pending ingestion)",
+      "latitude": 25.76,
+      "longitude": -80.19
+    },
+    {
+      "city_id": "cbsa:36740",
+      "display_name": "Orlando",
+      "official_name": "Orlando metro (mock label; official name pending ingestion)",
+      "latitude": 28.54,
+      "longitude": -81.38
+    },
+    {
+      "city_id": "cbsa:45300",
+      "display_name": "Tampa",
+      "official_name": "Tampa metro (mock label; official name pending ingestion)",
+      "latitude": 27.95,
+      "longitude": -82.46
+    },
+    {
+      "city_id": "cbsa:27260",
+      "display_name": "Jacksonville",
+      "official_name": "Jacksonville metro (mock label; official name pending ingestion)",
+      "latitude": 30.33,
+      "longitude": -81.66
+    },
+    {
+      "city_id": "cbsa:26420",
+      "display_name": "Houston",
+      "official_name": "Houston metro (mock label; official name pending ingestion)",
+      "latitude": 29.76,
+      "longitude": -95.37
+    },
+    {
+      "city_id": "cbsa:19100",
+      "display_name": "Dallas\u2013Fort Worth",
+      "official_name": "Dallas\u2013Fort Worth metro (mock label; official name pending ingestion)",
+      "latitude": 32.78,
+      "longitude": -96.8
+    },
+    {
+      "city_id": "cbsa:41700",
+      "display_name": "San Antonio",
+      "official_name": "San Antonio metro (mock label; official name pending ingestion)",
+      "latitude": 29.42,
+      "longitude": -98.49
+    },
+    {
+      "city_id": "cbsa:29820",
+      "display_name": "Las Vegas",
+      "official_name": "Las Vegas metro (mock label; official name pending ingestion)",
+      "latitude": 36.17,
+      "longitude": -115.14
+    },
+    {
+      "city_id": "cbsa:19740",
+      "display_name": "Denver",
+      "official_name": "Denver metro (mock label; official name pending ingestion)",
+      "latitude": 39.74,
+      "longitude": -104.99
+    },
+    {
+      "city_id": "cbsa:42660",
+      "display_name": "Seattle",
+      "official_name": "Seattle metro (mock label; official name pending ingestion)",
+      "latitude": 47.61,
+      "longitude": -122.33
+    },
+    {
+      "city_id": "cbsa:38900",
+      "display_name": "Portland",
+      "official_name": "Portland metro (mock label; official name pending ingestion)",
+      "latitude": 45.52,
+      "longitude": -122.68
+    },
+    {
+      "city_id": "cbsa:16980",
+      "display_name": "Chicago",
+      "official_name": "Chicago metro (mock label; official name pending ingestion)",
+      "latitude": 41.88,
+      "longitude": -87.63
+    },
+    {
+      "city_id": "cbsa:14460",
+      "display_name": "Boston",
+      "official_name": "Boston metro (mock label; official name pending ingestion)",
+      "latitude": 42.36,
+      "longitude": -71.06
+    },
+    {
+      "city_id": "cbsa:47900",
+      "display_name": "Washington",
+      "official_name": "Washington metro (mock label; official name pending ingestion)",
+      "latitude": 38.91,
+      "longitude": -77.04
+    },
+    {
+      "city_id": "cbsa:37980",
+      "display_name": "Philadelphia",
+      "official_name": "Philadelphia metro (mock label; official name pending ingestion)",
+      "latitude": 39.95,
+      "longitude": -75.17
+    },
+    {
+      "city_id": "cbsa:35620",
+      "display_name": "New York",
+      "official_name": "New York metro (mock label; official name pending ingestion)",
+      "latitude": 40.71,
+      "longitude": -74.01
+    },
+    {
+      "city_id": "cbsa:16740",
+      "display_name": "Charlotte",
+      "official_name": "Charlotte metro (mock label; official name pending ingestion)",
+      "latitude": 35.23,
+      "longitude": -80.84
+    },
+    {
+      "city_id": "cbsa:39580",
+      "display_name": "Raleigh",
+      "official_name": "Raleigh metro (mock label; official name pending ingestion)",
+      "latitude": 35.78,
+      "longitude": -78.64
+    },
+    {
+      "city_id": "cbsa:34980",
+      "display_name": "Nashville",
+      "official_name": "Nashville metro (mock label; official name pending ingestion)",
+      "latitude": 36.16,
+      "longitude": -86.78
+    },
+    {
+      "city_id": "cbsa:33460",
+      "display_name": "Minneapolis\u2013St. Paul",
+      "official_name": "Minneapolis\u2013St. Paul metro (mock label; official name pending ingestion)",
+      "latitude": 44.98,
+      "longitude": -93.27
+    }
+  ]
+}

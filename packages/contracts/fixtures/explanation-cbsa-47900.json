@@ -1,0 +1,18 @@
+{
+  "ranking_id": "a263dbcc99f345e28f3e",
+  "city_id": "cbsa:47900",
+  "mode": "template",
+  "summary": "Illustrative mock ranking. Washington ranks #13 with a screening score of 66.4. Atlanta is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+  "advantages": [
+    "Public DC charging contributes 70.0 points to readiness.",
+    "Annual snowfall: 179.00 mm/year; comparison reference 192.00."
+  ],
+  "tradeoffs": [
+    "Lower relative factors: zero-vehicle households, population density.",
+    "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+  ],
+  "evidence_ids": [
+    "synthetic:12060",
+    "synthetic:47900"
+  ]
+}

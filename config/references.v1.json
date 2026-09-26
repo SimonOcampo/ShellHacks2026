@@ -1,0 +1,57 @@
+[
+  {
+    "id": "mock-reference:38060",
+    "city_id": "cbsa:38060",
+    "operator": "Illustrative reference (not verified status)",
+    "category": "commercial",
+    "status_as_of": "2026-09-26",
+    "enabled": true,
+    "provenance_ids": [
+      "synthetic:38060"
+    ]
+  },
+  {
+    "id": "mock-reference:41860",
+    "city_id": "cbsa:41860",
+    "operator": "Illustrative reference (not verified status)",
+    "category": "commercial",
+    "status_as_of": "2026-09-26",
+    "enabled": true,
+    "provenance_ids": [
+      "synthetic:41860"
+    ]
+  },
+  {
+    "id": "mock-reference:31080",
+    "city_id": "cbsa:31080",
+    "operator": "Illustrative reference (not verified status)",
+    "category": "commercial",
+    "status_as_of": "2026-09-26",
+    "enabled": true,
+    "provenance_ids": [
+      "synthetic:31080"
+    ]
+  },
+  {
+    "id": "mock-reference:12420",
+    "city_id": "cbsa:12420",
+    "operator": "Illustrative reference (not verified status)",
+    "category": "commercial",
+    "status_as_of": "2026-09-26",
+    "enabled": true,
+    "provenance_ids": [
+      "synthetic:12420"
+    ]
+  },
+  {
+    "id": "mock-reference:12060",
+    "city_id": "cbsa:12060",
+    "operator": "Illustrative reference (not verified status)",
+    "category": "commercial",
+    "status_as_of": "2026-09-26",
+    "enabled": true,
+    "provenance_ids": [
+      "synthetic:12060"
+    ]
+  }
+]

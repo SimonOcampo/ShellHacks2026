@@ -1,0 +1,18 @@
+{
+  "ranking_id": "a263dbcc99f345e28f3e",
+  "city_id": "cbsa:33460",
+  "mode": "template",
+  "summary": "Illustrative mock ranking. Minneapolis\u2013St. Paul ranks #5 with a screening score of 76.5. Phoenix is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+  "advantages": [
+    "County charging coverage contributes 30.0 points to readiness.",
+    "Resident population contributes 30.0 points to opportunity."
+  ],
+  "tradeoffs": [
+    "Lower relative factors: transit commute share, zero-vehicle households.",
+    "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+  ],
+  "evidence_ids": [
+    "synthetic:33460",
+    "synthetic:38060"
+  ]
+}

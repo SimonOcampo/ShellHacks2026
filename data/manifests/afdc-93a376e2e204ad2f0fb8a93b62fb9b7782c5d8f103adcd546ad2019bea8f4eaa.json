@@ -1,0 +1,17 @@
+{
+  "source": "afdc",
+  "source_url": "https://developer.nlr.gov/api/alt-fuel-stations/v1.json",
+  "parameters": {
+    "fuel_type": "ELEC",
+    "access": "public",
+    "status": "E",
+    "limit": "all"
+  },
+  "dataset_id": "AFDC operational public electric stations",
+  "period": "current snapshot",
+  "geography": "station points",
+  "retrieved_at": "2026-09-26T06:21:29.515188+00:00",
+  "sha256": "93a376e2e204ad2f0fb8a93b62fb9b7782c5d8f103adcd546ad2019bea8f4eaa",
+  "path": "data/raw/afdc-93a376e2e204ad2f0fb8a93b62fb9b7782c5d8f103adcd546ad2019bea8f4eaa.json",
+  "license": "See official dataset terms; public source does not imply endorsement."
+}

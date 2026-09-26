@@ -1,0 +1,18 @@
+{
+  "ranking_id": "a263dbcc99f345e28f3e",
+  "city_id": "cbsa:27260",
+  "mode": "template",
+  "summary": "Illustrative mock ranking. Jacksonville ranks #17 with a screening score of 60.9. Atlanta is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+  "advantages": [
+    "Annual snowfall: 249.00 mm/year; comparison reference 192.00.",
+    "Annual precipitation: 761.00 mm/year; comparison reference 838.00."
+  ],
+  "tradeoffs": [
+    "Lower relative factors: transit commute share, zero-vehicle households.",
+    "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+  ],
+  "evidence_ids": [
+    "synthetic:12060",
+    "synthetic:27260"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "odd-scout-web",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "typecheck": "next typegen && tsc --noEmit",
+    "generate:api": "openapi-typescript ../../packages/contracts/openapi.json -o ../../packages/contracts/generated/api.d.ts",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "d3-geo": "^3.1.1",
+    "lucide-react": "^0.468.0",
+    "next": "^16.3.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "recharts": "^3.2.0",
+    "tailwind-merge": "^3.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@tailwindcss/postcss": "^4.1.0",
+    "@types/d3-geo": "^3.1.0",
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "openapi-typescript": "^7.9.0",
+    "prettier": "^3.9.9",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.9.0"
+  }
+}

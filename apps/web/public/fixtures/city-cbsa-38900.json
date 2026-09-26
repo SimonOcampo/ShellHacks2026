@@ -1,0 +1,136 @@
+{
+  "versions": {
+    "schema_version": "1",
+    "data_version": "mock.v1",
+    "model_version": "ranking.v1",
+    "data_mode": "mock"
+  },
+  "city_id": "cbsa:38900",
+  "display_name": "Portland",
+  "official_name": "Portland metro (mock label; official name pending ingestion)",
+  "geography_type": "cbsa",
+  "geography_vintage": "synthetic-mock",
+  "state_codes": [
+    "OR"
+  ],
+  "latitude": 45.52,
+  "longitude": -122.68,
+  "features": {
+    "annual_precipitation_mm": {
+      "value": 1720.0,
+      "unit": "mm/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:38900"
+      ]
+    },
+    "annual_snowfall_mm": {
+      "value": 830.0,
+      "unit": "mm/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:38900"
+      ]
+    },
+    "hot_days_32c": {
+      "value": 110.0,
+      "unit": "days/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:38900"
+      ]
+    },
+    "mean_commute_minutes": {
+      "value": 36.0,
+      "unit": "minutes",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:38900"
+      ]
+    },
+    "public_dc_ports_per_100k": {
+      "value": 53.0,
+      "unit": "ports/100k residents",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:38900"
+      ]
+    },
+    "population_share_in_counties_with_dc": {
+      "value": 0.55,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:38900"
+      ]
+    },
+    "population": {
+      "value": 8031230.0,
+      "unit": "residents",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:38900"
+      ]
+    },
+    "population_density_per_km2": {
+      "value": 1210.0,
+      "unit": "residents/km\u00c2\u00b2",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:38900"
+      ]
+    },
+    "zero_vehicle_household_share": {
+      "value": 0.195,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:38900"
+      ]
+    },
+    "transit_commute_share": {
+      "value": 0.14200000000000002,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:38900"
+      ]
+    }
+  },
+  "legal_evidence": [
+    {
+      "jurisdiction": "OR",
+      "category": "unresolved",
+      "summary": "Regulatory review unresolved; no approval inferred.",
+      "checked_at": "2026-09-26",
+      "provenance_ids": []
+    }
+  ],
+  "provenance": [
+    {
+      "id": "synthetic:38900",
+      "source_name": "Synthetic fixture generator",
+      "source_url": "synthetic://odd-scout/mock.v1",
+      "dataset_id": "synthetic-mock.v1",
+      "period": "Not observed",
+      "retrieved_at": "2026-09-26",
+      "source_geography": "synthetic",
+      "target_geography": "cbsa:38900",
+      "transformation": "Deterministic illustrative values; no public observations.",
+      "assumptions": [
+        "All ranking measurements are synthetic. Display markers approximate principal city locations."
+      ],
+      "raw_sha256": "475156e4100e8e9ca53414919f3fc5d6e09ce3b8843a484740ecafe343fd2052"
+    }
+  ]
+}

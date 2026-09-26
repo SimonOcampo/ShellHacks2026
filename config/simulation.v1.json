@@ -1,0 +1,17 @@
+{
+  "profile_id":"synthetic-zone.v1",
+  "base_requests_per_day":1000,
+  "service_zone_radius_miles":5,
+  "average_speed_mph":20,
+  "road_distance_multiplier":1.3,
+  "hourly_demand_weights":[0.3,0.2,0.15,0.15,0.2,0.4,0.8,1.4,1.5,1.1,0.9,1,1.1,1,1,1.1,1.5,1.8,1.7,1.4,1.2,1,0.7,0.5],
+  "battery_range_miles":250,
+  "reserve_fraction":0.1,
+  "charge_trigger_fraction":0.2,
+  "charge_target_fraction":0.8,
+  "charge_range_miles_per_minute":2.5,
+  "charger_count":5,
+  "max_pickup_wait_minutes":15,
+  "pickup_dwell_minutes":1,
+  "dropoff_dwell_minutes":1
+}

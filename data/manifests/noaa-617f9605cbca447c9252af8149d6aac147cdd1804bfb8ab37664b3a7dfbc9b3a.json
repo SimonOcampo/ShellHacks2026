@@ -1,0 +1,12 @@
+{
+  "source": "noaa",
+  "source_url": "https://www.ncei.noaa.gov/data/normals-annualseasonal/1991-2020/access/USW00012839.csv",
+  "parameters": {},
+  "dataset_id": "NOAA annual/seasonal climate normals",
+  "period": "1991\u20132020",
+  "geography": "station:USW00012839",
+  "retrieved_at": "2026-09-26T06:25:46.946001+00:00",
+  "sha256": "617f9605cbca447c9252af8149d6aac147cdd1804bfb8ab37664b3a7dfbc9b3a",
+  "path": "data/raw/noaa-617f9605cbca447c9252af8149d6aac147cdd1804bfb8ab37664b3a7dfbc9b3a.csv",
+  "license": "See official dataset terms; public source does not imply endorsement."
+}

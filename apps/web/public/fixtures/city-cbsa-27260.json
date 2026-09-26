@@ -1,0 +1,136 @@
+{
+  "versions": {
+    "schema_version": "1",
+    "data_version": "mock.v1",
+    "model_version": "ranking.v1",
+    "data_mode": "mock"
+  },
+  "city_id": "cbsa:27260",
+  "display_name": "Jacksonville",
+  "official_name": "Jacksonville metro (mock label; official name pending ingestion)",
+  "geography_type": "cbsa",
+  "geography_vintage": "synthetic-mock",
+  "state_codes": [
+    "FL"
+  ],
+  "latitude": 30.33,
+  "longitude": -81.66,
+  "features": {
+    "annual_precipitation_mm": {
+      "value": 761.0,
+      "unit": "mm/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:27260"
+      ]
+    },
+    "annual_snowfall_mm": {
+      "value": 249.0,
+      "unit": "mm/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:27260"
+      ]
+    },
+    "hot_days_32c": {
+      "value": 33.0,
+      "unit": "days/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:27260"
+      ]
+    },
+    "mean_commute_minutes": {
+      "value": 23.0,
+      "unit": "minutes",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:27260"
+      ]
+    },
+    "public_dc_ports_per_100k": {
+      "value": 47.0,
+      "unit": "ports/100k residents",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:27260"
+      ]
+    },
+    "population_share_in_counties_with_dc": {
+      "value": 0.685,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:27260"
+      ]
+    },
+    "population": {
+      "value": 3039369.0,
+      "unit": "residents",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:27260"
+      ]
+    },
+    "population_density_per_km2": {
+      "value": 419.0,
+      "unit": "residents/km\u00c2\u00b2",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:27260"
+      ]
+    },
+    "zero_vehicle_household_share": {
+      "value": 0.07600000000000001,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:27260"
+      ]
+    },
+    "transit_commute_share": {
+      "value": 0.051000000000000004,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:27260"
+      ]
+    }
+  },
+  "legal_evidence": [
+    {
+      "jurisdiction": "FL",
+      "category": "unresolved",
+      "summary": "Regulatory review unresolved; no approval inferred.",
+      "checked_at": "2026-09-26",
+      "provenance_ids": []
+    }
+  ],
+  "provenance": [
+    {
+      "id": "synthetic:27260",
+      "source_name": "Synthetic fixture generator",
+      "source_url": "synthetic://odd-scout/mock.v1",
+      "dataset_id": "synthetic-mock.v1",
+      "period": "Not observed",
+      "retrieved_at": "2026-09-26",
+      "source_geography": "synthetic",
+      "target_geography": "cbsa:27260",
+      "transformation": "Deterministic illustrative values; no public observations.",
+      "assumptions": [
+        "All ranking measurements are synthetic. Display markers approximate principal city locations."
+      ],
+      "raw_sha256": "475156e4100e8e9ca53414919f3fc5d6e09ce3b8843a484740ecafe343fd2052"
+    }
+  ]
+}

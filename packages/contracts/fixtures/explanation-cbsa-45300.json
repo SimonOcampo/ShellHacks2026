@@ -1,0 +1,18 @@
+{
+  "ranking_id": "a263dbcc99f345e28f3e",
+  "city_id": "cbsa:45300",
+  "mode": "template",
+  "summary": "Illustrative mock ranking. Tampa ranks #18 with a screening score of 48.3. Atlanta is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+  "advantages": [
+    "Annual snowfall: 166.00 mm/year; comparison reference 192.00.",
+    "Days at or above 90\u00c2\u00b0F: 22.00 days/year; comparison reference 4.00."
+  ],
+  "tradeoffs": [
+    "Lower relative factors: transit commute share, zero-vehicle households.",
+    "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+  ],
+  "evidence_ids": [
+    "synthetic:12060",
+    "synthetic:45300"
+  ]
+}

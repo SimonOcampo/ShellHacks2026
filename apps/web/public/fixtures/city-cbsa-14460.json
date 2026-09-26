@@ -1,0 +1,136 @@
+{
+  "versions": {
+    "schema_version": "1",
+    "data_version": "mock.v1",
+    "model_version": "ranking.v1",
+    "data_mode": "mock"
+  },
+  "city_id": "cbsa:14460",
+  "display_name": "Boston",
+  "official_name": "Boston metro (mock label; official name pending ingestion)",
+  "geography_type": "cbsa",
+  "geography_vintage": "synthetic-mock",
+  "state_codes": [
+    "MA"
+  ],
+  "latitude": 42.36,
+  "longitude": -71.06,
+  "features": {
+    "annual_precipitation_mm": {
+      "value": 594.0,
+      "unit": "mm/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:14460"
+      ]
+    },
+    "annual_snowfall_mm": {
+      "value": 96.0,
+      "unit": "mm/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:14460"
+      ]
+    },
+    "hot_days_32c": {
+      "value": 2.0,
+      "unit": "days/year",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:14460"
+      ]
+    },
+    "mean_commute_minutes": {
+      "value": 32.0,
+      "unit": "minutes",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:14460"
+      ]
+    },
+    "public_dc_ports_per_100k": {
+      "value": 79.0,
+      "unit": "ports/100k residents",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:14460"
+      ]
+    },
+    "population_share_in_counties_with_dc": {
+      "value": 0.64,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:14460"
+      ]
+    },
+    "population": {
+      "value": 9457476.0,
+      "unit": "residents",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:14460"
+      ]
+    },
+    "population_density_per_km2": {
+      "value": 1436.0,
+      "unit": "residents/km\u00c2\u00b2",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:14460"
+      ]
+    },
+    "zero_vehicle_household_share": {
+      "value": 0.229,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:14460"
+      ]
+    },
+    "transit_commute_share": {
+      "value": 0.168,
+      "unit": "fraction",
+      "quality": "derived",
+      "missing_reason": null,
+      "provenance_ids": [
+        "synthetic:14460"
+      ]
+    }
+  },
+  "legal_evidence": [
+    {
+      "jurisdiction": "MA",
+      "category": "unresolved",
+      "summary": "Regulatory review unresolved; no approval inferred.",
+      "checked_at": "2026-09-26",
+      "provenance_ids": []
+    }
+  ],
+  "provenance": [
+    {
+      "id": "synthetic:14460",
+      "source_name": "Synthetic fixture generator",
+      "source_url": "synthetic://odd-scout/mock.v1",
+      "dataset_id": "synthetic-mock.v1",
+      "period": "Not observed",
+      "retrieved_at": "2026-09-26",
+      "source_geography": "synthetic",
+      "target_geography": "cbsa:14460",
+      "transformation": "Deterministic illustrative values; no public observations.",
+      "assumptions": [
+        "All ranking measurements are synthetic. Display markers approximate principal city locations."
+      ],
+      "raw_sha256": "475156e4100e8e9ca53414919f3fc5d6e09ce3b8843a484740ecafe343fd2052"
+    }
+  ]
+}

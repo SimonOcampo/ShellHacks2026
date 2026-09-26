@@ -1,0 +1,18 @@
+{
+  "ranking_id": "a263dbcc99f345e28f3e",
+  "city_id": "cbsa:34980",
+  "mode": "template",
+  "summary": "Illustrative mock ranking. Nashville ranks #10 with a screening score of 68.8. Atlanta is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+  "advantages": [
+    "Resident population contributes 29.5 points to opportunity.",
+    "Annual snowfall: 594.00 mm/year; comparison reference 192.00."
+  ],
+  "tradeoffs": [
+    "Lower relative factors: transit commute share, zero-vehicle households.",
+    "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+  ],
+  "evidence_ids": [
+    "synthetic:12060",
+    "synthetic:34980"
+  ]
+}

@@ -1,0 +1,2033 @@
+{
+  "components": {
+    "schemas": {
+      "Bounds": {
+        "additionalProperties": false,
+        "properties": {
+          "lower": {
+            "title": "Lower",
+            "type": "number"
+          },
+          "upper": {
+            "title": "Upper",
+            "type": "number"
+          }
+        },
+        "required": [
+          "lower",
+          "upper"
+        ],
+        "title": "Bounds",
+        "type": "object"
+      },
+      "CityFeature": {
+        "additionalProperties": false,
+        "properties": {
+          "city_id": {
+            "pattern": "^cbsa:\\d{5}$",
+            "title": "City Id",
+            "type": "string"
+          },
+          "display_name": {
+            "title": "Display Name",
+            "type": "string"
+          },
+          "features": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Measurement"
+            },
+            "propertyNames": {
+              "enum": [
+                "annual_precipitation_mm",
+                "annual_snowfall_mm",
+                "hot_days_32c",
+                "mean_commute_minutes",
+                "public_dc_ports_per_100k",
+                "population_share_in_counties_with_dc",
+                "population",
+                "population_density_per_km2",
+                "zero_vehicle_household_share",
+                "transit_commute_share"
+              ]
+            },
+            "title": "Features",
+            "type": "object"
+          },
+          "geography_type": {
+            "const": "cbsa",
+            "default": "cbsa",
+            "title": "Geography Type",
+            "type": "string"
+          },
+          "geography_vintage": {
+            "title": "Geography Vintage",
+            "type": "string"
+          },
+          "latitude": {
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "title": "Latitude",
+            "type": "number"
+          },
+          "legal_evidence": {
+            "items": {
+              "$ref": "#/components/schemas/LegalEvidence"
+            },
+            "title": "Legal Evidence",
+            "type": "array"
+          },
+          "longitude": {
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "title": "Longitude",
+            "type": "number"
+          },
+          "official_name": {
+            "title": "Official Name",
+            "type": "string"
+          },
+          "provenance": {
+            "items": {
+              "$ref": "#/components/schemas/Provenance"
+            },
+            "title": "Provenance",
+            "type": "array"
+          },
+          "state_codes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "State Codes",
+            "type": "array"
+          },
+          "versions": {
+            "$ref": "#/components/schemas/VersionStamp"
+          }
+        },
+        "required": [
+          "versions",
+          "city_id",
+          "display_name",
+          "official_name",
+          "geography_vintage",
+          "state_codes",
+          "latitude",
+          "longitude",
+          "features",
+          "legal_evidence",
+          "provenance"
+        ],
+        "title": "CityFeature",
+        "type": "object"
+      },
+      "CityList": {
+        "additionalProperties": false,
+        "properties": {
+          "cities": {
+            "items": {
+              "$ref": "#/components/schemas/CitySummary"
+            },
+            "title": "Cities",
+            "type": "array"
+          },
+          "versions": {
+            "$ref": "#/components/schemas/VersionStamp"
+          }
+        },
+        "required": [
+          "versions",
+          "cities"
+        ],
+        "title": "CityList",
+        "type": "object"
+      },
+      "CityScore": {
+        "additionalProperties": false,
+        "properties": {
+          "city_id": {
+            "title": "City Id",
+            "type": "string"
+          },
+          "coverage": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Coverage",
+            "type": "number"
+          },
+          "exclusion_reasons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Exclusion Reasons",
+            "type": "array"
+          },
+          "expansion_score": {
+            "anyOf": [
+              {
+                "maximum": 100.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expansion Score"
+          },
+          "factors": {
+            "items": {
+              "$ref": "#/components/schemas/FactorResult"
+            },
+            "title": "Factors",
+            "type": "array"
+          },
+          "legal_flags": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Legal Flags",
+            "type": "array"
+          },
+          "pillars": {
+            "$ref": "#/components/schemas/PillarScores"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
+          "reference_matches": {
+            "items": {
+              "$ref": "#/components/schemas/ReferenceMatch"
+            },
+            "title": "Reference Matches",
+            "type": "array"
+          },
+          "strongest_factor_ids": {
+            "items": {
+              "enum": [
+                "annual_precipitation_mm",
+                "annual_snowfall_mm",
+                "hot_days_32c",
+                "mean_commute_minutes",
+                "public_dc_ports_per_100k",
+                "population_share_in_counties_with_dc",
+                "population",
+                "population_density_per_km2",
+                "zero_vehicle_household_share",
+                "transit_commute_share"
+              ],
+              "type": "string"
+            },
+            "title": "Strongest Factor Ids",
+            "type": "array"
+          },
+          "weakest_factor_ids": {
+            "items": {
+              "enum": [
+                "annual_precipitation_mm",
+                "annual_snowfall_mm",
+                "hot_days_32c",
+                "mean_commute_minutes",
+                "public_dc_ports_per_100k",
+                "population_share_in_counties_with_dc",
+                "population",
+                "population_density_per_km2",
+                "zero_vehicle_household_share",
+                "transit_commute_share"
+              ],
+              "type": "string"
+            },
+            "title": "Weakest Factor Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "city_id",
+          "rank",
+          "expansion_score",
+          "pillars",
+          "coverage",
+          "exclusion_reasons",
+          "factors",
+          "reference_matches",
+          "strongest_factor_ids",
+          "weakest_factor_ids",
+          "legal_flags"
+        ],
+        "title": "CityScore",
+        "type": "object"
+      },
+      "CitySummary": {
+        "additionalProperties": false,
+        "properties": {
+          "city_id": {
+            "title": "City Id",
+            "type": "string"
+          },
+          "display_name": {
+            "title": "Display Name",
+            "type": "string"
+          },
+          "latitude": {
+            "title": "Latitude",
+            "type": "number"
+          },
+          "longitude": {
+            "title": "Longitude",
+            "type": "number"
+          },
+          "official_name": {
+            "title": "Official Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "city_id",
+          "display_name",
+          "official_name",
+          "latitude",
+          "longitude"
+        ],
+        "title": "CitySummary",
+        "type": "object"
+      },
+      "ErrorDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "details": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Details",
+            "type": "array"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorDetail",
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorDetail"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse",
+        "type": "object"
+      },
+      "Explanation": {
+        "additionalProperties": false,
+        "properties": {
+          "advantages": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Advantages",
+            "type": "array"
+          },
+          "city_id": {
+            "title": "City Id",
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "mode": {
+            "enum": [
+              "template",
+              "llm"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "ranking_id": {
+            "title": "Ranking Id",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "tradeoffs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Tradeoffs",
+            "type": "array"
+          }
+        },
+        "required": [
+          "ranking_id",
+          "city_id",
+          "mode",
+          "summary",
+          "advantages",
+          "tradeoffs",
+          "evidence_ids"
+        ],
+        "title": "Explanation",
+        "type": "object"
+      },
+      "FactorResult": {
+        "additionalProperties": false,
+        "properties": {
+          "distance_component": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distance Component"
+          },
+          "feature": {
+            "enum": [
+              "annual_precipitation_mm",
+              "annual_snowfall_mm",
+              "hot_days_32c",
+              "mean_commute_minutes",
+              "public_dc_ports_per_100k",
+              "population_share_in_counties_with_dc",
+              "population",
+              "population_density_per_km2",
+              "zero_vehicle_household_share",
+              "transit_commute_share"
+            ],
+            "title": "Feature",
+            "type": "string"
+          },
+          "normalized_value": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Normalized Value"
+          },
+          "pillar": {
+            "enum": [
+              "familiarity",
+              "readiness",
+              "opportunity"
+            ],
+            "title": "Pillar",
+            "type": "string"
+          },
+          "provenance_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Provenance Ids",
+            "type": "array"
+          },
+          "raw_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Value"
+          },
+          "reference_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Value"
+          },
+          "score_points": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score Points"
+          }
+        },
+        "required": [
+          "feature",
+          "pillar",
+          "raw_value",
+          "normalized_value",
+          "reference_value",
+          "distance_component",
+          "score_points",
+          "provenance_ids"
+        ],
+        "title": "FactorResult",
+        "type": "object"
+      },
+      "FeatureSpec": {
+        "additionalProperties": false,
+        "properties": {
+          "definition": {
+            "title": "Definition",
+            "type": "string"
+          },
+          "key": {
+            "enum": [
+              "annual_precipitation_mm",
+              "annual_snowfall_mm",
+              "hot_days_32c",
+              "mean_commute_minutes",
+              "public_dc_ports_per_100k",
+              "population_share_in_counties_with_dc",
+              "population",
+              "population_density_per_km2",
+              "zero_vehicle_household_share",
+              "transit_commute_share"
+            ],
+            "title": "Key",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "maximum": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maximum"
+          },
+          "pillar": {
+            "enum": [
+              "familiarity",
+              "readiness",
+              "opportunity"
+            ],
+            "title": "Pillar",
+            "type": "string"
+          },
+          "transform": {
+            "enum": [
+              "linear",
+              "log1p"
+            ],
+            "title": "Transform",
+            "type": "string"
+          },
+          "unit": {
+            "title": "Unit",
+            "type": "string"
+          },
+          "weight": {
+            "exclusiveMinimum": 0.0,
+            "title": "Weight",
+            "type": "number"
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "pillar",
+          "unit",
+          "transform",
+          "weight",
+          "definition"
+        ],
+        "title": "FeatureSpec",
+        "type": "object"
+      },
+      "Health": {
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "const": "ok",
+            "title": "Status",
+            "type": "string"
+          },
+          "versions": {
+            "$ref": "#/components/schemas/VersionStamp"
+          }
+        },
+        "required": [
+          "status",
+          "versions"
+        ],
+        "title": "Health",
+        "type": "object"
+      },
+      "HourlyMetrics": {
+        "additionalProperties": false,
+        "properties": {
+          "average_wait_minutes": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Average Wait Minutes"
+          },
+          "completed_rides": {
+            "minimum": 0.0,
+            "title": "Completed Rides",
+            "type": "integer"
+          },
+          "gross_revenue_usd": {
+            "minimum": 0.0,
+            "title": "Gross Revenue Usd",
+            "type": "number"
+          },
+          "hour": {
+            "minimum": 0.0,
+            "title": "Hour",
+            "type": "integer"
+          },
+          "rejected_requests": {
+            "minimum": 0.0,
+            "title": "Rejected Requests",
+            "type": "integer"
+          },
+          "requests": {
+            "minimum": 0.0,
+            "title": "Requests",
+            "type": "integer"
+          },
+          "utilization_pct": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Utilization Pct",
+            "type": "number"
+          }
+        },
+        "required": [
+          "hour",
+          "requests",
+          "completed_rides",
+          "rejected_requests",
+          "average_wait_minutes",
+          "utilization_pct",
+          "gross_revenue_usd"
+        ],
+        "title": "HourlyMetrics",
+        "type": "object"
+      },
+      "LegalEvidence": {
+        "additionalProperties": false,
+        "properties": {
+          "category": {
+            "enum": [
+              "documented_pathway",
+              "documented_restriction",
+              "unresolved"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "checked_at": {
+            "title": "Checked At",
+            "type": "string"
+          },
+          "jurisdiction": {
+            "title": "Jurisdiction",
+            "type": "string"
+          },
+          "provenance_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Provenance Ids",
+            "type": "array"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "jurisdiction",
+          "category",
+          "summary",
+          "checked_at",
+          "provenance_ids"
+        ],
+        "title": "LegalEvidence",
+        "type": "object"
+      },
+      "Measurement": {
+        "additionalProperties": false,
+        "properties": {
+          "missing_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missing Reason"
+          },
+          "provenance_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Provenance Ids",
+            "type": "array"
+          },
+          "quality": {
+            "enum": [
+              "observed",
+              "derived",
+              "proxy",
+              "missing"
+            ],
+            "title": "Quality",
+            "type": "string"
+          },
+          "unit": {
+            "title": "Unit",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "value",
+          "unit",
+          "quality",
+          "missing_reason",
+          "provenance_ids"
+        ],
+        "title": "Measurement",
+        "type": "object"
+      },
+      "PillarScores": {
+        "additionalProperties": false,
+        "properties": {
+          "familiarity": {
+            "anyOf": [
+              {
+                "maximum": 100.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Familiarity"
+          },
+          "opportunity": {
+            "anyOf": [
+              {
+                "maximum": 100.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Opportunity"
+          },
+          "readiness": {
+            "anyOf": [
+              {
+                "maximum": 100.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Readiness"
+          }
+        },
+        "required": [
+          "familiarity",
+          "readiness",
+          "opportunity"
+        ],
+        "title": "PillarScores",
+        "type": "object"
+      },
+      "PillarWeights": {
+        "additionalProperties": false,
+        "properties": {
+          "familiarity": {
+            "default": 0.4,
+            "minimum": 0.0,
+            "title": "Familiarity",
+            "type": "number"
+          },
+          "opportunity": {
+            "default": 0.4,
+            "minimum": 0.0,
+            "title": "Opportunity",
+            "type": "number"
+          },
+          "readiness": {
+            "default": 0.2,
+            "minimum": 0.0,
+            "title": "Readiness",
+            "type": "number"
+          }
+        },
+        "title": "PillarWeights",
+        "type": "object"
+      },
+      "Provenance": {
+        "additionalProperties": false,
+        "properties": {
+          "assumptions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Assumptions",
+            "type": "array"
+          },
+          "dataset_id": {
+            "title": "Dataset Id",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "period": {
+            "title": "Period",
+            "type": "string"
+          },
+          "raw_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Raw Sha256",
+            "type": "string"
+          },
+          "retrieved_at": {
+            "title": "Retrieved At",
+            "type": "string"
+          },
+          "source_geography": {
+            "title": "Source Geography",
+            "type": "string"
+          },
+          "source_name": {
+            "title": "Source Name",
+            "type": "string"
+          },
+          "source_url": {
+            "title": "Source Url",
+            "type": "string"
+          },
+          "target_geography": {
+            "title": "Target Geography",
+            "type": "string"
+          },
+          "transformation": {
+            "title": "Transformation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "source_name",
+          "source_url",
+          "dataset_id",
+          "period",
+          "retrieved_at",
+          "source_geography",
+          "target_geography",
+          "transformation",
+          "assumptions",
+          "raw_sha256"
+        ],
+        "title": "Provenance",
+        "type": "object"
+      },
+      "PublicConfig": {
+        "additionalProperties": false,
+        "properties": {
+          "bounds": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Bounds"
+            },
+            "propertyNames": {
+              "enum": [
+                "annual_precipitation_mm",
+                "annual_snowfall_mm",
+                "hot_days_32c",
+                "mean_commute_minutes",
+                "public_dc_ports_per_100k",
+                "population_share_in_counties_with_dc",
+                "population",
+                "population_density_per_km2",
+                "zero_vehicle_household_share",
+                "transit_commute_share"
+              ]
+            },
+            "title": "Bounds",
+            "type": "object"
+          },
+          "exclusions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Exclusions",
+            "type": "array"
+          },
+          "features": {
+            "items": {
+              "$ref": "#/components/schemas/FeatureSpec"
+            },
+            "title": "Features",
+            "type": "array"
+          },
+          "references": {
+            "items": {
+              "$ref": "#/components/schemas/ReferenceMarket"
+            },
+            "title": "References",
+            "type": "array"
+          },
+          "simulation_defaults": {
+            "$ref": "#/components/schemas/SimulationAssumptions"
+          },
+          "versions": {
+            "$ref": "#/components/schemas/VersionStamp"
+          },
+          "weights": {
+            "$ref": "#/components/schemas/PillarWeights"
+          }
+        },
+        "required": [
+          "versions",
+          "weights",
+          "features",
+          "bounds",
+          "references",
+          "simulation_defaults",
+          "exclusions"
+        ],
+        "title": "PublicConfig",
+        "type": "object"
+      },
+      "RankingRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "reference_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Ids"
+          },
+          "weights": {
+            "$ref": "#/components/schemas/PillarWeights"
+          }
+        },
+        "title": "RankingRequest",
+        "type": "object"
+      },
+      "RankingResult": {
+        "additionalProperties": false,
+        "properties": {
+          "normalized_weights": {
+            "$ref": "#/components/schemas/PillarWeights"
+          },
+          "ranked": {
+            "items": {
+              "$ref": "#/components/schemas/CityScore"
+            },
+            "title": "Ranked",
+            "type": "array"
+          },
+          "ranking_id": {
+            "title": "Ranking Id",
+            "type": "string"
+          },
+          "reference_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Reference Ids",
+            "type": "array"
+          },
+          "unranked": {
+            "items": {
+              "$ref": "#/components/schemas/CityScore"
+            },
+            "title": "Unranked",
+            "type": "array"
+          },
+          "versions": {
+            "$ref": "#/components/schemas/VersionStamp"
+          }
+        },
+        "required": [
+          "versions",
+          "ranking_id",
+          "normalized_weights",
+          "reference_ids",
+          "ranked",
+          "unranked"
+        ],
+        "title": "RankingResult",
+        "type": "object"
+      },
+      "ReferenceMarket": {
+        "additionalProperties": false,
+        "properties": {
+          "category": {
+            "enum": [
+              "commercial",
+              "announced",
+              "testing"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "city_id": {
+            "title": "City Id",
+            "type": "string"
+          },
+          "enabled": {
+            "title": "Enabled",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "operator": {
+            "title": "Operator",
+            "type": "string"
+          },
+          "provenance_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Provenance Ids",
+            "type": "array"
+          },
+          "status_as_of": {
+            "title": "Status As Of",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "city_id",
+          "operator",
+          "category",
+          "status_as_of",
+          "enabled",
+          "provenance_ids"
+        ],
+        "title": "ReferenceMarket",
+        "type": "object"
+      },
+      "ReferenceMatch": {
+        "additionalProperties": false,
+        "properties": {
+          "distance": {
+            "minimum": 0.0,
+            "title": "Distance",
+            "type": "number"
+          },
+          "reference_id": {
+            "title": "Reference Id",
+            "type": "string"
+          },
+          "similarity": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Similarity",
+            "type": "number"
+          }
+        },
+        "required": [
+          "reference_id",
+          "distance",
+          "similarity"
+        ],
+        "title": "ReferenceMatch",
+        "type": "object"
+      },
+      "SimulationAssumptions": {
+        "additionalProperties": false,
+        "properties": {
+          "average_speed_mph": {
+            "exclusiveMinimum": 0.0,
+            "title": "Average Speed Mph",
+            "type": "number"
+          },
+          "base_requests_per_day": {
+            "exclusiveMinimum": 0.0,
+            "title": "Base Requests Per Day",
+            "type": "number"
+          },
+          "battery_range_miles": {
+            "exclusiveMinimum": 0.0,
+            "title": "Battery Range Miles",
+            "type": "number"
+          },
+          "charge_range_miles_per_minute": {
+            "exclusiveMinimum": 0.0,
+            "title": "Charge Range Miles Per Minute",
+            "type": "number"
+          },
+          "charge_target_fraction": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Charge Target Fraction",
+            "type": "number"
+          },
+          "charge_trigger_fraction": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Charge Trigger Fraction",
+            "type": "number"
+          },
+          "charger_count": {
+            "minimum": 1.0,
+            "title": "Charger Count",
+            "type": "integer"
+          },
+          "dropoff_dwell_minutes": {
+            "minimum": 0.0,
+            "title": "Dropoff Dwell Minutes",
+            "type": "number"
+          },
+          "hourly_demand_weights": {
+            "items": {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            "title": "Hourly Demand Weights",
+            "type": "array"
+          },
+          "max_pickup_wait_minutes": {
+            "exclusiveMinimum": 0.0,
+            "title": "Max Pickup Wait Minutes",
+            "type": "number"
+          },
+          "pickup_dwell_minutes": {
+            "minimum": 0.0,
+            "title": "Pickup Dwell Minutes",
+            "type": "number"
+          },
+          "profile_id": {
+            "title": "Profile Id",
+            "type": "string"
+          },
+          "reserve_fraction": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Reserve Fraction",
+            "type": "number"
+          },
+          "road_distance_multiplier": {
+            "exclusiveMinimum": 0.0,
+            "title": "Road Distance Multiplier",
+            "type": "number"
+          },
+          "service_zone_radius_miles": {
+            "exclusiveMinimum": 0.0,
+            "title": "Service Zone Radius Miles",
+            "type": "number"
+          }
+        },
+        "required": [
+          "profile_id",
+          "base_requests_per_day",
+          "service_zone_radius_miles",
+          "average_speed_mph",
+          "road_distance_multiplier",
+          "hourly_demand_weights",
+          "battery_range_miles",
+          "reserve_fraction",
+          "charge_trigger_fraction",
+          "charge_target_fraction",
+          "charge_range_miles_per_minute",
+          "charger_count",
+          "max_pickup_wait_minutes",
+          "pickup_dwell_minutes",
+          "dropoff_dwell_minutes"
+        ],
+        "title": "SimulationAssumptions",
+        "type": "object"
+      },
+      "SimulationMetrics": {
+        "additionalProperties": false,
+        "properties": {
+          "average_wait_minutes": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Average Wait Minutes"
+          },
+          "charging_queue_vehicle_hours": {
+            "minimum": 0.0,
+            "title": "Charging Queue Vehicle Hours",
+            "type": "number"
+          },
+          "charging_vehicle_hours": {
+            "minimum": 0.0,
+            "title": "Charging Vehicle Hours",
+            "type": "number"
+          },
+          "empty_mile_pct": {
+            "anyOf": [
+              {
+                "maximum": 100.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Empty Mile Pct"
+          },
+          "empty_miles": {
+            "minimum": 0.0,
+            "title": "Empty Miles",
+            "type": "number"
+          },
+          "gross_revenue_usd": {
+            "minimum": 0.0,
+            "title": "Gross Revenue Usd",
+            "type": "number"
+          },
+          "p95_wait_minutes": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "P95 Wait Minutes"
+          },
+          "paid_miles": {
+            "minimum": 0.0,
+            "title": "Paid Miles",
+            "type": "number"
+          },
+          "passenger_utilization_pct": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Passenger Utilization Pct",
+            "type": "number"
+          },
+          "rejected_requests": {
+            "minimum": 0.0,
+            "title": "Rejected Requests",
+            "type": "integer"
+          },
+          "revenue_per_vehicle_usd": {
+            "minimum": 0.0,
+            "title": "Revenue Per Vehicle Usd",
+            "type": "number"
+          },
+          "rides_completed": {
+            "minimum": 0.0,
+            "title": "Rides Completed",
+            "type": "integer"
+          },
+          "rides_per_vehicle": {
+            "minimum": 0.0,
+            "title": "Rides Per Vehicle",
+            "type": "number"
+          },
+          "total_requests": {
+            "minimum": 0.0,
+            "title": "Total Requests",
+            "type": "integer"
+          },
+          "unfinished_requests": {
+            "minimum": 0.0,
+            "title": "Unfinished Requests",
+            "type": "integer"
+          },
+          "utilization_pct": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Utilization Pct",
+            "type": "number"
+          }
+        },
+        "required": [
+          "total_requests",
+          "rides_completed",
+          "rejected_requests",
+          "unfinished_requests",
+          "average_wait_minutes",
+          "p95_wait_minutes",
+          "utilization_pct",
+          "passenger_utilization_pct",
+          "paid_miles",
+          "empty_miles",
+          "empty_mile_pct",
+          "charging_vehicle_hours",
+          "charging_queue_vehicle_hours",
+          "gross_revenue_usd",
+          "revenue_per_vehicle_usd",
+          "rides_per_vehicle"
+        ],
+        "title": "SimulationMetrics",
+        "type": "object"
+      },
+      "SimulationRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "base_fare_usd": {
+            "default": 3,
+            "maximum": 50.0,
+            "minimum": 0.0,
+            "title": "Base Fare Usd",
+            "type": "number"
+          },
+          "city_id": {
+            "title": "City Id",
+            "type": "string"
+          },
+          "days": {
+            "default": 7,
+            "maximum": 7.0,
+            "minimum": 1.0,
+            "title": "Days",
+            "type": "integer"
+          },
+          "demand_multiplier": {
+            "default": 1,
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Demand Multiplier",
+            "type": "number"
+          },
+          "fleet_size": {
+            "default": 50,
+            "maximum": 200.0,
+            "minimum": 1.0,
+            "title": "Fleet Size",
+            "type": "integer"
+          },
+          "price_per_mile_usd": {
+            "default": 1.75,
+            "maximum": 20.0,
+            "minimum": 0.0,
+            "title": "Price Per Mile Usd",
+            "type": "number"
+          },
+          "price_per_minute_usd": {
+            "default": 0.3,
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Price Per Minute Usd",
+            "type": "number"
+          },
+          "seed": {
+            "default": 42,
+            "maximum": 4294967295.0,
+            "minimum": 0.0,
+            "title": "Seed",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "city_id"
+        ],
+        "title": "SimulationRequest",
+        "type": "object"
+      },
+      "SimulationResult": {
+        "additionalProperties": false,
+        "properties": {
+          "assumptions": {
+            "$ref": "#/components/schemas/SimulationAssumptions"
+          },
+          "hourly": {
+            "items": {
+              "$ref": "#/components/schemas/HourlyMetrics"
+            },
+            "title": "Hourly",
+            "type": "array"
+          },
+          "metrics": {
+            "$ref": "#/components/schemas/SimulationMetrics"
+          },
+          "request": {
+            "$ref": "#/components/schemas/SimulationRequest"
+          },
+          "simulation_id": {
+            "title": "Simulation Id",
+            "type": "string"
+          },
+          "versions": {
+            "$ref": "#/components/schemas/VersionStamp"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "versions",
+          "simulation_id",
+          "request",
+          "assumptions",
+          "metrics",
+          "hourly",
+          "warnings"
+        ],
+        "title": "SimulationResult",
+        "type": "object"
+      },
+      "VersionStamp": {
+        "additionalProperties": false,
+        "properties": {
+          "data_mode": {
+            "enum": [
+              "mock",
+              "verified"
+            ],
+            "title": "Data Mode",
+            "type": "string"
+          },
+          "data_version": {
+            "title": "Data Version",
+            "type": "string"
+          },
+          "model_version": {
+            "title": "Model Version",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "default": "1",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "data_version",
+          "model_version",
+          "data_mode"
+        ],
+        "title": "VersionStamp",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "ODD Scout",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/cities": {
+      "get": {
+        "operationId": "cities_api_v1_cities_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CityList"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Cities"
+      }
+    },
+    "/api/v1/cities/{city_id}": {
+      "get": {
+        "operationId": "city_api_v1_cities__city_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "city_id",
+            "required": true,
+            "schema": {
+              "title": "City Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CityFeature"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "City"
+      }
+    },
+    "/api/v1/cities/{city_id}/explanation": {
+      "post": {
+        "operationId": "explanation_api_v1_cities__city_id__explanation_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "city_id",
+            "required": true,
+            "schema": {
+              "title": "City Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RankingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Explanation"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Explanation"
+      }
+    },
+    "/api/v1/config": {
+      "get": {
+        "operationId": "config_api_v1_config_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicConfig"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Config"
+      }
+    },
+    "/api/v1/rankings": {
+      "post": {
+        "operationId": "rankings_api_v1_rankings_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RankingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RankingResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Rankings"
+      }
+    },
+    "/api/v1/simulations": {
+      "post": {
+        "operationId": "simulation_api_v1_simulations_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimulationResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Simulation"
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Health"
+      }
+    }
+  }
+}

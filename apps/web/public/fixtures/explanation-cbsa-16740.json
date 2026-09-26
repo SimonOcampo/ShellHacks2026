@@ -1,0 +1,18 @@
+{
+  "ranking_id": "a263dbcc99f345e28f3e",
+  "city_id": "cbsa:16740",
+  "mode": "template",
+  "summary": "Illustrative mock ranking. Charlotte ranks #6 with a screening score of 73.2. Atlanta is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+  "advantages": [
+    "Transit commute share contributes 15.0 points to opportunity.",
+    "Annual snowfall: 428.00 mm/year; comparison reference 192.00."
+  ],
+  "tradeoffs": [
+    "Lower relative factors: zero-vehicle households, population density.",
+    "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+  ],
+  "evidence_ids": [
+    "synthetic:12060",
+    "synthetic:16740"
+  ]
+}

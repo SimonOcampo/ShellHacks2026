@@ -1,0 +1,18 @@
+{
+  "ranking_id": "a263dbcc99f345e28f3e",
+  "city_id": "cbsa:14460",
+  "mode": "template",
+  "summary": "Illustrative mock ranking. Boston ranks #1 with a screening score of 81.2. Atlanta is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+  "advantages": [
+    "Zero-vehicle households contributes 30.0 points to opportunity.",
+    "Population density contributes 25.0 points to opportunity."
+  ],
+  "tradeoffs": [
+    "Lower relative factors: county charging coverage, transit commute share.",
+    "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+  ],
+  "evidence_ids": [
+    "synthetic:12060",
+    "synthetic:14460"
+  ]
+}

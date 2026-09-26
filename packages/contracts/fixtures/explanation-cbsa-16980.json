@@ -1,0 +1,18 @@
+{
+  "ranking_id": "a263dbcc99f345e28f3e",
+  "city_id": "cbsa:16980",
+  "mode": "template",
+  "summary": "Illustrative mock ranking. Chicago ranks #2 with a screening score of 79.3. Los Angeles is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+  "advantages": [
+    "Population density contributes 24.3 points to opportunity.",
+    "Days at or above 90\u00c2\u00b0F: 121.00 days/year; comparison reference 112.00."
+  ],
+  "tradeoffs": [
+    "Lower relative factors: county charging coverage, transit commute share.",
+    "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+  ],
+  "evidence_ids": [
+    "synthetic:16980",
+    "synthetic:31080"
+  ]
+}
