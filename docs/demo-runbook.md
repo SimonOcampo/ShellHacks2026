@@ -24,9 +24,9 @@ The browser smoke starts local services if needed. It exercises selection, prove
 
 Vercel root directory: `apps/web`. Set `NEXT_PUBLIC_API_BASE_URL` to the Render HTTPS service and `NEXT_PUBLIC_DATA_TRANSPORT=http`. Generated types remain in the monorepo; enable access to files outside the root directory if Vercel requires that setting.
 
-Render uses the root Dockerfile and `/health`. Set `ODD_ALLOWED_ORIGINS` to the exact Vercel origin. `render.yaml` explicitly defaults to mock mode because no verified release exists. Set matching mode/path only after verified publication. The selected hosting plan and accounts must be provisioned externally; no deployment is claimed by committing these definitions.
+Render uses the root Dockerfile and `/health`. The backend is live as service `srv-dartlbm0tbcc73d0lmug` on mock release `mock.v1`; API smoke checks pass. The Vercel frontend is not hosted yet. Set `ODD_ALLOWED_ORIGINS` to its exact origin when available. `render.yaml` defaults to mock mode. Select verified mode and release only after publication and startup validation. This mock deployment is not production-ready.
 
-Use a plan that does not sleep during the presentation, or warm the service before rehearsal. Validate the default scenario on that actual host against the two-second target. Retain previous frontend deployment, backend image and release for rollback.
+Render Free sleeps after inactivity. Warm the service before rehearsal. The latest warm default-scenario measurements were 2.67 and 2.76 seconds, above the two-second target. Repeat timing proof after the target passes. Earlier deployments failed, so no prior healthy backend image is available for rollback; keep local HTTP fallback available.
 
 ## Failure handling
 
@@ -38,6 +38,7 @@ API errors retain prior simulation output with an error/retry state. Invalid inp
 - [x] Twenty synthetic metros and five reference fixtures.
 - [x] Explainable ranking and finite seeded fleet operations.
 - [x] No mixing synthetic and verified modes.
+- [x] Render mock backend deployed, measured, and smoke checked.
 - [ ] Eight verified ranked candidates with official evidence.
-- [ ] Hosted frontend/backend and chosen-host latency proof.
+- [ ] Default-scenario timing below two seconds and hosted frontend connection.
 - [ ] Remote CI success and deployed rehearsal.

@@ -13,11 +13,16 @@ Fraction = Annotated[float, Field(ge=0, le=1, allow_inf_nan=False)]
 Count = Annotated[int, Field(ge=0, strict=True)]
 Pillar = Literal["familiarity", "readiness", "opportunity"]
 DataMode = Literal["mock", "verified"]
-FeatureKey = Literal[
+ScoredFeatureKey = Literal[
     "annual_precipitation_mm",
     "annual_snowfall_mm",
     "hot_days_32c",
     "mean_commute_minutes",
+    "road_density_km_per_km2",
+    "intersection_density_per_km2",
+    "freeway_share",
+    "arterial_share",
+    "local_road_share",
     "public_dc_ports_per_100k",
     "population_share_in_counties_with_dc",
     "population",
@@ -25,6 +30,30 @@ FeatureKey = Literal[
     "zero_vehicle_household_share",
     "transit_commute_share",
 ]
+FeatureKey = ScoredFeatureKey | Literal["average_aadt", "lane_miles_per_km2"]
+
+EXPANDED_SCORING_KEYS = frozenset(
+    {
+        "road_density_km_per_km2",
+        "intersection_density_per_km2",
+        "freeway_share",
+        "arterial_share",
+        "local_road_share",
+    }
+)
+NONNEGATIVE_ROAD_KEYS = frozenset(
+    {
+        "road_density_km_per_km2",
+        "intersection_density_per_km2",
+        "average_aadt",
+        "lane_miles_per_km2",
+    }
+)
+ROAD_SHARE_KEYS = ("freeway_share", "arterial_share", "local_road_share")
+UNSCORED_UNITS = {
+    "average_aadt": "vehicles/day",
+    "lane_miles_per_km2": "lane-miles/km2",
+}
 
 
 class DTO(BaseModel):
@@ -108,6 +137,24 @@ class CityFeature(DTO):
         for item in self.legal_evidence:
             if item.category != "unresolved" and not item.provenance_ids:
                 raise ValueError("Documented legal claims require evidence")
+        for key in NONNEGATIVE_ROAD_KEYS:
+            item = self.features.get(key)
+            if item is not None and item.value is not None and item.value < 0:
+                raise ValueError(f"{key} must be nonnegative")
+        for key in ROAD_SHARE_KEYS:
+            item = self.features.get(key)
+            if item is not None and item.value is not None and not 0 <= item.value <= 1:
+                raise ValueError(f"{key} must be a fraction in [0, 1]")
+        shares = [self.features.get(key) for key in ROAD_SHARE_KEYS]
+        if all(item is not None and item.value is not None for item in shares):
+            if not math.isclose(
+                sum(item.value for item in shares), 1.0, rel_tol=0, abs_tol=1e-6
+            ):
+                raise ValueError("Road functional-class shares must sum to one")
+        for key, unit in UNSCORED_UNITS.items():
+            item = self.features.get(key)
+            if item is not None and item.unit != unit:
+                raise ValueError(f"Invalid unit: {key}")
         return self
 
 
@@ -146,7 +193,7 @@ class PillarScores(DTO):
 
 
 class FactorResult(DTO):
-    feature: FeatureKey
+    feature: ScoredFeatureKey
     pillar: Pillar
     raw_value: float | None
     normalized_value: Fraction | None
@@ -171,8 +218,8 @@ class CityScore(DTO):
     exclusion_reasons: list[str]
     factors: list[FactorResult]
     reference_matches: list[ReferenceMatch]
-    strongest_factor_ids: list[FeatureKey]
-    weakest_factor_ids: list[FeatureKey]
+    strongest_factor_ids: list[ScoredFeatureKey]
+    weakest_factor_ids: list[ScoredFeatureKey]
     legal_flags: list[str]
 
 
@@ -298,7 +345,7 @@ class SimulationResult(DTO):
 
 
 class FeatureSpec(DTO):
-    key: FeatureKey
+    key: ScoredFeatureKey
     label: str
     pillar: Pillar
     unit: str
@@ -319,7 +366,7 @@ class DataRelease(DTO):
     cities: list[CityFeature]
     references: list[ReferenceMarket]
     features: list[FeatureSpec]
-    bounds: dict[FeatureKey, Bounds]
+    bounds: dict[ScoredFeatureKey, Bounds]
     normalization_cohort: list[str]
     exclusions: list[str]
 
@@ -335,6 +382,8 @@ class DataRelease(DTO):
         keys = {f.key for f in self.features}
         if len(keys) != len(self.features) or keys != self.bounds.keys():
             raise ValueError("Registry and bounds must match")
+        if self.versions.model_version == "ranking.v1" and keys & EXPANDED_SCORING_KEYS:
+            raise ValueError("Expanded scoring features require a new model version")
         if len({r.id for r in self.references}) != len(self.references):
             raise ValueError("Duplicate reference ID")
         for b in self.bounds.values():
@@ -391,7 +440,7 @@ class PublicConfig(DTO):
     versions: VersionStamp
     weights: PillarWeights
     features: list[FeatureSpec]
-    bounds: dict[FeatureKey, Bounds]
+    bounds: dict[ScoredFeatureKey, Bounds]
     references: list[ReferenceMarket]
     simulation_defaults: SimulationAssumptions
     exclusions: list[str]

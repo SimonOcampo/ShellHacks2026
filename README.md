@@ -85,4 +85,4 @@ Simulation represents fleet operations in a synthetic service zone. Demand is as
 
 Read [architecture](docs/architecture.md), [contracts](docs/contracts.md), [methodology](docs/methodology.md), [simulation](docs/simulation.md), [team workflow](docs/team-workflow.md), [demo runbook](docs/demo-runbook.md), and [decisions](docs/decisions.md).
 
-Deployment definitions are included for Vercel (frontend root `apps/web`) and Render (`render.yaml`). They have not been provisioned. Render defaults to explicitly labeled mock mode until a verified release is available.
+Deployment definitions are included for Vercel (frontend root `apps/web`) and Render (`render.yaml`). The Render backend is provisioned and serves the explicitly labeled mock release. The Vercel frontend is not provisioned. The backend's warm default-scenario timing currently exceeds the two-second target. See [verification status](docs/verification.md). Keep mock and verified releases separate; do not claim production readiness without a verified release.

@@ -48,6 +48,7 @@ Each task names an owner, bounded files, an output, and proof. Start the indepen
 - **Inputs:** verified release path and Vercel origin when available. A mock deployment may be used earlier if its UI is visibly labeled.
 - **Output:** reachable Render service, `/health`, and deployment/release IDs.
 - **Proof:** API smoke tests against the deployed service and default-scenario timing below the two-second target. Record actual results. Preserve the prior image/release for rollback. Do not claim production readiness before a verified release is selected.
+- **Status:** Closed for the mock backend deployment on 2026-09-26. The service is live and its results are recorded. The two-second timing target and healthy-image rollback remain open integration gates; neither is claimed as passed.
 
 **P1. Add live explanation service after P0.**
 
@@ -99,7 +100,9 @@ Developer 1 must not change frontend or simulation. Developer 2 must not change 
 
 **P0 delivered locally:** monorepo, contracts/types, twenty-metro mock release, engines, HTTP integration, map, rankings, controls, factor/source drawer, template explanations, simulation, KPIs/charts/playback, environment example, docs, CI definition, deployment definitions.
 
-**P0 outstanding:** Developer 1 must complete official ingestion/harmonization and publish eight verified candidates. Developers 2 and 3 must provision services, verify their hosted connection, and rehearse the deployed flow. Local tests cannot establish remote CI or deployment success.
+**P0 closed — Developer 2 mock backend deployment:** Render service `srv-dartlbm0tbcc73d0lmug` is live on deployment `dep-darunmg473hc73fbpsdg`, commit `23679e6`, release `mock.v1`. Health and API smoke checks pass. The actual timing and rollback limitations are recorded in `docs/verification.md`.
+
+**P0 outstanding:** Developer 1 must complete official ingestion/harmonization and publish eight verified candidates. Developer 3 must deploy the frontend, verify its hosted connection, and rehearse the deployed flow. Two warm default-scenario requests took 2.67 and 2.76 seconds on Render Free, exceeding the two-second integration target. Earlier deployment attempts failed, so no earlier healthy image is available for rollback. Remote CI status remains unverified. Do not claim production readiness before a verified release is selected.
 
 **P1/P2:** assigned to owners above. Defer until verified P0 passes.
 
