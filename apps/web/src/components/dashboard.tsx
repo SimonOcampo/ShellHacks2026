@@ -33,9 +33,11 @@ import Scenario from "./scenario";
 
 const pillarNames = {
   familiarity: "ODD familiarity",
-  readiness: "Deployment readiness",
+  readiness: "Deployment readiness — public infrastructure proxies",
   opportunity: "Market opportunity",
 };
+const provenanceAnchor = (id: string) =>
+  `provenance-${id.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
 const initialWeights: Weights = {
   familiarity: 0.4,
   readiness: 0.2,
@@ -56,6 +58,7 @@ export default function Dashboard() {
   const [drawer, setDrawer] = useState<"methodology" | "sources" | null>(null);
   const [tab, setTab] = useState<"markets" | "scenario">("markets");
   const [search, setSearch] = useState("");
+  const [focusEvidenceId, setFocusEvidenceId] = useState<string | null>(null);
   const selectedRef = useRef(selected);
   selectedRef.current = selected;
   const drawerRef = useRef<HTMLDialogElement>(null);
@@ -140,10 +143,6 @@ export default function Dashboard() {
   const currentName =
     cities?.cities.find((c) => c.city_id === selected)?.display_name ??
     "Select a market";
-  const total = Object.values(weights).reduce<number>(
-    (a, b) => a + (b ?? 0),
-    0,
-  );
   useEffect(() => {
     if (drawer !== "sources" || !score || !config) return;
     const controller = new AbortController();
@@ -163,6 +162,12 @@ export default function Dashboard() {
       });
     return () => controller.abort();
   }, [drawer, score, config]);
+  useEffect(() => {
+    if (drawer !== "sources" || !focusEvidenceId) return;
+    document
+      .getElementById(provenanceAnchor(focusEvidenceId))
+      ?.scrollIntoView({ block: "center" });
+  }, [drawer, focusEvidenceId, city, referenceCities]);
   const visible = [
     ...(ranking?.ranked ?? []),
     ...(ranking?.unranked ?? []),
@@ -176,6 +181,10 @@ export default function Dashboard() {
     const next = { ...weights, [key]: value };
     if (Object.values(next).reduce<number>((a, b) => a + (b ?? 0), 0) > 0)
       setWeights(next);
+  }
+  function openEvidence(id: string) {
+    setFocusEvidenceId(id);
+    setDrawer("sources");
   }
   return (
     <>
@@ -353,7 +362,18 @@ export default function Dashboard() {
                     <h2>Candidate markets</h2>
                   </div>
                   {busy ? (
-                    <LoaderCircle size={17} className="spin" />
+                    <span
+                      className="ranking-updating"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      <LoaderCircle
+                        size={15}
+                        className="spin"
+                        aria-hidden="true"
+                      />
+                      Updating…
+                    </span>
                   ) : (
                     <Layers3 size={19} />
                   )}
@@ -371,7 +391,10 @@ export default function Dashboard() {
                   <span>METRO / RANK</span>
                   <span>SCREENING SCORE</span>
                 </div>
-                <div className="ranking-list" aria-busy={busy}>
+                <div
+                  className={`ranking-list ${busy ? "is-updating" : ""}`}
+                  aria-busy={busy}
+                >
                   {visible.map((r) => (
                     <button
                       className={`ranking-row ${selected === r.city_id ? "selected" : ""}`}
@@ -424,7 +447,10 @@ export default function Dashboard() {
                     <span>
                       {pillarNames[key]}
                       <strong>
-                        {(((weights[key] ?? 0) / total) * 100).toFixed(0)}%
+                        {((ranking.normalized_weights[key] ?? 0) * 100).toFixed(
+                          0,
+                        )}
+                        %
                       </strong>
                     </span>
                     <input
@@ -503,9 +529,16 @@ export default function Dashboard() {
                   </button>
                 </div>
                 <div className="analyst">
-                  <span className="eyebrow">
-                    <FlaskConical size={13} /> FACT-BASED ANALYST NOTE
-                  </span>
+                  <div className="analyst-heading">
+                    <span className="eyebrow">
+                      <FlaskConical size={13} /> FACT-BASED ANALYST NOTE
+                    </span>
+                    {explanation && (
+                      <span className="explanation-mode">
+                        MODE: {explanation.mode.toUpperCase()}
+                      </span>
+                    )}
+                  </div>
                   <p>
                     {explanation?.summary ?? "Preparing the evidence summary…"}
                   </p>
@@ -515,12 +548,27 @@ export default function Dashboard() {
                       <span>{a}</span>
                     </div>
                   ))}
-                  {explanation?.tradeoffs.slice(0, 1).map((t) => (
+                  {explanation?.tradeoffs.map((t) => (
                     <div className="analyst-factor tradeoff" key={t}>
                       <ArrowDownRight size={16} />
                       <span>{t}</span>
                     </div>
                   ))}
+                  {explanation?.evidence_ids.length ? (
+                    <div className="evidence-citations">
+                      <span>Evidence:</span>
+                      {explanation.evidence_ids.map((id) => (
+                        <button
+                          className="evidence-link"
+                          key={id}
+                          type="button"
+                          onClick={() => openEvidence(id)}
+                        >
+                          {id}
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
               </div>
               <div className="detail-footer">
@@ -595,26 +643,66 @@ export default function Dashboard() {
                     <div>
                       <h3>{f.label}</h3>
                       <strong>
+                        Raw:{" "}
                         {value?.value?.toLocaleString(undefined, {
                           maximumFractionDigits: 2,
                         }) ?? "Missing"}{" "}
-                        <small>{f.unit}</small>
+                        <small>{value?.unit ?? f.unit}</small>
                       </strong>
                     </div>
                     <p>{f.definition}</p>
                     <small>
-                      {value?.quality} ·{" "}
-                      {factor?.distance_component != null
-                        ? `Distance component: ${factor.distance_component.toFixed(4)}`
-                        : `Pillar points: ${factor?.score_points?.toFixed(2) ?? "unavailable"}`}{" "}
-                      · Evidence: {value?.provenance_ids.join(", ")}
+                      Quality: {value?.quality ?? "missing"} · Normalized value:{" "}
+                      {factor?.normalized_value == null
+                        ? "unavailable"
+                        : factor.normalized_value.toFixed(3)}
+                      {factor?.reference_value == null
+                        ? ""
+                        : ` · Reference value: ${factor.reference_value.toFixed(3)}`}
+                    </small>
+                    <small>
+                      {factor?.distance_component != null ? (
+                        <>
+                          Distance component:{" "}
+                          {factor.distance_component.toFixed(4)}
+                        </>
+                      ) : (
+                        <>
+                          Pillar points:{" "}
+                          {factor?.score_points?.toFixed(2) ?? "unavailable"}
+                        </>
+                      )}
+                    </small>
+                    {value?.missing_reason && (
+                      <small>Missing reason: {value.missing_reason}</small>
+                    )}
+                    <small>
+                      Evidence:{" "}
+                      {value?.provenance_ids.length
+                        ? value.provenance_ids.map((id, index) => (
+                            <span key={id}>
+                              {index > 0 ? ", " : ""}
+                              <button
+                                className="evidence-link"
+                                type="button"
+                                onClick={() => openEvidence(id)}
+                              >
+                                {id}
+                              </button>
+                            </span>
+                          ))
+                        : "unavailable"}
                     </small>
                   </article>
                 );
               })}
               <h3>Source provenance</h3>
               {city?.provenance.map((p) => (
-                <article className="source-feature" key={p.id}>
+                <article
+                  className="source-feature"
+                  id={provenanceAnchor(p.id)}
+                  key={p.id}
+                >
                   <h3>{p.source_name}</h3>
                   <p>{p.transformation}</p>
                   <p>
@@ -660,7 +748,7 @@ export default function Dashboard() {
                     {details?.provenance
                       .filter((p) => ref?.provenance_ids.includes(p.id))
                       .map((p) => (
-                        <p key={p.id}>
+                        <p id={provenanceAnchor(p.id)} key={p.id}>
                           {p.source_url.startsWith("https://") ? (
                             <a
                               href={p.source_url}
@@ -672,7 +760,8 @@ export default function Dashboard() {
                           ) : (
                             p.source_name
                           )}{" "}
-                          · {p.transformation}
+                          · {p.transformation} · Retrieved {p.retrieved_at}
+                          {" · "}SHA-256 {p.raw_sha256}
                         </p>
                       ))}
                   </article>
@@ -680,17 +769,36 @@ export default function Dashboard() {
               })}
               <h3>Regulatory evidence</h3>
               {city?.legal_evidence.map((e) => (
-                <p key={e.jurisdiction}>
-                  {e.jurisdiction}: {e.summary}
-                </p>
+                <article
+                  className="source-feature"
+                  key={`${e.jurisdiction}-${e.category}`}
+                >
+                  <h3>
+                    {e.jurisdiction} · {e.category.replaceAll("_", " ")}
+                  </h3>
+                  <p>{e.summary}</p>
+                  <small>Checked {e.checked_at}</small>
+                  {e.provenance_ids.map((id) => (
+                    <button
+                      className="evidence-link"
+                      key={id}
+                      type="button"
+                      onClick={() => openEvidence(id)}
+                    >
+                      Evidence: {id}
+                    </button>
+                  ))}
+                </article>
               ))}
             </>
           ) : (
             <>
               <p>
-                ODD Scout compares selected public environmental features and
-                explores hypothetical fleet operations. It does not reproduce
-                Waymo’s internal systems or scoring weights.
+                Scores reflect selected public features and transparent modeling
+                assumptions. Actual deployment requires mapping, real-world
+                driving, validation, safety testing, regulatory approval, and
+                operational testing. ODD Scout does not reproduce Waymo's
+                internal systems or scoring weights.
               </p>
               <h3>Three transparent pillars</h3>
               <p>
@@ -714,11 +822,6 @@ export default function Dashboard() {
                 Scores are relative indices, not probabilities. Missing enabled
                 features leave a metro unranked. Legal evidence stays outside
                 numeric scoring.
-              </p>
-              <h3>Deployment still requires</h3>
-              <p>
-                Mapping, real-world driving, validation, safety testing,
-                regulatory approval, and operational testing.
               </p>
               <h3>Hypothetical operations</h3>
               <p>

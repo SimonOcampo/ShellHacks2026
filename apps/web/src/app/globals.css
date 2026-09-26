@@ -484,6 +484,16 @@ main {
   scrollbar-color: #35504b transparent;
   flex: 1;
 }
+.ranking-list.is-updating {
+  opacity: 0.58;
+}
+.ranking-updating {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 9px;
+}
 .ranking-row {
   width: 100%;
   display: flex;
@@ -686,6 +696,37 @@ main {
   line-height: 1.9;
   margin: 12px 0;
   color: #c2d0c8;
+}
+.analyst-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.explanation-mode {
+  color: var(--amber);
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+.evidence-citations {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.evidence-link {
+  border: 0;
+  background: none;
+  color: var(--teal);
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .analyst-factor {
   display: flex;

@@ -9,16 +9,25 @@ test("market evidence and a recalculated launch work end to end", async ({
     page.getByRole("heading", { name: "Candidate markets" }),
   ).toBeVisible();
   await expect(page.locator(".ranking-row")).toHaveCount(20);
+  await expect(page.locator(".weight-controls strong")).toHaveText([
+    "40%",
+    "20%",
+    "40%",
+  ]);
   await page.getByPlaceholder("Find a metro…").fill("Miami");
   await page.locator(".ranking-row").click();
   await expect(
     page.getByRole("heading", { name: "Miami", exact: true }),
   ).toBeVisible();
-  await page
-    .getByRole("button", { name: "Inspect features & sources" })
-    .click();
+  await expect(page.getByText("MODE: TEMPLATE")).toBeVisible();
+  await page.getByRole("button", { name: "synthetic:12060" }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
-  await expect(page.getByText("Synthetic fixture generator", { exact: true })).toBeVisible();
+  await expect(page.locator("#provenance-synthetic-12060")).toBeVisible();
+  await expect(
+    page.getByText("Synthetic fixture generator", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("FL · unresolved")).toBeVisible();
+  await expect(page.getByText(/Normalized value:/).first()).toBeVisible();
   await page.getByRole("button", { name: "Close details" }).click();
   await page
     .getByRole("button", { name: "Simulate hypothetical launch" })
@@ -29,7 +38,23 @@ test("market evidence and a recalculated launch work end to end", async ({
   await expect(
     page.getByText("RIDES COMPLETED", { exact: true }),
   ).toBeVisible();
-  const before = await page.locator(".metric.accent > strong").innerText();
+  await expect(
+    page.getByText("PASSENGER UTILIZATION", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("EMPTY-MILE SHARE", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("CHARGING VEHICLE-HOURS", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("REVENUE PER VEHICLE", { exact: true }),
+  ).toBeVisible();
+  const revenue = page
+    .locator(".metric")
+    .filter({ hasText: "SIMULATED GROSS REVENUE" })
+    .locator("strong");
+  const before = await revenue.innerText();
   const response = page.waitForResponse(
     (r) =>
       r.url().endsWith("/api/v1/simulations") &&
@@ -38,7 +63,7 @@ test("market evidence and a recalculated launch work end to end", async ({
   await page.getByRole("slider", { name: "Base fare", exact: true }).fill("15");
   await response;
   await expect(page.getByText("SEEDED & REPRODUCIBLE")).toBeVisible();
-  await expect(page.locator(".metric.accent > strong")).not.toHaveText(before);
+  await expect(revenue).not.toHaveText(before);
   await page.getByRole("button", { name: "Play playback" }).click();
   await expect(
     page.getByRole("button", { name: "Pause playback" }),
@@ -82,5 +107,10 @@ test("superseded ranking responses cannot overwrite newer selection", async ({
     "aria-busy",
     "false",
   );
+  await expect(page.locator(".weight-controls strong")).toHaveText([
+    "60%",
+    "13%",
+    "27%",
+  ]);
   await expect(slider).toHaveValue("0.9");
 });

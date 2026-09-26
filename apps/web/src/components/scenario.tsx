@@ -229,10 +229,11 @@ export default function Scenario({
                 scenario.
               </h2>
             </div>
-            <span className="status-pill">
+            <span className="status-pill" role="status" aria-live="polite">
               {busy ? (
                 <>
-                  <LoaderCircle size={12} className="spin" /> RECALCULATING
+                  <LoaderCircle size={12} className="spin" aria-hidden="true" />{" "}
+                  UPDATING…
                 </>
               ) : (
                 <>
@@ -277,10 +278,39 @@ export default function Scenario({
                   note="Pickup + passenger service time"
                 />
                 <Metric
+                  icon={<CarFront size={18} />}
+                  label="PASSENGER UTILIZATION"
+                  value={`${number(metrics?.passenger_utilization_pct, 1)}%`}
+                  note="Passenger travel + dropoff dwell"
+                />
+                <Metric
+                  icon={<Route size={18} />}
+                  label="EMPTY-MILE SHARE"
+                  value={
+                    metrics?.empty_mile_pct == null
+                      ? "N/A"
+                      : `${number(metrics.empty_mile_pct, 1)}%`
+                  }
+                  note="Empty miles / total miles"
+                />
+                <Metric
+                  icon={<BatteryCharging size={18} />}
+                  label="CHARGING VEHICLE-HOURS"
+                  value={number(metrics?.charging_vehicle_hours, 1)}
+                  note="Summed vehicle time; queue separate"
+                />
+                <Metric
                   icon={<DollarSign size={18} />}
                   label="SIMULATED GROSS REVENUE"
                   value={`$${number(metrics?.gross_revenue_usd)}`}
-                  note={`$${number(metrics?.revenue_per_vehicle_usd)} / vehicle · not profit`}
+                  note="Costs excluded; not profit"
+                  accent
+                />
+                <Metric
+                  icon={<DollarSign size={18} />}
+                  label="REVENUE PER VEHICLE"
+                  value={`$${number(metrics?.revenue_per_vehicle_usd)}`}
+                  note="Gross revenue / vehicles"
                   accent
                 />
               </div>
