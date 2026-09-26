@@ -65,8 +65,8 @@ export default function MarketMap({
     <div className="map-wrap">
       <svg
         viewBox="0 0 840 490"
-        role="img"
-        aria-label="U.S. candidate metro map. Select a metro using the ranking list."
+        role="group"
+        aria-label="U.S. candidate metro map. Each metro marker is keyboard-operable; the ranked list is an alternate selection method."
       >
         <defs>
           <radialGradient id="map-glow">
@@ -74,7 +74,14 @@ export default function MarketMap({
             <stop offset="1" stopColor="#28c5ae" stopOpacity="0" />
           </radialGradient>
         </defs>
-        <ellipse cx="420" cy="250" rx="380" ry="220" fill="url(#map-glow)" />
+        <ellipse
+          cx="420"
+          cy="250"
+          rx="380"
+          ry="220"
+          fill="url(#map-glow)"
+          aria-hidden="true"
+        />
         {[100, 200, 300, 400].map((y) => (
           <line
             key={`y${y}`}
@@ -83,6 +90,7 @@ export default function MarketMap({
             y1={y}
             y2={y}
             className="map-grid"
+            aria-hidden="true"
           />
         ))}
         {[100, 200, 300, 400, 500, 600, 700].map((x) => (
@@ -93,6 +101,7 @@ export default function MarketMap({
             x1={x}
             x2={x}
             className="map-grid"
+            aria-hidden="true"
           />
         ))}
         {states?.features
@@ -101,7 +110,12 @@ export default function MarketMap({
               !["Alaska", "Hawaii", "Puerto Rico"].includes(f.properties?.name),
           )
           .map((f, i) => (
-            <path key={i} d={path(f) ?? ""} className="state-path" />
+            <path
+              key={i}
+              d={path(f) ?? ""}
+              className="state-path"
+              aria-hidden="true"
+            />
           ))}
         {cities.map((city) => {
           const point = projection([city.longitude, city.latitude]);
@@ -113,7 +127,17 @@ export default function MarketMap({
               key={city.city_id}
               className={`map-marker ${active ? "active" : ""} ${rank <= 3 ? "top" : ""}`}
               transform={`translate(${point[0]},${point[1]})`}
+              role="button"
+              tabIndex={0}
+              aria-pressed={active}
+              aria-label={`${city.display_name}, ${rank < 99 ? `rank ${rank}` : "unranked"}`}
               onClick={() => onSelect(city.city_id)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  onSelect(city.city_id);
+                }
+              }}
               style={{ cursor: "pointer" }}
             >
               <title>

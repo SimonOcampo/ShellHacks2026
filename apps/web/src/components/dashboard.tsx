@@ -223,12 +223,14 @@ export default function Dashboard() {
         <nav aria-label="Main navigation">
           <button
             className={tab === "markets" ? "nav-active" : ""}
+            aria-pressed={tab === "markets"}
             onClick={() => setTab("markets")}
           >
             Market explorer
           </button>
           <button
             className={tab === "scenario" ? "nav-active" : ""}
+            aria-pressed={tab === "scenario"}
             onClick={() => setTab("scenario")}
             disabled={!selected}
           >
@@ -701,7 +703,14 @@ export default function Dashboard() {
                 <Button
                   onClick={() => {
                     setTab("scenario");
-                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    window.scrollTo({
+                      top: 0,
+                      behavior: window.matchMedia(
+                        "(prefers-reduced-motion: reduce)",
+                      ).matches
+                        ? "auto"
+                        : "smooth",
+                    });
                   }}
                 >
                   Simulate hypothetical launch <ArrowRight size={16} />

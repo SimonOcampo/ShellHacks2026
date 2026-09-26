@@ -72,6 +72,17 @@ export default function Scenario({
   const [retry, setRetry] = useState(0);
   const [hour, setHour] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setReducedMotion(preference.matches);
+    updatePreference();
+    preference.addEventListener("change", updatePreference);
+    return () => preference.removeEventListener("change", updatePreference);
+  }, []);
+  useEffect(() => {
+    if (reducedMotion) setPlaying(false);
+  }, [reducedMotion]);
   useEffect(() => {
     const controller = new AbortController();
     setBusy(true);
@@ -104,13 +115,13 @@ export default function Scenario({
     };
   }, [cityId, inputs, retry]);
   useEffect(() => {
-    if (!playing || !result) return;
+    if (!playing || !result || reducedMotion) return;
     const interval = setInterval(
       () => setHour((h) => (h >= result.hourly.length - 1 ? 0 : h + 1)),
       160,
     );
     return () => clearInterval(interval);
-  }, [playing, result]);
+  }, [playing, result, reducedMotion]);
   const metrics = result?.metrics;
   let cumulative = 0;
   const chart =
@@ -360,7 +371,14 @@ export default function Scenario({
                     </div>
                     <Button
                       variant="outline"
-                      aria-label={playing ? "Pause playback" : "Play playback"}
+                      aria-label={
+                        reducedMotion
+                          ? "Automatic playback disabled by reduced-motion preference"
+                          : playing
+                            ? "Pause playback"
+                            : "Play playback"
+                      }
+                      disabled={reducedMotion}
                       onClick={() => setPlaying(!playing)}
                     >
                       {playing ? <Pause size={14} /> : <Play size={14} />}
@@ -387,13 +405,23 @@ export default function Scenario({
                       <small>utilization</small>
                     </span>
                   </section>
+                  {reducedMotion && (
+                    <p className="async-note reduced-motion-note" role="status">
+                      Auto-play is off; use the hour slider to move through the
+                      results.
+                    </p>
+                  )}
                   <div className="charts-grid">
                     <ChartPanel
                       title="Hourly requests vs. completed rides"
                       subtitle="Returned counts for each simulated hour"
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={chart} syncId="simulation-hours">
+                        <AreaChart
+                          data={chart}
+                          syncId="simulation-hours"
+                          accessibilityLayer
+                        >
                           <defs>
                             <linearGradient
                               id="rides-fill"
@@ -463,7 +491,11 @@ export default function Scenario({
                       subtitle="Simulated fares · USD · costs excluded"
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={chart} syncId="simulation-hours">
+                        <AreaChart
+                          data={chart}
+                          syncId="simulation-hours"
+                          accessibilityLayer
+                        >
                           <CartesianGrid vertical={false} stroke="#334748" />
                           <XAxis
                             dataKey="label"
@@ -504,7 +536,11 @@ export default function Scenario({
                       subtitle="Hourly share of total vehicle time in service"
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={chart} syncId="simulation-hours">
+                        <LineChart
+                          data={chart}
+                          syncId="simulation-hours"
+                          accessibilityLayer
+                        >
                           <CartesianGrid vertical={false} stroke="#334748" />
                           <XAxis
                             dataKey="label"
@@ -548,7 +584,11 @@ export default function Scenario({
                       subtitle="Mean wait for rides completed that hour · minutes"
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={chart} syncId="simulation-hours">
+                        <LineChart
+                          data={chart}
+                          syncId="simulation-hours"
+                          accessibilityLayer
+                        >
                           <CartesianGrid vertical={false} stroke="#334748" />
                           <XAxis
                             dataKey="label"
@@ -713,7 +753,9 @@ function ChartPanel({
     <section className="panel chart-panel">
       <h3>{title}</h3>
       <p>{subtitle}</p>
-      <div className="chart">{children}</div>
+      <div className="chart" role="group" aria-label={`${title}. ${subtitle}`}>
+        {children}
+      </div>
     </section>
   );
 }
