@@ -9,6 +9,10 @@ npm --prefix apps/web run generate:api
 
 Snake_case JSON, explicit units, finite numbers only, no extra fields. Null means unavailable. Pydantic validates numeric bounds, fare precision, battery thresholds, demand curves, legal evidence, feature units and provenance links. Validation errors use the same error envelope as HTTP errors.
 
+The city measurement contract accepts the 15 scored variables in `docs/decisions.md` and two additional road measurements: `average_aadt` (vehicles/day) and `lane_miles_per_km2` (lane-miles/km2). The two additional measurements may be present with an explicit missing reason, but they cannot enter the scored feature registry, normalization bounds, ranking factors, or factor IDs. The three road-class shares must each be between zero and one and sum to one when all are measured.
+
+The restored `mock.v1` release keeps its original ten-variable `ranking.v1` methodology and synthetic provenance. A release that scores any of the five new road variables must use a distinct model version, such as `ranking.v2`, and publish matching feature specifications and frozen bounds. Keep historical releases immutable; select an older release and configuration to roll back. A verified release must supply public HTTPS provenance and enough complete candidates for startup validation. Missing source measurements remain null rather than zero.
+
 | Route | Contract |
 |---|---|
 | GET `/health` | Health with release versions |
