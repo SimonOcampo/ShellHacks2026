@@ -41,5 +41,5 @@ API errors retain prior simulation output with an error/retry state. Invalid inp
 - [x] Render mock backend deployed, measured, and smoke checked; owner accepts warm simulation latency above two seconds for the hackathon demo.
 - [ ] Eight verified ranked candidates with official evidence.
 - [ ] Hosted frontend connection.
-- [x] GitHub Actions passed on `main` commit `02b9c72` (run #21).
-- [ ] GitHub Actions result for the new startup test and deployed rehearsal.
+- [x] GitHub Actions run #23 passed on PR commit `9674d85`, including the new startup test.
+- [ ] Deployed rehearsal.

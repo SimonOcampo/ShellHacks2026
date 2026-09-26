@@ -102,7 +102,7 @@ Developer 1 must not change frontend or simulation. Developer 2 must not change 
 
 **P0 closed — Developer 2 mock backend deployment:** Render service `srv-dartlbm0tbcc73d0lmug` is live on deployment `dep-darv61avcj2c73acjng0`, commit `329076b`, release `mock.v1`. Health and API smoke checks pass. The project owner accepts warm simulation latency above two seconds for the hackathon demo. Prior smoke-checked deployment `dep-darunmg473hc73fbpsdg` remains in Render history as rollback target. Details are recorded in `docs/verification.md`.
 
-**P0 outstanding:** Developer 1 must complete official ingestion/harmonization and publish eight verified candidates. Developer 3 must deploy the frontend, verify its hosted connection, and rehearse the deployed flow. GitHub Actions run #21 passed on `main` commit `02b9c72`; CI for the new startup test remains pending. Do not claim production readiness before a verified release is selected.
+**P0 outstanding:** Developer 1 must complete official ingestion/harmonization and publish eight verified candidates. Developer 3 must deploy the frontend, verify its hosted connection, and rehearse the deployed flow. GitHub Actions run #23 passed on PR commit `9674d85`, including the new startup test. Do not claim production readiness before a verified release is selected.
 
 **P1/P2:** assigned to owners above. Defer until verified P0 passes.
 

@@ -7,7 +7,7 @@ Use this file as the project checklist. Check an item only after recording its p
 ## Current snapshot
 
 - Developer 1 verified release: not published. Census access, official ingestion, harmonization, and reference evidence remain open.
-- Developer 2 contracts and engine: `uv run pytest` passed 45 tests on 2026-09-26 with the new startup test. GitHub Actions run #21 passed on `main` commit `02b9c72` before this test; PR CI remains pending.
+- Developer 2 contracts and engine: `uv run pytest` passed 45 tests on 2026-09-26 with the new startup test. GitHub Actions run #23 passed on PR commit `9674d85`, including this test.
 - Developer 2 mock deployment: closed for the hackathon demo. Render service `srv-dartlbm0tbcc73d0lmug` runs deployment `dep-darv61avcj2c73acjng0`, commit `329076b`, release `mock.v1`. Owner accepts warm simulation latency above two seconds; this does not pass the original target.
 - Developer 3 connected demo: local flow and browser proof exist. Hosted frontend, exact CORS origin, and deployed rehearsal remain open.
 
@@ -40,7 +40,7 @@ Paths: `backend/`, `packages/contracts/`, `tests/contracts/`, `tests/simulation/
 - [x] Run `npm --prefix apps/web run typecheck`.
 - [x] Test mock/verified separation and verified startup candidate threshold. Threshold test rejects seven ranked candidates and accepts eight without fabricating verified measurements.
 - [x] Run `uv run pytest` after updating from `main`: 45 passed on 2026-09-26. An earlier local full CI run passed 30 tests, OpenAPI and TypeScript generation with no drift, frontend typecheck and build, and Playwright E2E (2 passed).
-- [ ] Get GitHub Actions result for a pushed or pull-request commit containing the startup test. Run #21 passed on `main` commit `02b9c72`, before this test.
+- [x] GitHub Actions run #23 passed on PR commit `9674d85`, including the startup test.
 - [ ] Validate startup against Developer 1’s real verified release when available. No verified release exists yet.
 - [ ] Validate production CORS with Developer 3’s exact hosted origin when available.
 
