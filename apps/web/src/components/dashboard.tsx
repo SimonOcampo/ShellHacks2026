@@ -53,6 +53,13 @@ export default function Dashboard() {
   const [explanation, setExplanation] = useState<Explanation>();
   const [referenceCities, setReferenceCities] = useState<City[]>([]);
   const [error, setError] = useState("");
+  const [rankingError, setRankingError] = useState("");
+  const [detailError, setDetailError] = useState("");
+  const [detailBusy, setDetailBusy] = useState(false);
+  const [detailRetry, setDetailRetry] = useState(0);
+  const [referenceError, setReferenceError] = useState("");
+  const [referenceBusy, setReferenceBusy] = useState(false);
+  const [referenceRetry, setReferenceRetry] = useState(0);
   const [busy, setBusy] = useState(false);
   const [retry, setRetry] = useState(0);
   const [drawer, setDrawer] = useState<"methodology" | "sources" | null>(null);
@@ -84,6 +91,7 @@ export default function Dashboard() {
     if (!config) return;
     const controller = new AbortController();
     setBusy(true);
+    setRankingError("");
     const timer = setTimeout(
       () =>
         api
@@ -91,12 +99,12 @@ export default function Dashboard() {
           .then((r) => {
             if (controller.signal.aborted) return;
             setRanking(r);
-            setError("");
+            setRankingError("");
             if (!selectedRef.current)
               setSelected(r.ranked[0]?.city_id ?? r.unranked[0]?.city_id ?? "");
           })
           .catch((e) => {
-            if (!controller.signal.aborted) setError(e.message);
+            if (!controller.signal.aborted) setRankingError(e.message);
           })
           .finally(() => {
             if (!controller.signal.aborted) setBusy(false);
@@ -111,6 +119,8 @@ export default function Dashboard() {
   useEffect(() => {
     if (!selected || !ranking) return;
     const controller = new AbortController();
+    setDetailBusy(true);
+    setDetailError("");
     setCity(undefined);
     setExplanation(undefined);
     Promise.all([
@@ -131,10 +141,13 @@ export default function Dashboard() {
         }
       })
       .catch((e) => {
-        if (!controller.signal.aborted) setError(e.message);
+        if (!controller.signal.aborted) setDetailError(e.message);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setDetailBusy(false);
       });
     return () => controller.abort();
-  }, [selected, ranking]);
+  }, [selected, ranking, detailRetry]);
   const score =
     ranking &&
     [...ranking.ranked, ...ranking.unranked].find(
@@ -147,21 +160,30 @@ export default function Dashboard() {
     if (drawer !== "sources" || !score || !config) return;
     const controller = new AbortController();
     setReferenceCities([]);
+    setReferenceError("");
+    setReferenceBusy(true);
     const ids = score.reference_matches
       .map(
         (match) =>
           config.references.find((r) => r.id === match.reference_id)?.city_id,
       )
       .filter((id): id is string => !!id);
+    if (ids.length === 0) {
+      setReferenceBusy(false);
+      return () => controller.abort();
+    }
     Promise.all(ids.map((id) => api.city(id, controller.signal)))
       .then((values) => {
         if (!controller.signal.aborted) setReferenceCities(values);
       })
       .catch((e) => {
-        if (!controller.signal.aborted) setError(e.message);
+        if (!controller.signal.aborted) setReferenceError(e.message);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setReferenceBusy(false);
       });
     return () => controller.abort();
-  }, [drawer, score, config]);
+  }, [drawer, score, config, referenceRetry]);
   useEffect(() => {
     if (drawer !== "sources" || !focusEvidenceId) return;
     document
@@ -288,13 +310,33 @@ export default function Dashboard() {
           </div>
         )}
         {!cities || !config || !ranking ? (
-          <div className="loading">
-            <LoaderCircle className="spin" /> Connecting to market intelligence…
-            <small>
-              Backend:{" "}
-              {process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000"}
-            </small>
-          </div>
+          error || rankingError ? (
+            <div className="empty async-empty" role="status">
+              {error ? (
+                "Market data is unavailable. Retry the connection above to try again."
+              ) : (
+                <>
+                  <span>Ranking is unavailable: {rankingError}</span>
+                  <Button
+                    variant="outline"
+                    onClick={() => setRetry((value) => value + 1)}
+                  >
+                    Retry ranking
+                  </Button>
+                </>
+              )}
+            </div>
+          ) : (
+            <div className="loading" role="status" aria-live="polite">
+              <LoaderCircle className="spin" aria-hidden="true" /> Connecting to
+              market intelligence…
+              <small>
+                Backend:{" "}
+                {process.env.NEXT_PUBLIC_API_BASE_URL ??
+                  "http://localhost:8000"}
+              </small>
+            </div>
+          )
         ) : tab === "markets" ? (
           <>
             <section className="overview-strip">
@@ -387,6 +429,18 @@ export default function Dashboard() {
                   />
                   <span>⌕</span>
                 </label>
+                {rankingError && (
+                  <div className="error view-error" role="alert">
+                    Ranking update failed: {rankingError}. Showing the last
+                    successful ranking.
+                    <Button
+                      variant="outline"
+                      onClick={() => setRetry((r) => r + 1)}
+                    >
+                      Retry ranking
+                    </Button>
+                  </div>
+                )}
                 <div className="ranking-columns">
                   <span>METRO / RANK</span>
                   <span>SCREENING SCORE</span>
@@ -421,7 +475,13 @@ export default function Dashboard() {
                       <ChevronRight size={14} />
                     </button>
                   ))}
-                  {!visible.length && <p className="empty">No metros match.</p>}
+                  {!visible.length && (
+                    <p className="empty" role="status">
+                      {ranking.ranked.length + ranking.unranked.length === 0
+                        ? "This release returned no ranked or unranked metros."
+                        : "No metros match this search."}
+                    </p>
+                  )}
                 </div>
               </section>
             </div>
@@ -484,7 +544,14 @@ export default function Dashboard() {
                     <MapPin size={22} />
                     {currentName}
                   </h2>
-                  <p>{city?.official_name ?? "Loading metro evidence…"}</p>
+                  <p>
+                    {city?.official_name ??
+                      (detailBusy
+                        ? "Loading metro evidence…"
+                        : detailError
+                          ? "Metro evidence unavailable."
+                          : "No metro details returned.")}
+                  </p>
                 </div>
                 <div className="score-badge">
                   <strong>{score?.expansion_score?.toFixed(1) ?? "—"}</strong>
@@ -495,6 +562,17 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
+              {detailError && (
+                <div className="error view-error" role="alert">
+                  Metro evidence could not load: {detailError}
+                  <Button
+                    variant="outline"
+                    onClick={() => setDetailRetry((value) => value + 1)}
+                  >
+                    Retry metro detail
+                  </Button>
+                </div>
+              )}
               <section
                 className="coverage-summary"
                 aria-label="Ranking coverage and flags"
@@ -579,7 +657,12 @@ export default function Dashboard() {
                     )}
                   </div>
                   <p>
-                    {explanation?.summary ?? "Preparing the evidence summary…"}
+                    {explanation?.summary ??
+                      (detailBusy
+                        ? "Preparing the evidence summary…"
+                        : detailError
+                          ? "Evidence summary unavailable. Retry metro detail to try again."
+                          : "No evidence summary returned.")}
                   </p>
                   {explanation?.advantages.map((a) => (
                     <div className="analyst-factor" key={a}>
@@ -674,99 +757,151 @@ export default function Dashboard() {
                 <strong>{city?.versions.data_mode}</strong>. Geographic vintage:{" "}
                 {city?.geography_vintage}.
               </p>
-              {config?.features.map((f) => {
-                const value = city?.features[f.key];
-                const factor = score?.factors.find((x) => x.feature === f.key);
-                return (
-                  <article className="source-feature" key={f.key}>
-                    <div>
-                      <h3>{f.label}</h3>
-                      <strong>
-                        Raw:{" "}
-                        {value?.value?.toLocaleString(undefined, {
-                          maximumFractionDigits: 2,
-                        }) ?? "Missing"}{" "}
-                        <small>{value?.unit ?? f.unit}</small>
-                      </strong>
-                    </div>
-                    <p>{f.definition}</p>
-                    <small>
-                      Quality: {value?.quality ?? "missing"} · Normalized value:{" "}
-                      {factor?.normalized_value == null
-                        ? "unavailable"
-                        : factor.normalized_value.toFixed(3)}
-                      {factor?.reference_value == null
-                        ? ""
-                        : ` · Reference value: ${factor.reference_value.toFixed(3)}`}
-                    </small>
-                    <small>
-                      {factor?.distance_component != null ? (
-                        <>
-                          Distance component:{" "}
-                          {factor.distance_component.toFixed(4)}
-                        </>
-                      ) : (
-                        <>
-                          Pillar points:{" "}
-                          {factor?.score_points?.toFixed(2) ?? "unavailable"}
-                        </>
+              {detailBusy && (
+                <p role="status" aria-live="polite">
+                  Loading selected metro evidence…
+                </p>
+              )}
+              {detailError && (
+                <div className="error view-error" role="alert">
+                  Metro evidence could not load: {detailError}
+                  <Button
+                    variant="outline"
+                    onClick={() => setDetailRetry((value) => value + 1)}
+                  >
+                    Retry metro detail
+                  </Button>
+                </div>
+              )}
+              {!city && !detailBusy && !detailError && (
+                <p className="empty">
+                  No metro detail record was returned for this selection.
+                </p>
+              )}
+              {city &&
+                config?.features.map((f) => {
+                  const value = city?.features[f.key];
+                  const factor = score?.factors.find(
+                    (x) => x.feature === f.key,
+                  );
+                  return (
+                    <article className="source-feature" key={f.key}>
+                      <div>
+                        <h3>{f.label}</h3>
+                        <strong>
+                          Raw:{" "}
+                          {value?.value?.toLocaleString(undefined, {
+                            maximumFractionDigits: 2,
+                          }) ?? "Missing"}{" "}
+                          <small>{value?.unit ?? f.unit}</small>
+                        </strong>
+                      </div>
+                      <p>{f.definition}</p>
+                      <small>
+                        Quality: {value?.quality ?? "missing"} · Normalized
+                        value:{" "}
+                        {factor?.normalized_value == null
+                          ? "unavailable"
+                          : factor.normalized_value.toFixed(3)}
+                        {factor?.reference_value == null
+                          ? ""
+                          : ` · Reference value: ${factor.reference_value.toFixed(3)}`}
+                      </small>
+                      <small>
+                        {factor?.distance_component != null ? (
+                          <>
+                            Distance component:{" "}
+                            {factor.distance_component.toFixed(4)}
+                          </>
+                        ) : (
+                          <>
+                            Pillar points:{" "}
+                            {factor?.score_points?.toFixed(2) ?? "unavailable"}
+                          </>
+                        )}
+                      </small>
+                      {value?.missing_reason && (
+                        <small>Missing reason: {value.missing_reason}</small>
                       )}
-                    </small>
-                    {value?.missing_reason && (
-                      <small>Missing reason: {value.missing_reason}</small>
+                      <small>
+                        Evidence:{" "}
+                        {value?.provenance_ids.length
+                          ? value.provenance_ids.map((id, index) => (
+                              <span key={id}>
+                                {index > 0 ? ", " : ""}
+                                <button
+                                  className="evidence-link"
+                                  type="button"
+                                  onClick={() => openEvidence(id)}
+                                >
+                                  {id}
+                                </button>
+                              </span>
+                            ))
+                          : "unavailable"}
+                      </small>
+                    </article>
+                  );
+                })}
+              <h3>Source provenance</h3>
+              {city?.provenance.length ? (
+                city.provenance.map((p) => (
+                  <article
+                    className="source-feature"
+                    id={provenanceAnchor(p.id)}
+                    key={p.id}
+                  >
+                    <h3>{p.source_name}</h3>
+                    <p>{p.transformation}</p>
+                    <p>
+                      {p.period} · {p.source_geography} / {p.target_geography}
+                    </p>
+                    {p.source_url.startsWith("https://") ? (
+                      <a href={p.source_url} target="_blank" rel="noreferrer">
+                        Source document <ExternalLink size={12} />
+                      </a>
+                    ) : (
+                      <code>{p.source_url}</code>
                     )}
                     <small>
-                      Evidence:{" "}
-                      {value?.provenance_ids.length
-                        ? value.provenance_ids.map((id, index) => (
-                            <span key={id}>
-                              {index > 0 ? ", " : ""}
-                              <button
-                                className="evidence-link"
-                                type="button"
-                                onClick={() => openEvidence(id)}
-                              >
-                                {id}
-                              </button>
-                            </span>
-                          ))
-                        : "unavailable"}
+                      Retrieved {p.retrieved_at} · SHA-256 {p.raw_sha256}
                     </small>
+                    {p.assumptions.map((a) => (
+                      <p key={a}>{a}</p>
+                    ))}
                   </article>
-                );
-              })}
-              <h3>Source provenance</h3>
-              {city?.provenance.map((p) => (
-                <article
-                  className="source-feature"
-                  id={provenanceAnchor(p.id)}
-                  key={p.id}
-                >
-                  <h3>{p.source_name}</h3>
-                  <p>{p.transformation}</p>
-                  <p>
-                    {p.period} · {p.source_geography} / {p.target_geography}
-                  </p>
-                  {p.source_url.startsWith("https://") ? (
-                    <a href={p.source_url} target="_blank" rel="noreferrer">
-                      Source document <ExternalLink size={12} />
-                    </a>
-                  ) : (
-                    <code>{p.source_url}</code>
-                  )}
-                  <small>
-                    Retrieved {p.retrieved_at} · SHA-256 {p.raw_sha256}
-                  </small>
-                  {p.assumptions.map((a) => (
-                    <p key={a}>{a}</p>
-                  ))}
-                </article>
-              ))}
+                ))
+              ) : (
+                <p className="empty">
+                  No source provenance records were returned for this metro.
+                </p>
+              )}
               <h3>Nearest reference environments</h3>
               <p>
                 Similarity across selected features only. Reference status does
                 not establish metro-wide operation.
               </p>
+              {referenceBusy && (
+                <p role="status" aria-live="polite">
+                  Loading reference metro provenance…
+                </p>
+              )}
+              {referenceError && (
+                <div className="error view-error" role="alert">
+                  Reference provenance could not load: {referenceError}
+                  <Button
+                    variant="outline"
+                    onClick={() => setReferenceRetry((value) => value + 1)}
+                  >
+                    Retry reference details
+                  </Button>
+                </div>
+              )}
+              {!referenceBusy &&
+                !referenceError &&
+                !score?.reference_matches.length && (
+                  <p className="empty">No reference matches were returned.</p>
+                )}
               {score?.reference_matches.map((match) => {
                 const ref = config?.references.find(
                   (r) => r.id === match.reference_id,
@@ -777,8 +912,11 @@ export default function Dashboard() {
                 return (
                   <article className="source-feature" key={match.reference_id}>
                     <h3>
-                      {details?.display_name ?? "Loading reference…"} ·{" "}
-                      {match.similarity.toFixed(1)} similarity
+                      {details?.display_name ??
+                        (referenceBusy
+                          ? "Loading reference…"
+                          : "Reference detail unavailable")}{" "}
+                      · {match.similarity.toFixed(1)} similarity
                     </h3>
                     <p>
                       {ref?.operator} · {ref?.category} · as of{" "}
@@ -807,28 +945,35 @@ export default function Dashboard() {
                 );
               })}
               <h3>Regulatory evidence</h3>
-              {city?.legal_evidence.map((e) => (
-                <article
-                  className="source-feature"
-                  key={`${e.jurisdiction}-${e.category}`}
-                >
-                  <h3>
-                    {e.jurisdiction} · {e.category.replaceAll("_", " ")}
-                  </h3>
-                  <p>{e.summary}</p>
-                  <small>Checked {e.checked_at}</small>
-                  {e.provenance_ids.map((id) => (
-                    <button
-                      className="evidence-link"
-                      key={id}
-                      type="button"
-                      onClick={() => openEvidence(id)}
-                    >
-                      Evidence: {id}
-                    </button>
-                  ))}
-                </article>
-              ))}
+              {city?.legal_evidence.length ? (
+                city.legal_evidence.map((e) => (
+                  <article
+                    className="source-feature"
+                    key={`${e.jurisdiction}-${e.category}`}
+                  >
+                    <h3>
+                      {e.jurisdiction} · {e.category.replaceAll("_", " ")}
+                    </h3>
+                    <p>{e.summary}</p>
+                    <small>Checked {e.checked_at}</small>
+                    {e.provenance_ids.map((id) => (
+                      <button
+                        className="evidence-link"
+                        key={id}
+                        type="button"
+                        onClick={() => openEvidence(id)}
+                      >
+                        Evidence: {id}
+                      </button>
+                    ))}
+                  </article>
+                ))
+              ) : (
+                <p className="empty">
+                  No regulatory evidence records were returned. This does not
+                  establish a legal status.
+                </p>
+              )}
             </>
           ) : (
             <>

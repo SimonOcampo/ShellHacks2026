@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { geoAlbersUsa, geoArea, geoPath } from "d3-geo";
 import type { FeatureCollection, Position } from "geojson";
 import type { CityList, Ranking } from "@/lib/api/types";
+import { Button } from "@/components/ui/button";
 
 export default function MarketMap({
   cities,
@@ -16,9 +17,19 @@ export default function MarketMap({
   onSelect: (id: string) => void;
 }) {
   const [states, setStates] = useState<FeatureCollection | null>(null);
+  const [mapLoading, setMapLoading] = useState(true);
+  const [mapError, setMapError] = useState("");
+  const [mapRetry, setMapRetry] = useState(0);
   useEffect(() => {
-    fetch("/us-states.json")
-      .then((r) => r.json())
+    const controller = new AbortController();
+    setMapLoading(true);
+    setMapError("");
+    fetch("/us-states.json", { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok)
+          throw new Error(`Map outline request failed (${response.status})`);
+        return response.json();
+      })
       .then((data: FeatureCollection) => {
         // D3 uses spherical clockwise exteriors; upstream GeoJSON mixes winding.
         const orient = (rings: Position[][]) =>
@@ -32,10 +43,21 @@ export default function MarketMap({
             feature.geometry.coordinates =
               feature.geometry.coordinates.map(orient);
         }
-        setStates(data);
+        if (!controller.signal.aborted) setStates(data);
       })
-      .catch(() => setStates(null));
-  }, []);
+      .catch((error: unknown) => {
+        if (!controller.signal.aborted)
+          setMapError(
+            error instanceof Error
+              ? error.message
+              : "Map outlines could not load.",
+          );
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setMapLoading(false);
+      });
+    return () => controller.abort();
+  }, [mapRetry]);
   const projection = geoAlbersUsa().scale(940).translate([420, 240]);
   const path = geoPath(projection);
   const ranks = new Map(ranking.ranked.map((r) => [r.city_id, r.rank ?? 99]));
@@ -111,10 +133,28 @@ export default function MarketMap({
           CONTIGUOUS UNITED STATES · CBSA MARKERS
         </text>
       </svg>
-      {!states && (
-        <span className="map-fallback">
-          Map outline loading · city list remains available
+      {!states && mapLoading && (
+        <span className="map-fallback" role="status" aria-live="polite">
+          Map outlines loading · ranked list remains available
         </span>
+      )}
+      {!states && mapError && (
+        <div className="map-fallback map-error" role="alert">
+          <span>
+            Map outlines failed: {mapError}. City ranking remains available.
+          </span>
+          <Button
+            variant="outline"
+            onClick={() => setMapRetry((value) => value + 1)}
+          >
+            Retry map
+          </Button>
+        </div>
+      )}
+      {cities.length === 0 && (
+        <p className="empty" role="status">
+          No metro locations were returned for this release.
+        </p>
       )}
       <div className="map-legend">
         <span>

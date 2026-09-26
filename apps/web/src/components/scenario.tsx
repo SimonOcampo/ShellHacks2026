@@ -245,13 +245,27 @@ export default function Scenario({
           {error && (
             <div className="error" role="alert">
               {error}
+              {result && <span>Showing the last successful scenario.</span>}
               <Button onClick={() => setRetry((x) => x + 1)}>Retry</Button>
             </div>
           )}
+          {busy && result && (
+            <p className="async-note" role="status" aria-live="polite">
+              Showing the last successful scenario while updated inputs run.
+            </p>
+          )}
           {!result ? (
-            <div className="loading">
-              <LoaderCircle className="spin" /> Running fleet operations…
-            </div>
+            error ? (
+              <div className="empty async-empty" role="status">
+                Scenario results are unavailable. Retry to run this scenario
+                again.
+              </div>
+            ) : (
+              <div className="loading" role="status" aria-live="polite">
+                <LoaderCircle className="spin" aria-hidden="true" /> Running
+                fleet operations…
+              </div>
+            )
           ) : (
             <>
               <div className="kpi-grid">
@@ -314,174 +328,183 @@ export default function Scenario({
                   accent
                 />
               </div>
-              <section className="panel playback">
-                <div>
-                  <span className="eyebrow">WEEK IN MOTION</span>
-                  <h3>
-                    Day {Math.floor(hour / 24) + 1}{" "}
-                    <span>/ {String(hour % 24).padStart(2, "0")}:00</span>
-                  </h3>
-                </div>
-                <Button
-                  variant="outline"
-                  aria-label={playing ? "Pause playback" : "Play playback"}
-                  onClick={() => setPlaying(!playing)}
-                >
-                  {playing ? <Pause size={14} /> : <Play size={14} />}
-                </Button>
-                <label className="playback-slider">
-                  <span className="sr-only">Playback hour</span>
-                  <input
-                    type="range"
-                    min="0"
-                    max={result.hourly.length - 1}
-                    value={hour}
-                    onChange={(e) => {
-                      setPlaying(false);
-                      setHour(Number(e.target.value));
-                    }}
-                  />
-                </label>
-                <span className="playback-stat">
-                  {current?.completed_rides}
-                  <small>rides this hour</small>
-                </span>
-                <span className="playback-stat">
-                  {number(current?.utilization_pct, 0)}%
-                  <small>utilization</small>
-                </span>
-              </section>
-              <div className="charts-grid">
-                <ChartPanel
-                  title="Demand meets capacity"
-                  subtitle="Requests and completed rides by hour"
-                >
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={chart}>
-                      <defs>
-                        <linearGradient
-                          id="rides-fill"
-                          x1="0"
-                          y1="0"
-                          x2="0"
-                          y2="1"
-                        >
-                          <stop stopColor="#5bddbe" stopOpacity={0.35} />
-                          <stop
-                            offset="1"
-                            stopColor="#5bddbe"
-                            stopOpacity={0}
+              {result.hourly.length === 0 ? (
+                <p className="empty async-empty" role="status">
+                  No hourly simulation records were returned. Timeline and
+                  charts are unavailable for this result.
+                </p>
+              ) : (
+                <>
+                  <section className="panel playback">
+                    <div>
+                      <span className="eyebrow">WEEK IN MOTION</span>
+                      <h3>
+                        Day {Math.floor(hour / 24) + 1}{" "}
+                        <span>/ {String(hour % 24).padStart(2, "0")}:00</span>
+                      </h3>
+                    </div>
+                    <Button
+                      variant="outline"
+                      aria-label={playing ? "Pause playback" : "Play playback"}
+                      onClick={() => setPlaying(!playing)}
+                    >
+                      {playing ? <Pause size={14} /> : <Play size={14} />}
+                    </Button>
+                    <label className="playback-slider">
+                      <span className="sr-only">Playback hour</span>
+                      <input
+                        type="range"
+                        min="0"
+                        max={result.hourly.length - 1}
+                        value={hour}
+                        onChange={(e) => {
+                          setPlaying(false);
+                          setHour(Number(e.target.value));
+                        }}
+                      />
+                    </label>
+                    <span className="playback-stat">
+                      {current?.completed_rides}
+                      <small>rides this hour</small>
+                    </span>
+                    <span className="playback-stat">
+                      {number(current?.utilization_pct, 0)}%
+                      <small>utilization</small>
+                    </span>
+                  </section>
+                  <div className="charts-grid">
+                    <ChartPanel
+                      title="Demand meets capacity"
+                      subtitle="Requests and completed rides by hour"
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={chart}>
+                          <defs>
+                            <linearGradient
+                              id="rides-fill"
+                              x1="0"
+                              y1="0"
+                              x2="0"
+                              y2="1"
+                            >
+                              <stop stopColor="#5bddbe" stopOpacity={0.35} />
+                              <stop
+                                offset="1"
+                                stopColor="#5bddbe"
+                                stopOpacity={0}
+                              />
+                            </linearGradient>
+                          </defs>
+                          <CartesianGrid vertical={false} stroke="#233638" />
+                          <XAxis
+                            dataKey="label"
+                            minTickGap={80}
+                            tick={{ fontSize: 9 }}
                           />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid vertical={false} stroke="#233638" />
-                      <XAxis
-                        dataKey="label"
-                        minTickGap={80}
-                        tick={{ fontSize: 9 }}
-                      />
-                      <YAxis tick={{ fontSize: 10 }} width={30} />
-                      <Tooltip {...tooltip} />
-                      <Area
-                        name="Requests"
-                        dataKey="requests"
-                        stroke="#b8a783"
-                        fill="transparent"
-                        strokeDasharray="4 4"
-                        isAnimationActive={false}
-                      />
-                      <Area
-                        name="Completed rides"
-                        dataKey="completed_rides"
-                        stroke="#5bddbe"
-                        fill="url(#rides-fill)"
-                        isAnimationActive={false}
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </ChartPanel>
-                <ChartPanel
-                  title="Revenue accumulates"
-                  subtitle="Simulated gross fares · USD · costs excluded"
-                >
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={chart}>
-                      <CartesianGrid vertical={false} stroke="#233638" />
-                      <XAxis
-                        dataKey="label"
-                        minTickGap={90}
-                        tick={{ fontSize: 9 }}
-                      />
-                      <YAxis
-                        tick={{ fontSize: 10 }}
-                        width={42}
-                        tickFormatter={(v) => `${Number(v) / 1000}k`}
-                      />
-                      <Tooltip {...tooltip} />
-                      <Area
-                        name="Gross revenue"
-                        dataKey="cumulative_revenue"
-                        stroke="#d6bd83"
-                        fill="#d6bd8312"
-                        isAnimationActive={false}
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </ChartPanel>
-                <ChartPanel
-                  title="Fleet utilization"
-                  subtitle="Percentage of total vehicle time in service"
-                >
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={chart}>
-                      <CartesianGrid vertical={false} stroke="#233638" />
-                      <XAxis
-                        dataKey="label"
-                        minTickGap={90}
-                        tick={{ fontSize: 9 }}
-                      />
-                      <YAxis
-                        domain={[0, 100]}
-                        tick={{ fontSize: 10 }}
-                        width={30}
-                      />
-                      <Tooltip {...tooltip} />
-                      <Line
-                        name="Utilization %"
-                        dataKey="utilization_pct"
-                        stroke="#5bddbe"
-                        dot={false}
-                        isAnimationActive={false}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </ChartPanel>
-                <ChartPanel
-                  title="Pickup wait"
-                  subtitle="Mean wait for rides completed in each hour · minutes"
-                >
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={chart}>
-                      <CartesianGrid vertical={false} stroke="#233638" />
-                      <XAxis
-                        dataKey="label"
-                        minTickGap={90}
-                        tick={{ fontSize: 9 }}
-                      />
-                      <YAxis tick={{ fontSize: 10 }} width={30} />
-                      <Tooltip {...tooltip} />
-                      <Line
-                        name="Wait minutes"
-                        dataKey="average_wait_minutes"
-                        stroke="#95a9d9"
-                        dot={false}
-                        connectNulls={false}
-                        isAnimationActive={false}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </ChartPanel>
-              </div>
+                          <YAxis tick={{ fontSize: 10 }} width={30} />
+                          <Tooltip {...tooltip} />
+                          <Area
+                            name="Requests"
+                            dataKey="requests"
+                            stroke="#b8a783"
+                            fill="transparent"
+                            strokeDasharray="4 4"
+                            isAnimationActive={false}
+                          />
+                          <Area
+                            name="Completed rides"
+                            dataKey="completed_rides"
+                            stroke="#5bddbe"
+                            fill="url(#rides-fill)"
+                            isAnimationActive={false}
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </ChartPanel>
+                    <ChartPanel
+                      title="Revenue accumulates"
+                      subtitle="Simulated gross fares · USD · costs excluded"
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={chart}>
+                          <CartesianGrid vertical={false} stroke="#233638" />
+                          <XAxis
+                            dataKey="label"
+                            minTickGap={90}
+                            tick={{ fontSize: 9 }}
+                          />
+                          <YAxis
+                            tick={{ fontSize: 10 }}
+                            width={42}
+                            tickFormatter={(v) => `${Number(v) / 1000}k`}
+                          />
+                          <Tooltip {...tooltip} />
+                          <Area
+                            name="Gross revenue"
+                            dataKey="cumulative_revenue"
+                            stroke="#d6bd83"
+                            fill="#d6bd8312"
+                            isAnimationActive={false}
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </ChartPanel>
+                    <ChartPanel
+                      title="Fleet utilization"
+                      subtitle="Percentage of total vehicle time in service"
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={chart}>
+                          <CartesianGrid vertical={false} stroke="#233638" />
+                          <XAxis
+                            dataKey="label"
+                            minTickGap={90}
+                            tick={{ fontSize: 9 }}
+                          />
+                          <YAxis
+                            domain={[0, 100]}
+                            tick={{ fontSize: 10 }}
+                            width={30}
+                          />
+                          <Tooltip {...tooltip} />
+                          <Line
+                            name="Utilization %"
+                            dataKey="utilization_pct"
+                            stroke="#5bddbe"
+                            dot={false}
+                            isAnimationActive={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </ChartPanel>
+                    <ChartPanel
+                      title="Pickup wait"
+                      subtitle="Mean wait for rides completed in each hour · minutes"
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={chart}>
+                          <CartesianGrid vertical={false} stroke="#233638" />
+                          <XAxis
+                            dataKey="label"
+                            minTickGap={90}
+                            tick={{ fontSize: 9 }}
+                          />
+                          <YAxis tick={{ fontSize: 10 }} width={30} />
+                          <Tooltip {...tooltip} />
+                          <Line
+                            name="Wait minutes"
+                            dataKey="average_wait_minutes"
+                            stroke="#95a9d9"
+                            dot={false}
+                            connectNulls={false}
+                            isAnimationActive={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </ChartPanel>
+                  </div>
+                </>
+              )}
               <section className="panel operations-ledger">
                 <div className="section-heading">
                   <h3>

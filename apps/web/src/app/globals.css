@@ -446,6 +446,16 @@ main {
   font-size: 11px;
   color: var(--muted);
 }
+.map-fallback.map-error {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 90%;
+  color: #edd4ab;
+}
+.map-error button {
+  flex: 0 0 auto;
+}
 .ranking-panel {
   display: flex;
   flex-direction: column;
@@ -875,6 +885,23 @@ footer button {
   padding: 30px;
   color: var(--muted);
   font-size: 12px;
+}
+.async-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  text-align: center;
+}
+.async-note {
+  margin: 8px 0 14px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.view-error {
+  margin: 12px 0;
+  font-size: 11px;
 }
 .spin {
   animation: spin 1.5s linear infinite;
