@@ -5,1171 +5,1171 @@
   "datasets": [
     {
       "dataset": "tiger_cbsa",
-      "raw_path": "data/raw/census/cbsa_2024.zip",
+      "raw_path": "data/data/raw/census/cbsa_2024.zip",
       "sha256": "6b49c0d8caaab77aed9c7c786c4b2af19d1acd9333c76cd702fc117ff2165117",
       "bytes": 4695676
     },
     {
       "dataset": "tiger_county",
-      "raw_path": "data/raw/census/county_2024.zip",
+      "raw_path": "data/data/raw/census/county_2024.zip",
       "sha256": "da4051717caec55c75e3748c3608c2a3dbde8d1ff401bbaf4f952e3c3fb63ef1",
       "bytes": 11626066
     },
     {
       "dataset": "acs_summary_b01003",
-      "raw_path": "data/raw/acs/summary_file/acsdt5y2024-b01003.dat",
+      "raw_path": "data/data/raw/acs/summary_file/acsdt5y2024-b01003.dat",
       "sha256": "38d1a992bb058d184009b10b9b34987279aee575e4323165cfb5706c69b6ca90",
       "bytes": 18313708
     },
     {
       "dataset": "acs_summary_b08201",
-      "raw_path": "data/raw/acs/summary_file/acsdt5y2024-b08201.dat",
+      "raw_path": "data/data/raw/acs/summary_file/acsdt5y2024-b08201.dat",
       "sha256": "2f64e698223ba83f97b67dde4a34961a02f230e0359ffc69b9657b89a3df6b4d",
       "bytes": 65043091
     },
     {
       "dataset": "acs_summary_b08301",
-      "raw_path": "data/raw/acs/summary_file/acsdt5y2024-b08301.dat",
+      "raw_path": "data/data/raw/acs/summary_file/acsdt5y2024-b08301.dat",
       "sha256": "552b24c135b6e7c566910914a861cda6fc798ba0cd47801b1eb64295a128c2ee",
       "bytes": 88492616
     },
     {
       "dataset": "acs_summary_b08136",
-      "raw_path": "data/raw/acs/summary_file/acsdt5y2024-b08136.dat",
+      "raw_path": "data/data/raw/acs/summary_file/acsdt5y2024-b08136.dat",
       "sha256": "608b6c70ee59a31f34f68e16984fa470e31f15738d8e3d748ca6f021dd08d5dd",
       "bytes": 26135589
     },
     {
       "dataset": "afdc",
-      "raw_path": "data/raw/afdc/active_us_public_electric_stations.json",
+      "raw_path": "data/data/raw/afdc/active_us_public_electric_stations.json",
       "sha256": "93a376e2e204ad2f0fb8a93b62fb9b7782c5d8f103adcd546ad2019bea8f4eaa",
       "bytes": 274693146
     },
     {
       "dataset": "waymo_markets",
-      "raw_path": "data/raw/waymo/rides.html",
+      "raw_path": "data/data/raw/waymo/rides.html",
       "sha256": "d7246fccd5c4ecd9845b7501ab8c653e0db677a71b6d1ddedf0b1f1a0f8bcea8",
       "bytes": 334515
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/station_inventory_1991-2020_000000.json",
+      "raw_path": "data/data/raw/noaa/station_inventory_1991-2020_000000.json",
       "sha256": "abe90f438ce0fbd80928262652828d2e92b163a5da162978f204a0f9f7c1fbc3",
       "bytes": 339372
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/station_inventory_1991-2020_002000.json",
+      "raw_path": "data/data/raw/noaa/station_inventory_1991-2020_002000.json",
       "sha256": "d64c5b8b4d8fbccb3d81ef39b6001b2f719451cb11e9d3c2872f793598900db4",
       "bytes": 338850
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/station_inventory_1991-2020_004000.json",
+      "raw_path": "data/data/raw/noaa/station_inventory_1991-2020_004000.json",
       "sha256": "ca0aa70097d18e90082cd28077288a5e52916dcdbd4f8d4d3202e6357cb732e8",
       "bytes": 336951
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/station_inventory_1991-2020_006000.json",
+      "raw_path": "data/data/raw/noaa/station_inventory_1991-2020_006000.json",
       "sha256": "e9ba8c0f467ec13513d582c2563264150e30fa95a84a9387b2a34faad3358942",
       "bytes": 330543
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/station_inventory_1991-2020_008000.json",
+      "raw_path": "data/data/raw/noaa/station_inventory_1991-2020_008000.json",
       "sha256": "5380d438ce84b40c8b6d27b4160955fac36e1cbea71a9bd061924af158c4f010",
       "bytes": 330148
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/station_inventory_1991-2020_010000.json",
+      "raw_path": "data/data/raw/noaa/station_inventory_1991-2020_010000.json",
       "sha256": "2096f3b9b8a182007f4ed66e4684c550e304b87f3a1b4d9bd70d4d008fd0b0cd",
       "bytes": 330505
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/station_inventory_1991-2020_012000.json",
+      "raw_path": "data/data/raw/noaa/station_inventory_1991-2020_012000.json",
       "sha256": "36dcb1db964e3938ec9d10fdbc6ec63ce5905b1e3fdc1d265914b5b85bb71180",
       "bytes": 329004
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/station_inventory_1991-2020_014000.json",
+      "raw_path": "data/data/raw/noaa/station_inventory_1991-2020_014000.json",
       "sha256": "668e145e434e656c25035bc443f1159aef21a9ae8d0880d7e33afb7e3d9f4cea",
       "bytes": 271057
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00010764_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00010764_1991-2020_ge90f.json",
       "sha256": "708e55ff865edf27c74281f3c4686a65fd181bc12d5d2c1b416ce0d11a57269a",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00011225_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00011225_1991-2020_ge90f.json",
       "sha256": "4811f49b6960ce69f0a655ca0a2dd58984e99914d9cbcf0c6427e73ae3ee8401",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00013781_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00013781_1991-2020_ge90f.json",
       "sha256": "bc10121b592d0b189ad3a4d7d6ca747c5facd9c91374eb8e48ca9edd8e7e070a",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00014619_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00014619_1991-2020_ge90f.json",
       "sha256": "54d2c274322abf8ab367acbc56d41376b849186a9d4b76641e4c82ebc844de6d",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00024829_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00024829_1991-2020_ge90f.json",
       "sha256": "c53c505d408875773ef6cb97acade77242c9478ea84e15c5da8ffe43d546b6d4",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00025270_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00025270_1991-2020_ge90f.json",
       "sha256": "48288b438d9bed65a293772d06bf9a01c9cbd338f074100d336cb8f4da235f1f",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00028112_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00028112_1991-2020_ge90f.json",
       "sha256": "55b92c5b8833a90661d1f2f5eec6430162c09fa9c59279dd486965162998f84d",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00040144_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00040144_1991-2020_ge90f.json",
       "sha256": "7ee1aacf9405b872e17acda5271255c94bddcebfbbdcbd896752a5a3b5e4c348",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00042239_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00042239_1991-2020_ge90f.json",
       "sha256": "8ed619e4559a7df89828f9825375709d58e6bc0c2aaa59e5c36d84989534360e",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00043914_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00043914_1991-2020_ge90f.json",
       "sha256": "f58a5c9113a97f4c80f88c5cb8054a347a6fad093552edbc5c3340c3672b8915",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00044412_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00044412_1991-2020_ge90f.json",
       "sha256": "8ed94d524e5103cc7f11da9aed3b07246b148ad95618043ee730c46a73373d6f",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00044997_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00044997_1991-2020_ge90f.json",
       "sha256": "c27f2a8ee42072410654d1da36d81a9fa40c1bab5995dfa18d2ac727645e5e42",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00045915_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00045915_1991-2020_ge90f.json",
       "sha256": "47cc767c937853e6e7c4deac7f52b5a66d72518f9e5a81400cb017dbae2c0bbe",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00046006_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00046006_1991-2020_ge90f.json",
       "sha256": "f76367c22bc710790019cf22601a624eea3f9125e264dcf4bee8f365c9c9c327",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00046719_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00046719_1991-2020_ge90f.json",
       "sha256": "806857d750aca39988d1bac389ee18dd05e9ae511618463990b9b4e701b3cd99",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00047785_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00047785_1991-2020_ge90f.json",
       "sha256": "814cebb5dac25afb542c81322573bf537b800635a89f522758c716dbca60e942",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00051401_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00051401_1991-2020_ge90f.json",
       "sha256": "9d548e362c5077bdf0adfaab8d0ccbe4df10e6da3ea3cb30fa77335371f126f6",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00057249_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00057249_1991-2020_ge90f.json",
       "sha256": "8e243683f6c8dbbe757f3596d5e129e3764b01422b24c1444475ae089c9a9b80",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00058022_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00058022_1991-2020_ge90f.json",
       "sha256": "dec89a41fbdd0f4b5d61b3cee3c8e64a5563a49ba6832e2be43b6a2c308a64fc",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00067432_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00067432_1991-2020_ge90f.json",
       "sha256": "8aca829919106323bd7dc9929f00e743849299a6164db385e9c2215df5d42644",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00083163_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00083163_1991-2020_ge90f.json",
       "sha256": "a2bae30a3d3be1dba8673e7efb8950874c469f8f65382839ea40e4767d89e672",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00083470_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00083470_1991-2020_ge90f.json",
       "sha256": "1ff3470cf1f44b76f7c1e00414ad8134c6a49697cb57b17ae4b3a82dd74dab99",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00083986_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00083986_1991-2020_ge90f.json",
       "sha256": "fd0709818793bcea5c274c3b2fb2f8f7658c22f53c9aacc1859ca698542a8543",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00086634_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00086634_1991-2020_ge90f.json",
       "sha256": "223175ad55e2c29c759c149a14a19d9e8128418a2000f1cadc6d40cf37473557",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00087205_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00087205_1991-2020_ge90f.json",
       "sha256": "c4addde3253da344ded9ec5bf0ed0cced77f8778d5c3aff16eb55f028c5aa829",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00087851_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00087851_1991-2020_ge90f.json",
       "sha256": "92a1fd6b9584709f5a896ed632a32c04def07e7863fc80ae88ef9d3bf026e504",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00090444_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00090444_1991-2020_ge90f.json",
       "sha256": "0909218cead65ba5207868c5f9a615c95357ad675c7b4695fa5cecf7ca2d956a",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00095404_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00095404_1991-2020_ge90f.json",
       "sha256": "eacae96d4f7c3e9c7dee44a20b98cbce4a9c228c885cfab21da2af7c3f009780",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00124260_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00124260_1991-2020_ge90f.json",
       "sha256": "ec48bddba2683e4fb6f9e9a6c0b4b6f1d6650346e70591c6b39095c9147e363b",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00124272_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00124272_1991-2020_ge90f.json",
       "sha256": "0f8014cfc8ce972e69240d89bfc0b2573e9515c851909e987242a4cf1287323b",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00124286_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00124286_1991-2020_ge90f.json",
       "sha256": "b58b2ae180a34cc0f3dfd63104c264ce80d7fcefb3eaaeac370b6d1264e358a3",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00145972_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00145972_1991-2020_ge90f.json",
       "sha256": "def4d649c3f4f787af413f9dc156f3e11f214988dd6bd1643c386094ef71996e",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00146168_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00146168_1991-2020_ge90f.json",
       "sha256": "98ba2f42d81f4d5f53c6659daef7274c1e6534dd30546f84f9c1fa666e0f823c",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00147756_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00147756_1991-2020_ge90f.json",
       "sha256": "f0852ba870ac4f6580a631958e3f066f0f5b13f5e4a07b5580842868a9ccc6cd",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00154958_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00154958_1991-2020_ge90f.json",
       "sha256": "a478678418e1a10bc48f04a5b4937707d5090e38a1469af9b76d8b8c5fd899af",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00226527_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00226527_1991-2020_ge90f.json",
       "sha256": "b39c6106002e53a8fb8ef66c956820562e802cacbd19068e330daa9001c05799",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00237064_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00237064_1991-2020_ge90f.json",
       "sha256": "8188f46566bffd352299d68bf60eabd4c020037f7ee4774cb99c4caa0e61c4c0",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00238524_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00238524_1991-2020_ge90f.json",
       "sha256": "f4d5a694ed25b7782f5c2f62160ed3f293579494693df6a6d0c1ccde06f3bc5a",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00263316_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00263316_1991-2020_ge90f.json",
       "sha256": "5b631e475caec8085d99331b354d381302643985ad992e3d6de2ec9f866bddbf",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00264439_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00264439_1991-2020_ge90f.json",
       "sha256": "63e0b712986a8396699e30b5e81b4b029da64deaf2a0c2fb7dbd09575045308d",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00296754_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00296754_1991-2020_ge90f.json",
       "sha256": "cc20540e590f12f04a5cef45d17ba2ab814e7a96311ecb070563dc2193b4d5dd",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00297461_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00297461_1991-2020_ge90f.json",
       "sha256": "e0f14913f0fd0735971760a1ca05ce99cb0f118fad6b0fcf8a7819d578be9318",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00297481_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00297481_1991-2020_ge90f.json",
       "sha256": "0d749ed6356e003f0a3476f6636dfa827303b45e97f100cf30fdfb503fdafa9d",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00313238_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00313238_1991-2020_ge90f.json",
       "sha256": "b71fbc2562509679b3a31d380419b06e33cf9b3f3a67a1db1903b765fb63032c",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00317074_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00317074_1991-2020_ge90f.json",
       "sha256": "311bf6376395f7dab26709db5a7e5aa5b07e2ff10c68a74b1cddab4ca08387a5",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00317079_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00317079_1991-2020_ge90f.json",
       "sha256": "c7169b6d4b4ec2289b6b84f9e410f98a109c37827df1c8f4223eae2e04540eae",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00331458_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00331458_1991-2020_ge90f.json",
       "sha256": "6050d923a310172bcd2a8d12d474b7764e1c7dcff0c01fb6fa920b9641c10d0d",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00331515_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00331515_1991-2020_ge90f.json",
       "sha256": "80de6a93835f6531073aed82e1e22ff4a09b8d8985bc40e79dfad408c4d55597",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00331777_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00331777_1991-2020_ge90f.json",
       "sha256": "17dc103ec546d5e47f8ba87913a7ba8394552bbe7b59fff6618ecf9d02adaa02",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00331785_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00331785_1991-2020_ge90f.json",
       "sha256": "acbbd1808543cbc79b63624bb04326c2874222d763aad371ede55759a2b9c56e",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00334260_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00334260_1991-2020_ge90f.json",
       "sha256": "81b8b6163536f1b47f177ac6a4d153d1a6b54c34d45fa82f756e8d0f5211da40",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00335268_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00335268_1991-2020_ge90f.json",
       "sha256": "dfcb54c2c63b0d4caddf57399861aba9a76c5041ac69f6ea6b7cf5fcf24b357e",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00338951_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00338951_1991-2020_ge90f.json",
       "sha256": "09f2cdeae34994fb204d7c17ae9a405f11ea91be1c4fab31b979efa89ccacab7",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00342818_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00342818_1991-2020_ge90f.json",
       "sha256": "e4c7235e68708bab8b378ded9bc3233930438e97bd26155d0fc6f60aad8322b8",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00345522_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00345522_1991-2020_ge90f.json",
       "sha256": "93309a8a86c94dbf78669c16b5b061a015ca4e16436a502e502ff3b32a045c5b",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00346659_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00346659_1991-2020_ge90f.json",
       "sha256": "2d1290f17d70518889bc19d7cb62c03a2a8f03d870a8ff40ee95278842bf4277",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00349086_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00349086_1991-2020_ge90f.json",
       "sha256": "83753edcd655749c61da58a4b5a3a5f6bccd41c23b05b6e63282d104418d5a18",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00371875_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00371875_1991-2020_ge90f.json",
       "sha256": "7148f399b37a9779bd99e75441af4eea4511f3b2aa0d08e0f6cd9722e994a74e",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00375270_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00375270_1991-2020_ge90f.json",
       "sha256": "1dbb40bb9a66df61cd5a6c804da5440083cb4e6d9aa03bbddf313c81024faff5",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00401039_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00401039_1991-2020_ge90f.json",
       "sha256": "b031f37be7e8306dda717e655e4fbab0db8d9722f524cfe4e2f6baf80bab8fa5",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00401950_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00401950_1991-2020_ge90f.json",
       "sha256": "eb0c98e66307e2fe8bcec529c52df554c4b90f1261082a37b83f5641980a6651",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00403447_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00403447_1991-2020_ge90f.json",
       "sha256": "250350fb787ea9fc634b369b866745b23052d86cc957ab72e193788e4a45b3c1",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00409431_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00409431_1991-2020_ge90f.json",
       "sha256": "8973e1e9c3772b25c9287b49915ad3fe28f4aa3c7ed8bab8d5589928ce162ad6",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00410337_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00410337_1991-2020_ge90f.json",
       "sha256": "9000c749f13a0302f7282b042c0fe5fc5cfddd0e1e233e771103f76a176477bf",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00410431_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00410431_1991-2020_ge90f.json",
       "sha256": "3900d54cff1b0c223f503984c3d35f4bf3876e3130f50ced587564b362b98d2e",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00412012_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00412012_1991-2020_ge90f.json",
       "sha256": "0acf66b3daf264c35bc3f924034c4c3daa46f703e3e1818deb5c5ad04e6d828e",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00413266_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00413266_1991-2020_ge90f.json",
       "sha256": "0d9de0622bd9cd9fdc1759910bb9a170b8072c7addb5a4aa9325bb8227813605",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00414321_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00414321_1991-2020_ge90f.json",
       "sha256": "9a001fbdb06f08a6a03dfc1fcaa797756700fad07dd962604aef35185e063bba",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00414326_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00414326_1991-2020_ge90f.json",
       "sha256": "efe2eb8113a5c0e5beced6c60e18eebccfb2363bcf3638c1ad8f44533d2c6538",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00414327_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00414327_1991-2020_ge90f.json",
       "sha256": "ba0dc3b10c2a7475fde2d7326cac06d141ef05d235df4e4d81e7df5a5eed52b9",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00414597_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00414597_1991-2020_ge90f.json",
       "sha256": "07d6756882f105d2bd7de16f942c06b7e2cbc6450ac4195fe6e0877f8a86086a",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00418169_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00418169_1991-2020_ge90f.json",
       "sha256": "07ef186039825c8e746736ad02d51b6927a6e07cfe48304777ac42558c627ee3",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00419088_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00419088_1991-2020_ge90f.json",
       "sha256": "7ac30b1c8f013f6c9cb87a6587ea5fabaacb864e414a7de93a7d2130b5dce653",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00422257_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00422257_1991-2020_ge90f.json",
       "sha256": "8b53796c641ee5b45e2be8fe64dacf236912983cc83c2343fd027b10f69fa3de",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00423348_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00423348_1991-2020_ge90f.json",
       "sha256": "32f69a120d7bce8c2e1f96443716b99a63187bb2022c561cfb02a7a436229037",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00424362_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00424362_1991-2020_ge90f.json",
       "sha256": "56ea95438dc9cd77cb046082dc86de726c464fd5b1e3adaea19f204c5651e47d",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00444101_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00444101_1991-2020_ge90f.json",
       "sha256": "75ee1d38622ecc0e9781db11edc667ad48dd5dc7a004d09e88e5ff6df05797a8",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00446656_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00446656_1991-2020_ge90f.json",
       "sha256": "5b85a30a9bb2660b7427f210ab74d4a41fbf2283804887410d15b8105de9dbb8",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00448192_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00448192_1991-2020_ge90f.json",
       "sha256": "75e4718c85c0ee627a90662c83060b46a0ebfe686ba55ae393108669688276d8",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00448837_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00448837_1991-2020_ge90f.json",
       "sha256": "7b321444e49502fe8c6fd8c2e1ee094d987ea2fa692658031f9b3d9d8f7f8cc1",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00449213_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00449213_1991-2020_ge90f.json",
       "sha256": "f2b498db2d326311c002b81b9edef884dffafe3474f0a295ed3134b8894b14db",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00473058_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00473058_1991-2020_ge90f.json",
       "sha256": "a04505b2c39615b41f4b1ca55f51f9277296f50d414456ae02a7c162d7ca3646",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00473930_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00473930_1991-2020_ge90f.json",
       "sha256": "2cd84508d5cf74b7e899e689117c1a9b0b422b0beac134d6dc9e7236ef831239",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00475499_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00475499_1991-2020_ge90f.json",
       "sha256": "9f87935f38f453374da59b4bb9440a7fb250d23014ac287f3b87471a6528f96f",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USC00477148_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USC00477148_1991-2020_ge90f.json",
       "sha256": "ac7a91fcaa8538e15d1f358756de38a198270f613602b426106a089f96ebe8ee",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00003888_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00003888_1991-2020_ge90f.json",
       "sha256": "430ae97000dbdb4a605fd6405d8235e11dbeac0518bcd72447f6326ef91184ee",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00003954_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00003954_1991-2020_ge90f.json",
       "sha256": "441208407478c96f0c38b4c9725d4e3ea04c05397ca7caac104f59b2bcd42285",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00003967_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00003967_1991-2020_ge90f.json",
       "sha256": "0f8a561e5b2c743775d7fc907f3cb19495568db0df01563d58ed339b3367b244",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00004853_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00004853_1991-2020_ge90f.json",
       "sha256": "f8d9cad87dcc2eedf94e3d2b78d5c0d68dbc440fe3728e288f7db3b04980ff60",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00012815_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00012815_1991-2020_ge90f.json",
       "sha256": "a200142bbcf4f03e2253e245b923a2c1bd8d5306a5e156b8a74cc29d27ae4cb3",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00012841_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00012841_1991-2020_ge90f.json",
       "sha256": "4b355cb7931e02ad3cc65f0b1b77f76fed28bad26cd31b95b5ee10da32f9c191",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00012842_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00012842_1991-2020_ge90f.json",
       "sha256": "f2caf074f0ce099919006336553d21bcbf4279fac7794e3bda887560b229e6c4",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00012882_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00012882_1991-2020_ge90f.json",
       "sha256": "f192ab11df949d92b607b7c23ee0eec38743ca8dbc9c5519f1b29a626c85b042",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00012909_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00012909_1991-2020_ge90f.json",
       "sha256": "15e8fa94ad1bb0b68231fa17328f60130d0c341d8dcb5f024f70ddb87cce15a3",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00012960_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00012960_1991-2020_ge90f.json",
       "sha256": "3ed16ebf8a0fe339541b8b667a38709212ec76f9eecf6ba265d126148eeabe97",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00012970_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00012970_1991-2020_ge90f.json",
       "sha256": "7c63e38b6be972c5b5fe34bffa125a00d10b0db12abed63e8d22e9c10630b357",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00013740_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00013740_1991-2020_ge90f.json",
       "sha256": "de2c69d7fcb96512ae03799efa9d9d66980ed1b52d70a3f7b82ce9fb1aa05b9c",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00013762_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00013762_1991-2020_ge90f.json",
       "sha256": "f1d398ad5a38e38b3833fc0f039d10d4c2ebf41574274cb378a64b245ea7cc46",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00013810_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00013810_1991-2020_ge90f.json",
       "sha256": "6ef25835a00c3abd9621d7c0fa3218fce23b990c69dec39c1db5a643eeab3ce2",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00013876_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00013876_1991-2020_ge90f.json",
       "sha256": "1eeb05ede7d38a3cd81d941ca0219edef75992c904636689c1d557f8305dcdd7",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00013897_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00013897_1991-2020_ge90f.json",
       "sha256": "db422c02f1e77a0fb9fbb9ed14e2f09ba9ca11c28281eaf8e22fea6227ce463b",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00013904_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00013904_1991-2020_ge90f.json",
       "sha256": "5228fe915bdada52efe6e780a682433f26bdcad2a292563c1b8dcd234114f2d2",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00013958_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00013958_1991-2020_ge90f.json",
       "sha256": "af237f38579f9e2e7631613307c83b740858bb550814f6378769e0d4da3c3b9b",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00013967_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00013967_1991-2020_ge90f.json",
       "sha256": "b7975f8e5c44800863d1b42a597adcfb6d6fa21d0025404e81f6b4c1f692f2d3",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00013968_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00013968_1991-2020_ge90f.json",
       "sha256": "ae0ffea17e34aad478e542ac20fdf4921d88c41057967f5f8109229b6091fc9a",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00014740_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00014740_1991-2020_ge90f.json",
       "sha256": "f8c175d13b795e7aed58917c515e87a21b4bc2b96ebb60ae637eeb2eb941f0cd",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00014752_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00014752_1991-2020_ge90f.json",
       "sha256": "0629e5f830a61de148ccd7bebd7190a50955ce4ac3438f5d6df157c460d2cdc8",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00014765_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00014765_1991-2020_ge90f.json",
       "sha256": "bae6e7d21ba12fc80d563be2c28fdb0cd86dae66dbc269a29c4039dfa3a7899d",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00014821_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00014821_1991-2020_ge90f.json",
       "sha256": "939768d801da88357a04bd38d0c5f688d9143f443d0fa885b4d549219ddceab1",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00023169_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00023169_1991-2020_ge90f.json",
       "sha256": "7d663d6b091df91a8954de0274e89c46fc5b54da2b86bf17ea2a77f34aeec934",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00023285_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00023285_1991-2020_ge90f.json",
       "sha256": "cf231a0589c44f7854afb67a841fec236296c4bf4af6708cd31c8235b7543f59",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00053863_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00053863_1991-2020_ge90f.json",
       "sha256": "e90e31165c87c964e4d7e89f5ec9b92e4e4fdc89e4a8cc01facfcad3f1b44370",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00053879_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00053879_1991-2020_ge90f.json",
       "sha256": "e7fe4518e4fcda83390058a5fc9ae32466123d6588a0d61288ce1d8ea24f7b0f",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00053907_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00053907_1991-2020_ge90f.json",
       "sha256": "8385d12d0b140811e3bf0e2f107a3e8bba0c5f9e6cbdec878182f25b4acb4728",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00053908_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00053908_1991-2020_ge90f.json",
       "sha256": "af7e1ee87261cb74f62a961d3a76e0b657796be3272f1a34cd1acf371602a6be",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00053910_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00053910_1991-2020_ge90f.json",
       "sha256": "6a696d975e0d5e720d897517e467980004e845daed126d7a1ebc133028555e25",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00054788_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00054788_1991-2020_ge90f.json",
       "sha256": "c4ca3157a66a185d8d49351986dafc47c05380d4ecbc5d0cea6e990f983e8615",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00063890_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00063890_1991-2020_ge90f.json",
       "sha256": "cbe151d8aae7bf3478d2a961306e7c9773e74de460e9302d462b8f65b172dcb3",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00092809_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00092809_1991-2020_ge90f.json",
       "sha256": "c9420ed46cb753c9225edaa05933ea1875030c892a05fa34e03873d3e7d521f7",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00093812_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00093812_1991-2020_ge90f.json",
       "sha256": "e9caa242603943c353031b2ba8e7e64eea5448520385d7ec4691cb756c08382d",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00093819_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00093819_1991-2020_ge90f.json",
       "sha256": "893174c92838872529f3d382ec485205253bf1f2749c823b1722d3ad1e90c79a",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00093821_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00093821_1991-2020_ge90f.json",
       "sha256": "ae4affa2f22a835a36bfd2806c0a11d556d366b8c5776558b669a7981752b71d",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/hot_days/USW00093837_1991-2020_ge90f.json",
+      "raw_path": "data/data/raw/noaa/hot_days/USW00093837_1991-2020_ge90f.json",
       "sha256": "c38911f25c350a01566e5fda4e6c914d4bcdb7985ada15d179f561052cf1f378",
       "bytes": 67
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1ALJF0057_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1ALJF0057_1991-2020.json",
       "sha256": "c0e37d825fbc2757acd47d2df7674762eeafa517d2553a4b90e0affad92735bb",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1AZMR0313_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1AZMR0313_1991-2020.json",
       "sha256": "eaa5499676dc52861bbf9109129427e5a3530eb6079a47d9a9d60b804827f3dd",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1CALA0036_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1CALA0036_1991-2020.json",
       "sha256": "cbc05b44c5c24a989b3c6d2e31d6dbbb2aa8081cb21b5e39a0b8310bd11cb255",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1CODG0228_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1CODG0228_1991-2020.json",
       "sha256": "4d50e37c435cd0c7dfbbcbb5ac5e8b3fa0f77f2abc4bec0c13fe226eea650f1e",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1CTHR0068_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1CTHR0068_1991-2020.json",
       "sha256": "96698209d7add8bdc8f90705ef758845909416f395eebeec149ed4ced891fd40",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1FLBW0013_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1FLBW0013_1991-2020.json",
       "sha256": "695a39857a9dfc234895d7553fc533367e775e8496697d16f28e94bf943937c0",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1FLDV0033_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1FLDV0033_1991-2020.json",
       "sha256": "0ca4a437e0389315056de4718a21ea6cee709127fdc7637348344fbbbc9c38bd",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1FLHB0037_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1FLHB0037_1991-2020.json",
       "sha256": "244a6f7a585edc82cbebad0323a5194bb193f6e874e80b797ea868fe5b3d3fb0",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1FLOR0046_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1FLOR0046_1991-2020.json",
       "sha256": "a5c6b86a14fd81aaea5a125efc948f5dcce9d1892474b76371e7af5854f7da6b",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1GAFT0024_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1GAFT0024_1991-2020.json",
       "sha256": "1d15a99fade6422c5baa363304068b932d338155249640b275471a49ce6bdb61",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1KSJO0053_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1KSJO0053_1991-2020.json",
       "sha256": "e149531512d1c41408182324a2062d688428151b50d20ee85c79848b10b80a78",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1NCWK0003_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1NCWK0003_1991-2020.json",
       "sha256": "6ba3486b07817d5134cd62633dafaac75edccd55384b229b14552fe5a88cd78e",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1NMBR0205_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1NMBR0205_1991-2020.json",
       "sha256": "47e9a8b77f7868ad6eb13a608b42cd78b71fcd57cceb6aab255c55c942365697",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1NVCK0077_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1NVCK0077_1991-2020.json",
       "sha256": "57d9932775dfce6a775c7d988bf496fc335d63e1f98f9ee924c973353e84ae58",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1OHHM0031_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1OHHM0031_1991-2020.json",
       "sha256": "b58077c170c58b4cfda750233b5219ee5b160ef98f6274966bf1e5d7e71bdb54",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1OKCN0001_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1OKCN0001_1991-2020.json",
       "sha256": "19defe0360a2b5e257207661bd9593aae96525e07ffbe88feb33b49fe1bf1be2",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1OKTL0039_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1OKTL0039_1991-2020.json",
       "sha256": "8000b4b76468f434cc0cdf520805c2fcc3a864af35e5ec6f509ddd04429f4c99",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1TNDV0163_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1TNDV0163_1991-2020.json",
       "sha256": "3422d8ad34faee92a8c09b40ad2acfc7a60832acea3e62a35fceb7d70def399c",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/US1TXHRR176_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/US1TXHRR176_1991-2020.json",
       "sha256": "5ddf5caf9740769a9ffadb93d1f5ddd438d58a9a7c08d2682091a14827275cee",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00011225_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00011225_1991-2020.json",
       "sha256": "751fda9a4e4161bd977efc99f2a592cdcd40fb49c5941758c4a63ecb2a62d596",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00024829_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00024829_1991-2020.json",
       "sha256": "8edde31da0f47c0da8ff242bfc2e1b1517400db3a03e751d0a74c8b1fbd36910",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00044412_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00044412_1991-2020.json",
       "sha256": "c2ea0eeab044735eb578263f536f497568a242090e238078a58b81d025309a2c",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00044997_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00044997_1991-2020.json",
       "sha256": "67cd43dc927b6c940747ce0f385c6f3845c92b0c7c6e1abc9871fed72c2420b7",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00046719_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00046719_1991-2020.json",
       "sha256": "2cfe8874fda6d9702b2cf35cbeab72e7cc496c3d4834cdae637df0a546e041a5",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00051401_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00051401_1991-2020.json",
       "sha256": "195af8eab19e44cf75ecc7f08c6c234f89ac9feefc4fc9b6c7f5581aacf0009e",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00083986_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00083986_1991-2020.json",
       "sha256": "8a4ece70c803a2af99f36a59eafdaa4cf7f4402c872c2d8075a3f6ed04dfdd51",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00090444_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00090444_1991-2020.json",
       "sha256": "faa0106e098b55f45da64561388e716c5ab8ca95f90271f168ddee21a94b13d9",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00124286_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00124286_1991-2020.json",
       "sha256": "e5caa2b400b3c4094c2f4c529f035ac4ee1b023c278c8b7f52dc727cfa1cfe8a",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00154958_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00154958_1991-2020.json",
       "sha256": "01df28d6b2525c5c04a194a33d6c02020f0fbe365e23513d70a003ed0a5378cc",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00237064_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00237064_1991-2020.json",
       "sha256": "ee010e7b0468a74cacaf0010d48d49b3c62bda0d0e2a9e749d8f6159eca6689a",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00264439_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00264439_1991-2020.json",
       "sha256": "c8434955965920cd167cfc31e45aca257af4fc684c12efaa1fdad8d585b32e84",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00297481_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00297481_1991-2020.json",
       "sha256": "35e571e8eebb5235d842906b78629e011f620ab4c57b7e44b3226864d859a44f",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00317079_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00317079_1991-2020.json",
       "sha256": "9320dd09b172ec6b140aee88dce67add0c9e07166b1852936f35e14d6da01181",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00331777_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00331777_1991-2020.json",
       "sha256": "9a144edf4007aa980209d10784988e729722a40c12b677b459357db657602004",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00334260_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00334260_1991-2020.json",
       "sha256": "458264716882b51a16bc5953cfbaa12bd5aab79b1fd592b54052d3d69bd58ad6",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00346659_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00346659_1991-2020.json",
       "sha256": "82240d8cfcb3e8ba808d3e4ca5ceb638967d7f4272371e840a913d4eb7c31ed5",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00371875_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00371875_1991-2020.json",
       "sha256": "6deacf76b5cab0920748be52761aa0c122bbef16b22f5c4b600e9ed02eb5a19b",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00401039_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00401039_1991-2020.json",
       "sha256": "0315f7c5891a57cd0ba11e7934fc6c09a62e028a96f8c40a0bd3dc8161d1433f",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00403447_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00403447_1991-2020.json",
       "sha256": "c7020ed167f3eb073add82956530a5791ce683e92aecc1b5a22e286b8f000a45",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00410337_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00410337_1991-2020.json",
       "sha256": "84a8513faa3e469936e57f57a6f177b382cc139b9b7d5d39bc931b2e7affa07c",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00410431_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00410431_1991-2020.json",
       "sha256": "993cb2e7d952eb320d797bf7ee4f04e3527e487246b5f131dc0781dd006331f4",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00413266_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00413266_1991-2020.json",
       "sha256": "ae2692cd1032e19e46298c4a6304ead5807c0063bcb5ab129af59ffdf6c694c6",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00414321_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00414321_1991-2020.json",
       "sha256": "f94eb6e9e1d892ad4d0050e61217d339d759e8a188860b69457d4edadefd9cd6",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00424362_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00424362_1991-2020.json",
       "sha256": "b1ca8ac67470bb03ce6e28b9df6315dfdde512cc328718f99ec4d048f0075101",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00448837_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00448837_1991-2020.json",
       "sha256": "a0086848802122a49dac061e3d580972ab24cc3168f3b0205054712d11dae3f7",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00449213_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00449213_1991-2020.json",
       "sha256": "dd4afcb664749930434c42256ef479871720b7445d8858dff7e0b9bacff6430f",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USC00477148_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USC00477148_1991-2020.json",
       "sha256": "de72757f63744cb3df0031a2337b64e83544c842531cecded382ff4478b13ebb",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USS0012J07S_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USS0012J07S_1991-2020.json",
       "sha256": "103d2f5222061f980bc1e128abb5a0e9d5a70332068973f203fdb600d3ff03b4",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USW00012815_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USW00012815_1991-2020.json",
       "sha256": "3b0ff9e414965cbbd542798741a25781df6292edfe820532150020e5c8006591",
       "bytes": 88
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USW00012909_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USW00012909_1991-2020.json",
       "sha256": "ce9df0839ecce9fa163a622a35f7451981f0f2d1aef1aa8b643e8f4b1acb29a8",
       "bytes": 30
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USW00014752_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USW00014752_1991-2020.json",
       "sha256": "235b6998b2581b90f730357252870af193f93277d84eda09082197c71a015c5b",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USW00053908_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USW00053908_1991-2020.json",
       "sha256": "24e9fea7915d2d2fa7bd5df6cefde64dc70ef7313941f9f166ac3ca457fa8cb6",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USW00063890_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USW00063890_1991-2020.json",
       "sha256": "105591460b5696844fe6ed5adc9ebb9a58613fc66c21f2c326ba1a0e188fcf04",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USW00092809_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USW00092809_1991-2020.json",
       "sha256": "4c13c8b8353fae94d01e3a8ef213a239d8be98e3ecc1be1173cd33d2bdce9793",
       "bytes": 59
     },
     {
       "dataset": "noaa_climate_normals",
-      "raw_path": "data/raw/noaa/normals/USW00093812_1991-2020.json",
+      "raw_path": "data/data/raw/noaa/normals/USW00093812_1991-2020.json",
       "sha256": "05b839148e2ede4c293f7317d71632a41dafac436fbe862c45d9e815cc67c81a",
       "bytes": 59
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_01007_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_01007_edges.zip",
       "sha256": "d3e4a61d1e16986e7a680ffdf6cfa9c219f6800a6ecd1038ae852d9868f6573d",
       "bytes": 3109364,
       "retained": false,
@@ -1177,7 +1177,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_01009_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_01009_edges.zip",
       "sha256": "b752312beac1354e1cd051592fb335b66fa68b0d8514546e7f7b43ea6e3bac44",
       "bytes": 2847977,
       "retained": false,
@@ -1185,7 +1185,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_01021_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_01021_edges.zip",
       "sha256": "f5008bee4a3c10967b1007dbf32f9aad453a541176fc8c914d2f3cec5e1f60ca",
       "bytes": 3480919,
       "retained": false,
@@ -1193,7 +1193,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_01073_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_01073_edges.zip",
       "sha256": "2974db9e71972c9f98e8e3df99b6b0b18cd987b685098233e46f6a7f93e1937b",
       "bytes": 12524288,
       "retained": false,
@@ -1201,7 +1201,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_01115_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_01115_edges.zip",
       "sha256": "746792b75d4b4b84fc550365d61847a9f8ce7245a8327429b410d0a8e3bb7c00",
       "bytes": 4043592,
       "retained": false,
@@ -1209,7 +1209,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_01117_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_01117_edges.zip",
       "sha256": "cba73ac0670b95d1121ba85259de52acc772eed65aef4c496a8d6f90517c7cb0",
       "bytes": 11952656,
       "retained": false,
@@ -1217,7 +1217,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_01127_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_01127_edges.zip",
       "sha256": "ab9b5b6a25bca6b774961eef2465e01fd05eb5b35689b029c47d3348aed12378",
       "bytes": 4716891,
       "retained": false,
@@ -1225,7 +1225,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_04013_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_04013_edges.zip",
       "sha256": "e08a2302d766a851e7ce06c2b073376ae5d7decdb52eb43c122a0a6ce0cd80e8",
       "bytes": 51973051,
       "retained": false,
@@ -1233,7 +1233,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_04021_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_04021_edges.zip",
       "sha256": "9805f58cf7d180fe0e64a3ac1ed22d90772892e26952b95ba21cf79b67822c8f",
       "bytes": 19891488,
       "retained": false,
@@ -1241,7 +1241,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_05035_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_05035_edges.zip",
       "sha256": "67ed0841f1dd14487a8542881b25da7126f46982b67dbb0a32e54da84276b5bc",
       "bytes": 2344079,
       "retained": false,
@@ -1249,7 +1249,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_06001_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_06001_edges.zip",
       "sha256": "0e5c4c103ac1488700a77f8332c2340d83ddcfb461ef88bf235bc18434bd60fa",
       "bytes": 11987386,
       "retained": false,
@@ -1257,7 +1257,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_06013_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_06013_edges.zip",
       "sha256": "7d25b800572707b9f09505f771e52892afd91768c4aa268c5510cfce2ff83995",
       "bytes": 12309073,
       "retained": false,
@@ -1265,7 +1265,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_06037_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_06037_edges.zip",
       "sha256": "cb3a18a9df9ea6cc830245fbdd03b81a1c34108a296dcfafd643c5b1819a5919",
       "bytes": 50675194,
       "retained": false,
@@ -1273,7 +1273,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_06041_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_06041_edges.zip",
       "sha256": "1b313986a31a12b11f6b1d3e75e7b9b9c2405ddf0ca94445795a6dfbe1fdb558",
       "bytes": 3908024,
       "retained": false,
@@ -1281,7 +1281,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_06059_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_06059_edges.zip",
       "sha256": "885f9de07a6933bb856cd42e9b8db612e8f9617218f03dc60fbe9b81e9ba0f0d",
       "bytes": 18705986,
       "retained": false,
@@ -1289,7 +1289,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_06073_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_06073_edges.zip",
       "sha256": "790d605304433c0f097d31678581301d5c34ab1ef690b775ce9b75912300a8a1",
       "bytes": 29587093,
       "retained": false,
@@ -1297,7 +1297,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_06075_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_06075_edges.zip",
       "sha256": "e5e5484038e69ad33d6fd41c3ca71ed9516281e850f05be6e2c232c8bc55da07",
       "bytes": 1721916,
       "retained": false,
@@ -1305,7 +1305,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_06081_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_06081_edges.zip",
       "sha256": "eb9ba974565c3473c0cc4588ce52b935c0b0cbfd7e6553f631574023d50f783b",
       "bytes": 5400953,
       "retained": false,
@@ -1313,7 +1313,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_08001_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_08001_edges.zip",
       "sha256": "523320930bb5f56e1e397436d8994a5430ec0554e85742483eb7752c49fcef93",
       "bytes": 6912205,
       "retained": false,
@@ -1321,7 +1321,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_08005_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_08005_edges.zip",
       "sha256": "156845366ea91977a0b655c75585beaa97a8156fe09d6cea90d9a68da4c769e4",
       "bytes": 5891187,
       "retained": false,
@@ -1329,7 +1329,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_08014_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_08014_edges.zip",
       "sha256": "2a95497e988447c58ad48e42133f46f238bf70d91557f90303d93fb179ccc746",
       "bytes": 901419,
       "retained": false,
@@ -1337,7 +1337,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_08019_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_08019_edges.zip",
       "sha256": "30850354c4d65c8c7bee92714b5a650dcbf2fded84aeb88ac1e7ce8e1472236d",
       "bytes": 2102474,
       "retained": false,
@@ -1345,7 +1345,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_08031_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_08031_edges.zip",
       "sha256": "d3769c8b1e02446e42411219c10c127a1f9ef2ed561ada5ca7958dc7cdc6115e",
       "bytes": 3526730,
       "retained": false,
@@ -1353,7 +1353,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_08035_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_08035_edges.zip",
       "sha256": "e72db66547447d47c2bbb24690713ef3b888ddf7f56d468b57e141af32de17c6",
       "bytes": 5701090,
       "retained": false,
@@ -1361,7 +1361,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_08039_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_08039_edges.zip",
       "sha256": "85a31a59ab11b7599beb3482063f1fd690829377e18438e7185a2d434d528cc8",
       "bytes": 3020923,
       "retained": false,
@@ -1369,7 +1369,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_08047_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_08047_edges.zip",
       "sha256": "5481ea9c44d2c93f68aca41a0d34311c2993a05c6bb2fdb51c7e6b3126a00864",
       "bytes": 986207,
       "retained": false,
@@ -1377,7 +1377,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_08059_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_08059_edges.zip",
       "sha256": "595fe9cb16064d376f47726d3ded5155eaa8f8db4398d5e2dc8a23087ea3dafa",
       "bytes": 8211082,
       "retained": false,
@@ -1385,7 +1385,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_08093_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_08093_edges.zip",
       "sha256": "ea32502f3cefb4110b9370a760d4c7566389007fe5d518d11213fb9420bf0e09",
       "bytes": 9552355,
       "retained": false,
@@ -1393,7 +1393,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_09110_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_09110_edges.zip",
       "sha256": "46d5c7dffa15ebbb32ce54a2f06098edf9ef1d7ced9364d753442fad73e324f9",
       "bytes": 9865548,
       "retained": false,
@@ -1401,7 +1401,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_09130_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_09130_edges.zip",
       "sha256": "797d32f3fdee553dc5966e4761732b89227e60bb7af7be1435a3cc0c1e17a3cd",
       "bytes": 3981440,
       "retained": false,
@@ -1409,7 +1409,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12003_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12003_edges.zip",
       "sha256": "876de056c1f0808c93f8c4ea1fc0f57bf05a8bd100b132c0b32eb0046709ee4e",
       "bytes": 1025194,
       "retained": false,
@@ -1417,7 +1417,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12011_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12011_edges.zip",
       "sha256": "88cfa4766f3be562dd1d80540f95c26679f95d162efd807d0f1ae8d34da22497",
       "bytes": 11295737,
       "retained": false,
@@ -1425,7 +1425,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12019_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12019_edges.zip",
       "sha256": "6ea0b4dff1e48f0edf78931b74b8c3347ddd1c052af87826857bbf5203688b01",
       "bytes": 3573311,
       "retained": false,
@@ -1433,7 +1433,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12031_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12031_edges.zip",
       "sha256": "04a17efcd70ffa808519155079b252b201abeb76fd1b439b771bcd87e7e09f86",
       "bytes": 7602861,
       "retained": false,
@@ -1441,7 +1441,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12053_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12053_edges.zip",
       "sha256": "e60fd0245c62cd758699a1f230ef0e635072f4667d82fa19535b2916cc9c5d7b",
       "bytes": 3688385,
       "retained": false,
@@ -1449,7 +1449,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12057_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12057_edges.zip",
       "sha256": "364d2f172ad1264700492e2a67b09a9beb7d271e705b0a0aac0fb14246cad18c",
       "bytes": 14232313,
       "retained": false,
@@ -1457,7 +1457,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12069_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12069_edges.zip",
       "sha256": "facb1a7effc39878d58bb8632ff00de1fc7c9e6aed716bbbc31bc70fc1e2668d",
       "bytes": 9088729,
       "retained": false,
@@ -1465,7 +1465,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12086_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12086_edges.zip",
       "sha256": "a572144b056b45bd93780e9b3620313b98009213bc1e1432e1179af579b04abd",
       "bytes": 14186523,
       "retained": false,
@@ -1473,7 +1473,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12089_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12089_edges.zip",
       "sha256": "105b5ee8cfb303e041cf5b18755a6e0bc1d49adfd893db184f27a020764da80e",
       "bytes": 2493145,
       "retained": false,
@@ -1481,7 +1481,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12095_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12095_edges.zip",
       "sha256": "af20f412084f04f87d5e30bf99ebe4c3a37e609845712fffa920a4755ebc807b",
       "bytes": 12658967,
       "retained": false,
@@ -1489,7 +1489,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12097_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12097_edges.zip",
       "sha256": "dbe09aa238cfab9b55e7fc53cf5b622637a5028315d7f0d769e06f9666dd80af",
       "bytes": 4697990,
       "retained": false,
@@ -1497,7 +1497,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12099_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12099_edges.zip",
       "sha256": "c2786b3da9ee7794ce150458436350ca993b55c7cad1bffbc5be0559a7aabc02",
       "bytes": 10167175,
       "retained": false,
@@ -1505,7 +1505,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12101_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12101_edges.zip",
       "sha256": "8920df7bc93553c0987653f3f9b63d39411b5a33f2ea5cc1718ee8493cf8605d",
       "bytes": 5973103,
       "retained": false,
@@ -1513,7 +1513,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12103_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12103_edges.zip",
       "sha256": "8026d39825d5e282c87a88b4a15764e5af16044359e49b15d015663aa060131c",
       "bytes": 9326204,
       "retained": false,
@@ -1521,7 +1521,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12109_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12109_edges.zip",
       "sha256": "1093cb0b5114b72f6689d3756530231cd548fb5ff81f9846e000a6adbe6accb9",
       "bytes": 6159658,
       "retained": false,
@@ -1529,7 +1529,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_12117_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_12117_edges.zip",
       "sha256": "78bfaeca92d86b0d719e636ff2a393a8e5229cfd8f921dcc822ec49d9e82bd94",
       "bytes": 4438251,
       "retained": false,
@@ -1537,7 +1537,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13013_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13013_edges.zip",
       "sha256": "5e307da432087e0e8acc9ec8304a74048efabea3c62effc38edf9826a7f60d3a",
       "bytes": 2021139,
       "retained": false,
@@ -1545,7 +1545,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13015_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13015_edges.zip",
       "sha256": "7743411fe999789d8fa3d2b96b1e73122170901c92fc3d949787675828bb83cf",
       "bytes": 3826099,
       "retained": false,
@@ -1553,7 +1553,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13035_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13035_edges.zip",
       "sha256": "26ff501e9e9a0860f6310bab8a03cfc51db344cb7d7624e8df6234e69f8dfb09",
       "bytes": 1014459,
       "retained": false,
@@ -1561,7 +1561,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13045_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13045_edges.zip",
       "sha256": "3753469a1373c7d02fb267068b29aaff0f96f35c84c5a85e79e7e613d83881be",
       "bytes": 2086326,
       "retained": false,
@@ -1569,7 +1569,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13057_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13057_edges.zip",
       "sha256": "faeca17189a21348ecac4c514b678d145650d01d58113055e71473029523d64c",
       "bytes": 4677945,
       "retained": false,
@@ -1577,7 +1577,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13063_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13063_edges.zip",
       "sha256": "31ab4342c14ca54941ea33d1fa76482657250c406fd0a8daf17e763668e4f9d5",
       "bytes": 2213445,
       "retained": false,
@@ -1585,7 +1585,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13067_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13067_edges.zip",
       "sha256": "8b741d1a0f634b57652ac905f2b55391340e9ca9047c12ca90c791ad794c7c57",
       "bytes": 7063832,
       "retained": false,
@@ -1593,7 +1593,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13077_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13077_edges.zip",
       "sha256": "41bcc149619ed182b6c5ff75eb49b5f3a05c41bc0b4d9bd5561121243c9c57da",
       "bytes": 2901252,
       "retained": false,
@@ -1601,7 +1601,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13085_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13085_edges.zip",
       "sha256": "8905bd260a7ae689b78eaf58682b3d594349e95cbedc2ea4853b88c03262464c",
       "bytes": 1249210,
       "retained": false,
@@ -1609,7 +1609,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13089_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13089_edges.zip",
       "sha256": "7c6f3fec43269692cc480718167f33188d9a6ec0801383b576cf222f1a7e0933",
       "bytes": 4856753,
       "retained": false,
@@ -1617,7 +1617,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13097_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13097_edges.zip",
       "sha256": "62c73b43f4eacbededb09a0ed2f63f8ee1091287cd2f6d664d2143290eaf724f",
       "bytes": 1603030,
       "retained": false,
@@ -1625,7 +1625,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13113_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13113_edges.zip",
       "sha256": "4a2e0fab05587c28def875fb845bbcee3f8c80fa1c4570b580bc12dc626a819a",
       "bytes": 2076829,
       "retained": false,
@@ -1633,7 +1633,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13117_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13117_edges.zip",
       "sha256": "2aea2d326fa3c803130e5b58cc0d71be5876b458ad54b15bb59448b07b269ea2",
       "bytes": 2483076,
       "retained": false,
@@ -1641,7 +1641,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13121_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13121_edges.zip",
       "sha256": "2aa22d63aa45c5faa37eadfab012f42971263e1689d5713ff557d4f3bca2fed5",
       "bytes": 8499114,
       "retained": false,
@@ -1649,7 +1649,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13135_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13135_edges.zip",
       "sha256": "e87041058356e89590bc0bfc64bd847f29977980300162512ddccff35b51f720",
       "bytes": 7774311,
       "retained": false,
@@ -1657,7 +1657,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13143_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13143_edges.zip",
       "sha256": "94cb1dd95a77409b8926e30302bffea14acbee4ec5368dec7293fabc92d3008c",
       "bytes": 1808469,
       "retained": false,
@@ -1665,7 +1665,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13149_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13149_edges.zip",
       "sha256": "17cecbba76792bdf5ac4ba6a4e04e0206bb08f746eb0aa42623a6b97f82baedf",
       "bytes": 656608,
       "retained": false,
@@ -1673,7 +1673,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13151_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13151_edges.zip",
       "sha256": "6851f277fa52b59a7a89952957a07bea96d2e5d05590e4c0929d85d55a35466e",
       "bytes": 3844492,
       "retained": false,
@@ -1681,7 +1681,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13159_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13159_edges.zip",
       "sha256": "472369f4bfe12ce98b5ed84d669f64147abdb8fdcbf665b1e7cbdd9f6ae797f8",
       "bytes": 1201156,
       "retained": false,
@@ -1689,7 +1689,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13187_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13187_edges.zip",
       "sha256": "7cf7ad542b1e00a42e3c12e51c00a1a528bebc5aa3cf57a26b4a0812fd8a70ff",
       "bytes": 1522076,
       "retained": false,
@@ -1697,7 +1697,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13199_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13199_edges.zip",
       "sha256": "6d26550c2c4b34025d8b7118be9b999ffe04120e2930375a6823a346ba06bae0",
       "bytes": 1811395,
       "retained": false,
@@ -1705,7 +1705,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13211_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13211_edges.zip",
       "sha256": "cdb3a11bef432af05412f9ea40bc09680477f924545a36fb83a3a8b53ab3dd1f",
       "bytes": 2497532,
       "retained": false,
@@ -1713,7 +1713,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13217_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13217_edges.zip",
       "sha256": "ba10160e0dc1dc1d55759bafbf715cc368d49a6752682e2d7746ac045064ea98",
       "bytes": 2667266,
       "retained": false,
@@ -1721,7 +1721,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13223_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13223_edges.zip",
       "sha256": "38854a77a872ee88faa5bb866acc5c411f05f71dc4afb210ff9787f244cc390e",
       "bytes": 2820596,
       "retained": false,
@@ -1729,7 +1729,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13227_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13227_edges.zip",
       "sha256": "dfb5663c843e5884ec6653901c96d513ea43e32871d9109f36cf5bbb7c333169",
       "bytes": 1686721,
       "retained": false,
@@ -1737,7 +1737,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13231_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13231_edges.zip",
       "sha256": "00e735630445ba6e5557c5ecbef3b64d09f826a206343f62a55f0b611d600581",
       "bytes": 1178934,
       "retained": false,
@@ -1745,7 +1745,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13247_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13247_edges.zip",
       "sha256": "c52bce63731b03e22dbafc5e23d4fe79a66eda3745b8d8a9a26bf9d4cbd68a5a",
       "bytes": 1451292,
       "retained": false,
@@ -1753,7 +1753,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13255_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13255_edges.zip",
       "sha256": "498f01451b5e77dedaa7d4de9ffd9fe7a1c416ae8fae4916cd1d1d17c5b9b2d3",
       "bytes": 1238527,
       "retained": false,
@@ -1761,7 +1761,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_13297_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_13297_edges.zip",
       "sha256": "0ec270c22738e4b0926f20065871e8c5c47b9f7480fd6490349412923d8bfb0b",
       "bytes": 1935604,
       "retained": false,
@@ -1769,7 +1769,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18011_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18011_edges.zip",
       "sha256": "99df2591c9ab83eab2ac4fa6ffa8b602f09541c00f8a6f7eecbdc18f35ba5cb4",
       "bytes": 2020001,
       "retained": false,
@@ -1777,7 +1777,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18013_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18013_edges.zip",
       "sha256": "a2fae0894e58be56436aa702c6fc0a549ee83a96542be8f5814cb64fd7443c5b",
       "bytes": 1207302,
       "retained": false,
@@ -1785,7 +1785,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18019_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18019_edges.zip",
       "sha256": "5749dcfb42a446fcaf7121c384d872a9f233b0820a06bcb3d8d7fadd8a3243d3",
       "bytes": 3405662,
       "retained": false,
@@ -1793,7 +1793,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18029_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18029_edges.zip",
       "sha256": "a0a86a4ad7e969e7c28d7bb6a5667730509a67c2d2e250e09ae8a4638fac94a7",
       "bytes": 2092996,
       "retained": false,
@@ -1801,7 +1801,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18043_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18043_edges.zip",
       "sha256": "02093504fcbabc289d7bea74abea40ea3b2b8e99f368ed71bdd26c0b9b86280c",
       "bytes": 1837772,
       "retained": false,
@@ -1809,7 +1809,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18047_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18047_edges.zip",
       "sha256": "7d9a481d26069a148d2bae28c76c2aec7ebe3550280957190bb115b19530e615",
       "bytes": 2155994,
       "retained": false,
@@ -1817,7 +1817,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18057_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18057_edges.zip",
       "sha256": "952e6ab1c46cb903013925c188087de10069b7a0419bfd035310a28a09a21a3f",
       "bytes": 4203185,
       "retained": false,
@@ -1825,7 +1825,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18059_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18059_edges.zip",
       "sha256": "4c5b8afe95c5e19cdf686bfbbed39f9b58bbf0b70fbd864eff0ce7abf9824e28",
       "bytes": 1433360,
       "retained": false,
@@ -1833,7 +1833,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18061_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18061_edges.zip",
       "sha256": "52031ecdf8543596f7edec2a39d6c9bf7a22db26a4936ff323da1554b75cb379",
       "bytes": 1343405,
       "retained": false,
@@ -1841,7 +1841,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18063_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18063_edges.zip",
       "sha256": "1307b2760955bba6188e9a81428bb446e973ef1a179a5e6abae7e70b43ceed9a",
       "bytes": 3566943,
       "retained": false,
@@ -1849,7 +1849,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18081_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18081_edges.zip",
       "sha256": "bb61e5c2c3fe36e02e072926edbec22e83958e9c4eed7c624d46922263b56f9e",
       "bytes": 2699513,
       "retained": false,
@@ -1857,7 +1857,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18095_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18095_edges.zip",
       "sha256": "e12858e10417fd7936288dfa0c26d843a6b9c67df66b0e1fd27df8cb4e135111",
       "bytes": 1880649,
       "retained": false,
@@ -1865,7 +1865,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18097_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18097_edges.zip",
       "sha256": "9597f3aa70ad09cdf24ba6410b2481b512ce117505d9e9e1b0b5b7bfb98a550b",
       "bytes": 7888642,
       "retained": false,
@@ -1873,7 +1873,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18109_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18109_edges.zip",
       "sha256": "283cd2bedb13deb754d894f5a24cf87f7794d2bcd615ce9779727132dfb0a9a0",
       "bytes": 3365997,
       "retained": false,
@@ -1881,7 +1881,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18115_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18115_edges.zip",
       "sha256": "b160c4eb4b8a523dfca96c179c320be1eca4143341d587d376e6a0931179a556",
       "bytes": 285805,
       "retained": false,
@@ -1889,7 +1889,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18145_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18145_edges.zip",
       "sha256": "34a6e7a6dc339a9dc2df4424931500ae9c265dd51beb223d655ef05660074488",
       "bytes": 1759283,
       "retained": false,
@@ -1897,7 +1897,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18159_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18159_edges.zip",
       "sha256": "c14de3c0ef9a86e6a8f0a0f48c9b9017007c642c9909c267bd63c187efc4928c",
       "bytes": 651581,
       "retained": false,
@@ -1905,7 +1905,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_18175_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_18175_edges.zip",
       "sha256": "5009000c2200c4bd397dcfbafa856a1f20d856d70859d63c17865a37b05913db",
       "bytes": 2646547,
       "retained": false,
@@ -1913,7 +1913,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_20091_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_20091_edges.zip",
       "sha256": "a082d2d301816d989063e27bd5bdf1257b7a07c222ad72dcbcbd8509920f7c7f",
       "bytes": 7086297,
       "retained": false,
@@ -1921,7 +1921,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_20103_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_20103_edges.zip",
       "sha256": "c13eb1f841865da78de4a5a7eb99e036f315746bbfde3face2ff06000c5906c7",
       "bytes": 2063346,
       "retained": false,
@@ -1929,7 +1929,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_20107_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_20107_edges.zip",
       "sha256": "754a0fcdba80445bacc5cf1bdbee5ba2626ca25b0467cea357fd95b179c90475",
       "bytes": 4449888,
       "retained": false,
@@ -1937,7 +1937,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_20121_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_20121_edges.zip",
       "sha256": "8f1310c8299455e9ec69f12c7c6150222ca480271f0d7447fd3de04079d7afe4",
       "bytes": 5082298,
       "retained": false,
@@ -1945,7 +1945,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_20209_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_20209_edges.zip",
       "sha256": "d1fe9308955b0b36bd8032c82e13ea8c0bb9a1ef4ab0216f25cd8379f83f1465",
       "bytes": 2007835,
       "retained": false,
@@ -1953,7 +1953,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21015_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21015_edges.zip",
       "sha256": "52f305bbe317cf7e7cde14394d947593ab08aff7ccb6d0a74fe5c637b9610423",
       "bytes": 1403254,
       "retained": false,
@@ -1961,7 +1961,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21023_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21023_edges.zip",
       "sha256": "62d7d946dbc74741cd0c6c29974de1678b2d1e47a5e1ee21b0be95872006fbc8",
       "bytes": 1191695,
       "retained": false,
@@ -1969,7 +1969,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21029_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21029_edges.zip",
       "sha256": "6f22790b830d0e3664c2ccc6a9d46cea9b4a8531b16c08c926c1a4649a3dcf74",
       "bytes": 2377929,
       "retained": false,
@@ -1977,7 +1977,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21037_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21037_edges.zip",
       "sha256": "bd31f34432516ca679d721d9f869aeea17bcc81c9b516b691c575a9b37b318c5",
       "bytes": 1991078,
       "retained": false,
@@ -1985,7 +1985,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21077_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21077_edges.zip",
       "sha256": "44583b68bd46c5e13a861e5a3a11358244ad784e709ea45050a14575b9174325",
       "bytes": 789827,
       "retained": false,
@@ -1993,7 +1993,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21081_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21081_edges.zip",
       "sha256": "0f4b066b073e1e44794cbf320007e0a716f56aaf92b479fdf551bac27025539a",
       "bytes": 1959493,
       "retained": false,
@@ -2001,7 +2001,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21103_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21103_edges.zip",
       "sha256": "8466c9535d41af58874952a9369aa11cd8b973d429203515957f6eea562edb17",
       "bytes": 2053456,
       "retained": false,
@@ -2009,7 +2009,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21111_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21111_edges.zip",
       "sha256": "b6dbb25c3999f24de96a936c26720ff760f614bf8239aec92c08c4b7cda48ef8",
       "bytes": 12258479,
       "retained": false,
@@ -2017,7 +2017,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21117_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21117_edges.zip",
       "sha256": "cb19ec66fc1ab5b4d553a141fe4f2af32272ec85d63ea3a1e9ce739590b72266",
       "bytes": 5247508,
       "retained": false,
@@ -2025,7 +2025,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21163_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21163_edges.zip",
       "sha256": "25c41b4fdfd73a29395493d6fe7ea16b9e3bd4811e0a96bdb7c2f353de73b687",
       "bytes": 2085331,
       "retained": false,
@@ -2033,7 +2033,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21179_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21179_edges.zip",
       "sha256": "20e7c78d28c936c1f0e4927c44c870161f6c57e1a7522b702e8d2fe3e4baa2c1",
       "bytes": 2748108,
       "retained": false,
@@ -2041,7 +2041,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21185_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21185_edges.zip",
       "sha256": "8cb6cce0bb27d3ed7823e24bded607c14c1cddb0dd928421f6fbf159df16537c",
       "bytes": 2128869,
       "retained": false,
@@ -2049,7 +2049,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21191_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21191_edges.zip",
       "sha256": "299de4cec12ca4b1d46e7c6044e90136f2c1789b02b58b30395b34ad50a408d7",
       "bytes": 1839240,
       "retained": false,
@@ -2057,7 +2057,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21211_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21211_edges.zip",
       "sha256": "564fba2d2d646ab582c13482f51bc08c085306cd831bdc0b9028a91c1e7a60e4",
       "bytes": 2858808,
       "retained": false,
@@ -2065,7 +2065,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_21215_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_21215_edges.zip",
       "sha256": "efa8bf9197a296c7127a90f8ac159b003210a0ad28d063b7bfd5ca0936f3708f",
       "bytes": 1373487,
       "retained": false,
@@ -2073,7 +2073,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_25005_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_25005_edges.zip",
       "sha256": "48c8572b53f149394853de3587ccff7ee54cb8fe3967202960b878efc12cf9a6",
       "bytes": 7913662,
       "retained": false,
@@ -2081,7 +2081,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_28009_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_28009_edges.zip",
       "sha256": "8c5deddca20c9d6f81c19147119a22822e3ab7d98d812fabc8cf637601a4b680",
       "bytes": 1273540,
       "retained": false,
@@ -2089,7 +2089,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_28033_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_28033_edges.zip",
       "sha256": "24c2b8d562bcd4f597d4c51e84aec80f30923c3af7b55042349ecf463bb31637",
       "bytes": 2859834,
       "retained": false,
@@ -2097,7 +2097,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_28093_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_28093_edges.zip",
       "sha256": "54cdcbd7ecd60c1ac7b892310997c158c35eb57c30f0864b32a6af51e5c0914a",
       "bytes": 2618439,
       "retained": false,
@@ -2105,7 +2105,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_28137_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_28137_edges.zip",
       "sha256": "58d30bba0cb43fad115d5d3a65649dbc051c07cd5d0863d17f626f0c25080450",
       "bytes": 2237182,
       "retained": false,
@@ -2113,7 +2113,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_28143_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_28143_edges.zip",
       "sha256": "edde9410f92e4a80de681a16723578dc9acfd6bd3b4e517c485c095c909fbb6f",
       "bytes": 1265856,
       "retained": false,
@@ -2121,7 +2121,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_29013_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_29013_edges.zip",
       "sha256": "69d927b6c6bbda005ebed09baeb4fe1885f97188133c1d88d50fd531eb82da20",
       "bytes": 5562667,
       "retained": false,
@@ -2129,7 +2129,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_29025_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_29025_edges.zip",
       "sha256": "007d6d2cfdf4db1def6fd48e0978b6d194e374dbc3afe7953aec059d810f308a",
       "bytes": 4678555,
       "retained": false,
@@ -2137,7 +2137,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_29037_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_29037_edges.zip",
       "sha256": "b9239193b806067f968d1e42659034b2cd2e982602fa6dc1f825fd26791842a2",
       "bytes": 2682575,
       "retained": false,
@@ -2145,7 +2145,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_29047_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_29047_edges.zip",
       "sha256": "e7503b13b4042896262c7603e83ac4ab158bdb0ec8bee7ee8f46802efcda958d",
       "bytes": 3392458,
       "retained": false,
@@ -2153,7 +2153,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_29049_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_29049_edges.zip",
       "sha256": "254f5ba8edc0d9f2cf047944d0f35a33d1e7c1c267e699374d20b11cd03499e1",
       "bytes": 1774410,
       "retained": false,
@@ -2161,7 +2161,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_29095_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_29095_edges.zip",
       "sha256": "cb17d0a1105ee10bd9ff72effaa6f4a5a4d41f1ab73202a01001978c7eae9564",
       "bytes": 6650265,
       "retained": false,
@@ -2169,7 +2169,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_29107_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_29107_edges.zip",
       "sha256": "e40262e580115df2f528f66750aedc6f894cecc7bb13284e5efa091f08e306f5",
       "bytes": 3670606,
       "retained": false,
@@ -2177,7 +2177,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_29165_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_29165_edges.zip",
       "sha256": "f1c0ab16189c827dd551e6f3d616c0e60516f12c2b1c98d42e6836ca11a5dfd8",
       "bytes": 2185216,
       "retained": false,
@@ -2185,7 +2185,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_29177_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_29177_edges.zip",
       "sha256": "eb39668a865a3cdbe5d8e2170c04ce0268256c7abed785eda044de469c62a74e",
       "bytes": 1300248,
       "retained": false,
@@ -2193,7 +2193,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_32003_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_32003_edges.zip",
       "sha256": "6bd0f7cdb5d2d58834a553f0044df4e7ecd3961c2294ae42ebe67044b4905c8b",
       "bytes": 21911703,
       "retained": false,
@@ -2201,7 +2201,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_35001_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_35001_edges.zip",
       "sha256": "0cd08e5b7f9d980532fe9a7e9fbaef21a9843a726519e550ea005edc636f108a",
       "bytes": 7055725,
       "retained": false,
@@ -2209,7 +2209,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_35043_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_35043_edges.zip",
       "sha256": "161da75ab61608a4c6bbad63514748a1b729698dbf1cefb5f12b9db3513743ff",
       "bytes": 10618617,
       "retained": false,
@@ -2217,7 +2217,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_35057_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_35057_edges.zip",
       "sha256": "0d3a5a7771d89879ee74fc337f2f552cdb862d6e7ebcda6ccc80c477391ed096",
       "bytes": 3892200,
       "retained": false,
@@ -2225,7 +2225,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_35061_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_35061_edges.zip",
       "sha256": "e280b957dee34e90b1aca313005c43463eb974c8b237aae4153fe123bc6e2493",
       "bytes": 2645269,
       "retained": false,
@@ -2233,7 +2233,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_37029_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_37029_edges.zip",
       "sha256": "193c3e5362f54e19c87087d9b34c08ffd0fcff5c8796048ea70a5cde12a3ed51",
       "bytes": 314367,
       "retained": false,
@@ -2241,7 +2241,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_37053_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_37053_edges.zip",
       "sha256": "c883f85c90ac84548ec94cf1573fea03b0c75c104d504a0d6193956d24f55822",
       "bytes": 1234879,
       "retained": false,
@@ -2249,7 +2249,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_37069_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_37069_edges.zip",
       "sha256": "ed82512efe3f7e1aa13f98fbed3d6d406c0d0de5220de2568acef1c96f89d622",
       "bytes": 1855776,
       "retained": false,
@@ -2257,7 +2257,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_37073_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_37073_edges.zip",
       "sha256": "8e3fafb6869dd68bae7b4c1e689fcd060722baef0bcd5cf2b64f3afcedd66d9d",
       "bytes": 598912,
       "retained": false,
@@ -2265,7 +2265,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_37101_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_37101_edges.zip",
       "sha256": "cc3de664da2af5327d1c06e48594cdcfc12a38574834df876339b747b8a87189",
       "bytes": 4135122,
       "retained": false,
@@ -2273,7 +2273,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_37183_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_37183_edges.zip",
       "sha256": "7eaa0dd9f7c474dc4d8d367c4907ae9306b7c9851c21aa5df849a324205a91c3",
       "bytes": 13359569,
       "retained": false,
@@ -2281,7 +2281,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39007_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39007_edges.zip",
       "sha256": "0b8fd71271082bd895cf662c790f1fcf8258be03464c2b7bb5dd32edd4c40a68",
       "bytes": 2257681,
       "retained": false,
@@ -2289,7 +2289,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39015_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39015_edges.zip",
       "sha256": "2573b0a9c9f3a9089949e881f82ef0c91c99382efb357ef8feefdd2c87288b25",
       "bytes": 2479329,
       "retained": false,
@@ -2297,7 +2297,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39017_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39017_edges.zip",
       "sha256": "18948e70c367f86a14f46f8c19339717e4d753eb45926526ee29972280a090cb",
       "bytes": 3816359,
       "retained": false,
@@ -2305,7 +2305,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39025_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39025_edges.zip",
       "sha256": "fe2b9e95903a0f1976ce457348a8adb27b0445768a1e8ad07b2543c029677e51",
       "bytes": 4879470,
       "retained": false,
@@ -2313,7 +2313,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39035_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39035_edges.zip",
       "sha256": "f905183be97110bb4078b17da37f211bb52b71cabbc8d82a024ac73e80b3309f",
       "bytes": 6832625,
       "retained": false,
@@ -2321,7 +2321,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39041_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39041_edges.zip",
       "sha256": "c8305b8a8f7c51ca44085f93005b81284a2e33233075ba9595b1fbdd1da0d210",
       "bytes": 2694685,
       "retained": false,
@@ -2329,7 +2329,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39045_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39045_edges.zip",
       "sha256": "1802239a72556d65a60175e0140ed9cbb791b60460000dd74d8d71a4ae57b79a",
       "bytes": 3274102,
       "retained": false,
@@ -2337,7 +2337,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39049_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39049_edges.zip",
       "sha256": "059b9f8a27edf8546d6422481cf22d748d934e4abbe2bef7e9e1fca6b213ea9c",
       "bytes": 12254290,
       "retained": false,
@@ -2345,7 +2345,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39055_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39055_edges.zip",
       "sha256": "0ec1676f662854cc06557c1b7c162d7e626d69969d35c7c543ee5132a86033b2",
       "bytes": 1668068,
       "retained": false,
@@ -2353,7 +2353,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39061_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39061_edges.zip",
       "sha256": "855eb3c6d4536ba5b2ddf6bbbe8021363f11d70bdf7a4ee27b74d64b250f27e3",
       "bytes": 5847013,
       "retained": false,
@@ -2361,7 +2361,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39073_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39073_edges.zip",
       "sha256": "5ed93d04e1edede906ef478667e45b27b01d73318d390990ed36f1f1f5f7d71c",
       "bytes": 3180531,
       "retained": false,
@@ -2369,7 +2369,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39085_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39085_edges.zip",
       "sha256": "59157b2da2809448dcdf5dcd6a93b29ed3acb060625f013b3dec3a521abd0d4c",
       "bytes": 2356182,
       "retained": false,
@@ -2377,7 +2377,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39089_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39089_edges.zip",
       "sha256": "3bb204108b8ef2d93bbbed5d872fefd7894052f8344a6f291b869047ebfe4903",
       "bytes": 7534932,
       "retained": false,
@@ -2385,7 +2385,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39093_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39093_edges.zip",
       "sha256": "e74250585eb4d96fd01ac50b91ad443cee34fc6e6758c8e8a9b2d0e4ad74aff2",
       "bytes": 4292294,
       "retained": false,
@@ -2393,7 +2393,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39097_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39097_edges.zip",
       "sha256": "f9d5740a21458e28562e37d8834c835e1d2b9a71f5cea7758fafa7c2d79e087f",
       "bytes": 997191,
       "retained": false,
@@ -2401,7 +2401,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39103_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39103_edges.zip",
       "sha256": "fe7dd8fb4fd65f8c6b4e741d81dbf5dca2289b8391c9a89ae3153ec2d6ebacd4",
       "bytes": 1556703,
       "retained": false,
@@ -2409,7 +2409,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39117_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39117_edges.zip",
       "sha256": "f0e93f6d5692d8dd523bc6c89d7125a41dac67d0fe7647efaa2aa8490b22ed98",
       "bytes": 912040,
       "retained": false,
@@ -2417,7 +2417,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39127_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39127_edges.zip",
       "sha256": "2746bb9b45ac37acf5281e6604bedbd6c453f5403e7e1241b9f2b264136377d5",
       "bytes": 3462246,
       "retained": false,
@@ -2425,7 +2425,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39129_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39129_edges.zip",
       "sha256": "33521b8bb569d05512134f1ff35e70f540e281a39daf3398275c59bfb8d6b300",
       "bytes": 2251892,
       "retained": false,
@@ -2433,7 +2433,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39159_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39159_edges.zip",
       "sha256": "bfbb28b14cff23b3a12dd9fede5ad5de8e42ee4f291d4ab9aea43f075b3667f9",
       "bytes": 2818710,
       "retained": false,
@@ -2441,7 +2441,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_39165_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_39165_edges.zip",
       "sha256": "dd57c778fdde777f246f7d824ce788be1db089c8b0551343d3fd0e1b91e78360",
       "bytes": 3085233,
       "retained": false,
@@ -2449,7 +2449,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40017_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40017_edges.zip",
       "sha256": "1b7f09dae172d804eea6448d5bd01cfc5af34245395ad69db4b5778a09930582",
       "bytes": 5535588,
       "retained": false,
@@ -2457,7 +2457,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40027_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40027_edges.zip",
       "sha256": "1c38772da62b38f8f2b229b263cebe29f2680f399de11cf1abc7ec931b330af8",
       "bytes": 5763188,
       "retained": false,
@@ -2465,7 +2465,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40037_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40037_edges.zip",
       "sha256": "2d0ea00f072e91858de1da37e336543bd098493ef72a38ecad96a48fb8cbde85",
       "bytes": 8876595,
       "retained": false,
@@ -2473,7 +2473,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40051_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40051_edges.zip",
       "sha256": "d25e1ce691fdb91c10942a6dac0b4a8423b6e9143925be4463e362858aafcc78",
       "bytes": 3153077,
       "retained": false,
@@ -2481,7 +2481,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40081_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40081_edges.zip",
       "sha256": "4093c2ab3aa13b33c2085b79e22f9295120ce8a907241b9ced6318cef175796e",
       "bytes": 6693700,
       "retained": false,
@@ -2489,7 +2489,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40083_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40083_edges.zip",
       "sha256": "3582c75e1733b1852a79d01140f6dba362e7d101c638bc4461462f6c80ca366d",
       "bytes": 3694420,
       "retained": false,
@@ -2497,7 +2497,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40087_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40087_edges.zip",
       "sha256": "833d1acb480cc83a975b6f74afaec04489d8f58511058988935ac7040f2cc069",
       "bytes": 3982885,
       "retained": false,
@@ -2505,7 +2505,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40109_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40109_edges.zip",
       "sha256": "920d84f889546e3a6a88f3e2560dfa0b3c669a9a6f01d5d0875711a0bc9c9499",
       "bytes": 7520632,
       "retained": false,
@@ -2513,7 +2513,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40111_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40111_edges.zip",
       "sha256": "5f52a3b9e78cc8b71cfd35fadb2c7dcc2881a06050893757e596da5c20dabe4b",
       "bytes": 3993672,
       "retained": false,
@@ -2521,7 +2521,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40113_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40113_edges.zip",
       "sha256": "87f57d7acacab84a6526b9b90c5e6f1c253f07f484bcf600137cdb5868a9f3ef",
       "bytes": 14668985,
       "retained": false,
@@ -2529,7 +2529,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40117_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40117_edges.zip",
       "sha256": "2622be44d16f092dd2c7a5d74f9303ea17995fba0fa8abc1e73ad336f8ad9307",
       "bytes": 2463230,
       "retained": false,
@@ -2537,7 +2537,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40131_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40131_edges.zip",
       "sha256": "f9afcd5cac90341cc2f313b1f2fb798cc48b8d332ea4e6d5ff952ebf49e34ecc",
       "bytes": 3637228,
       "retained": false,
@@ -2545,7 +2545,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40143_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40143_edges.zip",
       "sha256": "d6e2b4ddfacf251fc70bcfa7ee0d34e410210c218503e43968e2a822f9679c2b",
       "bytes": 5424828,
       "retained": false,
@@ -2553,7 +2553,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_40145_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_40145_edges.zip",
       "sha256": "716731c5d4b10122beb7a72bf814efe3d23303a7f622582c268ca6a180f17923",
       "bytes": 3065774,
       "retained": false,
@@ -2561,7 +2561,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_44001_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_44001_edges.zip",
       "sha256": "d587f236fd0dba373a477daf15e011018d0a319d06ff1f3623b9d151ac044233",
       "bytes": 688633,
       "retained": false,
@@ -2569,7 +2569,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_44003_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_44003_edges.zip",
       "sha256": "9bd299869c59c99b8e4b5f2a50d3a563c3a515b238617b0098385bffcf26ab81",
       "bytes": 3737448,
       "retained": false,
@@ -2577,7 +2577,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_44005_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_44005_edges.zip",
       "sha256": "4da86347d7fd42869c14b4a70db50a80c81408f2563db99345a953d9e3fa4edb",
       "bytes": 2289069,
       "retained": false,
@@ -2585,7 +2585,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_44007_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_44007_edges.zip",
       "sha256": "9a4a4ca0a2af892ab0a522f1b45e04818bbfff0d80a8108a7fdd13498d423fb1",
       "bytes": 8640284,
       "retained": false,
@@ -2593,7 +2593,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_44009_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_44009_edges.zip",
       "sha256": "80a720405583052c9cd876f501c711b29524dc84f2fc01a43bc941be49b813c6",
       "bytes": 5403970,
       "retained": false,
@@ -2601,7 +2601,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47015_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47015_edges.zip",
       "sha256": "b3a078f67853212e98e3c209f751a25d29c7113b9a1fb08d42c2925decd916f9",
       "bytes": 1057562,
       "retained": false,
@@ -2609,7 +2609,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47021_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47021_edges.zip",
       "sha256": "20b2d6fb06404ddd39be92cfb30b59830e79eb0437851292b2994f03d7f37bbd",
       "bytes": 1433303,
       "retained": false,
@@ -2617,7 +2617,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47037_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47037_edges.zip",
       "sha256": "63ac95312d910ccd42510aed845c14aec40e51d38a2f20a085d2b199cec290bf",
       "bytes": 6276244,
       "retained": false,
@@ -2625,7 +2625,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47043_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47043_edges.zip",
       "sha256": "99d820139e5ceeaa3fc5a127845f6f18eb1c0a94faf42ab74868772a7a09bc2c",
       "bytes": 2590271,
       "retained": false,
@@ -2633,7 +2633,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47047_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47047_edges.zip",
       "sha256": "ee2de83f2e5b030042c3e563b982f21c5ac096d12d3726471c68524395c1e011",
       "bytes": 2660719,
       "retained": false,
@@ -2641,7 +2641,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47081_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47081_edges.zip",
       "sha256": "4ff7a5ce7056d3452377a4d87ab269fb204afbedf801e69d127255b10f87a717",
       "bytes": 3202823,
       "retained": false,
@@ -2649,7 +2649,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47111_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47111_edges.zip",
       "sha256": "1113262dc5c19fad27f795ed9fc96532b78e58593d4bb07b2e6e7108fdbad426",
       "bytes": 1388259,
       "retained": false,
@@ -2657,7 +2657,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47119_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47119_edges.zip",
       "sha256": "1582870e69e8f74d6fadf1f540a4266212404be1f0b755bc8778c1c707b43cef",
       "bytes": 3704734,
       "retained": false,
@@ -2665,7 +2665,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47147_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47147_edges.zip",
       "sha256": "354339d62ee78ccb3dd97cfa98187b1cfe4ea101c6c0423ff36d5c2be04cc228",
       "bytes": 1913621,
       "retained": false,
@@ -2673,7 +2673,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47149_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47149_edges.zip",
       "sha256": "ff2db270ec8c040e5ee19e68551ecf6c4691bc437f49130f8469ca0362620050",
       "bytes": 3601191,
       "retained": false,
@@ -2681,7 +2681,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47157_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47157_edges.zip",
       "sha256": "02274eb34663906497d72c2c0595501d4c74700be103255cecb2dfa39ff880ee",
       "bytes": 8860002,
       "retained": false,
@@ -2689,7 +2689,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47159_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47159_edges.zip",
       "sha256": "3af82bae261f204ba503774ba8f6aa00c7bd3c45a2ac7448224f04e91f219983",
       "bytes": 2013481,
       "retained": false,
@@ -2697,7 +2697,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47165_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47165_edges.zip",
       "sha256": "f7092cfbe48f3b514ad232ae5ca54f31744b28e2710c97105d9dd52e67d9f743",
       "bytes": 3316441,
       "retained": false,
@@ -2705,7 +2705,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47167_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47167_edges.zip",
       "sha256": "e961df916229688764cc32403cf79550ba7fc082e8ae1386f8c2f6c970091f9f",
       "bytes": 1719483,
       "retained": false,
@@ -2713,7 +2713,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47169_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47169_edges.zip",
       "sha256": "cee8df4873bb02439a8d47689afbe9711325fffa51bd52b87892e63010a45f02",
       "bytes": 540135,
       "retained": false,
@@ -2721,7 +2721,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47187_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47187_edges.zip",
       "sha256": "695a7759380ed6d97b212a39bf47b7f32c75a9bc93ff32c546f7849654b668a0",
       "bytes": 4427326,
       "retained": false,
@@ -2729,7 +2729,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_47189_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_47189_edges.zip",
       "sha256": "ef3498a6250d7858fabbd3e2c7ffe5ff7f7db80c8895983fb9da7ddb79d20273",
       "bytes": 3440415,
       "retained": false,
@@ -2737,7 +2737,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48013_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48013_edges.zip",
       "sha256": "f6fb35adfd627889623e935b72922eb419c69e394e73b5112de9ca92644eb913",
       "bytes": 3191513,
       "retained": false,
@@ -2745,7 +2745,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48015_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48015_edges.zip",
       "sha256": "309ed6f7bbc2af7334ed9cf106db431e16cb5a687cd85551ce361ad51768099b",
       "bytes": 4524289,
       "retained": false,
@@ -2753,7 +2753,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48019_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48019_edges.zip",
       "sha256": "b540d15ab5a0baffdfe06900eb21795af07ad0d223b3ccbdbfda0079c3d5b62c",
       "bytes": 4598608,
       "retained": false,
@@ -2761,7 +2761,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48021_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48021_edges.zip",
       "sha256": "3bb080a1bce1174b9ecbd03bf7ea9228a9b5e250285d5800354d3afaadaa11b4",
       "bytes": 4298780,
       "retained": false,
@@ -2769,7 +2769,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48029_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48029_edges.zip",
       "sha256": "bbe0c735d16678799f0a88b480bb49a68e3b97b60f2bfa2a68bcf5f8081e5fd4",
       "bytes": 16145019,
       "retained": false,
@@ -2777,7 +2777,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48039_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48039_edges.zip",
       "sha256": "b0667c02c6f983869cf0690e551d978c18cb3ba6a8af4a15eb4316033d11eba7",
       "bytes": 5336965,
       "retained": false,
@@ -2785,7 +2785,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48055_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48055_edges.zip",
       "sha256": "655b439f049f05f8b6df189b63be19d77e42cd58dc88138217d7492445280e24",
       "bytes": 2308271,
       "retained": false,
@@ -2793,7 +2793,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48071_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48071_edges.zip",
       "sha256": "e01f72c025b12f03af4b79dfff68daa125c5d3ef4634f308980dd0fe791cea7e",
       "bytes": 1999749,
       "retained": false,
@@ -2801,7 +2801,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48085_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48085_edges.zip",
       "sha256": "ee8c73041c169c820486f247ed07ac2fe6e5422177014372ee4587fdf06fae7d",
       "bytes": 10866597,
       "retained": false,
@@ -2809,7 +2809,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48091_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48091_edges.zip",
       "sha256": "47aaba3f2d56a88891dd643088e905677721e46471e28ba2d51e4570aafe79e2",
       "bytes": 4224064,
       "retained": false,
@@ -2817,7 +2817,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48113_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48113_edges.zip",
       "sha256": "86f089eb83f9954a4f7b8af5d46b3e5d316e506a582adc8619f5818f0597213a",
       "bytes": 15844667,
       "retained": false,
@@ -2825,7 +2825,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48121_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48121_edges.zip",
       "sha256": "5c6c0c3e6f834bf39464f3e6d7e2531fa2f4117000aa4df1029a0f72e9e3f1f0",
       "bytes": 9905424,
       "retained": false,
@@ -2833,7 +2833,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48139_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48139_edges.zip",
       "sha256": "d545cc9769d2e9211c9579c0a113d3e138f648b501fafad566c7a6fdd060f7f8",
       "bytes": 5241395,
       "retained": false,
@@ -2841,7 +2841,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48141_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48141_edges.zip",
       "sha256": "7e8a43eb8c4c7d9dda810ee88bf8190a250a5675ab1d59aef3735d4715ff3fd1",
       "bytes": 6685351,
       "retained": false,
@@ -2849,7 +2849,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48157_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48157_edges.zip",
       "sha256": "65f7d2b5a0ecc7f360fcbde5aaf1a2cd306cfb50fba5a37b71da804862816167",
       "bytes": 9428897,
       "retained": false,
@@ -2857,7 +2857,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48167_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48167_edges.zip",
       "sha256": "1ae3cf25ab5a209c52333e0a8de93efc0f4d34a493f487be3aff59271037c523",
       "bytes": 4090641,
       "retained": false,
@@ -2865,7 +2865,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48187_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48187_edges.zip",
       "sha256": "1e26fc3166125fa6b27a5a2918bc59ef3ab28c93860e7e83c661fc4fc835247b",
       "bytes": 4280986,
       "retained": false,
@@ -2873,7 +2873,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48201_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48201_edges.zip",
       "sha256": "1b5b802ccedfb8991e4291dc861ee796036bcecf040eaea480aecd6963f2e3c8",
       "bytes": 34182569,
       "retained": false,
@@ -2881,7 +2881,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48209_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48209_edges.zip",
       "sha256": "b465e784717ad1cc6c80438fa9f1abcdd5674b4c044e14e950e39d6c645286fc",
       "bytes": 2898623,
       "retained": false,
@@ -2889,7 +2889,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48229_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48229_edges.zip",
       "sha256": "33e247c55ad01180ae74cdc0ba2974529ac8ba4bc5f77bda3b4b8bde24f4508e",
       "bytes": 5424386,
       "retained": false,
@@ -2897,7 +2897,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48231_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48231_edges.zip",
       "sha256": "198fc1cf602a8d62b3a772562e087f1832582ca35abc260818f79f0f30e10246",
       "bytes": 4670665,
       "retained": false,
@@ -2905,7 +2905,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48251_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48251_edges.zip",
       "sha256": "ec5e427f4302c6c6dacb8e762f98b59c69d94f056a25b7e99e76c4956aabe755",
       "bytes": 5802814,
       "retained": false,
@@ -2913,7 +2913,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48257_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48257_edges.zip",
       "sha256": "e3dd7a0f1b6a34ec9c614fca75b7ba41de57d4f333aec6399c65304e94c07981",
       "bytes": 4536935,
       "retained": false,
@@ -2921,7 +2921,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48259_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48259_edges.zip",
       "sha256": "00e84be1cc2e659ac3fc288acaf2f006950dce9b0904a986fb779b6c72bd2351",
       "bytes": 1920876,
       "retained": false,
@@ -2929,7 +2929,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48291_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48291_edges.zip",
       "sha256": "dcf3d5bd63b6f2779a5ea30837fbda07db416615fa8074d44c524d0f61ee648c",
       "bytes": 3259804,
       "retained": false,
@@ -2937,7 +2937,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48325_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48325_edges.zip",
       "sha256": "cbc0e5866c17edc225333d62e2300eac2b69f416d0f988c7f4376f3e666e0522",
       "bytes": 5690159,
       "retained": false,
@@ -2945,7 +2945,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48339_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48339_edges.zip",
       "sha256": "139f6cec9880163d29e96872ad4a3137c0c8a6e058782cd5f8b111552f43287c",
       "bytes": 5649756,
       "retained": false,
@@ -2953,7 +2953,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48367_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48367_edges.zip",
       "sha256": "795bc6187b546c5426e8d18936bd7e4aadfdd63f6bb81e46cffc10d20e541bd4",
       "bytes": 4267943,
       "retained": false,
@@ -2961,7 +2961,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48397_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48397_edges.zip",
       "sha256": "342fb49f12a5047f04e962f071f66d9c6b03f1c70232d4b8901a88bd75a76593",
       "bytes": 1523651,
       "retained": false,
@@ -2969,7 +2969,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48407_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48407_edges.zip",
       "sha256": "acef1a17eb7d10fec0a273bb77cccfcc70d1c608fde04e833a47499ae35f82c7",
       "bytes": 3025654,
       "retained": false,
@@ -2977,7 +2977,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48439_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48439_edges.zip",
       "sha256": "d53540399fdf2265c502f744628f209f2c904691547171c323b5d26cd1254e33",
       "bytes": 13502213,
       "retained": false,
@@ -2985,7 +2985,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48453_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48453_edges.zip",
       "sha256": "7d49d45ecaa81ae7c7efc276e19af888b06f6934bd40506482d759a36287e5d5",
       "bytes": 15591668,
       "retained": false,
@@ -2993,7 +2993,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48473_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48473_edges.zip",
       "sha256": "6a020606668340c5d96436c83a00fa37b5978f6b851175dc29d342b70ea64731",
       "bytes": 1514160,
       "retained": false,
@@ -3001,7 +3001,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48491_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48491_edges.zip",
       "sha256": "a493bbc3949c3958a0df308c267a52a19a45e28b938ecb154703316fc7249332",
       "bytes": 10152573,
       "retained": false,
@@ -3009,7 +3009,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48493_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48493_edges.zip",
       "sha256": "37eb94b1a416af4ce90c5f1dc00b4bd5be1d5ecac0f97ef7717d53eb845826d6",
       "bytes": 4520662,
       "retained": false,
@@ -3017,7 +3017,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_48497_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_48497_edges.zip",
       "sha256": "198ca6df138810f037c8282af16560c820e66913ec82458b74f6b572a7d8e9b1",
       "bytes": 4993563,
       "retained": false,
@@ -3025,7 +3025,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_49035_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_49035_edges.zip",
       "sha256": "7f9777936a8b1df757990d3c07e7318d258561441793fb4312b919c5ba1322e3",
       "bytes": 8973189,
       "retained": false,
@@ -3033,7 +3033,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_49045_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_49045_edges.zip",
       "sha256": "8f57aa2e139fd020eed208aed860886b487e584104f3eec61f1e41699082a77a",
       "bytes": 10980674,
       "retained": false,
@@ -3041,7 +3041,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51007_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51007_edges.zip",
       "sha256": "4b5732b5ccc32827b06c379fec18945953d54ddce4c72c9d6fc0e6b8ce74680f",
       "bytes": 2750141,
       "retained": false,
@@ -3049,7 +3049,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51036_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51036_edges.zip",
       "sha256": "ae1b9cbdb6de51eedb0844ea6a1fccf080ca21c93a8657f9fea248bc0df031c3",
       "bytes": 968344,
       "retained": false,
@@ -3057,7 +3057,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51041_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51041_edges.zip",
       "sha256": "31c0c0cdbb6f08fd80f6d33da59098bdc45faf0f35e2063b43d1950dcff70780",
       "bytes": 6658353,
       "retained": false,
@@ -3065,7 +3065,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51053_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51053_edges.zip",
       "sha256": "6268931cb41927085a5fdec3a15687a009e2d3fda395fcb17a5423bd6de41954",
       "bytes": 3260866,
       "retained": false,
@@ -3073,7 +3073,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51073_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51073_edges.zip",
       "sha256": "83a21a8a7f8907c6725bae84f2216a0a99c7af1aacc92e52344e99867956fe0f",
       "bytes": 1932122,
       "retained": false,
@@ -3081,7 +3081,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51075_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51075_edges.zip",
       "sha256": "3845cbbd659ff262d43e69b75a4678e4a4eb0f00ce433005d8d552852a6ba00c",
       "bytes": 7075492,
       "retained": false,
@@ -3089,7 +3089,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51085_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51085_edges.zip",
       "sha256": "cc1d499abea03912ff5600e9513d546efe7939a148defeb75f7c7c6dd62c05a5",
       "bytes": 5296307,
       "retained": false,
@@ -3097,7 +3097,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51087_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51087_edges.zip",
       "sha256": "63abaed715779b8dae3f0b252c1cac98f0c4ac527e98eb8bd333ac1b79cf93e2",
       "bytes": 7161593,
       "retained": false,
@@ -3105,7 +3105,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51093_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51093_edges.zip",
       "sha256": "e9a364709ef0a4973cb109de5abe985a2c943f6e5a84f37ed96192e4d33a1955",
       "bytes": 2037679,
       "retained": false,
@@ -3113,7 +3113,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51095_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51095_edges.zip",
       "sha256": "81df64f16008d2a67b7f496a12e0537a0392638b69cb30a27b3fb3ab67dffb01",
       "bytes": 1793618,
       "retained": false,
@@ -3121,7 +3121,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51097_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51097_edges.zip",
       "sha256": "ae2d41c2f147e19eaa3e19a25d753c66cb57e7acea57ec31915c1a0145e295da",
       "bytes": 1996022,
       "retained": false,
@@ -3129,7 +3129,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51101_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51101_edges.zip",
       "sha256": "762a6de353096e00444634c9814a6d15ea46f34d05d49299c5d5f8bc8f40d161",
       "bytes": 2788571,
       "retained": false,
@@ -3137,7 +3137,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51115_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51115_edges.zip",
       "sha256": "0c889533d17752e460af2fdd9606efb4004b1ce94232772b64e808acb36a6cc4",
       "bytes": 895591,
       "retained": false,
@@ -3145,7 +3145,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51127_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51127_edges.zip",
       "sha256": "cca62b94b3fa281931e2d3acd3b1cd751a685385889904db672604bcd079f2b6",
       "bytes": 1713574,
       "retained": false,
@@ -3153,7 +3153,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51145_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51145_edges.zip",
       "sha256": "957ce5dec117404171e6e82cfd8c3b9b74189a391ab1cf80d74e5d1d0474064f",
       "bytes": 2495409,
       "retained": false,
@@ -3161,7 +3161,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51149_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51149_edges.zip",
       "sha256": "3489d1f59109de6826ef085c90b8c7ddbc5a301c6e7e61547fc02c84be99737d",
       "bytes": 1861760,
       "retained": false,
@@ -3169,7 +3169,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51181_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51181_edges.zip",
       "sha256": "2edcbef334c86f3896fe4c86619c852db32a165864ee10e26bfe60c71bfc75c0",
       "bytes": 1244459,
       "retained": false,
@@ -3177,7 +3177,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51183_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51183_edges.zip",
       "sha256": "e9b28dc9441d158980138216ec9a36b89f7d6daca6a68ea4c671003396f7781d",
       "bytes": 2310726,
       "retained": false,
@@ -3185,7 +3185,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51199_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51199_edges.zip",
       "sha256": "978b2dfdced54af70b259d0f034c3afab377ac68fc09772fc8ef6d74ae78ec61",
       "bytes": 2075657,
       "retained": false,
@@ -3193,7 +3193,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51550_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51550_edges.zip",
       "sha256": "6422a873f136fab4d5c258ba4246328c89b97038e18414e35f0a8ee1ab48713d",
       "bytes": 2457395,
       "retained": false,
@@ -3201,7 +3201,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51570_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51570_edges.zip",
       "sha256": "7018c88019c5935f8363c29d4a0dde7d69665d12e44d111e31cf18890e1f9f8a",
       "bytes": 206001,
       "retained": false,
@@ -3209,7 +3209,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51650_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51650_edges.zip",
       "sha256": "a116eb08a7742572de39491cc0ba437f932cc24cd9c05f37237af3323a68d21f",
       "bytes": 1549739,
       "retained": false,
@@ -3217,7 +3217,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51670_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51670_edges.zip",
       "sha256": "c08c2755e4405ce5f098e7e77a3ebed67c0d4ba267dcb1e26e2b49708999e988",
       "bytes": 335573,
       "retained": false,
@@ -3225,7 +3225,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51700_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51700_edges.zip",
       "sha256": "2c314ce7b0ccd7be2d36e3edf3f75cf627983184a2b020aeb45e22fc3c60d3bd",
       "bytes": 1425083,
       "retained": false,
@@ -3233,7 +3233,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51710_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51710_edges.zip",
       "sha256": "d2bdeac31670f754b5c101b309da703c300804733b1b2066bc761b23aa7a353a",
       "bytes": 2046719,
       "retained": false,
@@ -3241,7 +3241,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51730_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51730_edges.zip",
       "sha256": "0485a5c999342b153d313cdeca72ff400955838e68244d3a206a7ad70115031e",
       "bytes": 533071,
       "retained": false,
@@ -3249,7 +3249,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51735_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51735_edges.zip",
       "sha256": "10e3270d59f5eafc7b9d00c3d6390468b0a5118a1370e34261a9828c9ce96c6b",
       "bytes": 365499,
       "retained": false,
@@ -3257,7 +3257,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51740_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51740_edges.zip",
       "sha256": "fdc40935ddae8fe1fc5e5316d3305e5c8c1bc79b5e7d7f01ded4bba0d2057c9d",
       "bytes": 950932,
       "retained": false,
@@ -3265,7 +3265,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51760_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51760_edges.zip",
       "sha256": "da90563834bfb0f6dd7f1ecac405019e50ff1273ee054c020a22d26422c0a29e",
       "bytes": 1799489,
       "retained": false,
@@ -3273,7 +3273,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51800_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51800_edges.zip",
       "sha256": "69747b23bd35bc0518ce1cc0280c26a397cd48b0663d8503b81f5743a26f2fd2",
       "bytes": 2456384,
       "retained": false,
@@ -3281,7 +3281,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51810_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51810_edges.zip",
       "sha256": "0dbf8fcafe4cd3695698d6cc139416318c3dedc395aa18df3ff3d927c7d91cfa",
       "bytes": 4546031,
       "retained": false,
@@ -3289,7 +3289,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_51830_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_51830_edges.zip",
       "sha256": "75222b1eccb823be17b80d72e77316cf8574d9c2449231f4ea7d111c67d842c5",
       "bytes": 260219,
       "retained": false,
@@ -3297,7 +3297,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_55079_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_55079_edges.zip",
       "sha256": "992d147d3cf33be3ca2df6c58fcb6fb2d3536a834eb38ae09e9cdd123f86a9aa",
       "bytes": 4792192,
       "retained": false,
@@ -3305,7 +3305,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_55089_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_55089_edges.zip",
       "sha256": "0ffea49c2ced56f99ea238ac67cd6fe0366d675493577a3fbb1e1e32c0767c5a",
       "bytes": 1531405,
       "retained": false,
@@ -3313,7 +3313,7 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_55131_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_55131_edges.zip",
       "sha256": "d27092f04bc701698e04c04bf66cc34bf2931f6fda940ddb081b6caf225c0668",
       "bytes": 2058391,
       "retained": false,
@@ -3321,11 +3321,174 @@
     },
     {
       "dataset": "tiger_edges_2024",
-      "raw_path": "data/raw/roads/tiger_2024/tl_2024_55133_edges.zip",
+      "raw_path": "data/data/raw/roads/tiger_2024/tl_2024_55133_edges.zip",
       "sha256": "d6af2451c16af61ff330be9fd374901baae6bae68d90da8411531769970317ba",
       "bytes": 10074469,
       "retained": false,
       "retention_note": "Removed after producing the configured-CBSA road summary; source SHA-256 and per-city provenance are retained."
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USC00292100_1991-2020.json",
+      "sha256": "6cf9fb032cbd0da958831ba8eb72a07c25cf14ef870b733dc7aa840346cba319",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USW00013904_1991-2020.json",
+      "sha256": "729e1ae3d75cacd978dc794fe6f003b5db09a7c7f2dff9f05db2225907fa9ec2",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USW00013876_1991-2020.json",
+      "sha256": "11040758fb435fd6f5fdd9e3aaa87cc5af9301363794c4d197a8ca4bb5262718",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USC00331515_1991-2020.json",
+      "sha256": "7bf0c29af0b91b8e0df0deff3e0ef675488100fdf129193c8dd30bbc8d674742",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USC00331458_1991-2020.json",
+      "sha256": "03ecfef5a526fd2a4bfa9dd1a4d6eb283fe4a14aac8d86b40119d0929dae25d2",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USW00014821_1991-2020.json",
+      "sha256": "615b7c1fad0eb9401836c30b572470e7f40b3950a6ed7845d4cf8ed8b84bee17",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USW00014740_1991-2020.json",
+      "sha256": "23e32cd2fa8553fabbaf2f99e3c642d364c43a07e77c630a1d31a7a16ade8974",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USW00093819_1991-2020.json",
+      "sha256": "9868df19f34872d0fde020b8dc2d7c1d8e707f6a7631d4aff9451f621c7adc3b",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USW00093837_1991-2020.json",
+      "sha256": "4c00a618e17c1f920e95d31c74f9ec3c8795c1d2b59dcc445a290e82699f62b2",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USC00145972_1991-2020.json",
+      "sha256": "62c2129cbdc8fa6a2eb72a9e424370f6c4637ebd4ed88523ef342686fa64f669",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USC00083163_1991-2020.json",
+      "sha256": "814b7972a9c6f720d57ab326001107b444f188582d6614c3fc7c6b3ca538e1fa",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USC00473058_1991-2020.json",
+      "sha256": "2a3157c2f50e302aa1ebf023efeac9e66f45a6e2143984b886b3631b9756372e",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USW00013897_1991-2020.json",
+      "sha256": "18a96e34426ea8c756b5cfb365ca6cc80dcf9ca0ffaeb23be07ca17495056f43",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USW00013967_1991-2020.json",
+      "sha256": "6f6a5c1e7799d485499b6a89e56271ea08b70306af51bbad0075dca987080c99",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USW00014765_1991-2020.json",
+      "sha256": "34eff331431d5bc265bbba45b09cbd4bac43bebbc59d18266f3b002f932ea422",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USC00418169_1991-2020.json",
+      "sha256": "a8379ddb8d1553c54dce23e650f40cc2692ef60762d16754ef7323aef3a960dd",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USW00013968_1991-2020.json",
+      "sha256": "e37c908d0e6e70a301a8d40fdbd0b8a6605760262ff9753e7807efa526088d1a",
+      "bytes": 88
+    },
+    {
+      "dataset": "noaa_climate_normals",
+      "raw_path": "data/data/raw/noaa/normals/USC00448192_1991-2020.json",
+      "sha256": "559eca160d81b1ba2b6a1853c5297a7d3f17f1a240d3d1c13f1a07c7f07ff284",
+      "bytes": 88
+    },
+    {
+      "dataset": "acs5_profile",
+      "raw_path": "data/data/raw/acs/acs5_2024_profile_DP03_0025E_targeted_20260926T090006Z.json",
+      "sha256": "dcbd8b91451deda46def4afe1c85fc47d7b6f76f4ccc2c07a45c6b2530e25bd8",
+      "bytes": 44462
+    },
+    {
+      "dataset": "noaa_climate_normals_attribute_validation",
+      "raw_path": "data/data/raw/noaa/validation/selected_station_attributes_00.json",
+      "sha256": "78d0b96e657a2e01a82c0601d0e25fc994bb591a836aa78a7574579ac696a2c1",
+      "bytes": 7465,
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USC00010764%2CUSC00011225%2CUSC00013781%2CUSC00024829%2CUSC00025270%2CUSC00028112%2CUSC00042239%2CUSC00043914%2CUSC00044412%2CUSC00044997%2CUSC00045915%2CUSC00046006%2CUSC00046719%2CUSC00047785%2CUSC00051401%2CUSC00057249%2CUSC00058022%2CUSC00083163%2CUSC00083470%2CUSC00083986&dataTypes=ANN-PRCP-NORMAL%2CANN-SNOW-NORMAL%2CANN-TMAX-AVGNDS-GRTH090&format=json&units=standard&includeAttributes=true"
+    },
+    {
+      "dataset": "noaa_climate_normals_attribute_validation",
+      "raw_path": "data/data/raw/noaa/validation/selected_station_attributes_01.json",
+      "sha256": "fc490adc6977e928850b7e319f3e6a3a3145fc1fc57f72f39fa0c35ddbb3601f",
+      "bytes": 6481,
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USC00086634%2CUSC00087205%2CUSC00087851%2CUSC00090444%2CUSC00095404%2CUSC00124260%2CUSC00124272%2CUSC00124286%2CUSC00145972%2CUSC00154958%2CUSC00226527%2CUSC00237064%2CUSC00263316%2CUSC00264439%2CUSC00292100%2CUSC00296754%2CUSC00297461%2CUSC00297481%2CUSC00313238%2CUSC00317074&dataTypes=ANN-PRCP-NORMAL%2CANN-SNOW-NORMAL%2CANN-TMAX-AVGNDS-GRTH090&format=json&units=standard&includeAttributes=true"
+    },
+    {
+      "dataset": "noaa_climate_normals_attribute_validation",
+      "raw_path": "data/data/raw/noaa/validation/selected_station_attributes_02.json",
+      "sha256": "376a08addc89da1fd1cd8c412644c0e5b3494e51a0a260a642cf5adee6b3fcdd",
+      "bytes": 6760,
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USC00317079%2CUSC00331458%2CUSC00331515%2CUSC00331777%2CUSC00331785%2CUSC00334260%2CUSC00335268%2CUSC00338951%2CUSC00342818%2CUSC00345522%2CUSC00346659%2CUSC00371875%2CUSC00375270%2CUSC00401039%2CUSC00401950%2CUSC00403447%2CUSC00409431%2CUSC00410337%2CUSC00410431%2CUSC00412012&dataTypes=ANN-PRCP-NORMAL%2CANN-SNOW-NORMAL%2CANN-TMAX-AVGNDS-GRTH090&format=json&units=standard&includeAttributes=true"
+    },
+    {
+      "dataset": "noaa_climate_normals_attribute_validation",
+      "raw_path": "data/data/raw/noaa/validation/selected_station_attributes_03.json",
+      "sha256": "de30b755fedb30c74d8a92140df904309ec175a600270787d2df51151bcfd11d",
+      "bytes": 7112,
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USC00413266%2CUSC00414321%2CUSC00414326%2CUSC00414597%2CUSC00418169%2CUSC00419088%2CUSC00422257%2CUSC00423348%2CUSC00424362%2CUSC00444101%2CUSC00446656%2CUSC00448192%2CUSC00448837%2CUSC00449213%2CUSC00473058%2CUSC00473930%2CUSC00477148%2CUSW00003888%2CUSW00003954%2CUSW00003967&dataTypes=ANN-PRCP-NORMAL%2CANN-SNOW-NORMAL%2CANN-TMAX-AVGNDS-GRTH090&format=json&units=standard&includeAttributes=true"
+    },
+    {
+      "dataset": "noaa_climate_normals_attribute_validation",
+      "raw_path": "data/data/raw/noaa/validation/selected_station_attributes_04.json",
+      "sha256": "67c1d70c78f22e077e2bd445970b35f0077f0b021dd165f7b8a319004b9ec2e0",
+      "bytes": 7302,
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USW00004853%2CUSW00012815%2CUSW00012841%2CUSW00012842%2CUSW00012882%2CUSW00012909%2CUSW00012960%2CUSW00012970%2CUSW00013740%2CUSW00013762%2CUSW00013810%2CUSW00013876%2CUSW00013897%2CUSW00013904%2CUSW00013958%2CUSW00013967%2CUSW00013968%2CUSW00014740%2CUSW00014752%2CUSW00014765&dataTypes=ANN-PRCP-NORMAL%2CANN-SNOW-NORMAL%2CANN-TMAX-AVGNDS-GRTH090&format=json&units=standard&includeAttributes=true"
+    },
+    {
+      "dataset": "noaa_climate_normals_attribute_validation",
+      "raw_path": "data/data/raw/noaa/validation/selected_station_attributes_05.json",
+      "sha256": "3e07c50f0b02f7e4a34dfe3714359acfcc785f33b62a14ada3d307c4ca8aead6",
+      "bytes": 5095,
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USW00014821%2CUSW00023169%2CUSW00023285%2CUSW00053863%2CUSW00053879%2CUSW00053907%2CUSW00053908%2CUSW00053910%2CUSW00054788%2CUSW00063890%2CUSW00092809%2CUSW00093812%2CUSW00093819%2CUSW00093821%2CUSW00093837&dataTypes=ANN-PRCP-NORMAL%2CANN-SNOW-NORMAL%2CANN-TMAX-AVGNDS-GRTH090&format=json&units=standard&includeAttributes=true"
+    },
+    {
+      "dataset": "noaa_closer_station_attribute_validation",
+      "raw_path": "data/data/raw/noaa/validation/closer_station_attributes_00.json",
+      "sha256": "0ca02d4668a24cecbb2bf910729b41aa7a0b5b6b81ecb8875faa33368554c192",
+      "bytes": 1224,
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USC00067432%2CUSW00054788%2CUSC00146168%2CUSW00003967%2CUSC00409431%2CUSC00124272%2CUSC00335268%2CUSW00012882%2CUSC00296754%2CUSC00297461&dataTypes=ANN-PRCP-NORMAL%2CANN-SNOW-NORMAL&format=json&units=standard&includeAttributes=true"
     }
   ],
   "warnings": [
@@ -3349,6 +3512,58 @@
     "intermediate/charging_sites.parquet",
     "intermediate/tract_features.parquet",
     "intermediate/road_network_features.parquet",
-    "data/processed/cities/all_city_features.xlsx"
+    "data/data/processed/cities/all_city_features.xlsx",
+    "data/data/processed/cities/all_city_features.xlsx"
+  ],
+  "amendments": [
+    {
+      "applied_at": "2026-09-26T19:32:58.686286+00:00",
+      "scope": "NOAA 1991-2020 annual precipitation and snowfall backfill for 18 CBSAs using the nearest station reporting each requested normal within 100 km.",
+      "updated_measurements": 20,
+      "station_ids": [
+        "USC00083163",
+        "USC00145972",
+        "USC00292100",
+        "USC00331458",
+        "USC00331515",
+        "USC00418169",
+        "USC00448192",
+        "USC00473058",
+        "USW00013876",
+        "USW00013897",
+        "USW00013904",
+        "USW00013967",
+        "USW00013968",
+        "USW00014740",
+        "USW00014765",
+        "USW00014821",
+        "USW00093819",
+        "USW00093837"
+      ],
+      "zero_and_missing_handling": "Retained published zero snowfall as 0 mm/year; NOAA blanks and -9999 sentinels were left missing."
+    },
+    {
+      "applied_at": "2026-09-26T19:49:06.764442+00:00",
+      "scope": "Complete 2024 ACS 5-year profile DP03_0025E mean commute for five CBSAs with direct published estimates and provenance.",
+      "updated_measurements": 5,
+      "city_ids": [
+        "13820",
+        "21340",
+        "32820",
+        "39580",
+        "46140"
+      ],
+      "raw_sha256": "dcbd8b91451deda46def4afe1c85fc47d7b6f76f4ccc2c07a45c6b2530e25bd8"
+    },
+    {
+      "applied_at": "2026-09-26T20:24:05.267119+00:00",
+      "scope": "Normalize manifest paths to the repository root; preserve NOAA flagged-normal validation snapshots for 115 used stations and 175 feature observations. No scoring values changed.",
+      "source_validation_batches": 6
+    },
+    {
+      "applied_at": "2026-09-26",
+      "scope": "Preserve published evidence that ten geographically closer NOAA stations do not report the requested snowfall normal; no scoring values changed.",
+      "closer_nonreporting_stations_checked": 10
+    }
   ]
 }

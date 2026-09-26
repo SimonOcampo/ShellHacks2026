@@ -8,6 +8,11 @@ from src.common.http import fetch
 STATIONS_URL="https://services2.arcgis.com/C8EMgrsFcRFL6LrL/ArcGIS/rest/services/stations_ncei/FeatureServer/20/query"
 NORMALS_URL="https://www.ncei.noaa.gov/access/services/data/v1"
 HOT_DAY_DATATYPE = "ANN-TMAX-AVGNDS-GRTH090"
+ANNUAL_NORMAL_TYPES = {
+    "annual_precipitation_mm": "ANN-PRCP-NORMAL",
+    "annual_snowfall_mm": "ANN-SNOW-NORMAL",
+}
+MAX_CLIMATE_STATION_DISTANCE_KM = 100.0
 
 def download_station_inventory() -> tuple[list[tuple[dict, Path]], list[Path]]:
     """Page through NOAA's official 1991-2020 station layer and preserve raw JSON pages."""
@@ -28,8 +33,25 @@ def _distance_km(lat1,lon1,lat2,lon2):
     a=math.sin(dp/2)**2+math.cos(p1)*math.cos(p2)*math.sin(dl/2)**2
     return radius*2*math.asin(math.sqrt(a))
 
+def _published_normal(response: dict, datatype: str) -> float | None:
+    """Return a published normal only when its reported quality flags permit it."""
+    measurement_flag = str(response.get(f"meas_flag_{datatype}", " ")).strip()
+    completeness_flag = response.get(f"comp_flag_{datatype}")
+    if measurement_flag not in ("", "X"):
+        return None
+    if completeness_flag is not None and str(completeness_flag).strip() not in ("S", "R", "P", "E"):
+        return None
+    raw = response.get(datatype)
+    try:
+        value = float(str(raw).strip())
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(value) or value < 0:
+        return None
+    return value
+
 def download_market_normals(boundaries) -> dict[str, dict]:
-    """Select precipitation stations and qualifying 90 F normal stations for each CBSA."""
+    """Select nearest reporting station separately for each annual climate normal."""
     stations,raw_pages=download_station_inventory(); station_rows=[]
     for row,inventory_path in stations:
         try:
@@ -43,18 +65,51 @@ def download_market_normals(boundaries) -> dict[str, dict]:
     selected={}
     for _,market in boundaries.iterrows():
         code=str(market.GEOID); lat=float(market.latitude); lon=float(market.longitude)
-        sid,name,slat,slon,inventory_path=min(station_rows,key=lambda s:_distance_km(lat,lon,s[2],s[3]))
-        params={"dataset":f"normals-annualseasonal-{NOAA_PERIOD}","stations":sid,"dataTypes":"ANN-PRCP-NORMAL,ANN-SNOW-NORMAL","format":"json"}
-        path,digest=fetch(NORMALS_URL,RAW/"noaa"/"normals"/f"{sid}_{NOAA_PERIOD}.json",params=params,timeout=90)
-        payload=json.loads(path.read_text(encoding="utf-8"))
-        if not payload or not isinstance(payload,list): raise RuntimeError(f"NOAA normals unavailable for station {sid}")
-        selected[code]={"station_id":sid,"station_name":name,"station_latitude":slat,"station_longitude":slon,"distance_km":_distance_km(lat,lon,slat,slon),"raw_path":str(path),"sha256":digest,"response":payload[0],"source_url":f"{NORMALS_URL}?{urlencode(params)}","inventory_path":str(inventory_path),"inventory_url":STATIONS_URL}
+        candidates=sorted(
+            (
+                (_distance_km(lat,lon,row[2],row[3]),row)
+                for row in station_rows
+            ),
+            key=lambda item:(item[0],item[1][0]),
+        )
+        feature_records={key:None for key in ANNUAL_NORMAL_TYPES}
+        for distance,(sid,name,slat,slon,station_inventory_path) in candidates:
+            if distance>MAX_CLIMATE_STATION_DISTANCE_KM:
+                break
+            params={"dataset":f"normals-annualseasonal-{NOAA_PERIOD}","stations":sid,"dataTypes":"ANN-PRCP-NORMAL,ANN-SNOW-NORMAL","format":"json","units":"standard","includeAttributes":"true"}
+            try:
+                path,digest=fetch(NORMALS_URL,RAW/"noaa"/"normals"/f"{sid}_{NOAA_PERIOD}_attributes.json",params=params,timeout=90)
+                payload=json.loads(path.read_text(encoding="utf-8"))
+            except (OSError,ValueError,RuntimeError,json.JSONDecodeError):
+                continue
+            if not isinstance(payload,list) or not payload:
+                continue
+            response=payload[0]
+            for feature,datatype in ANNUAL_NORMAL_TYPES.items():
+                if feature_records[feature] is not None or _published_normal(response,datatype) is None:
+                    continue
+                feature_records[feature]={
+                    "station_id":sid,
+                    "station_name":name,
+                    "station_latitude":slat,
+                    "station_longitude":slon,
+                    "distance_km":distance,
+                    "raw_path":str(path),
+                    "sha256":digest,
+                    "response":response,
+                    "source_url":f"{NORMALS_URL}?{urlencode(params)}",
+                    "inventory_path":str(station_inventory_path),
+                    "inventory_url":STATIONS_URL,
+                }
+            if all(feature_records.values()):
+                break
+        selected[code]={"feature_records":feature_records}
         selected[code]["hot_day_stations"] = _download_hot_day_stations(
-            code, lat, lon, station_rows, inventory_path
+            code, lat, lon, station_rows
         )
     return selected
 
-def _download_hot_day_stations(cbsa: str, lat: float, lon: float, station_rows: list, inventory_path: Path) -> list[dict]:
+def _download_hot_day_stations(cbsa: str, lat: float, lon: float, station_rows: list) -> list[dict]:
     """Fetch up to three nearest 1991-2020 NOAA annual counts for Tmax >= 90 F."""
     datatype = HOT_DAY_DATATYPE
     candidates = sorted(
@@ -70,18 +125,19 @@ def _download_hot_day_stations(cbsa: str, lat: float, lon: float, station_rows: 
             "stations": sid,
             "dataTypes": datatype,
             "format": "json",
+            "units": "standard",
+            "includeAttributes": "true",
         }
         path, digest = fetch(
             NORMALS_URL,
-            RAW / "noaa" / "hot_days" / f"{sid}_{NOAA_PERIOD}_ge90f.json",
+            RAW / "noaa" / "hot_days" / f"{sid}_{NOAA_PERIOD}_ge90f_attributes.json",
             params=params,
             timeout=90,
         )
         try:
             payload = json.loads(path.read_text(encoding="utf-8"))
-            raw = payload[0].get(datatype) if isinstance(payload, list) and payload else None
-            value = float(raw)
-            if not math.isfinite(value) or value < 0:
+            value = _published_normal(payload[0], datatype) if isinstance(payload, list) and payload else None
+            if value is None or value > 366:
                 continue
         except (OSError, ValueError, TypeError, json.JSONDecodeError, AttributeError, RuntimeError):
             continue
@@ -95,7 +151,7 @@ def _download_hot_day_stations(cbsa: str, lat: float, lon: float, station_rows: 
             "raw_path": str(path),
             "sha256": digest,
             "source_url": f"{NORMALS_URL}?{urlencode(params)}",
-            "inventory_path": str(station_inventory_path or inventory_path),
+            "inventory_path": str(station_inventory_path),
             "inventory_url": STATIONS_URL,
         })
         if len(selected) == 3:

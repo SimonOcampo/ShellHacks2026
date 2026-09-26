@@ -32,6 +32,13 @@
       "unit": "fraction",
       "value": 0.027468988174841946
     },
+    "average_aadt": {
+      "missing_reason": "This optional informational road measurement is unavailable.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "vehicles/day",
+      "value": null
+    },
     "freeway_share": {
       "missing_reason": null,
       "provenance_ids": [
@@ -66,6 +73,13 @@
       "unit": "intersections/km2",
       "value": 1.8908076344480362
     },
+    "lane_miles_per_km2": {
+      "missing_reason": "This optional informational road measurement is unavailable.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "lane-miles/km2",
+      "value": null
+    },
     "local_road_share": {
       "missing_reason": null,
       "provenance_ids": [
@@ -77,11 +91,13 @@
       "value": 0.9266631960029925
     },
     "mean_commute_minutes": {
-      "missing_reason": "ACS mean commute estimate unavailable.",
-      "provenance_ids": [],
-      "quality": "missing",
+      "missing_reason": null,
+      "provenance_ids": [
+        "0e7d204d-93af-5c40-9d9a-1ad57edb86f9"
+      ],
+      "quality": "observed",
       "unit": "minutes",
-      "value": null
+      "value": 24.1
     },
     "population": {
       "missing_reason": null,
@@ -438,6 +454,21 @@
       "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_48229_edges.zip",
       "target_geography": "Census CBSA 21340",
       "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32613, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "Published ACS 5-year profile estimate is used directly; no imputation or zero substitution."
+      ],
+      "dataset_id": "acs5_profile_2024",
+      "id": "0e7d204d-93af-5c40-9d9a-1ad57edb86f9",
+      "period": "2024",
+      "raw_sha256": "dcbd8b91451deda46def4afe1c85fc47d7b6f76f4ccc2c07a45c6b2530e25bd8",
+      "retrieved_at": "2026-09-26T09:00:13.572231+00:00",
+      "source_geography": "Census CBSA 21340",
+      "source_name": "U.S. Census ACS 5-Year Data Profiles",
+      "source_url": "https://api.census.gov/data/2024/acs/acs5/profile?get=NAME%2CDP03_0025E&for=metropolitan+statistical+area%2Fmicropolitan+statistical+area%3A%2A",
+      "target_geography": "Census CBSA 21340",
+      "transformation": "Use published DP03_0025E mean travel time to work in minutes for CBSA 21340."
     }
   ],
   "state_codes": [

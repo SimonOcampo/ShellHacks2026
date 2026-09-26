@@ -47,6 +47,13 @@
       "unit": "fraction",
       "value": 0.07713947021814237
     },
+    "average_aadt": {
+      "missing_reason": "This optional informational road measurement is unavailable.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "vehicles/day",
+      "value": null
+    },
     "freeway_share": {
       "missing_reason": null,
       "provenance_ids": [
@@ -110,6 +117,13 @@
       "quality": "derived",
       "unit": "intersections/km2",
       "value": 5.6537719771845065
+    },
+    "lane_miles_per_km2": {
+      "missing_reason": "This optional informational road measurement is unavailable.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "lane-miles/km2",
+      "value": null
     },
     "local_road_share": {
       "missing_reason": null,

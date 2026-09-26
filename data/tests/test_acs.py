@@ -3,7 +3,7 @@ import json
 import pandas as pd
 from src.datasets.acs.download import download
 from src.datasets.acs.process import process
-from src.datasets.acs.summary_file import process as process_summary
+from src.datasets.acs.summary_file import process as process_summary, inspect_margins
 
 def test_acs_requires_real_key_without_falling_back(monkeypatch):
     monkeypatch.delenv("CENSUS_API_KEY",raising=False)
@@ -39,3 +39,20 @@ def test_keyless_summary_file_cbsa_geoids_and_county_commute_aggregation(tmp_pat
     assert result["zero_vehicle_household_share"]==0.1
     assert result["transit_commute_share"]==0.1
     assert result["mean_commute_minutes"]==24
+
+
+def test_keyless_summary_margins_handle_controlled_population_total(tmp_path):
+    rows = {
+        "b01003": "GEO_ID|B01003_E001|B01003_M001\n310M700US12345|1000|-555555555\n",
+        "b08201": "GEO_ID|B08201_E001|B08201_M001|B08201_E002|B08201_M002\n310M700US12345|400|20|40|8\n",
+        "b08301": "GEO_ID|B08301_E001|B08301_M001|B08301_E010|B08301_M010\n310M700US12345|500|30|50|9\n",
+        "b08136": "GEO_ID|B08136_E001|B08136_M001\n310M700US12345|12000|400\n",
+    }
+    paths = {}
+    for table, content in rows.items():
+        paths[table] = tmp_path / f"{table}.dat"
+        paths[table].write_text(content, encoding="utf-8")
+    report = inspect_margins(paths, {"12345"})["12345"]
+    assert report["b01003"]["B01003_M001"] == {"status": "controlled_total", "value": None}
+    assert report["b08201"]["B08201_M002"]["value"] == 8
+    assert report["b08136"]["B08136_M001"]["value"] == 400

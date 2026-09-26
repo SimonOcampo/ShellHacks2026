@@ -13,11 +13,14 @@
       "value": 1069.086
     },
     "annual_snowfall_mm": {
-      "missing_reason": "NOAA station snowfall normal is blank.",
-      "provenance_ids": [],
-      "quality": "missing",
+      "missing_reason": null,
+      "provenance_ids": [
+        "6a371eb6-1f9e-5955-bd2a-f2b043880463",
+        "1cab35d2-e703-5569-9501-cb3465c20f58"
+      ],
+      "quality": "proxy",
       "unit": "mm/year",
-      "value": null
+      "value": 220.97999999999996
     },
     "arterial_share": {
       "missing_reason": null,
@@ -33,6 +36,13 @@
       "quality": "derived",
       "unit": "fraction",
       "value": 0.06008031527991459
+    },
+    "average_aadt": {
+      "missing_reason": "This optional informational road measurement is unavailable.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "vehicles/day",
+      "value": null
     },
     "freeway_share": {
       "missing_reason": null,
@@ -78,6 +88,13 @@
       "unit": "intersections/km2",
       "value": 3.657648376506099
     },
+    "lane_miles_per_km2": {
+      "missing_reason": "This optional informational road measurement is unavailable.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "lane-miles/km2",
+      "value": null
+    },
     "local_road_share": {
       "missing_reason": null,
       "provenance_ids": [
@@ -94,11 +111,13 @@
       "value": 0.8996363425903373
     },
     "mean_commute_minutes": {
-      "missing_reason": "ACS mean commute estimate unavailable.",
-      "provenance_ids": [],
-      "quality": "missing",
+      "missing_reason": null,
+      "provenance_ids": [
+        "f071e188-4cd5-538d-b159-2c6a0849c16d"
+      ],
+      "quality": "observed",
       "unit": "minutes",
-      "value": null
+      "value": 22.1
     },
     "population": {
       "missing_reason": null,
@@ -555,6 +574,52 @@
       "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_40145_edges.zip",
       "target_geography": "Census CBSA 46140",
       "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32614, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "Selected station USW00013968 (TULSA INTL AP) is 21.87 km from the CBSA representative point.",
+        "The station normal is a proxy for the CBSA, not an area-weighted CBSA measurement."
+      ],
+      "dataset_id": "noaa_normals_stations_1991-2020",
+      "id": "6a371eb6-1f9e-5955-bd2a-f2b043880463",
+      "period": "1991-2020",
+      "raw_sha256": "668e145e434e656c25035bc443f1159aef21a9ae8d0880d7e33afb7e3d9f4cea",
+      "retrieved_at": "2026-09-26T07:34:20.474755+00:00",
+      "source_geography": "NOAA normals station points",
+      "source_name": "NOAA NCEI Annual Normals Station Inventory",
+      "source_url": "https://services2.arcgis.com/C8EMgrsFcRFL6LrL/ArcGIS/rest/services/stations_ncei/FeatureServer/20/query",
+      "target_geography": "Census CBSA 46140",
+      "transformation": "Select nearest station within 100 km reporting ANN-SNOW-NORMAL for this feature using great-circle distance."
+    },
+    {
+      "assumptions": [
+        "A NOAA-reported numeric 0.0 is retained as zero; blank or -9999 values mean missing/insufficient data and are not converted to zero."
+      ],
+      "dataset_id": "normals-annualseasonal-1991-2020",
+      "id": "1cab35d2-e703-5569-9501-cb3465c20f58",
+      "period": "1991-2020",
+      "raw_sha256": "e37c908d0e6e70a301a8d40fdbd0b8a6605760262ff9753e7807efa526088d1a",
+      "retrieved_at": "2026-09-26T19:27:19.371100+00:00",
+      "source_geography": "NOAA station USW00013968",
+      "source_name": "NOAA NCEI U.S. Climate Normals",
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USW00013968&dataTypes=ANN-PRCP-NORMAL%2CANN-SNOW-NORMAL&format=json",
+      "target_geography": "Census CBSA 46140",
+      "transformation": "Read ANN-SNOW-NORMAL in inches from the 1991-2020 station normal and convert to millimeters (multiply by 25.4)."
+    },
+    {
+      "assumptions": [
+        "Published ACS 5-year profile estimate is used directly; no imputation or zero substitution."
+      ],
+      "dataset_id": "acs5_profile_2024",
+      "id": "f071e188-4cd5-538d-b159-2c6a0849c16d",
+      "period": "2024",
+      "raw_sha256": "dcbd8b91451deda46def4afe1c85fc47d7b6f76f4ccc2c07a45c6b2530e25bd8",
+      "retrieved_at": "2026-09-26T09:00:13.572231+00:00",
+      "source_geography": "Census CBSA 46140",
+      "source_name": "U.S. Census ACS 5-Year Data Profiles",
+      "source_url": "https://api.census.gov/data/2024/acs/acs5/profile?get=NAME%2CDP03_0025E&for=metropolitan+statistical+area%2Fmicropolitan+statistical+area%3A%2A",
+      "target_geography": "Census CBSA 46140",
+      "transformation": "Use published DP03_0025E mean travel time to work in minutes for CBSA 46140."
     }
   ],
   "state_codes": [
