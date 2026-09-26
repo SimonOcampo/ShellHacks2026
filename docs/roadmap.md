@@ -6,7 +6,7 @@ Use this file as the project checklist. Check an item only after recording its p
 
 ## Current snapshot
 
-- Developer 1 verified release: not published. Census access, official ingestion, harmonization, and reference evidence remain open.
+- Developer 1 verified release: not published. The keyless official 2024 ACS path, 2024 Census geography, NOAA normals, AFDC snapshot, and dated Waymo reference evidence have produced 35 processed metro records. Only 5 of 20 configured candidates have all 15 ranking measurements; 11 of 15 enabled commercial references are complete. Source validation and publication gates remain open.
 - Developer 2 contracts and engine: `uv run pytest` passed 45 tests on 2026-09-26 with the new startup test. GitHub Actions run #23 passed on PR commit `9674d85`, including this test.
 - Developer 2 mock deployment: closed for the hackathon demo. Render service `srv-dartlbm0tbcc73d0lmug` runs deployment `dep-darv61avcj2c73acjng0`, commit `329076b`, release `mock.v1`. Owner accepts warm simulation latency above two seconds; this does not pass the original target.
 - Developer 3 connected demo: local flow and browser proof exist. Hosted frontend, exact CORS origin, and deployed rehearsal remain open.
@@ -17,16 +17,20 @@ Use this file as the project checklist. Check an item only after recording its p
 
 Paths: `data/`, `packages/ranking/`, ranking/reference configuration, ranking tests, and `docs/data-sources.md`.
 
-- [ ] Obtain Census API access through the approved local setup. Never put the key in chat, fixtures, manifests, or commits.
-- [ ] Ingest official 2024 ACS five-year estimates and matching CBSA/county geography.
-- [ ] Ingest NOAA 1991–2020 station normals; record scale, quality flags, and station distances.
-- [ ] Collect an operational public AFDC charging snapshot; deduplicate ports and validate status and counts.
-- [ ] Record dated public evidence for eligible commercial reference markets.
-- [ ] Harmonize sources to one frozen geographic vintage; keep raw snapshots immutable and source hashes recorded.
+- [x] Use the keyless Census Summary File path for official ACS acquisition. A Census API key is optional and must never enter chat, fixtures, manifests, or commits. Proof: `data/src/datasets/acs/summary_file.py` and the 2024 ACS entries in `data/data/processed/manifests/data_manifest.json`.
+- [x] Ingest official 2024 ACS five-year estimates and matching 2024 CBSA/county geography. Proof: 35 records in `data/data/processed/cities/all_city_features.json` and TIGER/ACS entries in the data manifest.
+- [x] Ingest NOAA 1991–2020 station normals and record station IDs, distances, source hashes, and unit conversions. Proof: `data/src/datasets/noaa/` and NOAA provenance in processed city records.
+- [ ] Finish NOAA source validation: confirm published scale and quality flags, resolve missing precipitation/snowfall normals where defensible, and verify station selection.
+- [x] Collect an operational public AFDC charging snapshot and filter public, operational DC sites. Proof: AFDC entry in the data manifest and `data/src/datasets/afdc/process.py`.
+- [ ] Deduplicate AFDC station IDs and independently validate port counts and geographic assignments.
+- [x] Record dated public evidence for commercial reference markets. Proof: 15 Waymo records and source provenance in `data/data/processed/reference_markets/`; 11 currently have complete ranking measurements.
+- [x] Join processed sources to 2024 CBSA/county geography and record source hashes without overwriting raw snapshots. Proof: data manifest, processed city provenance, and `data/tests/test_city_features.py`. NOAA normals retain their distinct 1991–2020 climate period.
 - [ ] Publish an immutable, provenance-complete release with at least eight fully measured candidate metros, frozen normalization bounds, and eligible commercial references.
-- [ ] Keep incomplete candidates visibly unranked. Do not promote synthetic measurements.
-- [ ] Verify joins, ACS denominators and margins of error, NOAA transformations, AFDC deduplication, reference dates, candidate completeness, publisher behavior, and verified-startup behavior.
-- [ ] Run ranking tests and record the release ID and proof in `docs/data-sources.md`.
+- [x] Keep incomplete candidates unranked and reject synthetic evidence in verified releases. Proof: `packages/ranking/odd_ranking/engine.py`, `packages/contracts/models.py`, `data/src/pipeline/export_release.py`, and ranking tests.
+- [x] Add focused tests for geography joins, ACS denominators, NOAA transformations, reference status, missing measurements, and publisher behavior. Proof: `data/tests/` and `tests/ranking/`.
+- [ ] Complete source and release verification: ACS margins of error, NOAA scale and quality flags, AFDC deduplication and counts, reference dates, candidate completeness, and verified-startup behavior. The data test suite still needs its declared dependencies in the test environment.
+- [x] Run ranking tests. `uv run pytest tests/ranking -q`: 21 passed on 2026-09-26.
+- [ ] Record the verified release ID and publication proof in `docs/data-sources.md` after the release passes its gates.
 
 ### Developer 2 — Keep contracts and engine gates green
 
