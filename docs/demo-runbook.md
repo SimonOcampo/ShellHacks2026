@@ -28,9 +28,9 @@ The browser smoke starts local services if needed. It exercises selection, prove
 
 Vercel root directory: `apps/web`. Set `NEXT_PUBLIC_API_BASE_URL` to the Render HTTPS service and `NEXT_PUBLIC_DATA_TRANSPORT=http`. Generated types remain in the monorepo; enable access to files outside the root directory if Vercel requires that setting.
 
-Render uses the root Dockerfile and `/health`. The backend is live as service `srv-dartlbm0tbcc73d0lmug` on mock release `mock.v1`; API smoke checks pass. The Vercel frontend is not hosted yet. Set `ODD_ALLOWED_ORIGINS` to its exact origin when available. `render.yaml` defaults to mock mode. Select verified mode and release only after publication and startup validation. This mock deployment is not production-ready.
+Render uses the root Dockerfile and `/health`. Service `srv-dartlbm0tbcc73d0lmug` serves `verified.v2` at `https://odd-scout-api.onrender.com`; seven hosted API checks pass. The Vercel frontend is not hosted yet. Set `ODD_ALLOWED_ORIGINS` to its exact origin when available. `render.yaml` selects the verified release. Hosted browser and CORS validation remain open.
 
-Render Free sleeps after inactivity. Warm the service before rehearsal. Three warm default-scenario measurements were 2.578, 2.659, and 2.095 seconds, above the two-second target. The project owner accepts this latency for the hackathon mock demo; cold-start latency remains unmeasured and may be longer. Prior smoke-checked deployment `dep-darunmg473hc73fbpsdg` remains in Render history as rollback target; keep local HTTP fallback available.
+Render Free sleeps after inactivity. Warm the service before rehearsal. Three verified default-scenario measurements were 2.708, 2.947, and 2.866 seconds, above the two-second target. Cold-start latency remains unmeasured and may be longer. Prior smoke-checked mock deployment `dep-das4ir0u01pc73ensm50` remains in Render history as a rollback target; keep local HTTP fallback available.
 
 ## Failure handling
 
@@ -43,7 +43,7 @@ API errors retain prior simulation output with an error/retry state. Invalid inp
 - [x] Explainable ranking and finite seeded fleet operations.
 - [x] No mixing synthetic and verified modes.
 - [x] Render mock backend deployed, measured, and smoke checked; owner accepts warm simulation latency above two seconds for the hackathon demo.
-- [ ] Eight verified ranked candidates with official evidence.
+- [x] Twenty verified ranked candidates with public evidence served by the Render API.
 - [ ] Hosted frontend connection.
 - [x] GitHub Actions run #23 passed on PR commit `9674d85`, including the new startup test.
 - [ ] Deployed rehearsal.

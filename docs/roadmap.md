@@ -8,7 +8,7 @@ Use this file as the project checklist. Check an item only after recording its p
 
 - Developer 1 release artifact: `verified.v2` corrects the commute denominator, uses one ACS method with both input MOEs for all 35 metros, and corrects AFDC provenance URLs. All 20 candidates rank against 15 references. Fresh correction checks and inherited source evidence are recorded in `data/audits/verified.v2-source-checks.json`; a full independent replay still requires the original off-repository raw bundle.
 - Developer 2 contracts and engine: `uv run pytest` passed 45 tests on 2026-09-26 with the new startup test. GitHub Actions run #23 passed on PR commit `9674d85`, including this test.
-- Developer 2 mock deployment: closed for the hackathon demo. Render service `srv-dartlbm0tbcc73d0lmug` runs deployment `dep-darv61avcj2c73acjng0`, commit `329076b`, release `mock.v1`. Owner accepts warm simulation latency above two seconds; this does not pass the original target.
+- Developer 2 verified deployment: Render service `srv-dartlbm0tbcc73d0lmug` serves `verified.v2` at `https://odd-scout-api.onrender.com`, deployment `dep-das4jcnpn0mc73eq63d0`, commit `5d87986`. All seven API routes passed hosted checks. Three warm default simulations took 2.708, 2.947, and 2.866 seconds; the two-second target remains unmet.
 - Developer 3 connected demo: local flow and browser proof exist. Hosted frontend, exact CORS origin, and deployed rehearsal remain open.
 
 ## P0 roadmap
@@ -25,7 +25,7 @@ Paths: `data/`, `packages/ranking/`, ranking/reference configuration, ranking te
 - [x] Deduplicate AFDC station IDs and independently validate port counts and geographic assignments. Inherited proof: the parent audit verifies 4,182 joined sites and 24,739 ports. The adapter rejects conflicting duplicate IDs; `verified.v2` corrects provenance URLs without changing measurements.
 - [x] Record dated public evidence for commercial reference markets. Proof: 15 Waymo records and source provenance in `data/data/processed/reference_markets/`; all 15 references have complete measurements in `verified.v2`.
 - [x] Join processed sources to 2024 CBSA/county geography and record source hashes without overwriting raw snapshots. Proof: data manifest, processed city provenance, and `data/tests/test_city_features.py`. NOAA normals retain their distinct 1991–2020 climate period.
-- [x] Publish an immutable release with at least eight fully measured candidate metros, frozen normalization bounds, and eligible references. `verified.v2` contains 20 complete candidates, 15 enabled references, a 35-city frozen cohort, and source hashes resolved through the parent manifest plus the correction audit. Publication proof is local; deployment remains a separate gate.
+- [x] Publish an immutable release with at least eight fully measured candidate metros, frozen normalization bounds, and eligible references. `verified.v2` contains 20 complete candidates, 15 enabled references, a 35-city frozen cohort, and source hashes resolved through the parent manifest plus the correction audit. Deployment proof is recorded in `docs/verification.md`.
 - [x] Keep incomplete candidates unranked and reject synthetic evidence in verified releases. Proof: `packages/ranking/odd_ranking/engine.py`, `packages/contracts/models.py`, `data/src/pipeline/export_release.py`, and ranking tests.
 - [x] Add focused tests for geography joins, ACS denominators, NOAA transformations, reference status, missing measurements, and publisher behavior. Proof: `data/tests/` and `tests/ranking/`.
 - [x] Complete incremental source and release verification. All 35 commutes have fresh estimate/MOE checks; unchanged sources reuse the exact parent audit. Local verified startup and all seven API checks pass. With declared data dependencies, 78 tests pass and two optional tests skip. Two full raw-replay tests remain unavailable without the original bundle; no fresh full-replay pass is claimed.
@@ -43,7 +43,7 @@ Paths: `backend/`, `packages/contracts/`, `tests/contracts/`, `tests/simulation/
 - [x] Run `uv run python -m contracts.export` and regenerate TypeScript with `npm --prefix apps/web run generate:api`; generated files show no drift.
 - [x] Run `npm --prefix apps/web run typecheck`.
 - [x] Test mock/verified separation and verified startup candidate threshold. Threshold test rejects seven ranked candidates and accepts eight without fabricating verified measurements.
-- [x] Run `uv run pytest` after updating from `main`: 45 passed on 2026-09-26. An earlier local full CI run passed 30 tests, OpenAPI and TypeScript generation with no drift, frontend typecheck and build, and Playwright E2E (2 passed).
+- [x] Run `uv run pytest` on `main` commit `5d87986`: 45 passed on 2026-09-26. GitHub Actions P0 acceptance run `36276939150` passed on the same commit.
 - [x] GitHub Actions run #23 passed on PR commit `9674d85`, including the startup test.
 - [x] Validate startup against Developer 1’s committed `verified.v1` release. On 2026-09-26, the actual FastAPI lifespan loaded the release and seven local API checks passed: health, config, city list/detail, rankings, explanation, and a default seven-day simulation. All 20 candidates ranked against 15 references. Explicit mock fallback also passed. Proof and release hash: `docs/verification.md`. This validates backend compatibility, not source-publication signoff.
 - [ ] Validate production CORS with Developer 3’s exact hosted origin when available. This remains dependent on the hosted frontend origin.
@@ -58,7 +58,7 @@ Paths: deployment files and necessary backend configuration only.
 - [x] Record owner acceptance of latency above two seconds for the hackathon mock demo. Do not claim the original two-second target passed.
 - [x] Preserve prior smoke-checked deployment `dep-darunmg473hc73fbpsdg` (commit `23679e6`) in Render deployment history as rollback target. No rollback was performed.
 - [x] Keep local HTTP mode as fallback.
-- [ ] Select the corrected `verified.v2` release on the backend, rerun deployed smoke checks, and record deployment and rollback identifiers. Local release and startup gates pass; Render remains on mock until this deployment step is completed.
+- [x] Select `verified.v2` on Render, run all seven hosted API checks, and record deployment and rollback identifiers. Deployment `dep-das4jcnpn0mc73eq63d0` runs commit `5d87986`; prior smoke-checked deployment `dep-das4ir0u01pc73ensm50` remains in history. No rollback was performed. Three warm default simulations returned the same ID and conserved 6,941 requests. None met the original two-second target.
 
 ### Developer 3 — Finish and rehearse connected demo
 
@@ -75,8 +75,8 @@ Paths: `apps/web/`, browser tests, and `docs/demo-runbook.md`.
 ## Shared integration sequence
 
 - [ ] Review the clean `main` scaffold and current contracts across all three owners.
-- [x] Publish Developer 1’s corrected release artifact while Developers 2 and 3 keep mock integration working. `verified.v2` has local source-correction and API proof; deployment is the next gate.
-- [ ] Have Developer 2 validate the verified release at startup and deploy it. Have Developer 3 use the backend URL and rehearse the hosted flow.
+- [x] Publish Developer 1’s corrected release artifact while Developers 2 and 3 keep integration working. `verified.v2` has source-correction and hosted API proof.
+- [ ] Have Developer 2 validate the verified release at startup and deploy it. Developer 2's portion passed; Developer 3 still needs the backend URL and hosted rehearsal.
 - [ ] For each shared contract or release change, review affected consumers, regenerate artifacts, update fixtures, and rerun relevant gates.
 - [ ] Freeze the verified release; rehearse rollback and local fallback; capture the final demo result.
 
@@ -85,7 +85,7 @@ Paths: `apps/web/`, browser tests, and `docs/demo-runbook.md`.
 - [x] Local contracts, fixtures, startup behavior, and ownership agree for mock mode.
 - [x] Twenty mock markets work through HTTP; ranking, explanation, and simulation endpoints return results.
 - [x] Ranking and seeded simulation tests pass; the UI consumes engine results.
-- [ ] Replace mock ranking data with eight verified candidates and reference evidence.
+- [x] Replace mock ranking data on the backend with 20 verified candidates and 15 reference markets. The hosted API returns ranking ID `e1e3650e5a6a13ca8a48`.
 - [ ] Complete hosted frontend, visual flow, error handling, and hosted rehearsal. The project owner accepts current warm simulation latency for this hackathon demo; the two-second target remains unmet.
 - [ ] Freeze the verified release and rehearse rollback and local fallback.
 
