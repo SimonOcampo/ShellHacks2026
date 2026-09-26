@@ -35,13 +35,6 @@
       "unit": "fraction",
       "value": 0.022963107779110294
     },
-    "average_aadt": {
-      "missing_reason": "No current, complete segment-level FHWA AADT and through-lane layer was available in the retrieved TIGER snapshots. The public HPMS geospatial release is legacy and coverage-limited; these metrics remain missing rather than being extrapolated.",
-      "provenance_ids": [],
-      "quality": "missing",
-      "unit": "vehicles/day",
-      "value": null
-    },
     "freeway_share": {
       "missing_reason": null,
       "provenance_ids": [
@@ -81,13 +74,6 @@
       "quality": "derived",
       "unit": "intersections/km2",
       "value": 14.06024513449907
-    },
-    "lane_miles_per_km2": {
-      "missing_reason": "No current, complete segment-level FHWA AADT and through-lane layer was available in the retrieved TIGER snapshots. The public HPMS geospatial release is legacy and coverage-limited; these metrics remain missing rather than being extrapolated.",
-      "provenance_ids": [],
-      "quality": "missing",
-      "unit": "lane-miles/km2",
-      "value": null
     },
     "local_road_share": {
       "missing_reason": null,
