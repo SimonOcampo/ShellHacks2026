@@ -192,9 +192,9 @@ export interface components {
             /** Reference Matches */
             reference_matches: components["schemas"]["ReferenceMatch"][];
             /** Strongest Factor Ids */
-            strongest_factor_ids: ("annual_precipitation_mm" | "annual_snowfall_mm" | "hot_days_32c" | "mean_commute_minutes" | "public_dc_ports_per_100k" | "population_share_in_counties_with_dc" | "population" | "population_density_per_km2" | "zero_vehicle_household_share" | "transit_commute_share")[];
+            strongest_factor_ids: ("annual_precipitation_mm" | "annual_snowfall_mm" | "hot_days_32c" | "mean_commute_minutes" | "road_density_km_per_km2" | "intersection_density_per_km2" | "freeway_share" | "arterial_share" | "local_road_share" | "public_dc_ports_per_100k" | "population_share_in_counties_with_dc" | "population" | "population_density_per_km2" | "zero_vehicle_household_share" | "transit_commute_share")[];
             /** Weakest Factor Ids */
-            weakest_factor_ids: ("annual_precipitation_mm" | "annual_snowfall_mm" | "hot_days_32c" | "mean_commute_minutes" | "public_dc_ports_per_100k" | "population_share_in_counties_with_dc" | "population" | "population_density_per_km2" | "zero_vehicle_household_share" | "transit_commute_share")[];
+            weakest_factor_ids: ("annual_precipitation_mm" | "annual_snowfall_mm" | "hot_days_32c" | "mean_commute_minutes" | "road_density_km_per_km2" | "intersection_density_per_km2" | "freeway_share" | "arterial_share" | "local_road_share" | "public_dc_ports_per_100k" | "population_share_in_counties_with_dc" | "population" | "population_density_per_km2" | "zero_vehicle_household_share" | "transit_commute_share")[];
         };
         /** CitySummary */
         CitySummary: {
@@ -250,7 +250,7 @@ export interface components {
              * Feature
              * @enum {string}
              */
-            feature: "annual_precipitation_mm" | "annual_snowfall_mm" | "hot_days_32c" | "mean_commute_minutes" | "public_dc_ports_per_100k" | "population_share_in_counties_with_dc" | "population" | "population_density_per_km2" | "zero_vehicle_household_share" | "transit_commute_share";
+            feature: "annual_precipitation_mm" | "annual_snowfall_mm" | "hot_days_32c" | "mean_commute_minutes" | "road_density_km_per_km2" | "intersection_density_per_km2" | "freeway_share" | "arterial_share" | "local_road_share" | "public_dc_ports_per_100k" | "population_share_in_counties_with_dc" | "population" | "population_density_per_km2" | "zero_vehicle_household_share" | "transit_commute_share";
             /** Normalized Value */
             normalized_value: number | null;
             /**
@@ -275,7 +275,7 @@ export interface components {
              * Key
              * @enum {string}
              */
-            key: "annual_precipitation_mm" | "annual_snowfall_mm" | "hot_days_32c" | "mean_commute_minutes" | "public_dc_ports_per_100k" | "population_share_in_counties_with_dc" | "population" | "population_density_per_km2" | "zero_vehicle_household_share" | "transit_commute_share";
+            key: "annual_precipitation_mm" | "annual_snowfall_mm" | "hot_days_32c" | "mean_commute_minutes" | "road_density_km_per_km2" | "intersection_density_per_km2" | "freeway_share" | "arterial_share" | "local_road_share" | "public_dc_ports_per_100k" | "population_share_in_counties_with_dc" | "population" | "population_density_per_km2" | "zero_vehicle_household_share" | "transit_commute_share";
             /** Label */
             label: string;
             /** Maximum */
