@@ -4,6 +4,7 @@ from typing import Any
 from pathlib import Path
 from src.common.provenance import provenance
 from src.common.units import inches_to_mm
+from src.datasets.noaa.download import ANNUAL_NORMAL_TYPES, _published_normal
 
 def aggregate_hot_day_stations(stations: list[dict]) -> float | None:
     """Average NOAA station annual counts; never interpret an empty station set as zero."""
@@ -16,16 +17,46 @@ def missing_climate_features(reason: str = "NOAA station normals were not retrie
             for key, unit in [("annual_precipitation_mm", "mm/year"), ("annual_snowfall_mm", "mm/year"), ("hot_days_32c", "days/year")]}
 
 def process_market_normals(records: dict[str, dict]) -> dict[str, dict]:
-    """Convert NOAA annual normals and station-level 90 F annual hot-day normals."""
+    """Convert NOAA annual normals and preserve feature-specific station provenance."""
     result={}
     for cbsa,record in records.items():
-        station_prov=provenance(source_name="NOAA NCEI Annual Normals Station Inventory",source_url=record["inventory_url"],dataset_id="noaa_normals_stations_1991-2020",period="1991-2020",raw_path=Path(record["inventory_path"]),source_geography="NOAA normals station points",target_geography=f"Census CBSA {cbsa}",transformation=f"Select station {record['station_id']} nearest to the CBSA representative point using great-circle distance.",assumptions=[f"Selected station is {record['distance_km']:.2f} km from the CBSA representative point."])
-        prov=provenance(source_name="NOAA NCEI U.S. Climate Normals",source_url=record["source_url"],dataset_id="normals-annualseasonal-1991-2020",period="1991-2020",raw_path=Path(record["raw_path"]),source_geography=f"NOAA station {record['station_id']}",target_geography=f"Census CBSA {cbsa}",transformation="Convert annual precipitation and snowfall from inches to millimeters.",assumptions=["NOAA station annual precipitation and snowfall normals are in inches."])
-        row=record["response"]
-        def value(key):
-            raw=row.get(key)
-            if raw is None or not str(raw).strip(): return None
-            return inches_to_mm(float(str(raw).strip()))
+        feature_values = {}
+        feature_provenance = {}
+        all_normal_provenance = []
+        for feature, datatype in ANNUAL_NORMAL_TYPES.items():
+            station = record.get("feature_records", {}).get(feature)
+            feature_values[feature] = None
+            feature_provenance[feature] = []
+            if not station:
+                continue
+            inches = _published_normal(station["response"], datatype)
+            if inches is None:
+                continue
+            feature_values[feature] = inches_to_mm(inches)
+            inventory_prov = provenance(
+                source_name="NOAA NCEI Annual Normals Station Inventory",
+                source_url=station["inventory_url"],
+                dataset_id="noaa_normals_stations_1991-2020",
+                period="1991-2020",
+                raw_path=Path(station["inventory_path"]),
+                source_geography="NOAA normals station points",
+                target_geography=f"Census CBSA {cbsa}",
+                transformation=f"Select nearest station within 100 km reporting {datatype} for this feature using great-circle distance.",
+                assumptions=[f"Selected station {station['station_id']} is {station['distance_km']:.2f} km from the CBSA representative point."],
+            )
+            normal_prov = provenance(
+                source_name="NOAA NCEI U.S. Climate Normals",
+                source_url=station["source_url"],
+                dataset_id="normals-annualseasonal-1991-2020",
+                period="1991-2020",
+                raw_path=Path(station["raw_path"]),
+                source_geography=f"NOAA station {station['station_id']}",
+                target_geography=f"Census CBSA {cbsa}",
+                transformation=f"Read {datatype} in inches and convert to millimeters; retain a reported zero as zero.",
+                assumptions=["NOAA blank or sentinel values are missing/insufficient data and are not converted to zero."],
+            )
+            feature_provenance[feature] = [inventory_prov, normal_prov]
+            all_normal_provenance.extend([inventory_prov, normal_prov])
         hot_provenance = []
         hot_stations = record.get("hot_day_stations", [])
         for station in hot_stations:
@@ -53,16 +84,14 @@ def process_market_normals(records: dict[str, dict]) -> dict[str, dict]:
             )
             hot_provenance.extend([inventory, normal])
         result[str(cbsa)]={
-            "annual_precipitation_mm":value("ANN-PRCP-NORMAL"),
-            "annual_snowfall_mm":value("ANN-SNOW-NORMAL"),
+            **feature_values,
+            "feature_provenance":feature_provenance,
             "hot_days_32c":aggregate_hot_day_stations(hot_stations),
             "hot_days_missing_reason":None if hot_stations else "No NOAA 1991-2020 station with the annual >=90 F Tmax normal was found within 100 km of the CBSA representative point.",
             "hot_day_station_ids":[x["station_id"] for x in hot_stations],
             "hot_day_station_distances_km":[x["distance_km"] for x in hot_stations],
             "hot_day_provenance":hot_provenance,
-            "normal_provenance":[station_prov,prov],
-            "provenance":[station_prov,prov,*hot_provenance],
-            "station_id":record["station_id"],
-            "station_distance_km":record["distance_km"],
+            "normal_provenance":all_normal_provenance,
+            "provenance":[*all_normal_provenance,*hot_provenance],
         }
     return result

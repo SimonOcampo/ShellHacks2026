@@ -13,11 +13,14 @@
       "value": 1116.838
     },
     "annual_snowfall_mm": {
-      "missing_reason": "NOAA station snowfall normal is blank.",
-      "provenance_ids": [],
-      "quality": "missing",
+      "missing_reason": null,
+      "provenance_ids": [
+        "1397a9be-ef7b-5565-ac66-e17315e2ea99",
+        "2468ff63-730d-5eb9-b4d5-4383d08359ca"
+      ],
+      "quality": "proxy",
       "unit": "mm/year",
-      "value": null
+      "value": 716.28
     },
     "arterial_share": {
       "missing_reason": null,
@@ -36,6 +39,13 @@
       "quality": "derived",
       "unit": "fraction",
       "value": 0.11490696436142128
+    },
+    "average_aadt": {
+      "missing_reason": "This optional informational road measurement is unavailable.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "vehicles/day",
+      "value": null
     },
     "freeway_share": {
       "missing_reason": null,
@@ -86,6 +96,13 @@
       "quality": "derived",
       "unit": "intersections/km2",
       "value": 5.216684035565688
+    },
+    "lane_miles_per_km2": {
+      "missing_reason": "This optional informational road measurement is unavailable.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "lane-miles/km2",
+      "value": null
     },
     "local_road_share": {
       "missing_reason": null,
@@ -629,6 +646,37 @@
       "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_39159_edges.zip",
       "target_geography": "Census CBSA 18140",
       "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32617, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "Selected station USW00014821 (COLUMBUS PORT COLUMBUS INTL AP) is 7.69 km from the CBSA representative point.",
+        "The station normal is a proxy for the CBSA, not an area-weighted CBSA measurement."
+      ],
+      "dataset_id": "noaa_normals_stations_1991-2020",
+      "id": "1397a9be-ef7b-5565-ac66-e17315e2ea99",
+      "period": "1991-2020",
+      "raw_sha256": "668e145e434e656c25035bc443f1159aef21a9ae8d0880d7e33afb7e3d9f4cea",
+      "retrieved_at": "2026-09-26T07:34:20.474755+00:00",
+      "source_geography": "NOAA normals station points",
+      "source_name": "NOAA NCEI Annual Normals Station Inventory",
+      "source_url": "https://services2.arcgis.com/C8EMgrsFcRFL6LrL/ArcGIS/rest/services/stations_ncei/FeatureServer/20/query",
+      "target_geography": "Census CBSA 18140",
+      "transformation": "Select nearest station within 100 km reporting ANN-SNOW-NORMAL for this feature using great-circle distance."
+    },
+    {
+      "assumptions": [
+        "A NOAA-reported numeric 0.0 is retained as zero; blank or -9999 values mean missing/insufficient data and are not converted to zero."
+      ],
+      "dataset_id": "normals-annualseasonal-1991-2020",
+      "id": "2468ff63-730d-5eb9-b4d5-4383d08359ca",
+      "period": "1991-2020",
+      "raw_sha256": "615b7c1fad0eb9401836c30b572470e7f40b3950a6ed7845d4cf8ed8b84bee17",
+      "retrieved_at": "2026-09-26T19:27:17.560956+00:00",
+      "source_geography": "NOAA station USW00014821",
+      "source_name": "NOAA NCEI U.S. Climate Normals",
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USW00014821&dataTypes=ANN-PRCP-NORMAL%2CANN-SNOW-NORMAL&format=json",
+      "target_geography": "Census CBSA 18140",
+      "transformation": "Read ANN-SNOW-NORMAL in inches from the 1991-2020 station normal and convert to millimeters (multiply by 25.4)."
     }
   ],
   "state_codes": [

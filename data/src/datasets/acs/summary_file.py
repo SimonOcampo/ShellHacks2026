@@ -8,6 +8,13 @@ from src.config.settings import ACS_YEAR, RAW, PROCESSED
 BASE="https://www2.census.gov/programs-surveys/acs/summary_file/{year}/table-based-SF/data/5YRData/acsdt5y{year}-{table}.dat"
 TABLES={"b01003":["GEO_ID","B01003_E001"],"b08201":["GEO_ID","B08201_E001","B08201_E002"],"b08301":["GEO_ID","B08301_E001","B08301_E010"],"b08136":["GEO_ID","B08136_E001"]}
 TABLE_LABELS={"b01003":"ACS detailed table B01003 population","b08201":"ACS detailed table B08201 households by vehicles available","b08301":"ACS detailed table B08301 commute mode","b08136":"ACS detailed table B08136 aggregate travel time to work"}
+MOE_COLUMNS={
+    "b01003": ("B01003_E001", "B01003_M001"),
+    "b08201": ("B08201_E001", "B08201_M001", "B08201_E002", "B08201_M002"),
+    "b08301": ("B08301_E001", "B08301_M001", "B08301_E010", "B08301_M010"),
+    "b08136": ("B08136_E001", "B08136_M001"),
+}
+CONTROLLED_TOTAL_MOE = -555555555
 
 def download(year: int=ACS_YEAR) -> dict[str,Path]:
     """Download only four required official 5-year summary tables, not the 12 GB archive."""
@@ -29,6 +36,36 @@ def _num(value):
         return result if result>=0 else None
     except (TypeError,ValueError):
         return None
+
+
+def inspect_margins(paths: dict[str, Path], cbsa_codes: set[str]) -> dict[str, dict]:
+    """Check the published ACS estimates and MOEs used by configured CBSAs."""
+    report = {code: {} for code in cbsa_codes}
+    for table, columns in MOE_COLUMNS.items():
+        frame = pd.read_csv(paths[table], sep="|", usecols=["GEO_ID", *columns],
+                            dtype={"GEO_ID": "string"}, low_memory=False)
+        rows = _cbsa_rows(frame)
+        rows = rows.loc[rows.cbsa_code.isin(cbsa_codes)]
+        if rows.cbsa_code.duplicated().any():
+            raise ValueError(f"Duplicate ACS CBSA rows in {table}")
+        for row in rows.itertuples(index=False):
+            values = {}
+            for column in columns:
+                value = getattr(row, column)
+                if pd.isna(value):
+                    raise ValueError(f"Missing ACS {column} for {row.cbsa_code}")
+                parsed = int(value)
+                if column.endswith("M001") and table == "b01003" and parsed == CONTROLLED_TOTAL_MOE:
+                    values[column] = {"status": "controlled_total", "value": None}
+                elif parsed < 0:
+                    raise ValueError(f"Invalid ACS {column} for {row.cbsa_code}: {parsed}")
+                else:
+                    values[column] = {"status": "reported", "value": parsed}
+            report[row.cbsa_code][table] = values
+    for code, tables in report.items():
+        if any(table not in tables for table in ("b01003", "b08201", "b08301")):
+            raise ValueError(f"ACS demographic MOEs incomplete for CBSA {code}")
+    return report
 
 def _cbsa_rows(frame: pd.DataFrame) -> pd.DataFrame:
     # Table-based SF uses summary level 310 with a year-specific geography

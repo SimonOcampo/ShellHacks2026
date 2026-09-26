@@ -1,0 +1,71 @@
+{
+  "acs": {
+    "cbsa_estimates_checked": 35,
+    "controlled_population_total_moes": 35,
+    "max_transit_numerator_moe_fraction": 0.2807933194154488,
+    "max_zero_vehicle_numerator_moe_fraction": 0.06935812398809213,
+    "profile_commute_estimates_without_saved_moe": [
+      "13820",
+      "21340",
+      "32820",
+      "39580",
+      "46140"
+    ],
+    "summary_commute_moes_reported": 30
+  },
+  "afdc": {
+    "all_qualifying_sites_in_configured_cbsas_accounted_for": true,
+    "cbsa_and_county_assignments_verified": true,
+    "county_population_coverage_verified": true,
+    "joined_dc_ports_verified": 24739,
+    "joined_sites_verified": 4182,
+    "qualifying_public_operational_dc_sites_nationwide": 15592,
+    "raw_station_rows": 82340,
+    "raw_unique_station_ids": 82340
+  },
+  "default_ranking_id": "93edf127d62f0d427f2d",
+  "enabled_references": 15,
+  "frozen_bounds": {
+    "complete_cohort_cities_checked": 35,
+    "scoring_features_checked": 15
+  },
+  "manifest": {
+    "removed_road_snapshots_with_preserved_hashes": 270,
+    "retained_snapshot_hashes_verified": 220
+  },
+  "noaa": {
+    "measurement_and_completeness_flags": {
+      "blank/E": 12,
+      "blank/P": 29,
+      "blank/R": 76,
+      "blank/S": 58
+    },
+    "stations_with_attributes": 115,
+    "units_requested": "standard; precipitation and snowfall inches converted to mm",
+    "used_observations_verified": 175
+  },
+  "noaa_station_selection": {
+    "city_feature_selections_checked": 105,
+    "closer_nonreporting_snowfall_stations_checked": 10,
+    "inventory_stations_checked": 9212
+  },
+  "publication_limitations": [
+    "The saved Census DP03 profile extract has estimates but no DP03_0025M MOEs for five fallback commutes.",
+    "The immutable verified.v1 release cites the retired developer.nrel.gov AFDC host; the current source is developer.nlr.gov.",
+    "Five profile commute estimates and 30 summary-file ratios use different methods."
+  ],
+  "ranked_candidates": 20,
+  "references": {
+    "enabled_commercial": 15,
+    "reference_markets_matched_to_preserved_official_page": 15,
+    "status_as_of": [
+      "2026-09-26T07:23:46.844162+00:00"
+    ]
+  },
+  "release_path": "data/releases/verified.v1.json",
+  "release_provenance": {
+    "distinct_source_hashes_resolved": 443,
+    "provenance_records_resolved": 875
+  },
+  "release_sha256": "e5099e4612908ced11403498afd6ab62953a44c0b1777c2ef0a19b51dfe737c6"
+}

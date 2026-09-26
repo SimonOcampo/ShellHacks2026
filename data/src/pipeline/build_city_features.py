@@ -12,6 +12,7 @@ from src.contracts.models import CityFeature, Measurement, VersionStamp
 from src.datasets.acs.process import process as process_acs
 from src.datasets.acs.download import download as download_acs
 from src.datasets.acs.download import download_tracts
+from src.datasets.acs.profile import commute_provenance as profile_commute_provenance, find_saved_profile, mean_commutes
 from src.datasets.acs.intermediate import build_tract_features as build_api_tract_features
 from src.datasets.acs.summary_file import download as download_acs_summary, process as process_acs_summary, build_tract_features as build_summary_tract_features, TABLES as ACS_SUMMARY_TABLES
 from src.datasets.afdc.download import download as download_afdc
@@ -31,8 +32,9 @@ from src.pipeline.export_city_features_excel import export_city_features_excel
 log = logging.getLogger(__name__)
 
 def _manifest_path(path: Path) -> str:
-    """Return one consistent workspace-relative path for raw-artifact manifests."""
-    return path.resolve().relative_to(Path.cwd().resolve()).as_posix()
+    """Return a repository-relative path regardless of the process working directory."""
+    repository = Path(__file__).resolve().parents[3]
+    return path.resolve().relative_to(repository).as_posix()
 
 def _measurement(value, unit: str, pid: str | list[str] | None, *, quality="derived", reason=None) -> Measurement:
     if value is None:
@@ -112,6 +114,8 @@ def build_all(*, download: bool = False, city_keys: list[str] | None = None) -> 
             api_data = (metro_path, county_path, profile_path, acs)
         except (RuntimeError, OSError, ValueError) as exc:
             log.warning("Census API unavailable (%s); falling back to official ACS Summary Files.", type(exc).__name__)
+    fallback_profile_path = None
+    fallback_commute_codes = set()
     if api_data is not None:
         metro_path, county_path, profile_path, acs = api_data
     elif not download and use_api and all(path.exists() for path in api_paths.values()):
@@ -124,6 +128,17 @@ def build_all(*, download: bool = False, city_keys: list[str] | None = None) -> 
         if any(not path.exists() for path in summary_paths.values()):
             raise RuntimeError("ACS source files are absent. Rebuild with --download to fetch the official Census Summary File, or set CENSUS_API_KEY to use the API.")
         acs = process_acs_summary(summary_paths, county_map)
+        missing_commutes = {
+            code for code in boundaries.GEOID.astype(str)
+            if code in acs and acs[code]["mean_commute_minutes"] is None
+        }
+        fallback_profile_path = find_saved_profile(missing_commutes)
+        if fallback_profile_path is not None:
+            published = mean_commutes(fallback_profile_path)
+            for code in missing_commutes:
+                if code in published:
+                    acs[code]["mean_commute_minutes"] = published[code]
+                    fallback_commute_codes.add(code)
         build_summary_tract_features(summary_paths, county_map)
         metro_path = county_path = profile_path = None
         tract_paths = {}
@@ -149,6 +164,8 @@ def build_all(*, download: bool = False, city_keys: list[str] | None = None) -> 
             provenance_rows.append(acs_provs[table])
         acs_prov, vehicle_prov, worker_prov, commute_prov = acs_provs["b01003"], acs_provs["b08201"], acs_provs["b08301"], acs_provs["b08136"]
         acs_sources = [(f"acs_summary_{table}", source) for table, source in summary_paths.items()]
+        if fallback_commute_codes:
+            acs_sources.append(("acs5_profile", fallback_profile_path))
     provenance_rows.extend([cbsa_prov, county_prov])
     afdc_values = {}
     afdc_prov = None
@@ -163,7 +180,7 @@ def build_all(*, download: bool = False, city_keys: list[str] | None = None) -> 
         try:
             afdc_path, _ = download_afdc()
             afdc_values = process_afdc(load_afdc(afdc_path), boundaries, county_shapes)
-            afdc_prov = provenance(source_name="U.S. DOE Alternative Fuels Data Center", source_url="https://developer.nrel.gov/api/alt-fuel-stations/v1.json", dataset_id="afdc_active_public_electric", period=datetime.now(timezone.utc).date().isoformat(), raw_path=afdc_path, source_geography="Station coordinates", target_geography="Census CBSA and counties", transformation="Count active public stations' reported DC fast ports after point-in-polygon joins to CBSA and counties.", assumptions=["Station status must be E and access must be public.", "Only reported DC fast port counts are used; stations with no reported port count are excluded."])
+            afdc_prov = provenance(source_name="U.S. DOE Alternative Fuels Data Center", source_url="https://developer.nlr.gov/api/alt-fuel-stations/v1.json", dataset_id="afdc_active_public_electric", period=datetime.now(timezone.utc).date().isoformat(), raw_path=afdc_path, source_geography="Station coordinates", target_geography="Census CBSA and counties", transformation="Deduplicate station IDs, then count active public stations' reported DC fast ports after point-in-polygon joins to CBSA and counties.", assumptions=["Station status must be E and access must be public.", "Only reported DC fast port counts are used; stations with no reported port count are excluded."])
             provenance_rows.append(afdc_prov)
         except (RuntimeError, OSError, ValueError) as exc:
             log.warning("AFDC unavailable; recording explicit missing measurements: %s", exc)
@@ -193,10 +210,11 @@ def build_all(*, download: bool = False, city_keys: list[str] | None = None) -> 
         charging_counties = set((dc or {}).get("county_ports", {}))
         coverage_denominator = sum(county_pops.values())
         coverage = (sum(pop for county, pop in county_pops.items() if county in charging_counties) / coverage_denominator) if dc is not None and coverage_denominator > 0 and len(county_pops) == int((county_map.cbsa_code == code).sum()) else None
+        fallback_commute_prov = profile_commute_provenance(fallback_profile_path, code) if code in fallback_commute_codes else None
         feats = {
             "population": _measurement(stats["population"], "persons", acs_prov.id, quality="observed"),
             "population_density_per_km2": _measurement(stats["population"] / area, "persons/km2", acs_prov.id),
-            "mean_commute_minutes": _measurement(stats["mean_commute_minutes"], "minutes", commute_prov.id, quality="observed", reason="ACS mean commute estimate unavailable."),
+            "mean_commute_minutes": _measurement(stats["mean_commute_minutes"], "minutes", fallback_commute_prov.id if fallback_commute_prov else commute_prov.id, quality="observed", reason="ACS mean commute estimate unavailable."),
             "zero_vehicle_household_share": _measurement(stats["zero_vehicle_household_share"], "fraction of households", vehicle_prov.id),
             "transit_commute_share": _measurement(stats["transit_commute_share"], "fraction of workers 16+", worker_prov.id),
             "public_dc_ports_per_100k": _measurement((dc["public_dc_ports"] / stats["population"] * 100_000) if dc is not None else None, "ports/100,000 persons", afdc_prov.id if afdc_prov else None, reason=missing_reason_afdc),
@@ -225,15 +243,16 @@ def build_all(*, download: bool = False, city_keys: list[str] | None = None) -> 
         feats["lane_miles_per_km2"] = Measurement(value=None, unit="lane-miles/km2", quality="missing", missing_reason=hpms_missing, provenance_ids=[])
         climate = noaa_values.get(code, {})
         if climate:
-            climate_ids=[p.id for p in climate["normal_provenance"]]
-            feats["annual_precipitation_mm"] = _measurement(climate["annual_precipitation_mm"], "mm/year", climate_ids, quality="proxy", reason="NOAA station precipitation normal is blank.")
-            feats["annual_snowfall_mm"] = _measurement(climate["annual_snowfall_mm"], "mm/year", climate_ids, quality="proxy", reason="NOAA station snowfall normal is blank.")
+            precip_ids=[p.id for p in climate.get("feature_provenance", {}).get("annual_precipitation_mm", [])]
+            snow_ids=[p.id for p in climate.get("feature_provenance", {}).get("annual_snowfall_mm", [])]
+            feats["annual_precipitation_mm"] = _measurement(climate["annual_precipitation_mm"], "mm/year", precip_ids, quality="proxy", reason="No nearby NOAA station reported an annual precipitation normal.")
+            feats["annual_snowfall_mm"] = _measurement(climate["annual_snowfall_mm"], "mm/year", snow_ids, quality="proxy", reason="No nearby NOAA station reported an annual snowfall normal.")
             feats["hot_days_32c"] = _measurement(climate["hot_days_32c"], "days/year", [p.id for p in climate.get("hot_day_provenance", [])], quality="proxy", reason=climate.get("hot_days_missing_reason"))
-            city_provenance = provenance_rows.copy() + climate["provenance"] + road_provs
+            city_provenance = provenance_rows.copy() + ([fallback_commute_prov] if fallback_commute_prov else []) + climate["provenance"] + road_provs
         else:
             for climate_key, item in noaa.items():
                 feats[climate_key] = Measurement(value=None, unit=item["unit"], quality="missing", missing_reason=item["missing_reason"], provenance_ids=[])
-            city_provenance = provenance_rows.copy() + road_provs
+            city_provenance = provenance_rows.copy() + ([fallback_commute_prov] if fallback_commute_prov else []) + road_provs
         states = sorted(set(row.state_codes or []))
         output.append(CityFeature(versions=VersionStamp(schema_version="1", data_version=f"{ACS_YEAR}-acs5__{GEOGRAPHY_YEAR}-tiger__NOAA-{__import__('os').getenv('ODD_SCOUT_NOAA_PERIOD','1991-2020')}__TIGER-edges-{GEOGRAPHY_YEAR}__AFDC-current", model_version=MODEL_VERSION, data_mode="verified"), city_id=code, display_name=names[key], official_name=str(row.NAME), geography_type="cbsa", geography_vintage=str(GEOGRAPHY_YEAR), state_codes=states, latitude=float(row.latitude), longitude=float(row.longitude), features=feats, legal_evidence=[], provenance=city_provenance))
 

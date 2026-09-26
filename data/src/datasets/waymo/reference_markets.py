@@ -10,7 +10,7 @@ from src.contracts.models import ReferenceMarket
 from src.common.provenance import provenance
 from src.datasets.census_geography.process import resolve_markets
 
-def build(cbsa: dict[str, dict]) -> tuple[list[ReferenceMarket], object]:
+def build(cbsa: dict[str, dict], *, persist: bool = True) -> tuple[list[ReferenceMarket], object]:
     """Download Waymo's page, assign each requested reference status from its sections."""
     path, _ = fetch(WAYMO_URL, RAW / "waymo" / "rides.html")
     html = path.read_text(encoding="utf-8", errors="replace")
@@ -36,7 +36,8 @@ def build(cbsa: dict[str, dict]) -> tuple[list[ReferenceMarket], object]:
         cat = "commercial" if in_serving else "announced"
         out.append(ReferenceMarket(id=f"waymo-{key}", city_id=cbsa[key]["cbsa_code"], operator="Waymo", category=cat,
                                    status_as_of=src.retrieved_at, enabled=in_serving, provenance_ids=[src.id]))
-    dest = PROCESSED / "reference_markets"; dest.mkdir(parents=True, exist_ok=True)
-    (dest / "reference_markets.json").write_text(__import__("json").dumps([x.model_dump(mode="json") for x in out], indent=2), encoding="utf-8")
-    (dest / "reference_markets_provenance.json").write_text(__import__("json").dumps(src.model_dump(mode="json"), indent=2), encoding="utf-8")
+    if persist:
+        dest = PROCESSED / "reference_markets"; dest.mkdir(parents=True, exist_ok=True)
+        (dest / "reference_markets.json").write_text(__import__("json").dumps([x.model_dump(mode="json") for x in out], indent=2), encoding="utf-8")
+        (dest / "reference_markets_provenance.json").write_text(__import__("json").dumps(src.model_dump(mode="json"), indent=2), encoding="utf-8")
     return out, src

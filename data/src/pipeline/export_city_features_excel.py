@@ -94,7 +94,7 @@ def export_city_features_excel(source: Path | None = None, output: Path | None =
     manifest_path = PROCESSED / "manifests" / "data_manifest.json"
     if manifest_path.exists():
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        relative_output = output.resolve().relative_to(Path.cwd().resolve()).as_posix()
+        relative_output = output.resolve().relative_to(Path(__file__).resolve().parents[3]).as_posix()
         outputs = manifest.setdefault("processed_outputs", [])
         if relative_output not in outputs:
             outputs.append(relative_output)

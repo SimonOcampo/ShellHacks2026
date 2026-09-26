@@ -13,11 +13,14 @@
       "value": 938.53
     },
     "annual_snowfall_mm": {
-      "missing_reason": "NOAA station snowfall normal is blank.",
-      "provenance_ids": [],
-      "quality": "missing",
+      "missing_reason": null,
+      "provenance_ids": [
+        "58bcc517-1e90-5110-9c13-0eb42f592c4a",
+        "5e2e1fc0-f618-5203-8f50-6e821df926fa"
+      ],
+      "quality": "proxy",
       "unit": "mm/year",
-      "value": null
+      "value": 170.18
     },
     "arterial_share": {
       "missing_reason": null,
@@ -33,6 +36,13 @@
       "quality": "derived",
       "unit": "fraction",
       "value": 0.06115309665053696
+    },
+    "average_aadt": {
+      "missing_reason": "This optional informational road measurement is unavailable.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "vehicles/day",
+      "value": null
     },
     "freeway_share": {
       "missing_reason": null,
@@ -77,6 +87,13 @@
       "quality": "derived",
       "unit": "intersections/km2",
       "value": 4.324793070001573
+    },
+    "lane_miles_per_km2": {
+      "missing_reason": "This optional informational road measurement is unavailable.",
+      "provenance_ids": [],
+      "quality": "missing",
+      "unit": "lane-miles/km2",
+      "value": null
     },
     "local_road_share": {
       "missing_reason": null,
@@ -557,6 +574,37 @@
       "source_url": "https://www2.census.gov/geo/tiger/TIGER2024/EDGES/tl_2024_40109_edges.zip",
       "target_geography": "Census CBSA 36420",
       "transformation": "Select unique ROADFLG topological edges from the CBSA's complete member counties, project to EPSG:32614, and aggregate qualifying MTFCC edge lengths and TNID endpoint degrees."
+    },
+    {
+      "assumptions": [
+        "Selected station USW00013967 (OKLAHOMA CITY WILL ROGERS AP) is 11.79 km from the CBSA representative point.",
+        "The station normal is a proxy for the CBSA, not an area-weighted CBSA measurement."
+      ],
+      "dataset_id": "noaa_normals_stations_1991-2020",
+      "id": "58bcc517-1e90-5110-9c13-0eb42f592c4a",
+      "period": "1991-2020",
+      "raw_sha256": "668e145e434e656c25035bc443f1159aef21a9ae8d0880d7e33afb7e3d9f4cea",
+      "retrieved_at": "2026-09-26T07:34:20.474755+00:00",
+      "source_geography": "NOAA normals station points",
+      "source_name": "NOAA NCEI Annual Normals Station Inventory",
+      "source_url": "https://services2.arcgis.com/C8EMgrsFcRFL6LrL/ArcGIS/rest/services/stations_ncei/FeatureServer/20/query",
+      "target_geography": "Census CBSA 36420",
+      "transformation": "Select nearest station within 100 km reporting ANN-SNOW-NORMAL for this feature using great-circle distance."
+    },
+    {
+      "assumptions": [
+        "A NOAA-reported numeric 0.0 is retained as zero; blank or -9999 values mean missing/insufficient data and are not converted to zero."
+      ],
+      "dataset_id": "normals-annualseasonal-1991-2020",
+      "id": "5e2e1fc0-f618-5203-8f50-6e821df926fa",
+      "period": "1991-2020",
+      "raw_sha256": "6f6a5c1e7799d485499b6a89e56271ea08b70306af51bbad0075dca987080c99",
+      "retrieved_at": "2026-09-26T19:27:18.890038+00:00",
+      "source_geography": "NOAA station USW00013967",
+      "source_name": "NOAA NCEI U.S. Climate Normals",
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USW00013967&dataTypes=ANN-PRCP-NORMAL%2CANN-SNOW-NORMAL&format=json",
+      "target_geography": "Census CBSA 36420",
+      "transformation": "Read ANN-SNOW-NORMAL in inches from the 1991-2020 station normal and convert to millimeters (multiply by 25.4)."
     }
   ],
   "state_codes": [
