@@ -4,6 +4,24 @@ test("market evidence and a recalculated launch work end to end", async ({
   page,
 }) => {
   await page.goto("/");
+  await expect(page.locator(".landing-page")).toBeVisible();
+  await page.keyboard.press("Tab");
+  await expect(page.locator(".brand")).toBeFocused();
+  await expect(page.locator(".brand")).toHaveCSS("outline-style", "solid");
+  await expect
+    .poll(
+      () =>
+        page
+          .locator(".landing-photo img")
+          .evaluate((image) => (image as HTMLImageElement).naturalWidth),
+      { timeout: 10000 },
+    )
+    .toBeGreaterThan(0);
+  await page.screenshot({
+    path: "test-results/landing-desktop.png",
+    fullPage: true,
+  });
+  await page.getByRole("button", { name: "Explore candidate cities" }).click();
   await expect(page.getByText("MOCK DATA · DEMO")).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Candidate markets" }),
@@ -16,10 +34,12 @@ test("market evidence and a recalculated launch work end to end", async ({
   ]);
   await page.getByPlaceholder("Find a metro…").fill("Miami");
   await page.locator(".ranking-row").click();
-  await expect(
-    page.getByRole("heading", { name: "Miami", exact: true }),
-  ).toBeVisible();
-  await expect(page.getByText("MODE: TEMPLATE")).toBeVisible();
+  await expect(page.locator(".map-panel h2")).toHaveText("Miami");
+  await expect(page.locator(".ranking-expanded")).toContainText(
+    "PILLAR BREAKDOWN",
+  );
+  await expect(page.locator(".assistant-mode")).toHaveText("template");
+  await page.getByRole("button", { name: "Why this score?" }).click();
   await page.getByRole("button", { name: "synthetic:12060" }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await expect(page.locator("#provenance-synthetic-12060")).toBeVisible();
@@ -35,6 +55,9 @@ test("market evidence and a recalculated launch work end to end", async ({
   await expect(page.getByText("SEEDED & REPRODUCIBLE")).toBeVisible({
     timeout: 30000,
   });
+  await expect(page.locator(".sim-map-frame .sim-legend")).toContainText(
+    "Picking up",
+  );
   await expect(
     page.getByText("RIDES COMPLETED", { exact: true }),
   ).toBeVisible();
@@ -69,12 +92,25 @@ test("market evidence and a recalculated launch work end to end", async ({
     page.getByRole("button", { name: "Pause playback" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Pause playback" }).click();
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const reducedMotionPlay = page.getByRole("button", {
+    name: "Automatic playback disabled by reduced-motion preference",
+  });
+  await expect(reducedMotionPlay).toBeDisabled();
+  await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.screenshot({
     path: "test-results/scenario-desktop.png",
     fullPage: true,
   });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator("body")).toHaveJSProperty("scrollWidth", 390);
+  await page.screenshot({
+    path: "test-results/scenario-mobile.png",
+    fullPage: true,
+  });
   await page.getByRole("button", { name: "Back to markets" }).click();
   await page.getByPlaceholder("Find a metro…").fill("");
+  await page.setViewportSize({ width: 1280, height: 900 });
   await page.screenshot({
     path: "test-results/markets-desktop.png",
     fullPage: true,
@@ -91,6 +127,7 @@ test("superseded ranking responses cannot overwrite newer selection", async ({
   page,
 }) => {
   await page.goto("/");
+  await page.getByRole("button", { name: "Explore candidate cities" }).click();
   await expect(page.locator(".ranking-row")).toHaveCount(20);
   await page.route("**/api/v1/rankings", async (route) => {
     const weights = route.request().postDataJSON().weights;

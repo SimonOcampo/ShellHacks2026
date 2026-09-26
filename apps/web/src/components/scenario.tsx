@@ -30,6 +30,7 @@ import {
 import { api, fixtureMode } from "@/lib/api/client";
 import type { Simulation, SimulationRequest } from "@/lib/api/types";
 import { Button } from "./ui/button";
+import { SimulationMapbox } from "./mapbox-map";
 
 const defaults = {
   fleet_size: 50,
@@ -59,10 +60,14 @@ const chartAxisTick = { fontSize: 9, fill: "#c2d0c8" };
 export default function Scenario({
   cityId,
   cityName,
+  latitude,
+  longitude,
   onBack,
 }: {
   cityId: string;
   cityName: string;
+  latitude: number;
+  longitude: number;
   onBack: () => void;
 }) {
   const [inputs, setInputs] = useState(defaults);
@@ -165,6 +170,14 @@ export default function Scenario({
           FLEET OPERATIONS · NOT AUTONOMOUS DRIVING
         </span>
       </div>
+      <SimulationMapbox
+        cityName={cityName}
+        latitude={latitude}
+        longitude={longitude}
+        activeHour={hour}
+        playing={playing}
+        reducedMotion={reducedMotion}
+      />
       <div className="scenario-grid">
         <aside className="panel scenario-controls">
           <span className="eyebrow">SCENARIO PARAMETERS</span>

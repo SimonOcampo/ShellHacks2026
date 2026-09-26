@@ -18,6 +18,10 @@ Run the commands in README. Confirm `/health` mode and release ID. Keep the mock
 
 `uv run pytest`; `npm --prefix apps/web run typecheck`; `npm --prefix apps/web run build`; `npm --prefix apps/web run test:e2e`.
 
+## Mapbox setup
+
+Copy `apps/web/.env.example` to `apps/web/.env.local` and set `NEXT_PUBLIC_MAPBOX_TOKEN` to a public `pk.` token from the Mapbox account. Restart the Next.js dev server after changing environment values. The token is exposed to browser code by design; never use a secret `sk.` token. Without a token, the market explorer keeps its local U.S. map and the simulator shows an illustrative city grid. The simulation API returns hourly aggregates, not per-vehicle routes, so animated routes remain illustrative.
+
 The browser smoke starts local services if needed. It exercises selection, provenance, simulation, changed fares, playback and mobile layout. It writes screenshots under ignored `apps/web/test-results`.
 
 ## Deployment

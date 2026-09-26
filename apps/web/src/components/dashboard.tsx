@@ -1,14 +1,12 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  ArrowDownRight,
   ArrowRight,
   ArrowUpRight,
   ChevronRight,
   Compass,
   Database,
   ExternalLink,
-  FlaskConical,
   Layers3,
   LoaderCircle,
   MapPin,
@@ -28,7 +26,9 @@ import type {
   Weights,
 } from "@/lib/api/types";
 import { Button } from "@/components/ui/button";
-import MarketMap from "./market-map";
+import Landing from "./landing";
+import EvidenceAssistant from "./evidence-assistant";
+import { MarketMapbox } from "./mapbox-map";
 import Scenario from "./scenario";
 
 const pillarNames = {
@@ -63,12 +63,18 @@ export default function Dashboard() {
   const [busy, setBusy] = useState(false);
   const [retry, setRetry] = useState(0);
   const [drawer, setDrawer] = useState<"methodology" | "sources" | null>(null);
-  const [tab, setTab] = useState<"markets" | "scenario">("markets");
+  const [tab, setTab] = useState<"home" | "markets" | "scenario">("home");
+  const [mapFocusVersion, setMapFocusVersion] = useState(0);
   const [search, setSearch] = useState("");
   const [focusEvidenceId, setFocusEvidenceId] = useState<string | null>(null);
   const selectedRef = useRef(selected);
   selectedRef.current = selected;
   const drawerRef = useRef<HTMLDialogElement>(null);
+  const rankingListRef = useRef<HTMLDivElement>(null);
+  const selectCity = useCallback((cityId: string) => {
+    setSelected(cityId);
+    setMapFocusVersion((version) => version + 1);
+  }, []);
   useEffect(() => {
     if (drawer) drawerRef.current?.showModal();
     else drawerRef.current?.close();
@@ -199,6 +205,20 @@ export default function Dashboard() {
       ?.display_name.toLowerCase()
       .includes(search.toLowerCase()),
   );
+  useEffect(() => {
+    const list = rankingListRef.current;
+    if (!list || !selected) return;
+    const item = Array.from(
+      list.querySelectorAll<HTMLElement>("[data-city-id]"),
+    ).find((candidate) => candidate.dataset.cityId === selected);
+    if (!item) return;
+    const listBounds = list.getBoundingClientRect();
+    const itemBounds = item.getBoundingClientRect();
+    if (itemBounds.top < listBounds.top)
+      list.scrollTop -= listBounds.top - itemBounds.top;
+    else if (itemBounds.bottom > listBounds.bottom)
+      list.scrollTop += itemBounds.bottom - listBounds.bottom;
+  }, [selected, visible.length]);
   function adjust(key: keyof Weights, value: number) {
     const next = { ...weights, [key]: value };
     if (Object.values(next).reduce<number>((a, b) => a + (b ?? 0), 0) > 0)
@@ -211,7 +231,12 @@ export default function Dashboard() {
   return (
     <>
       <header className="topbar">
-        <a className="brand" href="/" aria-label="ODD Scout home">
+        <button
+          className="brand"
+          type="button"
+          onClick={() => setTab("home")}
+          aria-label="ODD Scout home"
+        >
           <div className="brand-symbol">
             <Radar size={25} />
           </div>
@@ -219,8 +244,15 @@ export default function Dashboard() {
             ODD<span className="brand-light">SCOUT</span>
             <small>EXPANSION INTELLIGENCE</small>
           </span>
-        </a>
+        </button>
         <nav aria-label="Main navigation">
+          <button
+            className={tab === "home" ? "nav-active" : ""}
+            aria-pressed={tab === "home"}
+            onClick={() => setTab("home")}
+          >
+            Home
+          </button>
           <button
             className={tab === "markets" ? "nav-active" : ""}
             aria-pressed={tab === "markets"}
@@ -234,20 +266,31 @@ export default function Dashboard() {
             onClick={() => setTab("scenario")}
             disabled={!selected}
           >
-            Launch simulator
+            Fleet simulator
           </button>
           <button onClick={() => setDrawer("methodology")}>
             Methodology <ArrowUpRight size={13} />
           </button>
         </nav>
         <span className="status-pill">
-          <i className="dot amber" />
-          {config?.versions.data_mode === "verified"
-            ? "PUBLIC DATA SNAPSHOT"
-            : "MOCK DATA · DEMO"}
+          <i className={`dot ${config?.versions.data_mode === "verified" ? "teal" : "amber"}`} />
+          {!config
+            ? "DATA MODE LOADING"
+            : config.versions.data_mode === "verified"
+              ? "PUBLIC DATA SNAPSHOT"
+              : "MOCK DATA · DEMO"}
         </span>
       </header>
-      <main>
+      {tab === "home" && (
+        <Landing
+          candidateCount={cities?.cities.length}
+          dataMode={config?.versions.data_mode}
+          canSimulate={Boolean(selected)}
+          onExplore={() => setTab("markets")}
+          onSimulate={() => setTab("scenario")}
+        />
+      )}
+      <main hidden={tab === "home"}>
         <div className="eyebrow">
           <span className="tiny-line" /> PUBLIC SIGNALS. TRANSPARENT
           ASSUMPTIONS.
@@ -376,29 +419,7 @@ export default function Dashboard() {
                 </span>
               </div>
             </section>
-            <div className="explorer-grid">
-              <section className="panel map-panel">
-                <div className="section-heading">
-                  <div>
-                    <span className="eyebrow">01 / MARKET LANDSCAPE</span>
-                    <h2>Opportunity, in perspective.</h2>
-                  </div>
-                  <span className="micro-tag">U.S. METROS</span>
-                </div>
-                <MarketMap
-                  cities={cities.cities}
-                  ranking={ranking}
-                  selected={selected}
-                  onSelect={setSelected}
-                />
-                <div className="map-bottom">
-                  <span>
-                    <i className="dot teal" /> {ranking.ranked.length} ranked ·{" "}
-                    {ranking.unranked.length} unranked
-                  </span>
-                  <span>Scores relative to this release</span>
-                </div>
-              </section>
+            <div className="explorer-grid map-priority-grid">
               <section className="panel ranking-panel">
                 <div className="section-heading">
                   <div>
@@ -448,35 +469,63 @@ export default function Dashboard() {
                   <span>SCREENING SCORE</span>
                 </div>
                 <div
+                  ref={rankingListRef}
                   className={`ranking-list ${busy ? "is-updating" : ""}`}
                   aria-busy={busy}
                 >
-                  {visible.map((r) => (
-                    <button
-                      className={`ranking-row ${selected === r.city_id ? "selected" : ""}`}
-                      key={r.city_id}
-                      onClick={() => setSelected(r.city_id)}
-                    >
-                      <span
-                        className={`rank-number ${(r.rank ?? 99) <= 3 ? "top-rank" : ""}`}
-                      >
-                        {r.rank ? String(r.rank).padStart(2, "0") : "—"}
-                      </span>
-                      <span className="city-label">
-                        {
-                          cities.cities.find((c) => c.city_id === r.city_id)
-                            ?.display_name
-                        }
-                        <small>
-                          {r.rank && r.rank <= 3
-                            ? "TOP CANDIDATE"
-                            : "METRO AREA"}
-                        </small>
-                      </span>
-                      <strong>{r.expansion_score?.toFixed(1) ?? "N/A"}</strong>
-                      <ChevronRight size={14} />
-                    </button>
-                  ))}
+                  {visible.map((r) => {
+                    const expanded = selected === r.city_id;
+                    const name = cities.cities.find((c) => c.city_id === r.city_id)?.display_name ?? r.city_id;
+                    const breakdownId = `ranking-breakdown-${r.city_id.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
+                    return (
+                      <article className="ranking-item" key={r.city_id} data-city-id={r.city_id}>
+                        <button
+                          className={`ranking-row ${expanded ? "selected" : ""}`}
+                          aria-expanded={expanded}
+                          aria-controls={expanded ? breakdownId : undefined}
+                          onClick={() => selectCity(r.city_id)}
+                        >
+                          <span className={`rank-number ${(r.rank ?? 99) <= 3 ? "top-rank" : ""}`}>
+                            {r.rank ? String(r.rank).padStart(2, "0") : "—"}
+                          </span>
+                          <span className="city-label">
+                            {name}
+                            <small>{r.rank && r.rank <= 3 ? "TOP CANDIDATE" : "METRO AREA"}</small>
+                          </span>
+                          <strong>{r.expansion_score?.toFixed(1) ?? "N/A"}</strong>
+                          <ChevronRight size={14} />
+                        </button>
+                        {expanded && (
+                          <div className="ranking-expanded" id={breakdownId}>
+                            <span className="expanded-title">PILLAR BREAKDOWN</span>
+                            {(Object.keys(pillarNames) as (keyof Weights)[]).map((key) => (
+                              <div className="expanded-pillar" key={key}>
+                                <span>{key === "readiness" ? "Infrastructure proxies" : pillarNames[key]}</span>
+                                <strong>{r.pillars[key]?.toFixed(1) ?? "—"}</strong>
+                              </div>
+                            ))}
+                            <button
+                              type="button"
+                              className="expanded-detail-link"
+                              onClick={() =>
+                                document
+                                  .getElementById("city-detail")
+                                  ?.scrollIntoView({
+                                    behavior: window.matchMedia(
+                                      "(prefers-reduced-motion: reduce)",
+                                    ).matches
+                                      ? "auto"
+                                      : "smooth",
+                                  })
+                              }
+                            >
+                              Full factors and evidence <ArrowUpRight size={12} />
+                            </button>
+                          </div>
+                        )}
+                      </article>
+                    );
+                  })}
                   {!visible.length && (
                     <p className="empty" role="status">
                       {ranking.ranked.length + ranking.unranked.length === 0
@@ -486,6 +535,37 @@ export default function Dashboard() {
                   )}
                 </div>
               </section>
+              <section className="panel map-panel">
+                <div className="section-heading">
+                  <div>
+                    <span className="eyebrow">01 / MARKET LANDSCAPE</span>
+                    <h2>{selected ? currentName : "Opportunity, in perspective."}</h2>
+                  </div>
+                  <span className="micro-tag">MAPBOX · U.S. METROS</span>
+                </div>
+                <MarketMapbox
+                  cities={cities.cities}
+                  ranking={ranking}
+                  selected={selected}
+                  focusVersion={mapFocusVersion}
+                  onSelect={selectCity}
+                />
+                <div className="map-bottom">
+                  <span>
+                    <i className="dot teal" /> {ranking.ranked.length} ranked ·{" "}
+                    {ranking.unranked.length} unranked
+                  </span>
+                  <span>Markers show metro centers, not service boundaries</span>
+                </div>
+              </section>
+              <EvidenceAssistant
+                cityName={currentName}
+                score={score}
+                explanation={explanation}
+                loading={detailBusy}
+                error={detailError}
+                onEvidenceClick={openEvidence}
+              />
             </div>
             <section className="panel weights-panel">
               <div>
@@ -537,6 +617,7 @@ export default function Dashboard() {
             </section>
             <section
               className="panel detail-panel"
+              id="city-detail"
               aria-label="Selected metro detail"
             >
               <div className="detail-title">
@@ -647,53 +728,6 @@ export default function Dashboard() {
                     <ArrowUpRight size={13} />
                   </button>
                 </div>
-                <div className="analyst">
-                  <div className="analyst-heading">
-                    <span className="eyebrow">
-                      <FlaskConical size={13} /> FACT-BASED ANALYST NOTE
-                    </span>
-                    {explanation && (
-                      <span className="explanation-mode">
-                        MODE: {explanation.mode.toUpperCase()}
-                      </span>
-                    )}
-                  </div>
-                  <p>
-                    {explanation?.summary ??
-                      (detailBusy
-                        ? "Preparing the evidence summary…"
-                        : detailError
-                          ? "Evidence summary unavailable. Retry metro detail to try again."
-                          : "No evidence summary returned.")}
-                  </p>
-                  {explanation?.advantages.map((a) => (
-                    <div className="analyst-factor" key={a}>
-                      <ArrowUpRight size={16} />
-                      <span>{a}</span>
-                    </div>
-                  ))}
-                  {explanation?.tradeoffs.map((t) => (
-                    <div className="analyst-factor tradeoff" key={t}>
-                      <ArrowDownRight size={16} />
-                      <span>{t}</span>
-                    </div>
-                  ))}
-                  {explanation?.evidence_ids.length ? (
-                    <div className="evidence-citations">
-                      <span>Evidence:</span>
-                      {explanation.evidence_ids.map((id) => (
-                        <button
-                          className="evidence-link"
-                          key={id}
-                          type="button"
-                          onClick={() => openEvidence(id)}
-                        >
-                          {id}
-                        </button>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
               </div>
               <div className="detail-footer">
                 <span>
@@ -722,6 +756,8 @@ export default function Dashboard() {
           <Scenario
             cityId={selected}
             cityName={currentName}
+            latitude={cities?.cities.find((c) => c.city_id === selected)?.latitude ?? 39.5}
+            longitude={cities?.cities.find((c) => c.city_id === selected)?.longitude ?? -98.5}
             onBack={() => setTab("markets")}
           />
         )}
