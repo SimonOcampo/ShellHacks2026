@@ -646,6 +646,36 @@ main {
   letter-spacing: 1px;
   color: #a4beb1;
 }
+.coverage-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #0e1a1c;
+}
+.coverage-summary > div {
+  min-width: 0;
+}
+.coverage-summary > div > span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.coverage-summary strong,
+.coverage-summary p,
+.coverage-summary li {
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 400;
+}
+.coverage-summary ul {
+  margin: 0;
+  padding-left: 17px;
+}
 .detail-grid {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
@@ -1271,6 +1301,9 @@ footer button {
   }
 }
 @media (max-width: 780px) {
+  .coverage-summary {
+    grid-template-columns: 1fr;
+  }
   .topbar {
     height: auto;
     min-height: 78px;

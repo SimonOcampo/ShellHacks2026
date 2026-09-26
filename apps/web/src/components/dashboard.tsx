@@ -495,6 +495,45 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
+              <section
+                className="coverage-summary"
+                aria-label="Ranking coverage and flags"
+              >
+                <div>
+                  <span>Configured feature coverage</span>
+                  <strong>
+                    {score
+                      ? `${(score.coverage * 100).toFixed(0)}%`
+                      : "Unavailable"}
+                  </strong>
+                </div>
+                <div>
+                  <span>Ranking exclusions</span>
+                  {score?.exclusion_reasons.length ? (
+                    <ul>
+                      {score.exclusion_reasons.map((reason) => (
+                        <li key={reason}>{reason}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>
+                      {score ? "No exclusion reasons reported." : "Unavailable"}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <span>Legal flags · outside numeric score</span>
+                  {score?.legal_flags.length ? (
+                    <ul>
+                      {score.legal_flags.map((flag) => (
+                        <li key={flag}>{flag}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>{score ? "No legal flags reported." : "Unavailable"}</p>
+                  )}
+                </div>
+              </section>
               <div className="detail-grid">
                 <div className="pillar-bars">
                   {(Object.keys(pillarNames) as (keyof Weights)[]).map(
