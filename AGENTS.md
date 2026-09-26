@@ -2,6 +2,9 @@
 
 Public-data market screening and hypothetical fleet operations. Never claim AV safety, deployment approval, or reproduction of a private operator's model.
 
+## Communication
+Use the `caveman` skill for every user prompt and agent task in this repository. Read `C:\Users\simon\.agents\skills\caveman\SKILL.md` and follow its current level and clarity rules. Keep committed documentation, code, comments, and other repository artifacts in normal prose.
+
 ## Ownership
 - Developer 1: `data/`, `packages/ranking/`, ranking/reference configuration.
 - Developer 2: `backend/`, `packages/contracts/`, simulation configuration, CI and deployment.
