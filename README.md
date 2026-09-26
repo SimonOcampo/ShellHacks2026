@@ -1,4 +1,6 @@
-# ODD Scout
+# Waymo Autonomous Driving City System
+
+Made for ShellHacks 2026.
 
 **Public-data market screening and hypothetical fleet simulation. Not an assessment of AV safety or deployment approval.**
 
