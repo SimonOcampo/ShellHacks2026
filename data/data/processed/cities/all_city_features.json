@@ -113,7 +113,7 @@
         "provenance_ids": [],
         "quality": "missing",
         "unit": "minutes",
-        "value": null
+        "value": 25.4
       },
       "population": {
         "missing_reason": null,
@@ -1825,7 +1825,7 @@
         "provenance_ids": [],
         "quality": "missing",
         "unit": "vehicles/day",
-        "value": null
+        "value": 25.7
       },
       "freeway_share": {
         "missing_reason": null,
@@ -10563,7 +10563,7 @@
         "provenance_ids": [],
         "quality": "missing",
         "unit": "minutes",
-        "value": null
+        "value": 25.7
       },
       "population": {
         "missing_reason": null,
@@ -14302,7 +14302,7 @@
         "provenance_ids": [],
         "quality": "missing",
         "unit": "minutes",
-        "value": null
+        "value": 23.5
       },
       "population": {
         "missing_reason": null,
@@ -15385,7 +15385,7 @@
         "provenance_ids": [],
         "quality": "missing",
         "unit": "minutes",
-        "value": null
+        "value": 26.7
       },
       "population": {
         "missing_reason": null,
