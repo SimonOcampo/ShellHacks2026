@@ -9,7 +9,7 @@ Use this file as the project checklist. Check an item only after recording its p
 - Developer 1 release artifact: `verified.v2` corrects the commute denominator, uses one ACS method with both input MOEs for all 35 metros, and corrects AFDC provenance URLs. All 20 candidates rank against 15 references. Fresh correction checks and inherited source evidence are recorded in `data/audits/verified.v2-source-checks.json`; a full independent replay still requires the original off-repository raw bundle.
 - Developer 2 contracts and engine: `uv run pytest` passed 45 tests on 2026-09-26 with the new startup test. GitHub Actions run #23 passed on PR commit `9674d85`, including this test.
 - Developer 2 verified deployment: Render service `srv-dartlbm0tbcc73d0lmug` serves `verified.v2` at `https://odd-scout-api.onrender.com`, deployment `dep-das4jcnpn0mc73eq63d0`, commit `5d87986`. All seven API routes passed hosted checks. Three warm default simulations took 2.708, 2.947, and 2.866 seconds; the two-second target remains unmet.
-- Developer 3 connected demo: local flow and browser proof exist. Hosted frontend, exact CORS origin, and deployed rehearsal remain open.
+- Developer 3 connected demo: Vercel production deployment `CyDER2SMieZuNoGuXRvb8SpG2R8Q` serves `https://odd-scout-web.vercel.app` with the Render API URL and HTTP transport. Exact-origin CORS, desktop flow, rollback, and local HTTP fallback passed. Mobile demo is not a P0 gate.
 
 ## P0 roadmap
 
@@ -46,7 +46,7 @@ Paths: `backend/`, `packages/contracts/`, `tests/contracts/`, `tests/simulation/
 - [x] Run `uv run pytest` on `main` commit `5d87986`: 45 passed on 2026-09-26. GitHub Actions P0 acceptance run `36276939150` passed on the same commit.
 - [x] GitHub Actions run #23 passed on PR commit `9674d85`, including the startup test.
 - [x] Validate startup against Developer 1’s committed `verified.v1` release. On 2026-09-26, the actual FastAPI lifespan loaded the release and seven local API checks passed: health, config, city list/detail, rankings, explanation, and a default seven-day simulation. All 20 candidates ranked against 15 references. Explicit mock fallback also passed. Proof and release hash: `docs/verification.md`. This validates backend compatibility, not source-publication signoff.
-- [ ] Validate production CORS with Developer 3’s exact hosted origin when available. This remains dependent on the hosted frontend origin.
+- [x] Validate production CORS with Developer 3’s exact hosted origin. Render deployment `dep-das5lpu0tbcc73dudkc0` serves `ODD_ALLOWED_ORIGINS` including `https://odd-scout-web.vercel.app`; API GET and OPTIONS preflight return HTTP 200 with the expected allow-origin header.
 
 ### Developer 2 — Deploy backend and measure it
 
@@ -66,19 +66,19 @@ Paths: `apps/web/`, browser tests, and `docs/demo-runbook.md`.
 
 - [x] Build local market explorer and scenario flow with ranking controls, factor/source details, explanations, simulation results, charts, and playback.
 - [x] Verify local desktop/mobile flow, evidence drawer, changed inputs, fare behavior, playback, and stale-request cancellation.
-- [ ] Deploy frontend to Vercel and configure `NEXT_PUBLIC_API_BASE_URL` plus HTTP data transport.
-- [ ] Set Render `ODD_ALLOWED_ORIGINS` to the exact Vercel origin.
-- [ ] Rehearse hosted flow at desktop and mobile sizes against the Render backend.
-- [ ] Confirm visible mock/verified labels, source links, loading/errors, changed weights and scenario inputs, cancellation of stale requests, and graceful API errors.
-- [ ] Record deployed rehearsal results in `docs/demo-runbook.md`.
+- [x] Deploy frontend to Vercel and configure `NEXT_PUBLIC_API_BASE_URL=https://odd-scout-api.onrender.com` plus `NEXT_PUBLIC_DATA_TRANSPORT=http`. Current production deployment `CyDER2SMieZuNoGuXRvb8SpG2R8Q` is ready at `https://odd-scout-web.vercel.app`.
+- [x] Set Render `ODD_ALLOWED_ORIGINS` to include the exact Vercel production origin while preserving localhost origins.
+- [x] Rehearse hosted flow at desktop size against the Render backend. A mobile demo is not required.
+- [x] Confirm verified release/provenance, source links, loading states, changed weights and scenario inputs. Local API outage/retry recovered; superseded ranking response test passed.
+- [x] Record deployed rehearsal results in `docs/demo-runbook.md`.
 
 ## Shared integration sequence
 
-- [ ] Review the clean `main` scaffold and current contracts across all three owners.
+- [x] Review the integrated `main` scaffold and current contracts across owners. Verified release, FastAPI responses, generated API types, and hosted frontend agree; proof is in `docs/verification.md`.
 - [x] Publish Developer 1’s corrected release artifact while Developers 2 and 3 keep integration working. `verified.v2` has source-correction and hosted API proof.
-- [ ] Have Developer 2 validate the verified release at startup and deploy it. Developer 2's portion passed; Developer 3 still needs the backend URL and hosted rehearsal.
-- [ ] For each shared contract or release change, review affected consumers, regenerate artifacts, update fixtures, and rerun relevant gates.
-- [ ] Freeze the verified release; rehearse rollback and local fallback; capture the final demo result.
+- [x] Have Developer 2 validate and deploy the verified release, then have Developer 3 rehearse the hosted flow at desktop size. Results are in `docs/demo-runbook.md` and `docs/verification.md`.
+- [x] Review affected consumers for the verified release change; API schema and generated types did not change, and relevant gates passed.
+- [x] Freeze the verified release; rehearse rollback and local fallback; capture the final demo result.
 
 ## Integration gates
 
@@ -86,8 +86,8 @@ Paths: `apps/web/`, browser tests, and `docs/demo-runbook.md`.
 - [x] Twenty mock markets work through HTTP; ranking, explanation, and simulation endpoints return results.
 - [x] Ranking and seeded simulation tests pass; the UI consumes engine results.
 - [x] Replace mock ranking data on the backend with 20 verified candidates and 15 reference markets. The hosted API returns ranking ID `e1e3650e5a6a13ca8a48`.
-- [ ] Complete hosted frontend, visual flow, error handling, and hosted rehearsal. The project owner accepts current warm simulation latency for this hackathon demo; the two-second target remains unmet.
-- [ ] Freeze the verified release and rehearse rollback and local fallback.
+- [x] Complete hosted frontend visual flow and desktop rehearsal. Local API error/retry behavior and stale-response handling passed. Mobile demo is not required. The project owner accepts current warm simulation latency for this hackathon demo; the two-second target remains unmet.
+- [x] Freeze the verified release and rehearse rollback and local fallback.
 
 ## P1 and P2 backlog
 

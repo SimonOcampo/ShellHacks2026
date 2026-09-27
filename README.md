@@ -4,7 +4,7 @@ Made for ShellHacks 2026.
 
 **Public-data market screening and hypothetical fleet simulation. Not an assessment of AV safety or deployment approval.**
 
-Explore candidate U.S. metros, explain transparent scores, and run a reproducible seven-day fleet scenario. The local default contains **20 synthetic candidate metros and five synthetic reference records** and is visibly marked mock. The Render backend serves `verified.v2` with 20 public-data candidates and 15 references. The hosted frontend remains pending.
+Explore candidate U.S. metros, explain transparent scores, and run a reproducible seven-day fleet scenario. The local default contains **20 synthetic candidate metros and five synthetic reference records** and is visibly marked mock. Production uses the Vercel frontend at [odd-scout-web.vercel.app](https://odd-scout-web.vercel.app) and the Render API, which serves `verified.v2` with 20 public-data candidates and 15 references.
 
 ## Run locally
 
@@ -85,4 +85,4 @@ Simulation represents fleet operations in a synthetic service zone. Demand is as
 
 Read [architecture](docs/architecture.md), [contracts](docs/contracts.md), [methodology](docs/methodology.md), [simulation](docs/simulation.md), [team workflow](docs/team-workflow.md), [demo runbook](docs/demo-runbook.md), and [decisions](docs/decisions.md).
 
-Deployment definitions are included for Vercel (frontend root `apps/web`) and Render (`render.yaml`). The Render backend serves the verified release; the Vercel frontend is not provisioned. Hosted backend checks pass, but the warm default-scenario timing exceeds the two-second target. See [verification status](docs/verification.md). Keep mock and verified releases separate; complete hosted integration before claiming production readiness.
+Deployment definitions are included for Vercel (frontend root `apps/web`) and Render (`render.yaml`). The P0 desktop hosted rehearsal and rollback/local HTTP fallback rehearsal passed; see [verification status](docs/verification.md). Warm hosted simulation time exceeds the two-second target, and cold-start time remains unmeasured. Keep mock and verified releases separate. P1 and P2 remain backlog.

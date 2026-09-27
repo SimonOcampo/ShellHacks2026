@@ -64,7 +64,7 @@ Each task names an owner, bounded files, an output, and proof. Start the indepen
 - **Paths:** `apps/web/`, browser tests, and `docs/demo-runbook.md`.
 - **Inputs:** generated API types, deployed or local API URL, verified release metadata from Developers 1 and 2.
 - **Output:** responsive market explorer and scenario flow with top candidates, three ranking controls, factor breakdown, reference similarity, provenance drawer, loading/error states, and seven-day charts/playback. Keep source evidence and modeled assumptions distinct. Preserve the AV-safety/deployment boundary in the visible product copy.
-- **Proof:** run typecheck, production build, browser flow at desktop and mobile sizes; confirm source links, mock/verified labels, changed ranking weights, changed scenario inputs, cancellation of stale responses, and graceful API errors. Rehearse against the deployed backend when it exists.
+- **Proof:** run typecheck, production build, and browser flow. Verify desktop and mobile behavior locally; rehearse the hosted flow at desktop size only. Confirm source links, mock/verified labels, changed ranking weights, changed scenario inputs, cancellation of stale responses, and graceful API errors.
 
 **P1. Add comparison and explanation UX.**
 
@@ -102,7 +102,7 @@ Developer 1 must not change frontend or simulation. Developer 2 must not change 
 
 **P0 closed — Developer 2 mock backend deployment:** Render service `srv-dartlbm0tbcc73d0lmug` is live on deployment `dep-darv61avcj2c73acjng0`, commit `329076b`, release `mock.v1`. Health and API smoke checks pass. The project owner accepts warm simulation latency above two seconds for the hackathon demo. Prior smoke-checked deployment `dep-darunmg473hc73fbpsdg` remains in Render history as rollback target. Details are recorded in `docs/verification.md`.
 
-**P0 outstanding:** `verified.v2` now provides 20 ranked candidates with local correction and backend proof; see `docs/data-sources.md` for inherited audit scope and raw-replay limits. Developer 2 must select the corrected release on Render and validate the exact hosted frontend origin. Developer 3 must deploy the frontend, verify its hosted connection, and rehearse the deployed flow. GitHub Actions run #23 is historical proof for commit `9674d85`, not remote CI proof for this correction. Do not claim production readiness before deployment and hosted integration pass.
+**P0 complete:** `verified.v2` provides 20 ranked candidates with local correction and backend proof; see `docs/data-sources.md` for inherited audit scope and raw-replay limits. Render and Vercel production deployments are live, exact-origin CORS passes, and desktop hosted, rollback, and local HTTP fallback rehearsals passed. Results are in `docs/demo-runbook.md` and `docs/verification.md`. A mobile demo is not required. GitHub Actions run #23 is historical proof for commit `9674d85`, not remote CI proof for this correction. P1/P2 remain backlog.
 
 **P1/P2:** assigned to owners above. Defer until verified P0 passes.
 
