@@ -24,7 +24,9 @@ The restored `mock.v1` release keeps its original ten-variable `ranking.v1` meth
 | POST `/api/v1/simulations` | SimulationRequest to SimulationResult |
 
 Errors: `{ "error": { "code": "...", "message": "...", "details": [] } }`.
-404: unknown city; 413: request-count or optional playback ceiling exceeded; 422: invalid inputs or references; 429: simulation capacity busy. 503 includes an unavailable pinned simulation profile. Framework startup failure means the service does not become healthy.
+404: unknown city; 413: request-count or optional playback ceiling exceeded; 422: invalid inputs or references. 503 includes an unavailable pinned simulation profile. Framework startup failure means the service does not become healthy.
+
+Simulation endpoints have no application semaphore or fixed concurrent simulation cap. Requests still share the server's thread pool, CPU, and memory, so heavy concurrent use can increase latency or cause timeouts. Per-request size, simulation request-count, and optional playback ceilings remain enforced.
 
 The explanation endpoint always calculates ranking and template text on the server. For verified releases only, setting `GEMINI_API_KEY` in the backend environment enables an optional Gemini `gemini-2.5-flash` rewrite of the summary. The API key never enters the request or response. The model receives structured calculated factors, template text, and source IDs and periods. Only the summary can change; rank, score, advantages, tradeoffs, and evidence IDs remain deterministic. The response `mode` is `llm` only after output passes strict shape, length, citation-subset, and prohibited-claim checks. Invalid output, timeout, upstream failure, missing key, mock mode, unranked city, request quota, or busy capacity returns the existing template response. This validation checks citation identity and simple text constraints; it cannot prove every qualitative phrase true. Treat live text as wording, not additional evidence.
 
