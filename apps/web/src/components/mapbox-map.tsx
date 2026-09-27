@@ -14,6 +14,11 @@ export type MapInstance = {
   once: (event: string, handler: () => void) => void;
   addSource: (id: string, source: Record<string, unknown>) => void;
   addLayer: (layer: Record<string, unknown>) => void;
+  addImage: (
+    id: string,
+    image: ImageData,
+    options?: { pixelRatio?: number },
+  ) => void;
   getSource: (id: string) => { setData: (data: unknown) => void } | undefined;
   getLayer: (id: string) => unknown;
   addControl: (control: unknown, position?: string) => void;

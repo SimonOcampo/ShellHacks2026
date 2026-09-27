@@ -239,18 +239,19 @@ export default function Scenario({
           FLEET OPERATIONS · NOT AUTONOMOUS DRIVING
         </span>
       </div>
-      <div className="scenario-photo-banner">
-        <img
-          src={skyline ?? "/nashville-skyline.jpg"}
-          alt={`${skyline ? cityName : "Nashville"} skyline, illustrative city context`}
-        />
-        <span>
-          {skyline
-            ? cityName.toUpperCase()
-            : `ILLUSTRATIVE NASHVILLE SKYLINE · ${cityName.toUpperCase()} SCENARIO`}{" "}
-          · HYPOTHETICAL FLEET
-        </span>
-      </div>
+      <FleetPlaybackMap
+        cityName={cityName}
+        skyline={skyline}
+        result={result?.request.city_id === cityId ? result : undefined}
+        minute={minute}
+        reducedMotion={reducedMotion}
+        busy={busy}
+      />
+      {playbackNotice && (
+        <p className="async-note" role="status">
+          {playbackNotice}
+        </p>
+      )}
       <div className="scenario-grid">
         <aside className="panel scenario-controls">
           <span className="eyebrow">SCENARIO BUILDER</span>
@@ -337,20 +338,6 @@ export default function Scenario({
             </p>
           </div>
         </aside>
-        <div className="scenario-map-column">
-          <FleetPlaybackMap
-            cityName={cityName}
-            result={result?.request.city_id === cityId ? result : undefined}
-            minute={minute}
-            reducedMotion={reducedMotion}
-            busy={busy}
-          />
-          {playbackNotice && (
-            <p className="async-note" role="status">
-              {playbackNotice}
-            </p>
-          )}
-        </div>
         <aside
           className="panel scenario-live-panel"
           aria-label="Selected simulation hour"
