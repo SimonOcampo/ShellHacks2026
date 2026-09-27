@@ -46,14 +46,34 @@ test("market evidence and a recalculated launch work end to end", async ({
   await expect(page.locator(".assistant-mode")).toHaveText("template");
   await page.getByRole("button", { name: "Why this score?" }).click();
   await page.getByRole("button", { name: "synthetic:12060" }).click();
-  await expect(page.getByRole("dialog")).toBeVisible();
-  await expect(page.locator("#provenance-synthetic-12060")).toBeVisible();
+  await expect(page).toHaveURL(
+    /\/methodology\?city=cbsa%3A12060#provenance-synthetic-12060$/,
+  );
+  await expect(page.locator("#selected-city-title")).toHaveText("Atlanta");
   await expect(
-    page.getByText("Synthetic fixture generator", { exact: true }),
-  ).toBeVisible();
-  await expect(page.getByText("FL · unresolved")).toBeVisible();
-  await expect(page.getByText(/Normalized value:/).first()).toBeVisible();
-  await page.getByRole("button", { name: "Close details" }).click();
+    page.locator("#provenance-synthetic-12060"),
+  ).toHaveAttribute("open", "");
+  await expect(
+    page.locator("#provenance-synthetic-12060"),
+  ).toContainText("Synthetic fixture generator");
+  await expect(page.locator("#selected-city-evidence")).toContainText(
+    "mock",
+  );
+  await expect(page.locator("#selected-city-evidence")).toContainText(
+    "GA · unresolved",
+  );
+  await expect(page.locator("#selected-city-evidence")).toContainText(
+    "Stored feature values",
+  );
+  await page.getByRole("link", { name: "Explorer" }).click();
+  await page
+    .locator(".figma-hero-copy")
+    .getByRole("button", { name: "Explore markets" })
+    .click();
+  await expect(page.locator(".ranking-row")).toHaveCount(20);
+  await page.getByPlaceholder("Find a metro…").fill("Miami");
+  await page.locator(".ranking-row").click();
+  await expect(page.locator(".map-panel h2")).toHaveText("Miami");
   await page
     .getByRole("button", { name: "Simulate hypothetical launch" })
     .click();

@@ -476,16 +476,22 @@ export default function Dashboard() {
         : [...current, category],
     );
   }
-  function methodologyHref(anchor?: string) {
+  function methodologyHref(anchor?: string, evidenceCityId?: string) {
     const params = new URLSearchParams();
-    const evidenceCity = usesWaymoData ? waymoSelected : selected;
+    const evidenceCity =
+      evidenceCityId ?? (usesWaymoData ? waymoSelected : selected);
     if (evidenceCity) params.set("city", evidenceCity);
     if (usesWaymoData) params.set("source", "waymo");
     const query = params.toString();
     return `/methodology${query ? `?${query}` : ""}${anchor ? `#${anchor}` : ""}`;
   }
   function openEvidence(id: string) {
-    router.push(methodologyHref(provenanceAnchor(id)));
+    const evidenceCity = screenCity?.provenance.some((record) => record.id === id)
+      ? screenSelected
+      : (screenConfig?.references.find((reference) =>
+          reference.provenance_ids.includes(id),
+        )?.city_id ?? screenSelected);
+    router.push(methodologyHref(provenanceAnchor(id), evidenceCity));
   }
   return (
     <>
