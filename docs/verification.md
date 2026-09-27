@@ -8,6 +8,8 @@ The full root suite passed 56 tests. The focused data source test passed. Genera
 
 Against the committed `verified.v2` release and default seed 42, the original synthetic Providence scenario retained simulation ID `43012c31790f8e039ed0` and its original accounting: 6,941 requests, 6,802 completed, 133 rejected, 6 unfinished. The optional `providence-rism-2015.v1` profile returned 6,941 generated requests, 6,939 completed, zero rejected, and two unfinished. Its playback contained 34,728 segments covering all 50 vehicles without timeline gaps. The uncompressed seven-day JSON response was 7,538,116 bytes, so rendering clients should request playback only when needed. These are hypothetical outputs from modeled spatial weights and assumed request timing, not measured Providence ride-hail or Waymo operations.
 
+The figures above record the earlier `simulation.v1` implementation. Providence `simulation.v2` introduces assumed idle cruising, so its empty miles, battery use, pickup choices, and playback segment count can differ. The historical figures are not acceptance values for the new policy.
+
 ## P0 baseline — 2026-09-26
 
 Verified on Windows with Python 3.12 and Node 22:

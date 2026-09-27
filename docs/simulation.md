@@ -1,4 +1,4 @@
-# Fleet simulation v1
+# Fleet simulation
 
 This models hypothetical fleet operations, not driving intelligence. No perception, routing on real streets, vehicle physics, lane changes, or safety evaluation.
 
@@ -8,13 +8,15 @@ Heap events ordered by time, priority, and event ID. Completion events release v
 
 Generate Poisson hourly requests. Draw times uniformly in each hour and origins/destinations uniformly by area in a five-mile disk. Separate seed streams preserve identical requests when fleet or pricing changes.
 
-Assign nearest idle feasible vehicle, breaking distance ties by vehicle index. Require pickup <=15 minutes and enough battery for pickup, passenger trip, depot return, and reserve. No passenger queue: reject immediately when no vehicle qualifies. An energy-short idle vehicle may head to charge. After dropoff, charge at the trigger threshold; otherwise idle at destination.
+Assign nearest idle feasible vehicle, breaking distance ties by vehicle index. Require pickup <=15 minutes and enough battery for pickup, passenger trip, depot return, and reserve. No passenger queue: reject immediately when no vehicle qualifies. An energy-short idle vehicle may head to charge. The synthetic profile retains stationary idle behavior. The Providence public profile uses `simulation.v2`: after dropoff or charging, available vehicles cruise between nearby model-zone points until assigned or sent to the depot. Dispatch considers their position and remaining battery at the request time.
 
-Depot charging has a finite FIFO queue. No repositioning optimizer.
+Depot charging has a finite FIFO queue. Providence cruising is an assumed roaming policy, not a repositioning optimizer or a reproduction of an operator's behavior.
 
 ## Assumptions
 
 Configuration lives in `config/simulation.v1.json`. Defaults: 1,000 assumed requests/day, 50 vehicles, seven repeated synthetic days starting Monday, 20 mph, Euclidean distance times 1.3, one-minute pickup and dropoff dwell.
+
+Providence idle cruising uses [`config/providence-idle-cruising.v1.json`](../config/providence-idle-cruising.v1.json): assumed 12 mph, 0.25–1.2 local-mile waypoint legs, and a separate seed stream. Nearby waypoints are sampled using 2015 RISM modeled trip-production weights. This is a hypothetical fleet policy, not observed idle movement. Cruising is recorded as moving `IDLE` playback, consumes battery, increases empty miles, and can change pickup eligibility and completed rides. It does not alter the synthetic profile or the generated request schedule.
 
 Range 250 miles; start full; reserve 10%; trigger 20%; target 80%; replenish 2.5 range-miles/minute. Chargers are `ceil(fleet/10)`, minimum one. This private depot assumption is independent of public charging features.
 
@@ -72,11 +74,11 @@ HTTP scenarios request vehicle playback. Providence automatically selects the pi
 
 The browser indexes returned segments by vehicle, binary-searches the current interval, and interpolates only that interval's endpoints. One simulation-minute clock drives vehicles, the selected hourly chart marker, and the inspector. Play, pause, minute seeking, replay at the horizon, and 1/10/60 simulated minutes per second are supported. Hidden tabs and reduced-motion preferences stop automatic movement. Recalculation pauses playback and only the newest request can replace the scene.
 
-Mapbox GL JS v3.30.0 renders the geographic frame over Mapbox Standard Satellite. Its imagery, lighting, and available detailed 3D buildings provide the close-up view. The City GIS Hub snapshot supplies 52,271 building footprints with positive published heights and 7,746 road centerline segments. GIS building extrusions remain visible from zoom 8 through 14.5; at closer zoom, Mapbox's built-in detailed buildings take over so the plain GIS extrusions do not cover their facades. Detail coverage varies by building, and individual footprints become too small to distinguish at wide regional scales. The initial view fits the Providence area; Downtown 3D and the selected-vehicle camera expose neighborhood detail. State-colored circles represent vehicles at every zoom. The city photo sits beside the map in a 25/75 layout, with the state legend and vehicle inspector directly below both. This is current map context, not a reconstruction of Providence in 2015.
+Mapbox GL JS v3.30.0 renders the geographic frame over the non-satellite Mapbox Standard 3D style. Its available building geometry, lighting, facades, and landmark models provide the close-up view. The City GIS Hub snapshot supplies 52,271 building footprints with published heights where positive and 7,746 road centerline segments. GIS building extrusions remain visible from zoom 8 through 14.5; at closer zoom, Mapbox's built-in buildings take over so plain GIS extrusions do not cover their facades. The City data has no facade textures or roof geometry. Mapbox does not document a separate API for photorealistic 3D scans of every Providence building, so detailed coverage varies. Individual footprints become too small to distinguish at wide regional scales. The initial view fits the Providence area; Downtown 3D and the selected-vehicle camera expose neighborhood detail. State-colored circles represent vehicles at every zoom. The city photo sits beside the map in a 25/75 layout, with the state legend and vehicle inspector directly below both. This is current map context, not a reconstruction of Providence in 2015.
 
 The default playback speed is one simulated minute per real second. Each moving Providence circle follows a display-only shortest path across the connected City road centerlines, with its progress scaled to the engine segment's existing start and end times. Stationary positions are placed on the nearest centerline. The route builder uses the largest connected road component, nearest road anchors within 500 meters, and undirected edges; it does not apply one-way rules, turn restrictions, traffic, signals, lane-level geometry, or observed vehicle behavior. If either endpoint cannot be anchored or a connected path cannot be found, the visualization falls back to the engine's straight-line interpolation. The routing display never changes event timing, trip distance, costs, or dispatch calculations. No collision avoidance or deployment approval is claimed.
 
-All eight engine states have distinct labels and colors: idle, empty travel to pickup, pickup dwell, occupied travel, dropoff dwell, empty travel to depot, charging queue, and charging. A vehicle selector exposes the exact state, occupancy, and segment interval and highlights its straight-line leg. The source panel links the public model and displays limitations.
+All eight engine states have distinct labels and colors: idle/cruising, empty travel to pickup, pickup dwell, occupied travel, dropoff dwell, empty travel to depot, charging queue, and charging. A vehicle selector exposes the exact state, occupancy, and segment interval and highlights its displayed road path when available. The source panel links the public model and displays limitations.
 
 Without a Mapbox token or when map loading fails, the same engine coordinates render in an explicitly labeled local-mile plot. The fallback does not invent streets. Runs above the 10,000-request playback cap retry with the same inputs and seed for metrics only, accompanied by a visible notice. Neither the API trace nor the UI silently truncates the fleet.
 

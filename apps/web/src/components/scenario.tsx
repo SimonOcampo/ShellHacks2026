@@ -871,7 +871,11 @@ export default function Scenario({
                   <strong>{number(metrics?.paid_miles)}</strong>
                 </div>
                 <div>
-                  <span>Empty / deadhead miles</span>
+                  <span>
+                    {result.versions.model_version === "simulation.v2"
+                      ? "Empty / cruising miles"
+                      : "Empty / deadhead miles"}
+                  </span>
                   <strong>{number(metrics?.empty_miles)}</strong>
                 </div>
                 <div>
@@ -928,6 +932,14 @@ export default function Scenario({
                   {result.assumptions.average_speed_mph} mph. Pickup limit{" "}
                   {result.assumptions.max_pickup_wait_minutes} minutes.
                 </p>
+                {result.versions.model_version === "simulation.v2" && (
+                  <p>
+                    Idle vehicles cruise between nearby public-model zone points
+                    at an assumed speed. The policy uses modeled 2015 trip
+                    production weights and is not observed Waymo behavior.
+                    Cruising consumes battery and counts as empty miles.
+                  </p>
+                )}
                 {result.warnings.map((w) => (
                   <p key={w}>{w}</p>
                 ))}

@@ -1,0 +1,6 @@
+{
+  "version": "providence-idle-cruising.v1",
+  "speed_mph": 12,
+  "minimum_leg_miles": 0.25,
+  "maximum_leg_miles": 1.2
+}
