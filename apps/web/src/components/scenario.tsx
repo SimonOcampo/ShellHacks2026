@@ -170,14 +170,6 @@ export default function Scenario({
           FLEET OPERATIONS · NOT AUTONOMOUS DRIVING
         </span>
       </div>
-      <SimulationMapbox
-        cityName={cityName}
-        latitude={latitude}
-        longitude={longitude}
-        activeHour={hour}
-        playing={playing}
-        reducedMotion={reducedMotion}
-      />
       <div className="scenario-grid">
         <aside className="panel scenario-controls">
           <span className="eyebrow">SCENARIO PARAMETERS</span>
@@ -259,7 +251,69 @@ export default function Scenario({
             </p>
           </div>
         </aside>
-        <div className="scenario-results" aria-busy={busy}>
+        <div className="scenario-map-column">
+          <SimulationMapbox
+            cityName={cityName}
+            latitude={latitude}
+            longitude={longitude}
+            activeHour={hour}
+            playing={playing}
+            reducedMotion={reducedMotion}
+            simulationActive={Boolean(result)}
+            fleetSize={inputs.fleet_size}
+            seed={inputs.seed}
+          />
+        </div>
+        <aside className="panel scenario-live-panel" aria-label="Selected simulation hour">
+          <div className="scenario-live-heading">
+            <span className="eyebrow">LIVE SIMULATION</span>
+            <h3>
+              Day {Math.floor(hour / 24) + 1}{" "}
+              <small>{String(hour % 24).padStart(2, "0")}:00</small>
+            </h3>
+            <p>Hourly API outputs follow the selected playback hour.</p>
+          </div>
+          <div className="scenario-live-metrics">
+            <LiveMetric
+              label="Requests"
+              value={number(current?.requests)}
+              suffix="this hour"
+            />
+            <LiveMetric
+              label="Completed rides"
+              value={number(current?.completed_rides)}
+              suffix="this hour"
+            />
+            <LiveMetric
+              label="Average wait"
+              value={
+                current?.average_wait_minutes == null
+                  ? "N/A"
+                  : number(current.average_wait_minutes, 1)
+              }
+              suffix={current?.average_wait_minutes == null ? "" : "min"}
+            />
+            <LiveMetric
+              label="Fleet utilization"
+              value={`${number(current?.utilization_pct, 1)}%`}
+              suffix="this hour"
+            />
+            <LiveMetric
+              label="Gross revenue"
+              value={`$${number(current?.gross_revenue_usd)}`}
+              suffix="this hour"
+            />
+          </div>
+          <div className="scenario-fleet-preview">
+            <span className="eyebrow">VEHICLE SCENE</span>
+            <strong>
+              {Math.min(inputs.fleet_size, 60)} <small>vehicle samples</small>
+            </strong>
+            <p>Illustrative markers change color through idle, pickup, and dropoff states.</p>
+          </div>
+        </aside>
+      </div>
+      <div className="scenario-results" aria-busy={busy}>
           <div className="results-heading">
             <div>
               <span className="eyebrow">03 / HYPOTHETICAL LAUNCH</span>
@@ -724,9 +778,26 @@ export default function Scenario({
               </details>
             </>
           )}
-        </div>
       </div>
     </section>
+  );
+}
+
+function LiveMetric({
+  label,
+  value,
+  suffix,
+}: {
+  label: string;
+  value: string;
+  suffix: string;
+}) {
+  return (
+    <div className="scenario-live-metric">
+      <span>{label}</span>
+      <strong>{value}</strong>
+      {suffix && <small>{suffix}</small>}
+    </div>
   );
 }
 function Metric({
