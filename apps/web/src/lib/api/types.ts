@@ -7,7 +7,14 @@ export type RankingRequest = components["schemas"]["RankingRequest"];
 export type ReferenceRankingRequest =
   components["schemas"]["ReferenceRankingRequest"];
 export type Explanation = components["schemas"]["Explanation"];
-export type DataRelease = components["schemas"]["DataRelease"];
+export type DataRelease = Pick<
+  Config,
+  "versions" | "features" | "bounds" | "references" | "exclusions"
+> & {
+  candidate_ids: string[];
+  cities: City[];
+  normalization_cohort: string[];
+};
 export type Simulation = components["schemas"]["SimulationResult"];
 export type SimulationRequest = components["schemas"]["SimulationRequest"];
 export type Weights = components["schemas"]["PillarWeights"];
