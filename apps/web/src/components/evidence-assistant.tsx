@@ -1,101 +1,109 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Bot, CornerDownLeft, Sparkles } from "lucide-react";
-import type { Explanation, Ranking } from "@/lib/api/types";
+import { api, fixtureMode } from "@/lib/api/client";
+import type { Ranking } from "@/lib/api/types";
 
 type CityScore = Ranking["ranked"][number] | Ranking["unranked"][number];
 type Message = {
   role: "assistant" | "user";
   text: string;
   evidence?: string[];
+  mode?: "gemini" | "template";
 };
 
-function groundedAnswer(
-  question: string,
-  score: CityScore | undefined,
-  explanation: Explanation | undefined,
-) {
-  if (!score || !explanation) {
-    return "This market's structured explanation is still loading. Try again when the evidence panel is ready.";
-  }
-  const q = question.toLowerCase();
-  if (/risk|trade|weak|downside|concern|limitation/.test(q)) {
-    return explanation.tradeoffs.length
-      ? explanation.tradeoffs.join(" ")
-      : "The current explanation reports no specific trade-offs. Review feature coverage and source evidence before drawing conclusions.";
-  }
-  if (/compare|similar|reference|familiar/.test(q)) {
-    const matches = score.reference_matches
-      .map(
-        (match) =>
-          `${match.reference_id} (${match.similarity.toFixed(1)} similarity)`,
-      )
-      .join(", ");
-    return matches
-      ? `The ranking response compares this metro with ${matches}. Similarity uses selected public features; it does not establish safety or deployment approval.`
-      : "The ranking response has no reference match for this metro. Similarity is based on selected public features when a match exists.";
-  }
-  if (/score|rank|number|pillar|weight/.test(q)) {
-    const scoreText = (value: number | null) =>
-      value?.toFixed(1) ?? "unavailable";
-    return `Expansion screening score: ${score.expansion_score?.toFixed(1) ?? "unavailable"}. ODD familiarity: ${scoreText(score.pillars.familiarity)}. Public infrastructure proxies: ${scoreText(score.pillars.readiness)}. Market opportunity: ${scoreText(score.pillars.opportunity)}. Scores come from the deterministic ranking response.`;
-  }
-  if (/opportun|market|demand|population/.test(q)) {
-    const factors = score.factors
-      .filter((factor) => factor.pillar === "opportunity")
-      .map((factor) => factor.feature.replaceAll("_", " "))
-      .slice(0, 4);
-    const opportunity = score.pillars.opportunity?.toFixed(1) ?? "unavailable";
-    return factors.length
-      ? `The opportunity pillar is ${opportunity}. Its returned factors include ${factors.join(", ")}. These are screening proxies, not a local demand forecast.`
-      : `The opportunity pillar is ${opportunity}. The response has no named opportunity factors to summarize.`;
-  }
-  return `${explanation.summary} ${explanation.advantages.join(" ")}`.trim();
-}
-
 export default function EvidenceAssistant({
+  cityId,
   cityName,
   score,
+  ranking,
   explanation,
   loading,
   error,
   onEvidenceClick,
 }: {
+  cityId: string;
   cityName: string;
   score: CityScore | undefined;
-  explanation: Explanation | undefined;
+  ranking: Ranking | undefined;
+  explanation: import("@/lib/api/types").Explanation | undefined;
   loading: boolean;
   error: string;
   onEvidenceClick: (id: string) => void;
 }) {
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const [pending, setPending] = useState(false);
+  const [chatError, setChatError] = useState("");
+  const controller = useRef<AbortController | null>(null);
 
   useEffect(() => {
+    controller.current?.abort();
+    controller.current = null;
     setQuestion("");
     setMessages([]);
-  }, [cityName]);
+    setPending(false);
+    setChatError("");
+    return () => {
+      controller.current?.abort();
+    };
+  }, [cityId]);
 
-  function ask(text: string) {
+  async function ask(text: string) {
     const trimmed = text.trim();
-    if (!trimmed) return;
-    setMessages((current) => [
-      ...current,
-      { role: "user", text: trimmed },
-      {
-        role: "assistant",
-        text: groundedAnswer(trimmed, score, explanation),
-        evidence: explanation?.evidence_ids ?? [],
-      },
-    ]);
-    setQuestion("");
+    if (!trimmed || !cityId || !ranking || pending || fixtureMode) return;
+    controller.current?.abort();
+    const active = new AbortController();
+    controller.current = active;
+    setPending(true);
+    setChatError("");
+    try {
+      const result = await api.chat(
+        cityId,
+        {
+          question: trimmed,
+          history: messages.slice(-8).map(({ role, text: messageText }) => ({
+            role,
+            text: messageText,
+          })),
+          ranking: {
+            weights: ranking.normalized_weights,
+            reference_ids: ranking.reference_ids,
+          },
+        },
+        active.signal,
+      );
+      if (!active.signal.aborted) {
+        setMessages((current) => [
+          ...current,
+          { role: "user", text: trimmed },
+          {
+            role: "assistant",
+            text: result.answer,
+            evidence: result.evidence_ids,
+            mode: result.mode,
+          },
+        ]);
+        setQuestion("");
+      }
+    } catch (cause) {
+      if (!active.signal.aborted) {
+        setChatError(
+          cause instanceof Error ? cause.message : "Analyst request failed.",
+        );
+      }
+    } finally {
+      if (!active.signal.aborted) setPending(false);
+    }
   }
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    ask(question);
+    void ask(question);
   }
+
+  const canAsk = !!cityId && !!score && !!ranking && !!explanation && !loading;
 
   return (
     <aside className="panel evidence-assistant" aria-label="Evidence assistant">
@@ -103,10 +111,14 @@ export default function EvidenceAssistant({
         <span className="assistant-icon">
           <Sparkles size={16} />
         </span>
-        <span className="assistant-state">GROUNDED IN RANKING OUTPUT</span>
-        {explanation && (
-          <span className="assistant-mode">{explanation.mode}</span>
-        )}
+        <span className="assistant-state">EVIDENCE-GROUNDED CHAT</span>
+        <span className="assistant-mode">
+          {fixtureMode
+            ? "fixtures only"
+            : (messages.filter((message) => message.mode).at(-1)?.mode ??
+              explanation?.mode ??
+              "analyst")}
+        </span>
       </div>
       <div className="assistant-title">
         <div>
@@ -117,12 +129,18 @@ export default function EvidenceAssistant({
         </div>
       </div>
       <p className="assistant-disclosure">
-        Answers use this city&apos;s structured scores, factors, and
-        explanation. P0 does not use a free-form AI model.
+        Gemini answers from this city&apos;s backend ranking and source evidence.
+        If Gemini is not configured or fails, ODD Scout returns its deterministic
+        evidence summary.
       </p>
       {error && (
         <p className="assistant-error" role="status">
           {error}
+        </p>
+      )}
+      {chatError && (
+        <p className="assistant-error" role="alert">
+          {chatError}
         </p>
       )}
       <div
@@ -161,7 +179,9 @@ export default function EvidenceAssistant({
             )}
             <div>
               <span className="assistant-speaker">
-                {message.role === "user" ? "You" : "ODD Scout analyst"}
+                {message.role === "user"
+                  ? "You"
+                  : `ODD Scout analyst${message.mode ? ` · ${message.mode}` : ""}`}
               </span>
               <p>{message.text}</p>
               {message.evidence?.length ? (
@@ -181,23 +201,31 @@ export default function EvidenceAssistant({
             </div>
           </article>
         ))}
+        {pending && (
+          <p className="assistant-pending" role="status">
+            Checking ranking evidence…
+          </p>
+        )}
       </div>
       <div className="assistant-prompts" aria-label="Suggested questions">
-        {[
-          "Why this score?",
-          "What are the trade-offs?",
-          "How does it compare?",
-        ].map((prompt) => (
-          <button
-            type="button"
-            key={prompt}
-            onClick={() => ask(prompt)}
-            disabled={loading || !explanation}
-          >
-            {prompt}
-          </button>
-        ))}
+        {["Why this score?", "What are the trade-offs?", "How does it compare?"].map(
+          (prompt) => (
+            <button
+              type="button"
+              key={prompt}
+              onClick={() => void ask(prompt)}
+              disabled={!canAsk || pending || fixtureMode}
+            >
+              {prompt}
+            </button>
+          ),
+        )}
       </div>
+      {fixtureMode && (
+        <p className="assistant-footnote">
+          Switch to HTTP transport and run the backend to use analyst chat.
+        </p>
+      )}
       <form className="assistant-composer" onSubmit={submit}>
         <label className="sr-only" htmlFor="analyst-question">
           Ask a question about this market
@@ -207,19 +235,20 @@ export default function EvidenceAssistant({
           value={question}
           onChange={(event) => setQuestion(event.target.value)}
           placeholder="Ask about this market…"
-          disabled={loading || !explanation}
+          maxLength={1200}
+          disabled={!canAsk || pending || fixtureMode}
         />
         <button
           type="submit"
           aria-label="Send question"
-          disabled={loading || !explanation || !question.trim()}
+          disabled={!canAsk || pending || fixtureMode || !question.trim()}
         >
           <CornerDownLeft size={15} />
         </button>
       </form>
       <p className="assistant-footnote">
-        Scores remain deterministic. This panel explains returned evidence; it
-        does not assess deployment safety.
+        Ranking scores remain deterministic. Chat explains returned evidence;
+        it does not assess deployment safety.
       </p>
     </aside>
   );

@@ -7,6 +7,7 @@ import type {
   Explanation,
   Simulation,
   SimulationRequest,
+  AnalystChat,
 } from "./types";
 
 export const fixtureMode =
@@ -58,6 +59,15 @@ export const api = {
     fixtureMode
       ? fixture<Explanation>(`explanation-${id.replace(":", "-")}`, signal)
       : call<Explanation>(`/api/v1/cities/${id}/explanation`, request, signal),
+  chat: (
+    id: string,
+    body: {
+      question: string;
+      history: { role: "user" | "assistant"; text: string }[];
+      ranking: RankingRequest;
+    },
+    signal?: AbortSignal,
+  ) => call<AnalystChat>(`/api/v1/cities/${id}/chat`, body, signal),
   simulate: async (request: SimulationRequest, signal?: AbortSignal) => {
     if (!fixtureMode)
       return call<Simulation>("/api/v1/simulations", request, signal);

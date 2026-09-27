@@ -55,6 +55,8 @@ Each task names an owner, bounded files, an output, and proof. Start the indepen
 - Own server-side LLM credentials, request limits, evidence validation, caching, and deterministic template fallback. Coordinate accepted fields with Developer 3; pass calculated structured evidence only. Never let model output set ranks, facts, or simulation results.
 - Add resolved battery, charging, and speed inputs only if those scenario controls are approved as the next slice; keep response assumptions explicit and seeded results reproducible.
 
+The guarded Gemini analyst endpoint is implemented locally. Deployment still requires `GEMINI_API_KEY` as a backend secret; without it, the endpoint returns the deterministic template. P1 verification and hosted rehearsal remain open.
+
 **Do not own:** frontend design or independent ranking-method changes. Coordinate all shared schema changes with affected developers and regenerate TypeScript.
 
 ### Developer 3 — frontend, explanations UX, and demo
@@ -69,7 +71,7 @@ Each task names an owner, bounded files, an output, and proof. Start the indepen
 **P1. Add comparison and explanation UX.**
 
 - Build UI for reference-category exploration, weight sensitivity, baseline-versus-scenario comparisons, expanded uncertainty, and additional verified cities only after their API fields/releases are agreed.
-- Integrate live analyst wording only after Developer 2 ships the guarded endpoint. Keep numeric scores rendered from the deterministic API response, cite evidence IDs, and show the template when the service fails.
+- Integrate live analyst wording through the guarded backend endpoint. Keep numeric scores rendered from the deterministic API response, cite evidence IDs, and show the template when the service fails.
 
 **P2. Add optional visual polish.**
 

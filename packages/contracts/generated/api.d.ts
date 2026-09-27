@@ -38,6 +38,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/cities/{city_id}/chat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Analyst Chat */
+        post: operations["analyst_chat_api_v1_cities__city_id__chat_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/cities/{city_id}/explanation": {
         parameters: {
             query?: never;
@@ -127,6 +144,36 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AnalystChatRequest */
+        AnalystChatRequest: {
+            /** History */
+            history?: components["schemas"]["AnalystChatTurn"][];
+            /** Question */
+            question: string;
+            ranking?: components["schemas"]["RankingRequest"];
+        };
+        /** AnalystChatResponse */
+        AnalystChatResponse: {
+            /** Answer */
+            answer: string;
+            /** Evidence Ids */
+            evidence_ids: string[];
+            /**
+             * Mode
+             * @enum {string}
+             */
+            mode: "gemini" | "template";
+        };
+        /** AnalystChatTurn */
+        AnalystChatTurn: {
+            /**
+             * Role
+             * @enum {string}
+             */
+            role: "user" | "assistant";
+            /** Text */
+            text: string;
+        };
         /** Bounds */
         Bounds: {
             /** Lower */
@@ -700,6 +747,77 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["CityFeature"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    analyst_chat_api_v1_cities__city_id__chat_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                city_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AnalystChatRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AnalystChatResponse"];
                 };
             };
             /** @description Not Found */

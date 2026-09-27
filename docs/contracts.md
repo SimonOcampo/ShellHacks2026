@@ -21,9 +21,10 @@ The restored `mock.v1` release keeps its original ten-variable `ranking.v1` meth
 | GET `/api/v1/cities/{city_id}` | CityFeature including measurements and provenance |
 | POST `/api/v1/rankings` | RankingRequest to RankingResult |
 | POST `/api/v1/cities/{city_id}/explanation` | RankingRequest to Explanation |
+| POST `/api/v1/cities/{city_id}/chat` | AnalystChatRequest to evidence-cited AnalystChatResponse; Gemini when configured, deterministic template fallback otherwise |
 | POST `/api/v1/simulations` | SimulationRequest to SimulationResult |
 
-Errors: `{ "error": { "code": "...", "message": "...", "details": [] } }`.
+Errors: `{ "error": { "code": "...", "message": "...", "details": [] } }`. Analyst chat is limited to ten requests per minute per client and eight prior turns; questions and turns have a 1,200-character limit. Gemini keys remain server-side. If Gemini is unset, times out, or returns invalid output, the endpoint returns a deterministic template answer. Returned evidence IDs are restricted to the selected city's ranking evidence.
 404: unknown city; 413: request-count ceiling exceeded; 422: invalid inputs or references; 429: simulation capacity busy. 503 is reserved for an unavailable service. Framework startup failure means the service does not become healthy.
 
 Weights normalize to one and must have positive finite sum. Omitted API weights use `config/ranking.v1.json`. Reference selections must be nonempty, unique, known, and enabled. Announced/testing references are never selected by default.

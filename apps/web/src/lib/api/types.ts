@@ -5,6 +5,7 @@ export type Config = components["schemas"]["PublicConfig"];
 export type Ranking = components["schemas"]["RankingResult"];
 export type RankingRequest = components["schemas"]["RankingRequest"];
 export type Explanation = components["schemas"]["Explanation"];
+export type AnalystChat = components["schemas"]["AnalystChatResponse"];
 export type Simulation = components["schemas"]["SimulationResult"];
 export type SimulationRequest = components["schemas"]["SimulationRequest"];
 export type Weights = components["schemas"]["PillarWeights"];

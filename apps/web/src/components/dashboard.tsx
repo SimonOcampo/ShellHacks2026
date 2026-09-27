@@ -559,8 +559,10 @@ export default function Dashboard() {
                 </div>
               </section>
               <EvidenceAssistant
+                cityId={selected}
                 cityName={currentName}
                 score={score}
+                ranking={ranking}
                 explanation={explanation}
                 loading={detailBusy}
                 error={detailError}

@@ -1,6 +1,91 @@
 {
   "components": {
     "schemas": {
+      "AnalystChatRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "history": {
+            "items": {
+              "$ref": "#/components/schemas/AnalystChatTurn"
+            },
+            "maxItems": 8,
+            "title": "History",
+            "type": "array"
+          },
+          "question": {
+            "maxLength": 1200,
+            "minLength": 1,
+            "title": "Question",
+            "type": "string"
+          },
+          "ranking": {
+            "$ref": "#/components/schemas/RankingRequest"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "AnalystChatRequest",
+        "type": "object"
+      },
+      "AnalystChatResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "answer": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Answer",
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "mode": {
+            "enum": [
+              "gemini",
+              "template"
+            ],
+            "title": "Mode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mode",
+          "answer",
+          "evidence_ids"
+        ],
+        "title": "AnalystChatResponse",
+        "type": "object"
+      },
+      "AnalystChatTurn": {
+        "additionalProperties": false,
+        "properties": {
+          "role": {
+            "enum": [
+              "user",
+              "assistant"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 1200,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "role",
+          "text"
+        ],
+        "title": "AnalystChatTurn",
+        "type": "object"
+      },
       "Bounds": {
         "additionalProperties": false,
         "properties": {
@@ -1657,6 +1742,95 @@
           }
         },
         "summary": "City"
+      }
+    },
+    "/api/v1/cities/{city_id}/chat": {
+      "post": {
+        "operationId": "analyst_chat_api_v1_cities__city_id__chat_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "city_id",
+            "required": true,
+            "schema": {
+              "title": "City Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalystChatRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalystChatResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Analyst Chat"
       }
     },
     "/api/v1/cities/{city_id}/explanation": {

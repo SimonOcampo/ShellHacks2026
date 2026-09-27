@@ -10,3 +10,7 @@ services:
         value: /app/data/releases/mock.v1.json
       - key: ODD_ALLOWED_ORIGINS
         sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.6-flash

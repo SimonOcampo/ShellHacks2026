@@ -26,6 +26,7 @@ type MapInstance = {
 };
 type Marker = {
   setLngLat: (point: [number, number]) => Marker;
+  setRotation: (rotation: number) => Marker;
   addTo: (map: MapInstance) => Marker;
   remove: () => void;
 };
@@ -283,35 +284,6 @@ export function MarketMapbox({
   );
 }
 
-function routeCoordinates(
-  longitude: number,
-  latitude: number,
-  routeIndex = 0,
-): [number, number][] {
-  const routes = [
-    [
-      [-1, -0.2], [-0.75, -0.9], [-0.05, -1], [0.65, -0.65], [1, 0],
-      [0.68, 0.72], [0.05, 1], [-0.72, 0.7], [-1, -0.2],
-    ],
-    [
-      [-0.92, 0.45], [-0.75, -0.45], [-0.15, -0.92], [0.55, -0.8],
-      [0.92, -0.1], [0.55, 0.68], [-0.12, 0.95], [-0.72, 0.82], [-0.92, 0.45],
-    ],
-    [
-      [-0.7, -0.78], [0.02, -0.96], [0.75, -0.52], [0.92, 0.3],
-      [0.44, 0.92], [-0.32, 0.88], [-0.92, 0.24], [-0.7, -0.78],
-    ],
-    [
-      [-0.98, -0.08], [-0.45, -0.72], [0.36, -0.94], [0.96, -0.36],
-      [0.82, 0.48], [0.15, 0.96], [-0.62, 0.72], [-0.98, -0.08],
-    ],
-  ] as const;
-  const scale = 0.006 + (routeIndex % 3) * 0.0011;
-  const lonScale = scale / Math.max(Math.cos((latitude * Math.PI) / 180), 0.45);
-  const route = routes[routeIndex % routes.length];
-  return route.map(([x, y]) => [longitude + x * lonScale, latitude + y * scale]);
-}
-
 type VehicleState = "idle" | "pickup" | "dropoff";
 type VehicleMotion = {
   index: number;
@@ -322,9 +294,24 @@ type VehicleMotion = {
 type AnimatedVehicle = {
   marker: Marker;
   element: HTMLElement;
-  route: [number, number][];
+  route: StreetRoute;
   state: VehicleState;
   index: number;
+};
+type Coordinate = [number, number];
+type StreetRoute = {
+  coordinates: Coordinate[];
+  travelPath: Coordinate[];
+  cumulativeMeters: number[];
+  lengthMeters: number;
+};
+type DirectionsResponse = {
+  code?: string;
+  routes?: {
+    legs?: {
+      steps?: { geometry?: { coordinates?: Coordinate[] } }[];
+    }[];
+  }[];
 };
 
 const maxRenderedVehicles = 60;
@@ -338,6 +325,76 @@ function seededUnit(seed: number, index: number, salt: number) {
   value = Math.imul(value ^ (value >>> 16), 0x45d9f3b);
   value = (value ^ (value >>> 16)) >>> 0;
   return value / 0x1_0000_0000;
+}
+
+function cityWaypoints(longitude: number, latitude: number, seed: number) {
+  return Array.from({ length: routeCount + 1 }, (_, index) => {
+    const lonRadius = 0.012 / Math.max(Math.cos((latitude * Math.PI) / 180), 0.45);
+    const east = (seededUnit(seed, index, 91) - 0.5) * 2 * lonRadius;
+    const north = (seededUnit(seed, index, 137) - 0.5) * 0.018;
+    return [longitude + east, latitude + north] as Coordinate;
+  });
+}
+
+function distanceMeters(from: Coordinate, to: Coordinate) {
+  const meanLatitude = ((from[1] + to[1]) / 2) * (Math.PI / 180);
+  const east = (to[0] - from[0]) * 111_320 * Math.cos(meanLatitude);
+  const north = (to[1] - from[1]) * 111_320;
+  return Math.hypot(east, north);
+}
+
+function createStreetRoute(coordinates: Coordinate[]): StreetRoute {
+  const travelPath = [...coordinates, ...coordinates.slice(0, -1).reverse()];
+  const cumulativeMeters = [0];
+  for (let index = 1; index < travelPath.length; index += 1) {
+    cumulativeMeters.push(
+      cumulativeMeters[index - 1] +
+        distanceMeters(travelPath[index - 1], travelPath[index]),
+    );
+  }
+  return {
+    coordinates,
+    travelPath,
+    cumulativeMeters,
+    lengthMeters: cumulativeMeters.at(-1) ?? 0,
+  };
+}
+
+async function fetchStreetRoutes(
+  longitude: number,
+  latitude: number,
+  seed: number,
+  token: string,
+  signal: AbortSignal,
+) {
+  const coordinates = cityWaypoints(longitude, latitude, seed);
+  const query = new URLSearchParams({
+    access_token: token,
+    geometries: "geojson",
+    overview: "full",
+    steps: "true",
+  });
+  const path = coordinates.map(([lng, lat]) => `${lng},${lat}`).join(";");
+  const response = await fetch(
+    `https://api.mapbox.com/directions/v5/mapbox/driving/${path}?${query}`,
+    { signal },
+  );
+  if (!response.ok) throw new Error(`Directions API returned ${response.status}`);
+  const payload = (await response.json()) as DirectionsResponse;
+  if (payload.code !== "Ok" || !payload.routes?.[0]?.legs)
+    throw new Error(`Directions API returned ${payload.code ?? "no routes"}`);
+
+  return payload.routes[0].legs.flatMap((leg) => {
+    const path: Coordinate[] = [];
+    for (const step of leg.steps ?? []) {
+      for (const coordinate of step.geometry?.coordinates ?? []) {
+        const previous = path.at(-1);
+        if (!previous || previous[0] !== coordinate[0] || previous[1] !== coordinate[1])
+          path.push(coordinate);
+      }
+    }
+    return path.length >= 2 ? [createStreetRoute(path)] : [];
+  });
 }
 
 function vehicleMotion(
@@ -365,65 +422,42 @@ function vehicleMotion(
   return { ...base, state: "idle", progress: 0.94 };
 }
 
-function interpolateRoute(route: [number, number][], progress: number) {
-  const scaled = Math.max(0, Math.min(0.9999, progress)) * (route.length - 1);
-  const segment = Math.floor(scaled);
-  const fraction = scaled - segment;
-  const from = route[segment];
-  const to = route[Math.min(segment + 1, route.length - 1)];
+function routePosition(route: StreetRoute, progress: number) {
+  const distance = Math.max(0, Math.min(0.9999, progress)) * route.lengthMeters;
+  let low = 0;
+  let high = route.cumulativeMeters.length - 1;
+  while (low < high - 1) {
+    const middle = Math.floor((low + high) / 2);
+    if (route.cumulativeMeters[middle] <= distance) low = middle;
+    else high = middle;
+  }
+  const segmentLength = route.cumulativeMeters[high] - route.cumulativeMeters[low];
+  const fraction = segmentLength
+    ? (distance - route.cumulativeMeters[low]) / segmentLength
+    : 0;
+  const from = route.travelPath[low];
+  const to = route.travelPath[high];
+  const meanLatitude = ((from[1] + to[1]) / 2) * (Math.PI / 180);
   return [
-    from[0] + (to[0] - from[0]) * fraction,
-    from[1] + (to[1] - from[1]) * fraction,
-  ] as [number, number];
+    [from[0] + (to[0] - from[0]) * fraction, from[1] + (to[1] - from[1]) * fraction] as Coordinate,
+    (Math.atan2((to[0] - from[0]) * Math.cos(meanLatitude), to[1] - from[1]) * 180) /
+      Math.PI,
+  ] as const;
 }
-
-const fallbackRoutes: [number, number][][] = [
-  [[70, 400], [190, 345], [330, 405], [510, 370], [700, 315], [900, 270], [940, 430], [510, 480], [70, 400]],
-  [[190, 45], [255, 140], [225, 280], [390, 500], [560, 410], [700, 250], [690, 55], [440, 80], [190, 45]],
-  [[690, 45], [620, 165], [770, 305], [740, 500], [570, 445], [430, 305], [300, 220], [440, 90], [690, 45]],
-  [[260, 282], [365, 190], [520, 222], [650, 318], [820, 410], [900, 320], [760, 180], [500, 155], [260, 282]],
-];
 
 function FallbackSimulationMap({
   cityName,
-  simulationActive,
-  fleetSize,
-  seed,
-  reducedMotion,
   message,
 }: {
   cityName: string;
-  simulationActive: boolean;
-  fleetSize: number;
-  seed: number;
-  reducedMotion: boolean;
   message: string;
 }) {
-  const [elapsed, setElapsed] = useState(0);
-  useEffect(() => {
-    if (!simulationActive || reducedMotion) return;
-    const started = performance.now();
-    const timer = window.setInterval(
-      () => setElapsed((performance.now() - started) / 1000),
-      120,
-    );
-    return () => window.clearInterval(timer);
-  }, [simulationActive, reducedMotion, seed]);
-  const visibleVehicles = vehicleCount(fleetSize);
-  const vehicles = Array.from({ length: visibleVehicles }, (_, index) => {
-    const motion = vehicleMotion(index, visibleVehicles, seed, elapsed);
-    const point = interpolateRoute(fallbackRoutes[motion.routeIndex], motion.progress);
-    return { ...motion, point };
-  });
-  const mapDescription =
-    `Illustrative fleet map for ${cityName}. ` +
-    "Vehicle dots and routes are not returned by the simulation API.";
   return (
     <div className="mapbox-frame sim-map-frame">
       <div
         className="fallback-street-map"
         role="img"
-        aria-label={mapDescription}
+        aria-label={`Illustrative street grid for ${cityName}; no vehicle paths are shown without road routing.`}
       >
         <svg
           viewBox="0 0 1000 560"
@@ -454,14 +488,6 @@ function FallbackSimulationMap({
             strokeWidth="34"
           />
           <path
-            d="M-40 400 C180 340 300 455 510 370 S820 320 1040 225"
-            fill="none"
-            stroke="#55cfc6"
-            strokeOpacity=".7"
-            strokeWidth="2"
-            strokeDasharray="8 10"
-          />
-          <path
             d="M195 -20 C255 140 220 290 390 580 M690 -20 C610 150 790 315 740 580"
             fill="none"
             stroke="#294e53"
@@ -475,68 +501,7 @@ function FallbackSimulationMap({
             strokeWidth="1"
             strokeDasharray="5 8"
           />
-          <path
-            d="M250 282 C365 190 520 222 650 318 S820 410 899 320"
-            fill="none"
-            stroke="#65e2d5"
-            strokeWidth="3"
-            strokeOpacity=".9"
-          />
-          <path
-            d="M250 282 C365 190 520 222 650 318 S820 410 899 320"
-            fill="none"
-            stroke="#65e2d5"
-            strokeWidth="13"
-            strokeOpacity=".13"
-          />
-          <path
-            d="M290 446 C420 385 495 180 728 154"
-            fill="none"
-            stroke="#86adff"
-            strokeWidth="2"
-            strokeDasharray="6 7"
-          />
-          <path
-            d="M70 400 C190 345 330 405 510 370 S790 310 940 270 C965 350 730 460 510 480 S180 475 70 400"
-            fill="none"
-            stroke="#65e2d5"
-            strokeWidth="2"
-            strokeOpacity=".56"
-            strokeDasharray="7 7"
-          />
-          <path
-            d="M190 45 C255 140 225 280 390 500 S650 385 700 250 S690 60 440 80 Z"
-            fill="none"
-            stroke="#86adff"
-            strokeWidth="2"
-            strokeOpacity=".5"
-            strokeDasharray="7 8"
-          />
-          <path
-            d="M690 45 C620 165 770 305 740 500 S430 380 300 220 S440 90 690 45 Z"
-            fill="none"
-            stroke="#ffbd75"
-            strokeWidth="2"
-            strokeOpacity=".45"
-            strokeDasharray="7 8"
-          />
         </svg>
-        {simulationActive &&
-          vehicles.map((vehicle) => (
-            <span
-              aria-label={`Illustrative vehicle ${vehicle.index + 1}, ${vehicle.state}`}
-              className={`fallback-car ${vehicle.state}`}
-              data-state={vehicle.state}
-              key={vehicle.index}
-              style={{
-                left: `${vehicle.point[0] / 10}%`,
-                top: `${vehicle.point[1] / 5.6}%`,
-              }}
-              title={`Vehicle ${vehicle.index + 1} · ${vehicle.state}`}
-            >
-              <i aria-hidden="true" />
-            </span>
-          ))}
       </div>
       <div className="mapbox-overlay mapbox-city-label">
         <span className="mapbox-live-dot" />
@@ -549,27 +514,10 @@ function FallbackSimulationMap({
       >
         {message}
       </div>
-      <div className="mapbox-legend sim-legend">
-        <span>
-          <i className="vehicle-dot idle" /> Idle
-        </span>
-        <span>
-          <i className="vehicle-dot pickup" /> Picking up
-        </span>
-        <span>
-          <i className="vehicle-dot dropoff" /> Dropping off
-        </span>
-        <span className="route-key">Route preview</span>
-      </div>
       <div className="mapbox-disclaimer">
-        Illustrative route preview · API returns hourly aggregates, not
-        per-vehicle paths
+        Cars stay hidden until real road routes are available. API returns hourly
+        aggregates, not per-vehicle paths.
       </div>
-      {simulationActive && !reducedMotion && (
-        <span className="mapbox-sim-playing">
-          <span className="mapbox-live-dot" /> ILLUSTRATIVE FLEET PREVIEW · MOVING
-        </span>
-      )}
     </div>
   );
 }
@@ -601,6 +549,9 @@ export function SimulationMapbox({
   const vehicleMarkers = useRef<AnimatedVehicle[]>([]);
   const [mapReady, setMapReady] = useState(false);
   const [mapError, setMapError] = useState("");
+  const [streetRoutes, setStreetRoutes] = useState<StreetRoute[]>([]);
+  const [routeLoading, setRouteLoading] = useState(false);
+  const [routeError, setRouteError] = useState("");
   useEffect(() => {
     if (!token || !container.current) return;
     let active = true;
@@ -650,18 +601,52 @@ export function SimulationMapbox({
   }, [token, longitude, latitude]);
 
   useEffect(() => {
+    if (!token || !simulationActive) {
+      setStreetRoutes([]);
+      setRouteError("");
+      setRouteLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    setStreetRoutes([]);
+    setRouteError("");
+    setRouteLoading(true);
+    fetchStreetRoutes(longitude, latitude, seed, token, controller.signal)
+      .then((routes) => {
+        if (controller.signal.aborted) return;
+        if (routes.length === 0) {
+          setRouteError("No drivable street routes found near this city center.");
+          return;
+        }
+        setStreetRoutes(routes);
+        if (routes.length < routeCount)
+          setRouteError(`Only ${routes.length} of ${routeCount} street paths could be routed.`);
+      })
+      .catch((error: unknown) => {
+        if (!controller.signal.aborted)
+          setRouteError(
+            error instanceof Error
+              ? `${error.message}. Check token permissions for Mapbox Directions.`
+              : "Mapbox Directions could not return street routes.",
+          );
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setRouteLoading(false);
+      });
+    return () => controller.abort();
+  }, [token, longitude, latitude, seed, simulationActive]);
+
+  useEffect(() => {
     const map = mapRef.current;
     const mapbox = window.mapboxgl;
     if (!mapReady || !map || !mapbox) return;
-    const routes = Array.from({ length: routeCount }, (_, index) =>
-      routeCoordinates(longitude, latitude, index),
-    );
+    const routes = simulationActive ? streetRoutes : [];
     const feature: GeoJSON.FeatureCollection<GeoJSON.LineString> = {
       type: "FeatureCollection",
       features: routes.map((route, index) => ({
         type: "Feature",
         properties: { route: index + 1 },
-        geometry: { type: "LineString", coordinates: route },
+        geometry: { type: "LineString", coordinates: route.coordinates },
       })),
     };
     try {
@@ -700,11 +685,12 @@ export function SimulationMapbox({
     }
     vehicleMarkers.current.forEach(({ marker }) => marker.remove());
     vehicleMarkers.current = [];
-    if (!simulationActive) return;
+    if (!simulationActive || routes.length === 0) return;
     const count = vehicleCount(fleetSize);
     vehicleMarkers.current = Array.from({ length: count }, (_, index) => {
       const motion = vehicleMotion(index, count, seed, 0);
-      const route = routes[motion.routeIndex];
+      const route = routes[motion.routeIndex % routes.length];
+      const [point, bearing] = routePosition(route, motion.progress);
       const element = markerElement(
         `mapbox-vehicle-marker ${motion.state}`,
         `Illustrative vehicle ${index + 1}, ${motion.state}`,
@@ -712,12 +698,17 @@ export function SimulationMapbox({
       );
       element.dataset.state = motion.state;
       element.innerHTML = `<svg aria-hidden="true" viewBox="0 0 24 32"><path class="car-body" d="M7 2h10l4 7v14l-4 7H7l-4-7V9z"/><path class="car-window" d="M7 9h10l2 5H5zM5 17h14l-2 6H7z"/></svg>`;
-      const marker = new mapbox.Marker({ element, anchor: "center" })
-        .setLngLat(interpolateRoute(route, motion.progress))
+      const marker = new mapbox.Marker({
+        element,
+        anchor: "center",
+        rotationAlignment: "map",
+      })
+        .setLngLat(point)
+        .setRotation(bearing)
         .addTo(map);
       return { marker, element, route, state: motion.state, index };
     });
-  }, [mapReady, latitude, longitude, simulationActive, fleetSize, seed]);
+  }, [mapReady, streetRoutes, simulationActive, fleetSize, seed]);
 
   useEffect(() => {
     if (
@@ -743,7 +734,8 @@ export function SimulationMapbox({
           );
           vehicle.element.title = `Vehicle ${vehicle.index + 1} · ${motion.state}`;
         }
-        vehicle.marker.setLngLat(interpolateRoute(vehicle.route, motion.progress));
+        const [point, bearing] = routePosition(vehicle.route, motion.progress);
+        vehicle.marker.setLngLat(point).setRotation(bearing);
       });
     }, 100);
     return () => window.clearInterval(interval);
@@ -753,14 +745,10 @@ export function SimulationMapbox({
     return (
       <FallbackSimulationMap
         cityName={cityName}
-        simulationActive={simulationActive}
-        fleetSize={fleetSize}
-        seed={seed}
-        reducedMotion={reducedMotion}
         message={
           mapError
-            ? `Mapbox unavailable: ${mapError}. Showing an illustrative street grid.`
-            : "Add NEXT_PUBLIC_MAPBOX_TOKEN for Mapbox streets. Preview below is illustrative."
+            ? `Mapbox unavailable: ${mapError}. No fabricated vehicle paths are shown.`
+            : "Add a Mapbox token with Directions access to show vehicles on real streets."
         }
       />
     );
@@ -787,16 +775,22 @@ export function SimulationMapbox({
         <span>
           <i className="vehicle-dot dropoff" /> Dropping off
         </span>
-        <span className="route-key">Route preview</span>
+        <span className="route-key">Mapbox road routes</span>
       </div>
-      {simulationActive && (
+      {simulationActive && !routeLoading && streetRoutes.length > 0 && (
         <span className="mapbox-fleet-count">
-          {vehicleCount(fleetSize)} of {fleetSize} illustrative vehicles shown
+          {vehicleCount(fleetSize)} cars · {streetRoutes.length} street paths
         </span>
       )}
       <div className="mapbox-disclaimer">
-        Illustrative movement · API returns hourly aggregates, not vehicle paths
+        Illustrative cars follow Mapbox road geometry; API returns hourly
+        aggregates, not vehicle trips
       </div>
+      {simulationActive && (routeLoading || routeError) && (
+        <span className="sim-map-setup-note" role={routeError ? "alert" : "status"}>
+          {routeLoading ? "Finding drivable street routes…" : routeError}
+        </span>
+      )}
       {simulationActive && !reducedMotion && (
         <span className="mapbox-sim-playing">
           <span className="mapbox-live-dot" />

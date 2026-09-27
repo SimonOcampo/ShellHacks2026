@@ -242,6 +242,41 @@ class Explanation(DTO):
     evidence_ids: list[str]
 
 
+class AnalystChatTurn(DTO):
+    role: Literal["user", "assistant"]
+    text: Annotated[str, Field(min_length=1, max_length=1200)]
+
+    @field_validator("text")
+    @classmethod
+    def nonblank_text(cls, value):
+        value = value.strip()
+        if not value:
+            raise ValueError("Chat turns cannot be blank")
+        return value
+
+
+class AnalystChatRequest(DTO):
+    question: Annotated[str, Field(min_length=1, max_length=1200)]
+    history: Annotated[list[AnalystChatTurn], Field(max_length=8)] = Field(
+        default_factory=list
+    )
+    ranking: RankingRequest = Field(default_factory=RankingRequest)
+
+    @field_validator("question")
+    @classmethod
+    def nonblank_question(cls, value):
+        value = value.strip()
+        if not value:
+            raise ValueError("Question cannot be blank")
+        return value
+
+
+class AnalystChatResponse(DTO):
+    mode: Literal["gemini", "template"]
+    answer: Annotated[str, Field(min_length=1, max_length=4000)]
+    evidence_ids: list[str]
+
+
 class SimulationRequest(DTO):
     city_id: str
     fleet_size: Annotated[int, Field(ge=1, le=200, strict=True)] = 50

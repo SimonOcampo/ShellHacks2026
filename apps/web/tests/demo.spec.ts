@@ -55,36 +55,51 @@ test("market evidence and a recalculated launch work end to end", async ({
   await expect(page.getByText("SEEDED & REPRODUCIBLE")).toBeVisible({
     timeout: 30000,
   });
-  await expect(page.locator(".sim-map-frame .sim-legend")).toContainText(
-    "Picking up",
-  );
   await expect(page.locator(".scenario-grid > .scenario-controls")).toBeVisible();
   await expect(page.locator(".scenario-grid > .scenario-map-column")).toBeVisible();
   await expect(page.getByLabel("Selected simulation hour")).toContainText(
     "Gross revenue",
   );
-  const fleetVehicles = page.locator(
-    ".mapbox-vehicle-marker, .fallback-car",
-  );
-  await expect(fleetVehicles).toHaveCount(50, { timeout: 30000 });
-  const pickupVehicles = page.locator(
-    '.mapbox-vehicle-marker[data-state="pickup"], .fallback-car[data-state="pickup"]',
-  );
-  await expect(pickupVehicles).not.toHaveCount(0);
-  const pickup = pickupVehicles.first();
-  const initialPosition = await pickup.evaluate((element) => {
-    const rect = element.getBoundingClientRect();
-    return [rect.x, rect.y];
-  });
-  await page.waitForTimeout(500);
-  const movedPosition = await pickup.evaluate((element) => {
-    const rect = element.getBoundingClientRect();
-    return [rect.x, rect.y];
-  });
-  expect(
-    Math.abs(movedPosition[0] - initialPosition[0]) +
-      Math.abs(movedPosition[1] - initialPosition[1]),
-  ).toBeGreaterThan(0.25);
+  await expect
+    .poll(
+      async () =>
+        (await page.locator(".mapbox-vehicle-marker").count()) > 0 ||
+        (await page.locator(".sim-map-setup-note").isVisible()),
+      { timeout: 30000 },
+    )
+    .toBe(true);
+  if ((await page.locator(".mapbox-vehicle-marker").count()) > 0) {
+    await expect(page.locator(".sim-map-frame .sim-legend")).toContainText(
+      "Picking up",
+    );
+    const fleetVehicles = page.locator(".mapbox-vehicle-marker");
+    await expect(fleetVehicles).toHaveCount(50, { timeout: 30000 });
+    await expect(
+      page.locator('.mapbox-vehicle-marker[data-state="pickup"]'),
+    ).not.toHaveCount(0);
+    const pickup = page
+      .locator('.mapbox-vehicle-marker[data-state="pickup"]')
+      .first();
+    const initialPosition = await pickup.evaluate((element) => {
+      const rect = element.getBoundingClientRect();
+      return [rect.x, rect.y];
+    });
+    await page.waitForTimeout(500);
+    const movedPosition = await pickup.evaluate((element) => {
+      const rect = element.getBoundingClientRect();
+      return [rect.x, rect.y];
+    });
+    expect(
+      Math.abs(movedPosition[0] - initialPosition[0]) +
+        Math.abs(movedPosition[1] - initialPosition[1]),
+    ).toBeGreaterThan(0.25);
+  } else {
+    await expect(page.locator(".sim-map-setup-note")).toContainText(
+      "Mapbox",
+    );
+    await expect(page.locator(".fallback-car, .mapbox-vehicle-marker")).toHaveCount(0);
+    await expect(page.locator(".mapbox-disclaimer")).toBeVisible();
+  }
   await expect(
     page.getByText("RIDES COMPLETED", { exact: true }),
   ).toBeVisible();

@@ -12,3 +12,7 @@ test-results/
 playwright-report/
 data/raw/*
 !data/raw/.gitkeep
+
+secrets.local.ps1
+
+.pnpm-store/

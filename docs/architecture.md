@@ -15,7 +15,7 @@ Scenario request + explicit assumptions + seed
   -> window-limited accounting and hourly results
 
 FastAPI contracts -> generated TypeScript -> dashboard
-Server-calculated ranking evidence -> deterministic explanation template
+Server-calculated ranking evidence -> deterministic explanation template -> optional evidence-grounded Gemini analyst wording
 ```
 
 `packages/contracts` is canonical. `packages/ranking/odd_ranking` has no HTTP or source-column dependencies. `backend/odd_scout/simulation` owns operational state and accounting. `data/adapters` owns external column names and source transforms. The frontend only renders returned calculations.
@@ -23,6 +23,8 @@ Server-calculated ranking evidence -> deterministic explanation template
 Each release carries mode, schema, data, and model identifiers. Backend startup refuses mode/release mismatches. Verified startup additionally requires eight ranked candidates. Selecting mock is an explicit environment choice, never an automatic fallback after an ingestion error.
 
 The frontend cancels superseded requests and checks abort state before applying results. Previous simulation results remain displayed with a recalculation indicator. Simulation concurrency is bounded to two synchronous requests per process. Deployment uses one process by default.
+
+The optional analyst chat sends server-calculated ranking evidence and selected-city provenance to Gemini. Its server-side key is never exposed to the frontend. Responses cite only evidence IDs supplied by the backend; invalid model output falls back to the deterministic explanation. The model cannot set scores or simulation results.
 
 ## Geography
 

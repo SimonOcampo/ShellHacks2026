@@ -22,6 +22,26 @@ Run the commands in README. Confirm `/health` mode and release ID. Keep the mock
 
 Copy `apps/web/.env.example` to `apps/web/.env.local` and set `NEXT_PUBLIC_MAPBOX_TOKEN` to a public `pk.` token from the Mapbox account. Restart the Next.js dev server after changing environment values. The token is exposed to browser code by design; never use a secret `sk.` token. Without a token, the market explorer keeps its local U.S. map and the simulator shows an illustrative city grid. The simulation API returns hourly aggregates, not per-vehicle routes, so animated routes remain illustrative.
 
+## Gemini analyst setup
+
+The backend reads `GEMINI_API_KEY` and optional `GEMINI_MODEL` from its process environment. Set the key as a backend secret only; never add it to a `NEXT_PUBLIC_*` variable or commit it. For local PowerShell, run the backend in the same terminal as this hidden-input prompt. The key stays in that process environment and is removed when the backend stops:
+
+```powershell
+$secureKey = Read-Host "Gemini API key" -AsSecureString
+$pointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureKey)
+try {
+  $env:GEMINI_API_KEY = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($pointer)
+  $env:GEMINI_MODEL = "gemini-3.6-flash"
+  uv run uvicorn odd_scout.api.main:app --reload --host 127.0.0.1 --port 8000
+} finally {
+  [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($pointer)
+  Remove-Item Env:GEMINI_API_KEY -ErrorAction SilentlyContinue
+  Remove-Item Env:GEMINI_MODEL -ErrorAction SilentlyContinue
+}
+```
+
+Run the frontend separately with HTTP transport. If the key is absent or Gemini fails, chat uses a labeled deterministic evidence fallback. Render deployments need `GEMINI_API_KEY` configured in the service's secret environment. The chat endpoint limits each client to ten requests per minute, caches successful answers briefly, and returns only evidence IDs from the selected market.
+
 The browser smoke starts local services if needed. It exercises selection, provenance, simulation, changed fares, playback and mobile layout. It writes screenshots under ignored `apps/web/test-results`.
 
 ## Deployment
@@ -34,7 +54,7 @@ Render Free sleeps after inactivity. Warm the service before rehearsal. The late
 
 ## Failure handling
 
-API errors retain prior simulation output with an error/retry state. Invalid input is rejected, not coerced into a different scenario. Missing verified data prevents verified startup. LLM access is irrelevant to P0. Local HTTP mode is the main fallback; static fixture replay is a last resort with controls disabled and its replay label visible.
+API errors retain prior simulation output with an error/retry state. Invalid input is rejected, not coerced into a different scenario. Missing verified data prevents verified startup. Analyst chat falls back to a deterministic evidence summary when Gemini is unset or unavailable. Local HTTP mode is the main fallback; static fixture replay is a last resort with controls disabled and its replay label visible.
 
 ## Completion checklist
 
