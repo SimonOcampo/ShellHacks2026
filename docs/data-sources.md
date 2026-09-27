@@ -1,5 +1,13 @@
 # Data sources and ingestion
 
+## Providence simulation spatial source
+
+The optional `providence-rism-2015.v1` simulation profile uses the Rhode Island Division of Statewide Planning's [public high-employment TAZ layer](https://risegis.ri.gov/hosting/rest/services/RIDOA/ESTIP_Geoprocessing/MapServer/7). Its `Prod2015` and `Attrac2015` fields are outputs of the Rhode Island Statewide Model. The pinned [query](https://risegis.ri.gov/hosting/rest/services/RIDOA/ESTIP_Geoprocessing/MapServer/7/query?where=Municipali%3D%27Providence%27&outFields=TAZ%2CMunicipali%2CSqMi%2CProd2015%2CAttrac2015%2CJobs3013&returnGeometry=true&outSR=4326&f=geojson) returned 86 zones marked `Municipali=Providence` on 2026-09-27, totaling 13.690061 square miles. Raw response SHA-256: `4ba6796ac38f08c178dfcf81c555109989db235d33fcc5783b62c248dbe96ba6`.
+
+The [builder](../data/src/datasets/rism/build_simulation_profile.py) reads the committed 203,629-byte [raw response](../data/data/raw/rism/providence_taz_2015.geojson), checks its pinned hash, validates all zone values and geometries, and derives 32 reproducible points within each polygon. Its immutable [simulation artifact](../data/releases/simulation/providence-rism-2015.v1.json) has SHA-256 `9506de3ebb7d8c757b064c858e196b7d228046b765489c95d6cd459504155cfb`. Rebuild with `uv run --with-editable ./data python -m src.datasets.rism.build_simulation_profile`. The command refuses changed source bytes or a different existing output; a changed source requires a new audit and profile version.
+
+The layer provides a limited spatial proxy. It is not a complete Providence municipality or CBSA release, an observed passenger-demand series, an origin-destination log, or Waymo telemetry. Its 2015 modeled trip fields do not establish current ride-hail request volume, time-of-day patterns, route choice, fleet policy, or vehicle behavior. Those remain explicitly assumed in simulation v1. The market-screening `verified.v2` release stays separate and unchanged.
+
 ## Current status
 
 The runtime still defaults to synthetic `mock.v1`. The immutable `verified.v1` artifact is retained as a historical release. The corrected `data/releases/verified.v2.json` closes its three publication gaps using fresh Census evidence and the hash-matched prior audit for unchanged sources. It has 20 ranked candidates and 15 enabled references. It has passed local API validation but has not been selected on Render.

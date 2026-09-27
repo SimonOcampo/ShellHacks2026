@@ -1,21 +1,25 @@
-from collections import deque
-from dataclasses import dataclass
-from decimal import Decimal, ROUND_HALF_UP
 import heapq
 import itertools
 import math
+from collections import deque
+from dataclasses import dataclass
+from decimal import ROUND_HALF_UP, Decimal
 
 import numpy as np
-
 from contracts.models import (
-    SimulationRequest,
-    SimulationAssumptions,
-    SimulationMetrics,
-    SimulationResult,
     HourlyMetrics,
+    SimulationAssumptions,
+    SimulationDemandSource,
+    SimulationMetrics,
+    SimulationPlayback,
+    SimulationRequest,
+    SimulationResult,
+    VehiclePlaybackSegment,
     VersionStamp,
 )
 from odd_ranking.engine import digest
+
+from odd_scout.simulation.profile import DemandProfile
 
 
 class CapacityError(ValueError):
@@ -38,7 +42,10 @@ class Vehicle:
 
 
 def generate_requests(
-    request: SimulationRequest, assumptions: SimulationAssumptions
+    request: SimulationRequest,
+    assumptions: SimulationAssumptions,
+    *,
+    demand_profile: DemandProfile | None = None,
 ) -> list[Ride]:
     seeds = np.random.SeedSequence(request.seed).spawn(2)
     demand, locations = (np.random.default_rng(s) for s in seeds)
@@ -54,15 +61,30 @@ def generate_requests(
             "Simulation exceeds 100,000 requests; reduce demand or duration"
         )
 
-    def point():
-        radius = assumptions.service_zone_radius_miles * math.sqrt(locations.random())
-        angle = locations.uniform(0, 2 * math.pi)
-        return (radius * math.cos(angle), radius * math.sin(angle))
+    if demand_profile is None:
+
+        def point(kind):
+            radius = assumptions.service_zone_radius_miles * math.sqrt(
+                locations.random()
+            )
+            angle = locations.uniform(0, 2 * math.pi)
+            return (radius * math.cos(angle), radius * math.sin(angle))
+    else:
+        zones = demand_profile.zones
+        production = np.array([z.trip_production_2015 for z in zones], dtype=float)
+        attraction = np.array([z.trip_attraction_2015 for z in zones], dtype=float)
+        probabilities = (production / production.sum(), attraction / attraction.sum())
+
+        def point(kind):
+            index = int(locations.choice(len(zones), p=probabilities[kind]))
+            samples = zones[index].sample_points
+            sample = samples[int(locations.integers(len(samples)))]
+            return (sample.x_miles, sample.y_miles)
 
     rides = []
     for hour, count in enumerate(counts):
         for timestamp in sorted(demand.uniform(hour * 60, (hour + 1) * 60, int(count))):
-            rides.append(Ride(float(timestamp), point(), point()))
+            rides.append(Ride(float(timestamp), point(0), point(1)))
     return rides
 
 
@@ -81,19 +103,46 @@ def simulate(
     versions: VersionStamp,
     *,
     rides: list[Ride] | None = None,
+    demand_profile: DemandProfile | None = None,
     audit: dict | None = None,
 ) -> SimulationResult:
-    rides = generate_requests(request, assumptions) if rides is None else rides
+    if request.demand_profile_id != assumptions.profile_id:
+        raise ValueError("Request and simulation assumption profiles differ")
+    if demand_profile is None and request.demand_profile_id != "synthetic-zone.v1":
+        raise ValueError("Providence public profile is required for this request")
+    if demand_profile is not None and (
+        request.city_id != "cbsa:39300"
+        or demand_profile.source.profile_id != request.demand_profile_id
+    ):
+        raise ValueError("Demand profile does not match the requested city or profile")
+    rides = (
+        generate_requests(request, assumptions, demand_profile=demand_profile)
+        if rides is None
+        else rides
+    )
     if len(rides) > 100_000:
         raise CapacityError("Simulation exceeds 100,000 requests")
+    if request.include_playback and len(rides) > 10_000:
+        raise CapacityError(
+            "Playback exceeds 10,000 requests; lower demand or omit playback"
+        )
     a = assumptions
     hours = request.days * 24
     horizon = hours * 60.0
-    if any(not 0 <= r.time < horizon for r in rides):
-        raise ValueError("Requests must fall inside simulation window")
+    if any(
+        not math.isfinite(r.time)
+        or not 0 <= r.time < horizon
+        or any(
+            not math.isfinite(v) for point in (r.origin, r.destination) for v in point
+        )
+        for r in rides
+    ):
+        raise ValueError("Requests need finite positions and times inside the window")
     fleet = [
         Vehicle((0.0, 0.0), a.battery_range_miles) for _ in range(request.fleet_size)
     ]
+    playback_segments = [] if request.include_playback else None
+    idle_since = [0.0 for _ in fleet]
     events, sequence, queue = [], itertools.count(), deque()
     active_chargers = 0
     max_chargers = 0
@@ -116,6 +165,35 @@ def simulate(
 
     def duration(miles):
         return miles / a.average_speed_mph * 60
+
+    def segment(index, state, start, end, origin, destination, *, occupied=False):
+        if playback_segments is None:
+            return
+        stop = min(end, horizon)
+        if stop <= start:
+            return
+        fraction = min(1.0, (stop - start) / (end - start))
+        clipped = (
+            origin[0] + (destination[0] - origin[0]) * fraction,
+            origin[1] + (destination[1] - origin[1]) * fraction,
+        )
+        playback_segments.append(
+            VehiclePlaybackSegment(
+                vehicle_id=index,
+                state=state,
+                start_minute=start,
+                end_minute=stop,
+                from_x_miles=origin[0],
+                from_y_miles=origin[1],
+                to_x_miles=clipped[0],
+                to_y_miles=clipped[1],
+                occupied=occupied,
+            )
+        )
+
+    def close_idle(index, now):
+        position = fleet[index].position
+        segment(index, "IDLE", idle_since[index], now, position, position)
 
     def interval(start, end, kind):
         stop = min(end, horizon)
@@ -148,6 +226,7 @@ def simulate(
         nonlocal active_chargers, max_chargers
         vehicle = fleet[index]
         interval(vehicle.queued_at, now, "queue")
+        segment(index, "CHARGING_QUEUE", vehicle.queued_at, now, (0.0, 0.0), (0.0, 0.0))
         vehicle.state = "CHARGING"
         active_chargers += 1
         max_chargers = max(max_chargers, active_chargers)
@@ -155,13 +234,16 @@ def simulate(
         target = a.charge_target_fraction * a.battery_range_miles
         end = now + max(0, target - vehicle.battery) / a.charge_range_miles_per_minute
         interval(now, end, "charge")
+        segment(index, "CHARGING", now, end, (0.0, 0.0), (0.0, 0.0))
         push(end, 0, "charged", index)
 
     def to_depot(now, index):
         vehicle = fleet[index]
         assert vehicle.state == "IDLE"
+        close_idle(index, now)
         vehicle.state = "DEPOT_TRAVEL"
         end = travel(vehicle, now, distance(vehicle.position, (0.0, 0.0)), "empty")
+        segment(index, "DEPOT_TRAVEL", now, end, vehicle.position, (0.0, 0.0))
         push(end, 0, "depot", index)
 
     for ride in rides:
@@ -202,9 +284,12 @@ def simulate(
             pickup, index = min(feasible)
             vehicle = fleet[index]
             assert vehicle.state == "IDLE"
+            close_idle(index, now)
             vehicle.state = "PICKUP_TRAVEL"
             arrived = travel(vehicle, now, pickup, "empty")
             departure = arrived + a.pickup_dwell_minutes
+            segment(index, "PICKUP_TRAVEL", now, arrived, vehicle.position, ride.origin)
+            segment(index, "PICKUP_DWELL", arrived, departure, ride.origin, ride.origin)
             interval(now, departure, "service")
             push(departure, 0, "pickup", index, (ride, arrived - now, passenger_miles))
         elif kind == "pickup":
@@ -212,7 +297,26 @@ def simulate(
             vehicle = fleet[index]
             assert vehicle.state == "PICKUP_TRAVEL"
             vehicle.state = "PASSENGER_TRAVEL"
-            end = travel(vehicle, now, miles, "paid") + a.dropoff_dwell_minutes
+            arrived = travel(vehicle, now, miles, "paid")
+            end = arrived + a.dropoff_dwell_minutes
+            segment(
+                index,
+                "PASSENGER_TRAVEL",
+                now,
+                arrived,
+                ride.origin,
+                ride.destination,
+                occupied=True,
+            )
+            segment(
+                index,
+                "DROPOFF_DWELL",
+                arrived,
+                end,
+                ride.destination,
+                ride.destination,
+                occupied=True,
+            )
             interval(now, end, "service")
             interval(now, end, "passenger")
             push(end, 0, "dropoff", index, (ride, wait, miles))
@@ -221,6 +325,7 @@ def simulate(
             vehicle = fleet[index]
             vehicle.position = ride.destination
             vehicle.state = "IDLE"
+            idle_since[index] = now
             completed += 1
             waits.append(wait)
             cents = fare_cents(request, miles, duration(miles))
@@ -244,11 +349,23 @@ def simulate(
             vehicle = fleet[index]
             vehicle.battery = a.charge_target_fraction * a.battery_range_miles
             vehicle.state = "IDLE"
+            idle_since[index] = now
             active_chargers -= 1
             if queue:
                 start_charge(now, queue.popleft())
     for index in queue:
         interval(fleet[index].queued_at, horizon, "queue")
+        segment(
+            index,
+            "CHARGING_QUEUE",
+            fleet[index].queued_at,
+            horizon,
+            (0.0, 0.0),
+            (0.0, 0.0),
+        )
+    for index, vehicle in enumerate(fleet):
+        if vehicle.state == "IDLE":
+            close_idle(index, horizon)
     total_miles = totals["paid"] + totals["empty"]
     denominator = request.fleet_size * horizon
     metrics = SimulationMetrics(
@@ -277,16 +394,70 @@ def simulate(
             minimum_battery=minimum_battery,
             states=[v.state for v in fleet],
         )
+    if demand_profile is None:
+        demand_source = SimulationDemandSource(
+            profile_id="synthetic-zone.v1",
+            kind="synthetic",
+            source_name="ODD Scout assumed demand profile",
+            source_geography="Hypothetical five-mile-radius disk",
+            transformation="Poisson hourly requests and uniform-by-area pickup and dropoff locations",
+            limitations=[
+                "No observed local ride-hailing demand or actual street locations are used."
+            ],
+        )
+    else:
+        demand_source = demand_profile.source
     simulation_versions = versions.model_copy(update={"model_version": "simulation.v1"})
+    identity = {
+        "versions": simulation_versions.model_dump(),
+        "request": request.model_dump(
+            exclude={"demand_profile_id", "include_playback"}
+        ),
+        "assumptions": a.model_dump(),
+    }
+    if demand_profile is not None:
+        identity["demand_profile"] = {
+            "profile_id": demand_source.profile_id,
+            "artifact_sha256": demand_source.artifact_sha256,
+        }
+    playback = None
+    if playback_segments is not None:
+        playback = SimulationPlayback(
+            origin_longitude=demand_profile.origin_longitude
+            if demand_profile
+            else None,
+            origin_latitude=demand_profile.origin_latitude if demand_profile else None,
+            miles_per_degree_longitude=(
+                demand_profile.miles_per_degree_longitude if demand_profile else None
+            ),
+            miles_per_degree_latitude=(
+                demand_profile.miles_per_degree_latitude if demand_profile else None
+            ),
+            segments=sorted(
+                playback_segments,
+                key=lambda item: (item.start_minute, item.vehicle_id, item.end_minute),
+            ),
+        )
+    if demand_profile is None:
+        warnings = [
+            "Hypothetical fleet operations, not autonomous driving.",
+            "Demand is assumed: same baseline across metros; no observed local ride-hailing demand.",
+            "Synthetic service zone; no street routing. No passenger queue; immediate assignment policy.",
+            "Gross revenue excludes all operating costs and is not profit. Wait metrics cover completed rides only.",
+            "Passenger miles include unfinished trips within the window; revenue is recognized only at completed dropoff.",
+            "Charging uses an assumed private depot, not measured public charging capacity.",
+        ]
+    else:
+        warnings = [
+            "Hypothetical fleet operations, not autonomous driving or Waymo operations.",
+            *demand_source.limitations,
+            "No street routing. No passenger queue; immediate assignment policy.",
+            "Gross revenue excludes operating costs and is not profit; fares are scenario inputs.",
+            "Charging uses an assumed private depot, not measured public charging capacity.",
+        ]
     return SimulationResult(
         versions=simulation_versions,
-        simulation_id=digest(
-            {
-                "versions": simulation_versions.model_dump(),
-                "request": request.model_dump(),
-                "assumptions": a.model_dump(),
-            }
-        ),
+        simulation_id=digest(identity),
         request=request,
         assumptions=a,
         metrics=metrics,
@@ -304,12 +475,7 @@ def simulate(
             )
             for i, h in enumerate(hourly)
         ],
-        warnings=[
-            "Hypothetical fleet operations, not autonomous driving.",
-            "Demand is assumed: same baseline across metros; no observed local ride-hailing demand.",
-            "Synthetic service zone; no street routing. No passenger queue; immediate assignment policy.",
-            "Gross revenue excludes all operating costs and is not profit. Wait metrics cover completed rides only.",
-            "Passenger miles include unfinished trips within the window; revenue is recognized only at completed dropoff.",
-            "Charging uses an assumed private depot, not measured public charging capacity.",
-        ],
+        demand_source=demand_source,
+        playback=playback,
+        warnings=warnings,
     )

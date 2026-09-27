@@ -311,6 +311,10 @@ class SimulationRequest(DTO):
     price_per_mile_usd: Annotated[float, Field(ge=0, le=20)] = 1.75
     price_per_minute_usd: Annotated[float, Field(ge=0, le=5)] = 0.30
     seed: Annotated[int, Field(ge=0, le=4294967295, strict=True)] = 42
+    demand_profile_id: Literal[
+        "synthetic-zone.v1", "providence-rism-2015.v1"
+    ] = "synthetic-zone.v1"
+    include_playback: bool = False
 
     @field_validator("base_fare_usd", "price_per_mile_usd", "price_per_minute_usd")
     @classmethod
@@ -394,6 +398,60 @@ class HourlyMetrics(DTO):
     gross_revenue_usd: NonNegative
 
 
+class SimulationDemandSource(DTO):
+    profile_id: str
+    kind: Literal["synthetic", "public_model_proxy"]
+    source_name: str
+    source_url: str | None = None
+    source_period: str | None = None
+    retrieved_at: str | None = None
+    source_geography: str
+    raw_sha256: Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")] | None = None
+    artifact_sha256: Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")] | None = None
+    transformation: str
+    limitations: list[str]
+
+
+VehiclePlaybackState = Literal[
+    "IDLE",
+    "PICKUP_TRAVEL",
+    "PICKUP_DWELL",
+    "PASSENGER_TRAVEL",
+    "DROPOFF_DWELL",
+    "DEPOT_TRAVEL",
+    "CHARGING_QUEUE",
+    "CHARGING",
+]
+
+
+class VehiclePlaybackSegment(DTO):
+    vehicle_id: Count
+    state: VehiclePlaybackState
+    start_minute: NonNegative
+    end_minute: NonNegative
+    from_x_miles: float
+    from_y_miles: float
+    to_x_miles: float
+    to_y_miles: float
+    occupied: bool
+
+    @model_validator(mode="after")
+    def ordered(self):
+        if self.end_minute <= self.start_minute:
+            raise ValueError("Playback segments require a positive duration")
+        return self
+
+
+class SimulationPlayback(DTO):
+    coordinate_system: Literal["local_miles"] = "local_miles"
+    path_geometry: Literal["straight_line"] = "straight_line"
+    origin_longitude: float | None = None
+    origin_latitude: float | None = None
+    miles_per_degree_longitude: Positive | None = None
+    miles_per_degree_latitude: Positive | None = None
+    segments: list[VehiclePlaybackSegment]
+
+
 class SimulationResult(DTO):
     versions: VersionStamp
     simulation_id: str
@@ -401,6 +459,8 @@ class SimulationResult(DTO):
     assumptions: SimulationAssumptions
     metrics: SimulationMetrics
     hourly: list[HourlyMetrics]
+    demand_source: SimulationDemandSource | None = None
+    playback: SimulationPlayback | None = None
     warnings: list[str]
 
 

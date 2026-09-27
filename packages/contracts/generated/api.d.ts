@@ -585,6 +585,34 @@ export interface components {
             /** Service Zone Radius Miles */
             service_zone_radius_miles: number;
         };
+        /** SimulationDemandSource */
+        SimulationDemandSource: {
+            /** Artifact Sha256 */
+            artifact_sha256?: string | null;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "synthetic" | "public_model_proxy";
+            /** Limitations */
+            limitations: string[];
+            /** Profile Id */
+            profile_id: string;
+            /** Raw Sha256 */
+            raw_sha256?: string | null;
+            /** Retrieved At */
+            retrieved_at?: string | null;
+            /** Source Geography */
+            source_geography: string;
+            /** Source Name */
+            source_name: string;
+            /** Source Period */
+            source_period?: string | null;
+            /** Source Url */
+            source_url?: string | null;
+            /** Transformation */
+            transformation: string;
+        };
         /** SimulationMetrics */
         SimulationMetrics: {
             /** Average Wait Minutes */
@@ -620,6 +648,31 @@ export interface components {
             /** Utilization Pct */
             utilization_pct: number;
         };
+        /** SimulationPlayback */
+        SimulationPlayback: {
+            /**
+             * Coordinate System
+             * @default local_miles
+             * @constant
+             */
+            coordinate_system: "local_miles";
+            /** Miles Per Degree Latitude */
+            miles_per_degree_latitude?: number | null;
+            /** Miles Per Degree Longitude */
+            miles_per_degree_longitude?: number | null;
+            /** Origin Latitude */
+            origin_latitude?: number | null;
+            /** Origin Longitude */
+            origin_longitude?: number | null;
+            /**
+             * Path Geometry
+             * @default straight_line
+             * @constant
+             */
+            path_geometry: "straight_line";
+            /** Segments */
+            segments: components["schemas"]["VehiclePlaybackSegment"][];
+        };
         /** SimulationRequest */
         SimulationRequest: {
             /**
@@ -640,10 +693,21 @@ export interface components {
              */
             demand_multiplier: number;
             /**
+             * Demand Profile Id
+             * @default synthetic-zone.v1
+             * @enum {string}
+             */
+            demand_profile_id: "synthetic-zone.v1" | "providence-rism-2015.v1";
+            /**
              * Fleet Size
              * @default 50
              */
             fleet_size: number;
+            /**
+             * Include Playback
+             * @default false
+             */
+            include_playback: boolean;
             /**
              * Price Per Mile Usd
              * @default 1.75
@@ -663,15 +727,41 @@ export interface components {
         /** SimulationResult */
         SimulationResult: {
             assumptions: components["schemas"]["SimulationAssumptions"];
+            demand_source?: components["schemas"]["SimulationDemandSource"] | null;
             /** Hourly */
             hourly: components["schemas"]["HourlyMetrics"][];
             metrics: components["schemas"]["SimulationMetrics"];
+            playback?: components["schemas"]["SimulationPlayback"] | null;
             request: components["schemas"]["SimulationRequest"];
             /** Simulation Id */
             simulation_id: string;
             versions: components["schemas"]["VersionStamp"];
             /** Warnings */
             warnings: string[];
+        };
+        /** VehiclePlaybackSegment */
+        VehiclePlaybackSegment: {
+            /** End Minute */
+            end_minute: number;
+            /** From X Miles */
+            from_x_miles: number;
+            /** From Y Miles */
+            from_y_miles: number;
+            /** Occupied */
+            occupied: boolean;
+            /** Start Minute */
+            start_minute: number;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "IDLE" | "PICKUP_TRAVEL" | "PICKUP_DWELL" | "PASSENGER_TRAVEL" | "DROPOFF_DWELL" | "DEPOT_TRAVEL" | "CHARGING_QUEUE" | "CHARGING";
+            /** To X Miles */
+            to_x_miles: number;
+            /** To Y Miles */
+            to_y_miles: number;
+            /** Vehicle Id */
+            vehicle_id: number;
         };
         /** VersionStamp */
         VersionStamp: {

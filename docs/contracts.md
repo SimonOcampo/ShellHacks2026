@@ -24,7 +24,7 @@ The restored `mock.v1` release keeps its original ten-variable `ranking.v1` meth
 | POST `/api/v1/simulations` | SimulationRequest to SimulationResult |
 
 Errors: `{ "error": { "code": "...", "message": "...", "details": [] } }`.
-404: unknown city; 413: request-count ceiling exceeded; 422: invalid inputs or references; 429: simulation capacity busy. 503 is reserved for an unavailable service. Framework startup failure means the service does not become healthy.
+404: unknown city; 413: request-count or optional playback ceiling exceeded; 422: invalid inputs or references; 429: simulation capacity busy. 503 includes an unavailable pinned simulation profile. Framework startup failure means the service does not become healthy.
 
 The explanation endpoint always calculates ranking and template text on the server. For verified releases only, setting `GEMINI_API_KEY` in the backend environment enables an optional Gemini `gemini-2.5-flash` rewrite of the summary. The API key never enters the request or response. The model receives structured calculated factors, template text, and source IDs and periods. Only the summary can change; rank, score, advantages, tradeoffs, and evidence IDs remain deterministic. The response `mode` is `llm` only after output passes strict shape, length, citation-subset, and prohibited-claim checks. Invalid output, timeout, upstream failure, missing key, mock mode, unranked city, request quota, or busy capacity returns the existing template response. This validation checks citation identity and simple text constraints; it cannot prove every qualitative phrase true. Treat live text as wording, not additional evidence.
 
@@ -32,7 +32,9 @@ Live calls have a five-second timeout, a 300-token output cap, two concurrent sl
 
 Weights normalize to one and must have positive finite sum. Omitted API weights use the configuration for the selected release; the existing mock runtime remains on `config/ranking.v1.json` until a compatible verified release is deliberately selected. `config/ranking.v2.json` describes the expanded methodology but does not itself switch runtime data. Reference selections must be nonempty, unique, known, and enabled. Announced/testing references are never selected by default.
 
-Ranking identity hashes the full release, normalized weights, and reference selection. Simulation identity hashes versions, resolved inputs, and assumptions. No runtime timestamp or UUID enters either result.
+Ranking identity hashes the full release, normalized weights, and reference selection. Simulation identity hashes versions, resolved inputs, and assumptions; a selected public spatial profile also adds its pinned artifact hash. The presentation-only `include_playback` flag does not change simulation identity. No runtime timestamp or UUID enters either result.
+
+Simulation requests optionally select `demand_profile_id` and `include_playback`, both with defaults that preserve the original scenario. Current responses add optional `demand_source` provenance and `playback` vehicle segments. Playback coordinates use local miles; a geographic origin is present only for the Providence public spatial profile. Generated clients should treat these fields as optional because historical fixtures predate them.
 
 Fixture generation uses actual mock-data API responses. Fixture transport is for the default scenario only, with editing disabled. It does not pretend to recalculate changed assumptions. The HTTP transport uses the real engines even while ranking measurements are mock.
 
