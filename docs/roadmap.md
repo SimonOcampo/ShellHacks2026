@@ -95,7 +95,7 @@ Paths: `apps/web/`, browser tests, and `docs/demo-runbook.md`.
 
 - [x] P1: Confirm twenty verified candidate metros and document exclusions and uncertainty. All 20 configured `verified.v2` candidates rank; no candidate is excluded. Coverage outside that configured set remains unassessed. See `docs/data-sources.md`.
 - [ ] P1: Add road and intersection features only after checking coverage and geography joins. Version any scoring change and coordinate frontend impacts.
-- [ ] P1: Add reference-category selection and deterministic weight-sensitivity comparisons.
+- [x] P1: Add reference-category selection and deterministic weight-sensitivity comparisons. Ranking tests cover category validation, reference consistency, frozen bounds, and rank and score changes.
 - [ ] P1: Add crash context only as unscored public context after validating source and denominators. Exclude it from safety/readiness claims.
 - [ ] P2: Evaluate airport activity and severe-weather features. Add only when source coverage and geographic assignment are defensible.
 
@@ -107,7 +107,8 @@ Paths: `apps/web/`, browser tests, and `docs/demo-runbook.md`.
 
 ### Developer 3
 
-- [ ] P1: Add comparison UX for reference categories, weight sensitivity, baseline/scenario comparisons, uncertainty, and additional verified cities after API fields are agreed.
+- [x] P1: Add comparison UX for reference categories and per-city weight sensitivity against release default weights. The UI shows selected-reference results and score and rank changes from the same reference set. The mock release has only commercial references; no other category is selectable there. Browser tests cover the comparison and superseded responses.
+- [ ] P1: Add uncertainty presentation and additional verified cities after source coverage and API fields are agreed.
 - [ ] P1: Integrate live analyst wording only after Developer 2 ships the guarded endpoint. Render numeric scores from deterministic API results, cite evidence IDs, and show template text on service failure.
 - [ ] P2: Consider lightweight illustrative map motion only after hosted P0 is reliable. Label it illustrative; never use it to calculate fleet metrics.
 
