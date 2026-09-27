@@ -23,9 +23,10 @@ metadata; vertical units are not independently confirmed. 1,753 surviving
 building records lack a positive height and render flat. The source metadata
 contains processing history going back to 2011. The 2025 ArcGIS item modified
 date is a snapshot date, not proof that every footprint or height was surveyed
-in 2025. These layers are visual reference context only; simulation routes
-remain straight lines between engine endpoints and are not snapped to these
-streets.
+in 2025. The road centerlines now support display-only shortest paths between
+the engine's endpoints. The engine still calculates timing and distance using
+its existing assumptions; the path display does not change those results or
+apply one-way and turn rules.
 
 This map data does not establish a live Waymo service, road safety, or
 deployment approval.
