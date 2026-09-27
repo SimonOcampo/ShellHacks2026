@@ -37,3 +37,7 @@ The default simulation uses a hypothetical five-mile-radius disk, not the metro 
 Developer 1 owns data, ranking, and ranking/reference configuration. Developer 2 owns API, contracts, simulation, and deployment. Developer 3 owns UI and explanation UX. Shared contract changes require affected owners.
 
 Keep `/api/v1` backwards compatible for deployed clients. Add optional input fields with defaults and regenerate types before migrating consumers. Breaking changes require a new API version and coordinated rollout. Releases are immutable; rollback selects the previous release and backend/frontend deployment. No destructive contraction is implemented.
+
+## Vehicle playback renderer
+
+The Python event queue remains the sole simulation engine. The frontend requests its trace, indexes segments by vehicle, and renders positions from the supplied timing and endpoints. Mapbox GL JS handles the city basemap and 3D polygon extrusion; it does not dispatch vehicles or recalculate operational metrics. One playback clock controls both the fleet scene and hourly metric selection. Unanchored synthetic profiles use local coordinates, while the pinned Providence profile provides the geographic frame. Historical fixtures have no vehicle trace. See `docs/simulation.md` for source limitations, capacity fallback, and controls.

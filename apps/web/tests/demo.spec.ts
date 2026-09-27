@@ -50,15 +50,14 @@ test("market evidence and a recalculated launch work end to end", async ({
     /\/methodology\?city=cbsa%3A12060#provenance-synthetic-12060$/,
   );
   await expect(page.locator("#selected-city-title")).toHaveText("Atlanta");
-  await expect(
-    page.locator("#provenance-synthetic-12060"),
-  ).toHaveAttribute("open", "");
-  await expect(
-    page.locator("#provenance-synthetic-12060"),
-  ).toContainText("Synthetic fixture generator");
-  await expect(page.locator("#selected-city-evidence")).toContainText(
-    "mock",
+  await expect(page.locator("#provenance-synthetic-12060")).toHaveAttribute(
+    "open",
+    "",
   );
+  await expect(page.locator("#provenance-synthetic-12060")).toContainText(
+    "Synthetic fixture generator",
+  );
+  await expect(page.locator("#selected-city-evidence")).toContainText("mock");
   await expect(page.locator("#selected-city-evidence")).toContainText(
     "GA · unresolved",
   );
@@ -92,26 +91,24 @@ test("market evidence and a recalculated launch work end to end", async ({
   await expect(page.getByLabel("Selected simulation hour")).toContainText(
     "Gross revenue",
   );
-  const fleetVehicles = page.locator(".mapbox-vehicle-marker, .fallback-car");
+  const fleetVehicles = page.getByTestId("fleet-vehicle");
   await expect(fleetVehicles).toHaveCount(50, { timeout: 30000 });
-  const pickupVehicles = page.locator(
-    '.mapbox-vehicle-marker[data-state="pickup"], .fallback-car[data-state="pickup"]',
-  );
-  await expect(pickupVehicles).not.toHaveCount(0);
-  const pickup = pickupVehicles.first();
-  const initialPosition = await pickup.evaluate((element) => {
-    const rect = element.getBoundingClientRect();
-    return [rect.x, rect.y];
+  await expect(
+    page.locator('[data-testid="fleet-vehicle"][data-state="IDLE"]'),
+  ).toHaveCount(50);
+  const timeline = page.getByRole("slider", {
+    name: "Playback minute",
+    exact: true,
   });
+  await timeline.fill("480");
+  await timeline.press("ArrowRight");
+  await expect(
+    page.getByRole("region", { name: "Engine vehicle playback" }),
+  ).toContainText("480.1 min");
+  const vehicle = fleetVehicles.first();
+  const initialPosition = await vehicle.getAttribute("cx");
   await page.waitForTimeout(500);
-  const movedPosition = await pickup.evaluate((element) => {
-    const rect = element.getBoundingClientRect();
-    return [rect.x, rect.y];
-  });
-  expect(
-    Math.abs(movedPosition[0] - initialPosition[0]) +
-      Math.abs(movedPosition[1] - initialPosition[1]),
-  ).toBeGreaterThan(0.25);
+  expect(await vehicle.getAttribute("cx")).toBe(initialPosition);
   await expect(
     page.getByText("RIDES COMPLETED", { exact: true }),
   ).toBeVisible();

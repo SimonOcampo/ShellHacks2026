@@ -76,3 +76,9 @@ Vercel production deployment `CyDER2SMieZuNoGuXRvb8SpG2R8Q` was created by redep
 Local fallback used the committed `verified.v2` release over HTTP. Local `/health` reported `verified` and `ranking.v2`; the local browser rendered 20 ranked markets and the verified release ID. Stopping the local API showed Retry connection without a framework error overlay. Restarting the API and using Retry restored the market list. Playwright test `superseded ranking responses cannot overwrite newer selection` passed (1 test) on 2026-09-26.
 
 After rehearsal, the production URL returned HTTP 200 and the hosted API still reported `verified` / `ranking.v2`. Warm simulation latency remains above two seconds; cold-start latency remains unmeasured. A mobile demo is not a P0 requirement.
+
+## Providence Mapbox playback — 2026-09-27
+
+The frontend consumes the merged engine's optional trace and geographic frame. TypeScript type generation/typecheck and the optimized Next.js production build passed. A local verified.v2 HTTP run rendered 50 vehicles, with the expected 6,939 completions from 6,941 requests. Browser inspection confirmed the Mapbox street basemap and 3D building extrusions, selection of vehicle 0, and seeking to 480.1 minutes (38 idle, 3 pickup travel, 3 pickup dwell, 6 passenger travel). A container-height conflict with Mapbox's stylesheet was found and fixed; a ResizeObserver keeps the canvas sized to the scene.
+
+The existing browser smoke expectations were updated from autonomous illustrative loops to engine states, seeking, and stationary paused positions. The browser test suite was not rerun in this change. The prior engine/data test results above remain the backend validation record. No deployment or merge was performed for the renderer PR. Straight-line movement can cross buildings/water; the screenshot of a city basemap is not evidence of street routing or real operator fidelity.
