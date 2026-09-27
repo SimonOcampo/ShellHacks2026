@@ -19,6 +19,7 @@ from contracts.models import (
 )
 from odd_ranking.engine import digest
 
+from odd_scout.simulation.cruising import CruiseWaypoints, load_idle_cruise_policy
 from odd_scout.simulation.profile import DemandProfile
 
 
@@ -39,6 +40,10 @@ class Vehicle:
     battery: float
     state: str = "IDLE"
     queued_at: float = 0
+    cruise_destination: tuple[float, float] | None = None
+    cruise_start: float = 0
+    cruise_end: float = 0
+    cruise_token: int = 0
 
 
 def generate_requests(
@@ -127,6 +132,17 @@ def simulate(
             "Playback exceeds 10,000 requests; lower demand or omit playback"
         )
     a = assumptions
+    cruise_policy = load_idle_cruise_policy() if demand_profile is not None else None
+    cruise_waypoints = (
+        CruiseWaypoints(demand_profile, cruise_policy)
+        if demand_profile is not None and cruise_policy is not None
+        else None
+    )
+    cruise_rng = (
+        np.random.default_rng(np.random.SeedSequence(request.seed).spawn(3)[2])
+        if cruise_policy is not None
+        else None
+    )
     hours = request.days * 24
     horizon = hours * 60.0
     if any(
@@ -156,6 +172,7 @@ def simulate(
     ]
     waits = []
     completed = rejected = revenue = 0
+    cruise_miles = 0.0
 
     def push(time, priority, kind, vehicle=-1, payload=None):
         heapq.heappush(events, (time, priority, next(sequence), kind, vehicle, payload))
@@ -191,9 +208,37 @@ def simulate(
             )
         )
 
+    def idle_position_and_battery(vehicle, now):
+        destination = vehicle.cruise_destination
+        if destination is None:
+            return vehicle.position, vehicle.battery
+        fraction = min(
+            1.0,
+            max(0.0, (now - vehicle.cruise_start) / (vehicle.cruise_end - vehicle.cruise_start)),
+        )
+        position = (
+            vehicle.position[0] + (destination[0] - vehicle.position[0]) * fraction,
+            vehicle.position[1] + (destination[1] - vehicle.position[1]) * fraction,
+        )
+        return position, vehicle.battery - distance(vehicle.position, destination) * fraction
+
     def close_idle(index, now):
-        position = fleet[index].position
-        segment(index, "IDLE", idle_since[index], now, position, position)
+        nonlocal minimum_battery, cruise_miles
+        vehicle = fleet[index]
+        origin = vehicle.position
+        position, battery = idle_position_and_battery(vehicle, now)
+        segment(index, "IDLE", idle_since[index], now, origin, position)
+        if vehicle.cruise_destination is not None:
+            miles = vehicle.battery - battery
+            totals["empty"] += miles
+            cruise_miles += miles
+            vehicle.battery = battery
+            minimum_battery = min(minimum_battery, battery)
+            if battery < a.reserve_fraction * a.battery_range_miles - 1e-8:
+                raise AssertionError("Idle cruising violated battery reserve")
+            vehicle.position = position
+            vehicle.cruise_destination = None
+            vehicle.cruise_token += 1
 
     def interval(start, end, kind):
         stop = min(end, horizon)
@@ -246,13 +291,45 @@ def simulate(
         segment(index, "DEPOT_TRAVEL", now, end, vehicle.position, (0.0, 0.0))
         push(end, 0, "depot", index)
 
+    def start_idle_cruise(now, index):
+        if cruise_policy is None or cruise_waypoints is None or cruise_rng is None:
+            return
+        vehicle = fleet[index]
+        assert vehicle.state == "IDLE" and vehicle.cruise_destination is None
+        destination = cruise_waypoints.choose(vehicle.position, cruise_rng)
+        if destination is None:
+            return
+        miles = distance(vehicle.position, destination)
+        needed = (
+            miles
+            + distance(destination, (0.0, 0.0))
+            + a.reserve_fraction * a.battery_range_miles
+        )
+        if vehicle.battery + 1e-9 < needed:
+            to_depot(now, index)
+            return
+        vehicle.cruise_destination = destination
+        vehicle.cruise_start = now
+        vehicle.cruise_end = now + miles / cruise_policy.speed_mph * 60
+        vehicle.cruise_token += 1
+        idle_since[index] = now
+        push(vehicle.cruise_end, 0, "cruise_end", index, vehicle.cruise_token)
+
+    for index in range(len(fleet)):
+        start_idle_cruise(0.0, index)
     for ride in rides:
         push(ride.time, 1, "request", payload=ride)
     while events:
         now, _, _, kind, index, payload = heapq.heappop(events)
         if now >= horizon:
             break
-        if kind == "request":
+        if kind == "cruise_end":
+            vehicle = fleet[index]
+            if vehicle.state == "IDLE" and vehicle.cruise_token == payload:
+                close_idle(index, now)
+                idle_since[index] = now
+                start_idle_cruise(now, index)
+        elif kind == "request":
             ride = payload
             h = hourly[int(now // 60)]
             h["requests"] += 1
@@ -261,16 +338,17 @@ def simulate(
             for i, vehicle in enumerate(fleet):
                 if vehicle.state != "IDLE":
                     continue
-                pickup = distance(vehicle.position, ride.origin)
+                idle_position, idle_battery = idle_position_and_battery(vehicle, now)
+                pickup = distance(idle_position, ride.origin)
                 needed = (
                     pickup
                     + passenger_miles
                     + distance(ride.destination, (0.0, 0.0))
                     + a.reserve_fraction * a.battery_range_miles
                 )
-                if vehicle.battery + 1e-9 < needed:
+                if idle_battery + 1e-9 < needed:
                     if (
-                        vehicle.battery
+                        idle_battery
                         < a.charge_target_fraction * a.battery_range_miles
                     ):
                         to_depot(now, i)
@@ -336,6 +414,8 @@ def simulate(
             h["waits"].append(wait)
             if vehicle.battery <= a.charge_trigger_fraction * a.battery_range_miles:
                 to_depot(now, index)
+            else:
+                start_idle_cruise(now, index)
         elif kind == "depot":
             vehicle = fleet[index]
             vehicle.position = (0.0, 0.0)
@@ -353,6 +433,7 @@ def simulate(
             active_chargers -= 1
             if queue:
                 start_charge(now, queue.popleft())
+            start_idle_cruise(now, index)
     for index in queue:
         interval(fleet[index].queued_at, horizon, "queue")
         segment(
@@ -392,6 +473,7 @@ def simulate(
         audit.update(
             max_chargers=max_chargers,
             minimum_battery=minimum_battery,
+            idle_cruise_miles=cruise_miles,
             states=[v.state for v in fleet],
         )
     if demand_profile is None:
@@ -407,7 +489,9 @@ def simulate(
         )
     else:
         demand_source = demand_profile.source
-    simulation_versions = versions.model_copy(update={"model_version": "simulation.v1"})
+    simulation_versions = versions.model_copy(
+        update={"model_version": "simulation.v2" if cruise_policy else "simulation.v1"}
+    )
     identity = {
         "versions": simulation_versions.model_dump(),
         "request": request.model_dump(
@@ -420,6 +504,7 @@ def simulate(
             "profile_id": demand_source.profile_id,
             "artifact_sha256": demand_source.artifact_sha256,
         }
+        identity["idle_cruise_policy"] = cruise_policy.model_dump()
     playback = None
     if playback_segments is not None:
         playback = SimulationPlayback(
@@ -451,7 +536,8 @@ def simulate(
         warnings = [
             "Hypothetical fleet operations, not autonomous driving or Waymo operations.",
             *demand_source.limitations,
-            "No street routing. No passenger queue; immediate assignment policy.",
+            "Idle vehicles follow an assumed seeded cruising policy weighted by 2015 modeled trip production; this is not observed fleet behavior. Cruising consumes empty miles and battery.",
+            "The engine uses assumed distances and times, not street routing. The map may show display-only road paths. No passenger queue; immediate assignment policy.",
             "Gross revenue excludes operating costs and is not profit; fares are scenario inputs.",
             "Charging uses an assumed private depot, not measured public charging capacity.",
         ]

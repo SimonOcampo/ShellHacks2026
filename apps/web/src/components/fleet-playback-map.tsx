@@ -52,6 +52,11 @@ export function FleetPlaybackMap({
   );
   const focus = vehicles.find((vehicle) => vehicle.id === selected);
   const isProvidence = cityName.toLowerCase().includes("providence");
+  const cruisingEnabled = result?.versions.model_version === "simulation.v2";
+  const stateLabel = (state: keyof typeof vehicleStates) =>
+    state === "IDLE" && cruisingEnabled
+      ? "Cruising · empty"
+      : vehicleStates[state].label;
   const activeRoadNetwork = isProvidence ? roadNetwork : null;
   const mapVehicles = useMemo(() => {
     if (!project) return [];
@@ -138,14 +143,16 @@ export function FleetPlaybackMap({
         map = new api.Map({
           container: container.current,
           accessToken: token,
-          style: "mapbox://styles/mapbox/standard-satellite",
+          style: "mapbox://styles/mapbox/standard",
           config: {
             basemap: {
               lightPreset: "day",
+              showHdRoads: true,
               show3dObjects: true,
               show3dBuildings: true,
               show3dFacades: true,
               show3dLandmarks: true,
+              show3dTrees: true,
             },
           },
           center: project(0, 0),
@@ -371,7 +378,7 @@ export function FleetPlaybackMap({
                       strokeWidth="1.5"
                     >
                       <title>
-                        Vehicle {v.id}: {vehicleStates[v.segment.state].label}
+                        Vehicle {v.id}: {stateLabel(v.segment.state)}
                       </title>
                     </circle>
                   ))}
@@ -436,7 +443,7 @@ export function FleetPlaybackMap({
           {Object.entries(vehicleStates).map(([state, value]) => (
             <span key={state}>
               <i style={{ background: value.color }} aria-hidden="true" />
-              {value.label}{" "}
+              {stateLabel(state as keyof typeof vehicleStates)}{" "}
               <b>
                 {playback
                   ? vehicles.filter((v) => v.segment.state === state).length
@@ -470,7 +477,7 @@ export function FleetPlaybackMap({
             </label>
             <p>
               {focus
-                ? `${vehicleStates[focus.segment.state].label} · ${focus.segment.occupied ? "occupied" : "empty"} · ${focus.segment.start_minute.toFixed(1)}–${focus.segment.end_minute.toFixed(1)} min`
+                ? `${stateLabel(focus.segment.state)} · ${focus.segment.occupied ? "occupied" : "empty"} · ${focus.segment.start_minute.toFixed(1)}–${focus.segment.end_minute.toFixed(1)} min`
                 : "Select a vehicle to inspect its current state and leg."}
             </p>
           </div>
@@ -479,12 +486,14 @@ export function FleetPlaybackMap({
       <p className="fleet-disclosure">
         Hypothetical fleet, not live Waymo operations. The event engine still
         calculates trip timing from its own assumptions.{" "}
+        {cruisingEnabled &&
+          "Available idle vehicles cruise under an assumed seeded policy; this is not observed operator behavior. "}
         {isProvidence && roadStatus === "ready"
           ? "Moving circles follow shortest paths on the published Providence road centerlines for display when both endpoints can be connected; other legs use straight interpolation. One-way rules, traffic, turns, and travel time are not modeled."
           : "The displayed positions interpolate the engine endpoints; a road path is unavailable."}{" "}
-        Mapbox Standard Satellite provides imagery and detailed 3D buildings
-        where its coverage permits. City GIS footprints and heights provide the
-        city-wide building layer.
+        Mapbox Standard renders 3D buildings, facades, and landmarks where its
+        coverage permits. City GIS footprints and heights provide the wider
+        city building layer.
       </p>
       {cityName.toLowerCase().includes("providence") && (
         <p className="fleet-gis-source">
