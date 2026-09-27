@@ -15,6 +15,15 @@ export const fixtureMode =
   process.env.NEXT_PUBLIC_DATA_TRANSPORT === "fixtures";
 const base = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    public status: number,
+  ) {
+    super(message);
+  }
+}
+
 async function call<T>(
   path: string,
   body?: unknown,
@@ -28,7 +37,10 @@ async function call<T>(
   });
   const json = await response.json();
   if (!response.ok)
-    throw new Error(json.error?.message ?? `API error ${response.status}`);
+    throw new ApiError(
+      json.error?.message ?? `API error ${response.status}`,
+      response.status,
+    );
   return json as T;
 }
 
@@ -71,8 +83,10 @@ export const api = {
     publicJson<DataRelease>("backendreference", signal),
   waymoReferenceRanking: (signal?: AbortSignal) =>
     publicJson<Ranking>("backendreference-ranking", signal),
-  rankWaymoReferences: (request: ReferenceRankingRequest, signal?: AbortSignal) =>
-    call<Ranking>("/api/v1/waymo-reference-rankings", request, signal),
+  rankWaymoReferences: (
+    request: ReferenceRankingRequest,
+    signal?: AbortSignal,
+  ) => call<Ranking>("/api/v1/waymo-reference-rankings", request, signal),
   explainWaymoReference: async (
     id: string,
     request: ReferenceRankingRequest,

@@ -1,0 +1,138 @@
+.fleet-playback {
+  overflow: hidden;
+  border: 1px solid #d7e0e5;
+  border-radius: 12px;
+  background: #fff;
+  color: #243746;
+}
+.fleet-map-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 18px;
+}
+.fleet-map-heading h3 {
+  margin: 5px 0 0;
+  font-size: 20px;
+}
+.fleet-map-heading > span {
+  font-size: 12px;
+  color: #546574;
+}
+.fleet-map-stage {
+  position: relative;
+  height: clamp(350px, 48vh, 560px);
+  background: #eef3f5;
+}
+.fleet-map-canvas,
+.fleet-local-view {
+  position: absolute;
+  inset: 0;
+}
+.fleet-map-stage > .fleet-map-canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.fleet-local-view svg {
+  width: 100%;
+  height: calc(100% - 54px);
+}
+.fleet-local-view p {
+  margin: 0 18px;
+  font-size: 12px;
+}
+.fleet-map-notice {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.fleet-camera-controls {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 8px;
+}
+.fleet-camera-controls button {
+  padding: 9px 12px;
+  background: #fff;
+  color: #243746;
+  border: 1px solid #cad5dc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.fleet-state-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  padding: 16px 18px;
+  border-bottom: 1px solid #e2e8ec;
+  font-size: 12px;
+}
+.fleet-state-legend span {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+.fleet-state-legend i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.fleet-inspector {
+  padding: 14px 18px 0;
+  font-size: 13px;
+}
+.fleet-inspector select {
+  margin-left: 10px;
+  padding: 6px;
+  color: #243746;
+  background: #f7fafb;
+  border: 1px solid #cad5dc;
+  border-radius: 5px;
+}
+.fleet-inspector p,
+.fleet-disclosure {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #546574;
+}
+.fleet-disclosure,
+.fleet-provenance {
+  margin: 14px 18px;
+}
+.fleet-provenance {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.fleet-provenance summary {
+  cursor: pointer;
+}
+.fleet-provenance a {
+  text-decoration: underline;
+}
+.fleet-provenance ul {
+  padding-left: 20px;
+}
+.playback-speed {
+  font-size: 12px;
+}
+.playback-speed select {
+  padding: 6px;
+  margin-left: 8px;
+  background: #fff;
+  color: #243746;
+  border: 1px solid #cad5dc;
+}
+@media (max-width: 600px) {
+  .fleet-map-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .fleet-state-legend {
+    gap: 10px;
+  }
+}

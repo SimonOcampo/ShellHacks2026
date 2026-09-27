@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -27,10 +27,10 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { api, fixtureMode } from "@/lib/api/client";
+import { api, ApiError, fixtureMode } from "@/lib/api/client";
 import type { Simulation, SimulationRequest } from "@/lib/api/types";
 import { Button } from "./ui/button";
-import { SimulationMapbox } from "./mapbox-map";
+import { FleetPlaybackMap } from "./fleet-playback-map";
 import { citySkyline } from "@/lib/city-photos";
 
 const defaults = {
@@ -66,8 +66,6 @@ const chartAxisTick = { fontSize: 10, fill: "#63707b" };
 export default function Scenario({
   cityId,
   cityName,
-  latitude,
-  longitude,
   onBack,
   referenceMode,
 }: {
@@ -85,13 +83,26 @@ export default function Scenario({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [retry, setRetry] = useState(0);
-  const [hour, setHour] = useState(0);
+  const [minute, setMinute] = useState(0);
+  const [speed, setSpeed] = useState(60);
+  const [playbackNotice, setPlaybackNotice] = useState("");
+  const hour = Math.min(
+    Math.floor(minute / 60),
+    Math.max(0, (result?.hourly.length ?? 1) - 1),
+  );
   const [playing, setPlaying] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const skyline =
     citySkyline(cityId) ??
-    Object.entries(skylinePhotos).find(([name]) => cityName.includes(name))?.[1];
-  useEffect(() => setPreviousResult(undefined), [cityId]);
+    Object.entries(skylinePhotos).find(([name]) =>
+      cityName.includes(name),
+    )?.[1];
+  useEffect(() => {
+    setPreviousResult(undefined);
+    setResult(undefined);
+    setPlaying(false);
+    setMinute(0);
+  }, [cityId, referenceMode]);
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updatePreference = () => setReducedMotion(preference.matches);
@@ -106,12 +117,40 @@ export default function Scenario({
     const controller = new AbortController();
     setBusy(true);
     setError("");
+    setPlaying(false);
+    setPlaybackNotice("");
+    const simulate = referenceMode ? api.simulateWaymoReference : api.simulate;
+    const request: SimulationRequest = {
+      city_id: cityId,
+      ...inputs,
+      demand_profile_id:
+        !fixtureMode && !referenceMode && cityId === "cbsa:39300"
+          ? "providence-rism-2015.v1"
+          : "synthetic-zone.v1",
+      include_playback: !fixtureMode,
+    };
     const timer = setTimeout(
       () =>
-        (referenceMode ? api.simulateWaymoReference : api.simulate)(
-          { city_id: cityId, ...inputs } as SimulationRequest,
-          controller.signal,
-        )
+        simulate(request, controller.signal)
+          .catch(async (e: unknown) => {
+            if (
+              e instanceof ApiError &&
+              e.status === 413 &&
+              request.include_playback &&
+              !controller.signal.aborted
+            ) {
+              const metricsOnly = await simulate(
+                { ...request, include_playback: false },
+                controller.signal,
+              );
+              if (!controller.signal.aborted)
+                setPlaybackNotice(
+                  "This run exceeds the vehicle playback limit. Metrics cover the complete run; no vehicle trace is displayed.",
+                );
+              return metricsOnly;
+            }
+            throw e;
+          })
           .then((r) => {
             if (!controller.signal.aborted) {
               const earlier = lastResult.current;
@@ -122,7 +161,7 @@ export default function Scenario({
                 setPreviousResult(earlier);
               lastResult.current = r;
               setResult(r);
-              setHour(0);
+              setMinute(0);
               setPlaying(false);
             }
           })
@@ -140,21 +179,31 @@ export default function Scenario({
     };
   }, [cityId, inputs, retry, referenceMode]);
   useEffect(() => {
-    if (!playing || !result || reducedMotion) return;
-    const interval = setInterval(
-      () => setHour((h) => (h >= result.hourly.length - 1 ? 0 : h + 1)),
-      160,
-    );
+    if (!playing || !result || reducedMotion || busy) return;
+    let last = performance.now();
+    const interval = setInterval(() => {
+      const now = performance.now();
+      const delta = (Math.min(now - last, 250) / 1000) * speed;
+      last = now;
+      if (!document.hidden)
+        setMinute((m) => Math.min(result.request.days * 1440, m + delta));
+    }, 50);
     return () => clearInterval(interval);
-  }, [playing, result, reducedMotion]);
+  }, [playing, result, reducedMotion, busy, speed]);
+  useEffect(() => {
+    if (result && minute >= result.request.days * 1440) setPlaying(false);
+  }, [minute, result]);
   const metrics = result?.metrics;
-  let cumulative = 0;
-  const chart =
-    result?.hourly.map((h) => ({
-      ...h,
-      label: `D${Math.floor(h.hour / 24) + 1} ${String(h.hour % 24).padStart(2, "0")}:00`,
-      cumulative_revenue: (cumulative += h.gross_revenue_usd),
-    })) ?? [];
+  const chart = useMemo(() => {
+    let cumulative = 0;
+    return (
+      result?.hourly.map((h) => ({
+        ...h,
+        label: `D${Math.floor(h.hour / 24) + 1} ${String(h.hour % 24).padStart(2, "0")}:00`,
+        cumulative_revenue: (cumulative += h.gross_revenue_usd),
+      })) ?? []
+    );
+  }, [result]);
   const current = result?.hourly[hour];
   const controls: [
     keyof typeof defaults,
@@ -289,17 +338,18 @@ export default function Scenario({
           </div>
         </aside>
         <div className="scenario-map-column">
-          <SimulationMapbox
+          <FleetPlaybackMap
             cityName={cityName}
-            latitude={latitude}
-            longitude={longitude}
-            activeHour={hour}
-            playing={playing}
+            result={result?.request.city_id === cityId ? result : undefined}
+            minute={minute}
             reducedMotion={reducedMotion}
-            simulationActive={Boolean(result)}
-            fleetSize={inputs.fleet_size}
-            seed={inputs.seed}
+            busy={busy}
           />
+          {playbackNotice && (
+            <p className="async-note" role="status">
+              {playbackNotice}
+            </p>
+          )}
         </div>
         <aside
           className="panel scenario-live-panel"
@@ -309,7 +359,10 @@ export default function Scenario({
             <span className="eyebrow">LIVE SIMULATION</span>
             <h3>
               Day {Math.floor(hour / 24) + 1}{" "}
-              <small>{String(hour % 24).padStart(2, "0")}:00</small>
+              <small>
+                {String(hour % 24).padStart(2, "0")}:
+                {String(Math.floor(minute % 60)).padStart(2, "0")}
+              </small>
             </h3>
             <p>Hourly API outputs follow the selected playback hour.</p>
           </div>
@@ -347,11 +400,12 @@ export default function Scenario({
           <div className="scenario-fleet-preview">
             <span className="eyebrow">VEHICLE SCENE</span>
             <strong>
-              {Math.min(inputs.fleet_size, 60)} <small>vehicle samples</small>
+              {result?.playback ? result.request.fleet_size : "—"}{" "}
+              <small>engine vehicles</small>
             </strong>
             <p>
-              Illustrative markers change color through idle, pickup, and
-              dropoff states.
+              Vehicle states and positions follow the returned event trace. No
+              movement is inferred when playback is unavailable.
             </p>
           </div>
         </aside>
@@ -540,7 +594,10 @@ export default function Scenario({
                     <span className="eyebrow">WEEK IN MOTION</span>
                     <h3>
                       Day {Math.floor(hour / 24) + 1}{" "}
-                      <span>/ {String(hour % 24).padStart(2, "0")}:00</span>
+                      <span>
+                        / {String(hour % 24).padStart(2, "0")}:
+                        {String(Math.floor(minute % 60)).padStart(2, "0")}
+                      </span>
                     </h3>
                   </div>
                   <Button
@@ -552,23 +609,38 @@ export default function Scenario({
                           ? "Pause playback"
                           : "Play playback"
                     }
-                    disabled={reducedMotion}
-                    onClick={() => setPlaying(!playing)}
+                    disabled={reducedMotion || busy}
+                    onClick={() => {
+                      if (minute >= result.request.days * 1440) setMinute(0);
+                      setPlaying(!playing);
+                    }}
                   >
                     {playing ? <Pause size={14} /> : <Play size={14} />}
                   </Button>
                   <label className="playback-slider">
-                    <span className="sr-only">Playback hour</span>
+                    <span className="sr-only">Playback minute</span>
                     <input
                       type="range"
                       min="0"
-                      max={result.hourly.length - 1}
-                      value={hour}
+                      max={result.request.days * 1440}
+                      step="0.1"
+                      value={minute}
                       onChange={(e) => {
                         setPlaying(false);
-                        setHour(Number(e.target.value));
+                        setMinute(Number(e.target.value));
                       }}
                     />
+                  </label>
+                  <label className="playback-speed">
+                    Speed
+                    <select
+                      value={speed}
+                      onChange={(e) => setSpeed(Number(e.target.value))}
+                    >
+                      <option value={1}>1 min / sec</option>
+                      <option value={10}>10 min / sec</option>
+                      <option value={60}>1 hour / sec</option>
+                    </select>
                   </label>
                   <span className="playback-stat">
                     {current?.completed_rides}
@@ -581,7 +653,7 @@ export default function Scenario({
                 </section>
                 {reducedMotion && (
                   <p className="async-note reduced-motion-note" role="status">
-                    Auto-play is off; use the hour slider to move through the
+                    Auto-play is off; use the minute slider to move through the
                     results.
                   </p>
                 )}
