@@ -8,6 +8,10 @@ The [builder](../data/src/datasets/rism/build_simulation_profile.py) reads the c
 
 The layer provides a limited spatial proxy. It is not a complete Providence municipality or CBSA release, an observed passenger-demand series, an origin-destination log, or Waymo telemetry. Its 2015 modeled trip fields do not establish current ride-hail request volume, time-of-day patterns, route choice, fleet policy, or vehicle behavior. Those remain explicitly assumed in simulation v1. The market-screening `verified.v2` release stays separate and unchanged.
 
+## Providence GIS display layers
+
+The 3D scene uses public City of Providence GIS Hub [building footprints](https://pvdgis.maps.arcgis.com/home/item.html?id=d66b8deed2614d54b18906ba1f532030) and [road centerlines](https://pvdgis.maps.arcgis.com/home/item.html?id=8c101a6fca0c4104b9b08499725c6625). Their downloaded Shapefiles, acquisition metadata, SHA-256 digests, deterministic conversion script, and limitations are recorded in [the GIS dataset README](../data/src/datasets/providence_gis/README.md). The checked-in display GeoJSON is derived from those snapshots. The GIS layers add visual city context only; neither the event engine nor its movement assumptions consume them.
+
 ## Current status
 
 The runtime still defaults to synthetic `mock.v1`. The immutable `verified.v1` artifact is retained as a historical release. The corrected `data/releases/verified.v2.json` closes its three publication gaps using fresh Census evidence and the hash-matched prior audit for unchanged sources. It has 20 ranked candidates and 15 enabled references. It has passed local API validation but has not been selected on Render.

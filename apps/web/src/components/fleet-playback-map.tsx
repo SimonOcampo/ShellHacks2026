@@ -9,18 +9,21 @@ import {
   vehicleStates,
 } from "@/lib/simulation-playback";
 import { loadMapbox, type MapInstance } from "./mapbox-map";
+import { fleetCarIcon } from "./fleet-car-icon";
 import "./fleet-playback.css";
 
 export function FleetPlaybackMap({
   result,
   minute,
   cityName,
+  skyline,
   reducedMotion,
   busy,
 }: {
   result?: Simulation;
   minute: number;
   cityName: string;
+  skyline?: string;
   reducedMotion: boolean;
   busy: boolean;
 }) {
@@ -80,31 +83,67 @@ export function FleetPlaybackMap({
           attributionControl: true,
         });
         mapRef.current = map;
-        map.on("error", () => {
-          if (active)
-            setError(
-              "Mapbox could not load. The local coordinate view remains available.",
-            );
-        });
         map.once("load", () => {
           if (!active || !map) return;
           try {
-            map.addLayer({
-              id: "fleet-buildings",
-              type: "fill-extrusion",
-              source: "composite",
-              "source-layer": "building",
-              filter: ["==", "extrude", "true"],
-              minzoom: 14,
-              paint: {
-                "fill-extrusion-color": "#bcc9cc",
-                "fill-extrusion-height": ["get", "height"],
-                "fill-extrusion-base": ["get", "min_height"],
-                "fill-extrusion-opacity": 0.55,
-              },
-            });
+            if (cityName.toLowerCase().includes("providence")) {
+              map.addSource("providence-roads", {
+                type: "geojson",
+                data: "/gis/providence-roads.geojson",
+              });
+              map.addLayer({
+                id: "providence-roads",
+                type: "line",
+                source: "providence-roads",
+                minzoom: 8,
+                paint: {
+                  "line-color": "#58768a",
+                  "line-opacity": 0.46,
+                  "line-width": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    16,
+                    2,
+                  ],
+                },
+              });
+              map.addSource("providence-buildings", {
+                type: "geojson",
+                data: "/gis/providence-buildings.geojson",
+              });
+              map.addLayer({
+                id: "providence-buildings",
+                type: "fill-extrusion",
+                source: "providence-buildings",
+                minzoom: 8,
+                paint: {
+                  "fill-extrusion-color": "#aebec4",
+                  "fill-extrusion-height": ["coalesce", ["get", "height_m"], 0],
+                  "fill-extrusion-base": 0,
+                  "fill-extrusion-opacity": 0.72,
+                },
+              });
+            } else {
+              map.addLayer({
+                id: "fleet-buildings",
+                type: "fill-extrusion",
+                source: "composite",
+                "source-layer": "building",
+                filter: ["==", "extrude", "true"],
+                minzoom: 12,
+                paint: {
+                  "fill-extrusion-color": "#bcc9cc",
+                  "fill-extrusion-height": ["get", "height"],
+                  "fill-extrusion-base": ["get", "min_height"],
+                  "fill-extrusion-opacity": 0.55,
+                },
+              });
+            }
             const empty = { type: "FeatureCollection", features: [] };
-            map.addSource("fleet-points", { type: "geojson", data: empty });
+            map.addSource("fleet-cars", { type: "geojson", data: empty });
             map.addSource("fleet-bodies", { type: "geojson", data: empty });
             map.addSource("fleet-route", { type: "geojson", data: empty });
             map.addLayer({
@@ -117,22 +156,35 @@ export function FleetPlaybackMap({
                 "line-dasharray": [2, 2],
               },
             });
+            for (const [state, value] of Object.entries(vehicleStates))
+              map.addImage(`fleet-car-${state}`, fleetCarIcon(value.color), {
+                pixelRatio: 2,
+              });
             map.addLayer({
-              id: "fleet-points",
-              type: "circle",
-              source: "fleet-points",
-              paint: {
-                "circle-color": ["get", "color"],
-                "circle-radius": 5,
-                "circle-stroke-width": 1.5,
-                "circle-stroke-color": "#ffffff",
+              id: "fleet-car-icons",
+              type: "symbol",
+              source: "fleet-cars",
+              layout: {
+                "icon-image": ["concat", "fleet-car-", ["get", "state"]],
+                "icon-size": [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  9,
+                  0.6,
+                  15,
+                  1.1,
+                ],
+                "icon-rotate": ["get", "bearing"],
+                "icon-rotation-alignment": "map",
+                "icon-allow-overlap": true,
               },
             });
             map.addLayer({
               id: "fleet-bodies",
               type: "fill-extrusion",
               source: "fleet-bodies",
-              minzoom: 14,
+              minzoom: 15,
               paint: {
                 "fill-extrusion-color": ["get", "color"],
                 "fill-extrusion-height": ["get", "height"],
@@ -162,12 +214,12 @@ export function FleetPlaybackMap({
       map?.remove();
       mapRef.current = null;
     };
-  }, [token, project, bounds]);
+  }, [token, project, bounds, cityName]);
 
   useEffect(() => {
     const map = mapRef.current;
     if (!ready || !map || !project) return;
-    const points: GeoJSON.FeatureCollection<GeoJSON.Point> = {
+    const cars: GeoJSON.FeatureCollection<GeoJSON.Point> = {
       type: "FeatureCollection",
       features: [],
     };
@@ -177,15 +229,20 @@ export function FleetPlaybackMap({
     };
     for (const vehicle of vehicles) {
       const color = vehicleStates[vehicle.segment.state].color;
-      points.features.push({
+      cars.features.push({
         type: "Feature",
-        properties: { color },
+        properties: {
+          state: vehicle.segment.state,
+          bearing: 90 - (vehicle.angle * 180) / Math.PI,
+        },
         geometry: { type: "Point", coordinates: project(vehicle.x, vehicle.y) },
       });
-      // Stylized car body and cabin, enlarged for readability at neighborhood zoom.
+      // Stylized autonomous minivan body, cabin, and roof sensor, enlarged for legibility.
       for (const [length, width, base, height, tint] of [
-        [12, 5.5, 0, 3, color],
-        [6, 4.5, 3, 4.8, "#243746"],
+        [8.5, 3.8, 0, 2.2, "#eef3f5"],
+        [5.2, 3.2, 2.2, 3.2, "#243746"],
+        [3.4, 2.4, 3.2, 3.35, color],
+        [0.9, 0.9, 3.35, 4.05, "#e5eaf0"],
       ] as const) {
         const coordinates = [
           [-1, -1],
@@ -212,7 +269,7 @@ export function FleetPlaybackMap({
         });
       }
     }
-    map.getSource("fleet-points")?.setData(points);
+    map.getSource("fleet-cars")?.setData(cars);
     map.getSource("fleet-bodies")?.setData(bodies);
     map.getSource("fleet-route")?.setData({
       type: "FeatureCollection",
@@ -240,157 +297,222 @@ export function FleetPlaybackMap({
   const local = !token || !project || Boolean(error);
   return (
     <section className="fleet-playback" aria-label="Engine vehicle playback">
-      <div className="fleet-map-heading">
-        <div>
-          <span className="eyebrow">ENGINE PLAYBACK</span>
-          <h3>{cityName}</h3>
+      <div className="fleet-visual-row">
+        <div className="fleet-photo-panel">
+          <img
+            src={skyline ?? "/nashville-skyline.jpg"}
+            alt={`${skyline ? cityName : "Nashville"} skyline, illustrative city context`}
+          />
+          <span>
+            {skyline
+              ? cityName.toUpperCase()
+              : `ILLUSTRATIVE NASHVILLE SKYLINE · ${cityName.toUpperCase()} SCENARIO`}
+            <small>HYPOTHETICAL FLEET</small>
+          </span>
         </div>
-        <span>
-          {busy
-            ? "Updating scenario…"
-            : playback
-              ? `${vehicles.length} vehicles · ${minute.toFixed(1)} min`
-              : "Vehicle trace unavailable"}
-        </span>
-      </div>
-      <div className="fleet-map-stage">
-        <div
-          ref={container}
-          className="fleet-map-canvas"
-          style={{ visibility: local ? "hidden" : "visible" }}
-          role="region"
-          aria-label="3D Providence fleet map"
-        />
-        {local && (
-          <div className="fleet-local-view">
-            <svg
-              viewBox="0 0 600 400"
-              role="img"
-              aria-label="Vehicle positions in local miles; no street basemap"
-            >
-              <path
-                d="M300 30V370M30 200H570"
-                stroke="#b7c6ce"
-                strokeDasharray="4 6"
-              />
-              {vehicles.map((v) => (
-                <circle
-                  data-testid="fleet-vehicle"
-                  data-state={v.segment.state}
-                  key={v.id}
-                  cx={300 + (v.x / bounds) * 185}
-                  cy={200 - (v.y / bounds) * 185}
-                  r={v.id === selected ? 7 : 4}
-                  fill={vehicleStates[v.segment.state].color}
+        <div className="fleet-map-panel">
+          <div className="fleet-map-heading">
+            <div>
+              <span className="eyebrow">ENGINE PLAYBACK</span>
+              <h3>{cityName}</h3>
+            </div>
+            <span>
+              {busy
+                ? "Updating scenario…"
+                : playback
+                  ? `${vehicles.length} vehicles · ${minute.toFixed(1)} min`
+                  : "Vehicle trace unavailable"}
+            </span>
+          </div>
+          <div className="fleet-map-stage">
+            <div
+              ref={container}
+              className="fleet-map-canvas"
+              style={{ visibility: local ? "hidden" : "visible" }}
+              role="region"
+              aria-label="3D Providence fleet map"
+            />
+            {local && (
+              <div className="fleet-local-view">
+                <svg
+                  viewBox="0 0 600 400"
+                  role="img"
+                  aria-label="Vehicle positions in local miles; no street basemap"
                 >
-                  <title>
-                    Vehicle {v.id}: {vehicleStates[v.segment.state].label}
-                  </title>
-                </circle>
-              ))}
-              <text x="20" y="385" fill="#475569" fontSize="12">
-                Local miles · north ↑ · extent ±{bounds.toFixed(1)} miles
-              </text>
-            </svg>
+                  <path
+                    d="M300 30V370M30 200H570"
+                    stroke="#b7c6ce"
+                    strokeDasharray="4 6"
+                  />
+                  {vehicles.map((v) => (
+                    <g
+                      data-testid="fleet-vehicle"
+                      data-state={v.segment.state}
+                      key={v.id}
+                      transform={`translate(${300 + (v.x / bounds) * 185} ${200 - (v.y / bounds) * 185}) rotate(${90 - (v.angle * 180) / Math.PI})`}
+                    >
+                      <title>
+                        Vehicle {v.id}: {vehicleStates[v.segment.state].label}
+                      </title>
+                      <rect
+                        x="-5"
+                        y="-9"
+                        width="10"
+                        height="18"
+                        rx="3"
+                        fill="#f8fafb"
+                        stroke={vehicleStates[v.segment.state].color}
+                        strokeWidth={v.id === selected ? 2.5 : 1.7}
+                      />
+                      <rect
+                        x="-3.5"
+                        y="-4"
+                        width="7"
+                        height="5"
+                        rx="1.5"
+                        fill="#243746"
+                      />
+                      <circle
+                        r="2.2"
+                        cy="3"
+                        fill={vehicleStates[v.segment.state].color}
+                      />
+                      <circle r="0.8" cy="3" fill="#f8fafb" />
+                    </g>
+                  ))}
+                  <text x="20" y="385" fill="#475569" fontSize="12">
+                    Local miles · north ↑ · extent ±{bounds.toFixed(1)} miles
+                  </text>
+                </svg>
+                <p>
+                  {error ||
+                    (playback
+                      ? project
+                        ? "Local coordinate view. A configured Mapbox token enables the 3D city."
+                        : "Synthetic local coordinates. This profile has no geographic city frame."
+                      : "Vehicle playback is unavailable for this result. No vehicle movement is inferred.")}
+                </p>
+              </div>
+            )}
+            {!local && !ready && (
+              <p className="fleet-map-notice" role="status">
+                Loading 3D city…
+              </p>
+            )}
+            {!local && ready && (
+              <div className="fleet-camera-controls">
+                <button
+                  type="button"
+                  onClick={() =>
+                    mapRef.current?.fitBounds(
+                      [project!(-bounds, -bounds), project!(bounds, bounds)],
+                      {
+                        padding: 40,
+                        duration: reducedMotion ? 0 : 600,
+                        maxZoom: 13.5,
+                      },
+                    )
+                  }
+                >
+                  Fleet overview
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    mapRef.current?.easeTo({
+                      center: focus
+                        ? project!(focus.x, focus.y)
+                        : [-71.4128, 41.824],
+                      zoom: 16.5,
+                      pitch: 60,
+                      duration: reducedMotion ? 0 : 600,
+                    })
+                  }
+                >
+                  {focus ? "Inspect vehicle in 3D" : "Downtown 3D"}
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="fleet-console" aria-label="Vehicle states and inspector">
+        <div className="fleet-state-legend">
+          {Object.entries(vehicleStates).map(([state, value]) => (
+            <span key={state}>
+              <i style={{ background: value.color }} aria-hidden="true" />
+              {value.label}{" "}
+              <b>
+                {playback
+                  ? vehicles.filter((v) => v.segment.state === state).length
+                  : "—"}
+              </b>
+            </span>
+          ))}
+        </div>
+        {index.size > 0 && (
+          <div className="fleet-inspector">
+            <label>
+              Inspect vehicle{" "}
+              <select
+                aria-label="Inspect vehicle"
+                value={selected ?? ""}
+                onChange={(e) =>
+                  setSelected(
+                    e.target.value === "" ? null : Number(e.target.value),
+                  )
+                }
+              >
+                <option value="">Select a vehicle</option>
+                {[...index.keys()]
+                  .sort((a, b) => a - b)
+                  .map((id) => (
+                    <option key={id} value={id}>
+                      Vehicle {id}
+                    </option>
+                  ))}
+              </select>
+            </label>
             <p>
-              {error ||
-                (playback
-                  ? project
-                    ? "Local coordinate view. A configured Mapbox token enables the 3D city."
-                    : "Synthetic local coordinates. This profile has no geographic city frame."
-                  : "Vehicle playback is unavailable for this result. No vehicle movement is inferred.")}
+              {focus
+                ? `${vehicleStates[focus.segment.state].label} · ${focus.segment.occupied ? "occupied" : "empty"} · ${focus.segment.start_minute.toFixed(1)}–${focus.segment.end_minute.toFixed(1)} min`
+                : "Select a vehicle to inspect its current state and leg."}
             </p>
           </div>
         )}
-        {!local && !ready && (
-          <p className="fleet-map-notice" role="status">
-            Loading 3D city…
-          </p>
-        )}
-        {!local && ready && (
-          <div className="fleet-camera-controls">
-            <button
-              type="button"
-              onClick={() =>
-                mapRef.current?.fitBounds(
-                  [project!(-bounds, -bounds), project!(bounds, bounds)],
-                  {
-                    padding: 40,
-                    duration: reducedMotion ? 0 : 600,
-                    maxZoom: 13.5,
-                  },
-                )
-              }
-            >
-              Fleet overview
-            </button>
-            <button
-              type="button"
-              onClick={() =>
-                mapRef.current?.easeTo({
-                  center: focus
-                    ? project!(focus.x, focus.y)
-                    : [-71.4128, 41.824],
-                  zoom: 16.5,
-                  pitch: 60,
-                  duration: reducedMotion ? 0 : 600,
-                })
-              }
-            >
-              {focus ? "Inspect vehicle in 3D" : "Downtown 3D"}
-            </button>
-          </div>
-        )}
       </div>
-      <div className="fleet-state-legend">
-        {Object.entries(vehicleStates).map(([state, value]) => (
-          <span key={state}>
-            <i style={{ background: value.color }} />
-            {value.label}{" "}
-            <b>
-              {playback
-                ? vehicles.filter((v) => v.segment.state === state).length
-                : "—"}
-            </b>
-          </span>
-        ))}
-      </div>
-      {index.size > 0 && (
-        <div className="fleet-inspector">
-          <label>
-            Inspect vehicle{" "}
-            <select
-              aria-label="Inspect vehicle"
-              value={selected ?? ""}
-              onChange={(e) =>
-                setSelected(
-                  e.target.value === "" ? null : Number(e.target.value),
-                )
-              }
-            >
-              <option value="">Select a vehicle</option>
-              {[...index.keys()]
-                .sort((a, b) => a - b)
-                .map((id) => (
-                  <option key={id} value={id}>
-                    Vehicle {id}
-                  </option>
-                ))}
-            </select>
-          </label>
-          <p>
-            {focus
-              ? `${vehicleStates[focus.segment.state].label} · ${focus.segment.occupied ? "occupied" : "empty"} · ${focus.segment.start_minute.toFixed(1)}–${focus.segment.end_minute.toFixed(1)} min`
-              : "Select a vehicle to inspect its current state and leg."}
-          </p>
-        </div>
-      )}
       <p className="fleet-disclosure">
         Hypothetical fleet, not live Waymo operations. Positions follow
         straight-line engine legs, which may cross buildings or water; street
-        routing is not modeled. Mapbox supplies city streets and available
-        building heights. Car shapes are enlarged symbols.
+        routing is not modeled.{" "}
+        {cityName.toLowerCase().includes("providence")
+          ? "Providence GIS Hub supplies building footprints, published heights, and road centerlines; Mapbox supplies the basemap."
+          : "Mapbox supplies city streets and available building heights."}{" "}
+        Car shapes are enlarged symbols.
       </p>
+      {cityName.toLowerCase().includes("providence") && (
+        <p className="fleet-gis-source">
+          City GIS Hub:{" "}
+          <a
+            href="https://pvdgis.maps.arcgis.com/home/item.html?id=d66b8deed2614d54b18906ba1f532030"
+            target="_blank"
+            rel="noreferrer"
+          >
+            building footprints
+          </a>{" "}
+          (item modified June 2025) and{" "}
+          <a
+            href="https://pvdgis.maps.arcgis.com/home/item.html?id=8c101a6fca0c4104b9b08499725c6625"
+            target="_blank"
+            rel="noreferrer"
+          >
+            road centerlines
+          </a>{" "}
+          (item modified January 2025). Individual records may be older.
+          Missing or nonpositive building heights render flat. GIS geometry is
+          reference context, not a drivable route network.
+        </p>
+      )}
       {result?.demand_source && (
         <details className="fleet-provenance">
           <summary>Demand source and assumptions</summary>

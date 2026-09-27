@@ -1,0 +1,27 @@
+{
+  "buildings": {
+    "item_id": "d66b8deed2614d54b18906ba1f532030",
+    "item_url": "https://pvdgis.maps.arcgis.com/home/item.html?id=d66b8deed2614d54b18906ba1f532030",
+    "download_url": "https://www.arcgis.com/sharing/rest/content/items/d66b8deed2614d54b18906ba1f532030/data",
+    "title": "Building Footprints",
+    "owner": "PVDGIS_Admin",
+    "modified_utc": "2025-06-10T14:48:20+00:00",
+    "sha256": "e571838fc99d5906988331be7837dec062804c648a785bcfeb114d9c5950d13e",
+    "bytes": 9819154,
+    "derived_sha256": "b79d4e74401ea2046c438a97ec4a71b45ce4d7fe8cd394f52505fd2738acffb6",
+    "derived_features": 52271,
+    "missing_positive_height": 1753
+  },
+  "roads": {
+    "item_id": "8c101a6fca0c4104b9b08499725c6625",
+    "item_url": "https://pvdgis.maps.arcgis.com/home/item.html?id=8c101a6fca0c4104b9b08499725c6625",
+    "download_url": "https://www.arcgis.com/sharing/rest/content/items/8c101a6fca0c4104b9b08499725c6625/data",
+    "title": "Providence Road Lines",
+    "owner": "PVDGIS_Admin",
+    "modified_utc": "2025-01-30T16:09:11+00:00",
+    "sha256": "1e87b2d86aab3db0e4403be949f06f8e8a4d4f0b99c0e7f8a63d93172f63494c",
+    "bytes": 678094,
+    "derived_sha256": "5fc89ee5adc5c132e706c7cef1897d770f19be0c2161fbfc70bc14f8f97e5f9a",
+    "derived_features": 7746
+  }
+}
