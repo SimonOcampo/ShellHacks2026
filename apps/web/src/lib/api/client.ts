@@ -108,6 +108,8 @@ export const api = {
         price_per_mile_usd: 1.75,
         price_per_minute_usd: 0.3,
         seed: 42,
+        demand_profile_id: "synthetic-zone.v1",
+        include_playback: false,
       };
       if (
         Object.entries(defaults).some(
@@ -154,6 +156,8 @@ export const api = {
       price_per_minute_usd: 0.3,
       seed: 42,
       city_id: request.city_id,
+      demand_profile_id: "synthetic-zone.v1",
+      include_playback: false,
     };
     if (
       Object.entries(defaults).some(

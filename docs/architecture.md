@@ -9,10 +9,10 @@ Official snapshots + manifests
   -> frozen normalization and reference selection
   -> deterministic ranking and evidence
 
-Scenario request + explicit assumptions + seed
-  -> request generation
+Scenario request + explicit assumptions + seed + optional pinned spatial profile
+  -> seeded request generation
   -> discrete fleet events
-  -> window-limited accounting and hourly results
+  -> window-limited accounting, hourly results, optional vehicle segments
 
 FastAPI contracts -> generated TypeScript -> dashboard
 Server-calculated ranking evidence -> deterministic explanation template
@@ -30,7 +30,7 @@ Rank fixed Census CBSA metros. Census data and county aggregation fit regional m
 
 Production releases must pin the geographic vintage matching ACS 2024 five-year data. Charging points require a documented spatial join. County data uses a frozen CBSA crosswalk. Weather uses nearby station proxies. Multi-state legal evidence stays jurisdiction-specific.
 
-Simulation uses a hypothetical five-mile-radius disk, not the metro boundary. Public map markers only identify principal city locations. No service coverage is asserted.
+The default simulation uses a hypothetical five-mile-radius disk, not the metro boundary. The optional Providence profile selects representative points inside published Rhode Island Statewide Model high-employment zones. It covers part of Providence municipality, not the whole metro, and still uses assumed request timing and straight-line travel. Public map markers only identify principal city locations. No service coverage is asserted.
 
 ## Ownership and compatibility
 

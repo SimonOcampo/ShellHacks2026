@@ -1,4 +1,14 @@
-# Local verification — 2026-09-26
+# Local verification
+
+## Providence simulation spatial profile — 2026-09-27
+
+The committed Rhode Island Statewide Model raw GeoJSON matches SHA-256 `4ba6796ac38f08c178dfcf81c555109989db235d33fcc5783b62c248dbe96ba6`. The offline builder reproduces the pinned 86-zone simulation artifact, and its geospatial check confirms all 2,752 generated sample points remain inside their source zone polygons. The packaged artifact matches SHA-256 `9506de3ebb7d8c757b064c858e196b7d228046b765489c95d6cd459504155cfb`.
+
+The full root suite passed 56 tests. The focused data source test passed. Generated OpenAPI matched the running app schema; generated TypeScript passed typecheck; the web production build succeeded. This host did not have `uv` on `PATH`, so the project virtual environment ran backend commands and system Python with the data dependencies ran the source test.
+
+Against the committed `verified.v2` release and default seed 42, the original synthetic Providence scenario retained simulation ID `43012c31790f8e039ed0` and its original accounting: 6,941 requests, 6,802 completed, 133 rejected, 6 unfinished. The optional `providence-rism-2015.v1` profile returned 6,941 generated requests, 6,939 completed, zero rejected, and two unfinished. Its playback contained 34,728 segments covering all 50 vehicles without timeline gaps. The uncompressed seven-day JSON response was 7,538,116 bytes, so rendering clients should request playback only when needed. These are hypothetical outputs from modeled spatial weights and assumed request timing, not measured Providence ride-hail or Waymo operations.
+
+## P0 baseline — 2026-09-26
 
 Verified on Windows with Python 3.12 and Node 22:
 

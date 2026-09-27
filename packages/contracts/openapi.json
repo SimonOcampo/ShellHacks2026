@@ -1336,6 +1336,109 @@
         "title": "SimulationAssumptions",
         "type": "object"
       },
+      "SimulationDemandSource": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifact Sha256"
+          },
+          "kind": {
+            "enum": [
+              "synthetic",
+              "public_model_proxy"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Limitations",
+            "type": "array"
+          },
+          "profile_id": {
+            "title": "Profile Id",
+            "type": "string"
+          },
+          "raw_sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Sha256"
+          },
+          "retrieved_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrieved At"
+          },
+          "source_geography": {
+            "title": "Source Geography",
+            "type": "string"
+          },
+          "source_name": {
+            "title": "Source Name",
+            "type": "string"
+          },
+          "source_period": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Period"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "transformation": {
+            "title": "Transformation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "profile_id",
+          "kind",
+          "source_name",
+          "source_geography",
+          "transformation",
+          "limitations"
+        ],
+        "title": "SimulationDemandSource",
+        "type": "object"
+      },
       "SimulationMetrics": {
         "additionalProperties": false,
         "properties": {
@@ -1465,6 +1568,81 @@
         "title": "SimulationMetrics",
         "type": "object"
       },
+      "SimulationPlayback": {
+        "additionalProperties": false,
+        "properties": {
+          "coordinate_system": {
+            "const": "local_miles",
+            "default": "local_miles",
+            "title": "Coordinate System",
+            "type": "string"
+          },
+          "miles_per_degree_latitude": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Miles Per Degree Latitude"
+          },
+          "miles_per_degree_longitude": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Miles Per Degree Longitude"
+          },
+          "origin_latitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Origin Latitude"
+          },
+          "origin_longitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Origin Longitude"
+          },
+          "path_geometry": {
+            "const": "straight_line",
+            "default": "straight_line",
+            "title": "Path Geometry",
+            "type": "string"
+          },
+          "segments": {
+            "items": {
+              "$ref": "#/components/schemas/VehiclePlaybackSegment"
+            },
+            "title": "Segments",
+            "type": "array"
+          }
+        },
+        "required": [
+          "segments"
+        ],
+        "title": "SimulationPlayback",
+        "type": "object"
+      },
       "SimulationRequest": {
         "additionalProperties": false,
         "properties": {
@@ -1493,12 +1671,26 @@
             "title": "Demand Multiplier",
             "type": "number"
           },
+          "demand_profile_id": {
+            "default": "synthetic-zone.v1",
+            "enum": [
+              "synthetic-zone.v1",
+              "providence-rism-2015.v1"
+            ],
+            "title": "Demand Profile Id",
+            "type": "string"
+          },
           "fleet_size": {
             "default": 50,
             "maximum": 200.0,
             "minimum": 1.0,
             "title": "Fleet Size",
             "type": "integer"
+          },
+          "include_playback": {
+            "default": false,
+            "title": "Include Playback",
+            "type": "boolean"
           },
           "price_per_mile_usd": {
             "default": 1.75,
@@ -1534,6 +1726,16 @@
           "assumptions": {
             "$ref": "#/components/schemas/SimulationAssumptions"
           },
+          "demand_source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SimulationDemandSource"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "hourly": {
             "items": {
               "$ref": "#/components/schemas/HourlyMetrics"
@@ -1543,6 +1745,16 @@
           },
           "metrics": {
             "$ref": "#/components/schemas/SimulationMetrics"
+          },
+          "playback": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SimulationPlayback"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "request": {
             "$ref": "#/components/schemas/SimulationRequest"
@@ -1572,6 +1784,73 @@
           "warnings"
         ],
         "title": "SimulationResult",
+        "type": "object"
+      },
+      "VehiclePlaybackSegment": {
+        "additionalProperties": false,
+        "properties": {
+          "end_minute": {
+            "minimum": 0.0,
+            "title": "End Minute",
+            "type": "number"
+          },
+          "from_x_miles": {
+            "title": "From X Miles",
+            "type": "number"
+          },
+          "from_y_miles": {
+            "title": "From Y Miles",
+            "type": "number"
+          },
+          "occupied": {
+            "title": "Occupied",
+            "type": "boolean"
+          },
+          "start_minute": {
+            "minimum": 0.0,
+            "title": "Start Minute",
+            "type": "number"
+          },
+          "state": {
+            "enum": [
+              "IDLE",
+              "PICKUP_TRAVEL",
+              "PICKUP_DWELL",
+              "PASSENGER_TRAVEL",
+              "DROPOFF_DWELL",
+              "DEPOT_TRAVEL",
+              "CHARGING_QUEUE",
+              "CHARGING"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "to_x_miles": {
+            "title": "To X Miles",
+            "type": "number"
+          },
+          "to_y_miles": {
+            "title": "To Y Miles",
+            "type": "number"
+          },
+          "vehicle_id": {
+            "minimum": 0.0,
+            "title": "Vehicle Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "vehicle_id",
+          "state",
+          "start_minute",
+          "end_minute",
+          "from_x_miles",
+          "from_y_miles",
+          "to_x_miles",
+          "to_y_miles",
+          "occupied"
+        ],
+        "title": "VehiclePlaybackSegment",
         "type": "object"
       },
       "VersionStamp": {

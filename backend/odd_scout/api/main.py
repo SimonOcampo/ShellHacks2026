@@ -11,9 +11,9 @@ from contracts.models import (
     Health,
     PillarWeights,
     PublicConfig,
-    ReferenceRankingRequest,
     RankingRequest,
     RankingResult,
+    ReferenceRankingRequest,
     SimulationRequest,
     SimulationResult,
 )
@@ -28,6 +28,7 @@ from odd_scout.api.limits import RequestSizeLimit
 from odd_scout.explanations.live import LiveExplanation
 from odd_scout.explanations.template import explain
 from odd_scout.simulation.engine import CapacityError, simulate
+from odd_scout.simulation.profile import load_rism_profile
 from odd_scout.store import (
     assumptions,
     default_weights,
@@ -243,11 +244,28 @@ def explanation(city_id: str, request: RankingRequest, http_request: Request):
 @app.post("/api/v1/simulations", response_model=SimulationResult)
 def simulation(request: SimulationRequest):
     get_city(request.city_id)
+    demand_profile = None
+    simulation_assumptions = assumptions(request.fleet_size)
+    if request.demand_profile_id == "providence-rism-2015.v1":
+        if request.city_id != "cbsa:39300":
+            raise HTTPException(422, "Providence demand profile requires cbsa:39300")
+        try:
+            demand_profile = load_rism_profile()
+        except (OSError, ValueError) as exc:
+            raise HTTPException(
+                503, "Providence demand profile is unavailable"
+            ) from exc
+        simulation_assumptions = simulation_assumptions.model_copy(
+            update={"profile_id": demand_profile.source.profile_id}
+        )
     if not slots.acquire(blocking=False):
         raise HTTPException(429, "Simulation capacity busy; retry shortly")
     try:
         return simulate(
-            request, assumptions(request.fleet_size), app.state.release.versions
+            request,
+            simulation_assumptions,
+            app.state.release.versions,
+            demand_profile=demand_profile,
         )
     except CapacityError as exc:
         raise HTTPException(413, str(exc)) from exc
@@ -257,6 +275,10 @@ def simulation(request: SimulationRequest):
 
 @app.post("/api/v1/waymo-reference-simulations", response_model=SimulationResult)
 def waymo_reference_simulation(request: SimulationRequest):
+    if request.demand_profile_id != "synthetic-zone.v1":
+        raise HTTPException(
+            422, "Waymo reference scenarios use the synthetic demand profile"
+        )
     release = app.state.waymo_reference_release
     if request.city_id not in {
         reference.city_id
