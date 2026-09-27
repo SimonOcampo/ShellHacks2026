@@ -221,6 +221,16 @@ class RankingRequest(DTO):
         return self
 
 
+class ReferenceRankingRequest(RankingRequest):
+    city_ids: list[str] = Field(min_length=1, max_length=20)
+
+    @model_validator(mode="after")
+    def unique_cities(self):
+        if len(set(self.city_ids)) != len(self.city_ids):
+            raise ValueError("Select unique reference city IDs")
+        return self
+
+
 class PillarScores(DTO):
     familiarity: Score | None
     readiness: Score | None

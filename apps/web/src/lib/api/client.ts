@@ -4,9 +4,11 @@ import type {
   Config,
   Ranking,
   RankingRequest,
+  ReferenceRankingRequest,
   Explanation,
   Simulation,
   SimulationRequest,
+  DataRelease,
 } from "./types";
 
 export const fixtureMode =
@@ -37,6 +39,13 @@ async function fixture<T>(name: string, signal?: AbortSignal): Promise<T> {
   return response.json() as Promise<T>;
 }
 
+async function publicJson<T>(name: string, signal?: AbortSignal): Promise<T> {
+  const response = await fetch(`/${name}.json`, { signal });
+  if (!response.ok)
+    throw new Error(`${name} is unavailable from this frontend release.`);
+  return response.json() as Promise<T>;
+}
+
 export const api = {
   cities: (signal?: AbortSignal) =>
     fixtureMode
@@ -54,6 +63,77 @@ export const api = {
     fixtureMode
       ? fixture<Ranking>("ranking", signal)
       : call<Ranking>("/api/v1/rankings", request, signal),
+  referenceRank: (request: ReferenceRankingRequest, signal?: AbortSignal) =>
+    fixtureMode
+      ? Promise.reject(new Error("Reference scores require the verified API."))
+      : call<Ranking>("/api/v1/reference-rankings", request, signal),
+  waymoReferenceRelease: (signal?: AbortSignal) =>
+    publicJson<DataRelease>("backendreference", signal),
+  waymoReferenceRanking: (signal?: AbortSignal) =>
+    publicJson<Ranking>("backendreference-ranking", signal),
+  rankWaymoReferences: (request: ReferenceRankingRequest, signal?: AbortSignal) =>
+    call<Ranking>("/api/v1/waymo-reference-rankings", request, signal),
+  explainWaymoReference: async (
+    id: string,
+    request: ReferenceRankingRequest,
+    signal?: AbortSignal,
+  ) => {
+    if (fixtureMode) {
+      const explanations = await publicJson<Record<string, Explanation>>(
+        "backendreference-explanations",
+        signal,
+      );
+      const explanation = explanations[id];
+      if (!explanation)
+        throw new Error("Reference market explanation is unavailable.");
+      return explanation;
+    }
+    return call<Explanation>(
+      `/api/v1/waymo-reference-cities/${id}/explanation`,
+      request,
+      signal,
+    );
+  },
+  simulateWaymoReference: async (
+    request: SimulationRequest,
+    signal?: AbortSignal,
+  ) => {
+    if (fixtureMode) {
+      const defaults: SimulationRequest = {
+        city_id: request.city_id,
+        fleet_size: 50,
+        days: 7,
+        demand_multiplier: 1,
+        base_fare_usd: 3,
+        price_per_mile_usd: 1.75,
+        price_per_minute_usd: 0.3,
+        seed: 42,
+      };
+      if (
+        Object.entries(defaults).some(
+          ([key, value]) =>
+            (request as Record<string, unknown>)[key] !== undefined &&
+            (request as Record<string, unknown>)[key] !== value,
+        )
+      )
+        throw new Error(
+          "Fixture replay supports default assumptions only. Use HTTP transport to recalculate.",
+        );
+      const simulations = await publicJson<Record<string, Simulation>>(
+        "backendreference-simulations",
+        signal,
+      );
+      const simulation = simulations[request.city_id];
+      if (!simulation)
+        throw new Error("Reference market simulation is unavailable.");
+      return simulation;
+    }
+    return call<Simulation>(
+      "/api/v1/waymo-reference-simulations",
+      request,
+      signal,
+    );
+  },
   explain: (id: string, request: RankingRequest, signal?: AbortSignal) =>
     fixtureMode
       ? fixture<Explanation>(`explanation-${id.replace(":", "-")}`, signal)

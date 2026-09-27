@@ -3,7 +3,7 @@ import math
 import os
 from pathlib import Path
 
-from contracts.models import DataRelease, SimulationAssumptions
+from contracts.models import DataRelease, RankingResult, SimulationAssumptions
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -25,6 +25,26 @@ def load_release():
                 "Verified demo requires at least eight complete candidates"
             )
     return release
+
+
+def load_waymo_reference_release():
+    path = ROOT / "data/releases/backendreference.json"
+    release = DataRelease.model_validate_json(path.read_text(encoding="utf-8"))
+    if release.versions.data_mode != "verified":
+        raise ValueError("Waymo reference page requires the verified release")
+    if release.versions.model_version != "ranking.v2":
+        raise ValueError("Waymo reference page requires ranking.v2")
+    if not any(
+        reference.enabled and reference.operator == "Waymo"
+        for reference in release.references
+    ):
+        raise ValueError("Waymo reference release has no enabled markets")
+    return release
+
+
+def load_waymo_reference_ranking():
+    path = ROOT / "data/releases/backendreference-ranking.json"
+    return RankingResult.model_validate_json(path.read_text(encoding="utf-8"))
 
 
 def assumptions(fleet_size=50):

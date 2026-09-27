@@ -1,0 +1,584 @@
+{
+  "cbsa:12060": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:12060",
+    "mode": "template",
+    "summary": "Atlanta, Georgia ranks #11 with a screening score of 60.2. Miami, Florida is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "Arterial share: 0.08 fraction; comparison reference 0.08.",
+      "Annual precipitation: 1,374.39 mm/year; comparison reference 1,574.29."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: zero-vehicle households, transit commute share.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "08c064ea-dec6-5282-aa1c-9391056cbe4e",
+      "0b0bba80-0602-5a9b-a92c-3a804f7ecbe8",
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "0ff5b24c-db4c-5ca4-8879-473c7f365946",
+      "144ee86f-fea5-5f0c-8321-02d5c7028032",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "19ef8a5b-b413-52f1-929f-882530de07ac",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "24925a42-6652-5c51-b9fb-80d99010885a",
+      "271645aa-a216-5699-b0ec-a5d40edb1ca9",
+      "2b92fd6d-e9b1-55f1-80af-3d16d39454b1",
+      "2c647879-e77b-5a0f-a919-892505e309a8",
+      "2eef0041-f120-5edc-877e-4fde74739ca3",
+      "3193718a-c153-5225-a6fc-f4518e9ab49c",
+      "3ce8cb6a-6dca-528e-83f3-00a1921dc707",
+      "505e08ed-6b7d-5b44-b6b6-9d3fbf9d5b63",
+      "576765d8-abab-5b29-b4a4-7bb2bc4130b0",
+      "5efebb83-c52b-5961-908b-98c8d8c48009",
+      "619c2ee7-afac-50f0-970c-bf3be3527c19",
+      "64c497f6-a8b6-5e19-a008-f4079bc3e985",
+      "7c9600a0-8c1e-52b0-9d8e-698e84de202f",
+      "964b2621-cac6-5ab9-84cc-213d64ca9508",
+      "964d3b67-9e17-50d7-9cfc-8e932af98213",
+      "98feaebd-d17e-5204-b196-af5334fff0b4",
+      "a42013ae-8263-5b94-bfef-298e45e564c8",
+      "ae531498-9e18-5cca-9555-0d4f4dddc654",
+      "b24c45ca-15cb-5084-8e99-bee425b55d19",
+      "b653c602-1c3e-57d1-9450-8301d9d8b246",
+      "b7b8dbee-5b0f-5a9b-9220-378bf257f0f9",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "bd93c53a-c59f-5dca-a244-33ac172ad08c",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "c5d05179-027c-5c4c-acbc-d4a3e75f40f3",
+      "c889f6f2-4673-555a-9af0-f746e43e8325",
+      "cae81cb5-cd6b-580b-bae6-f65d51b3e844",
+      "d6ee91f5-d592-5fa1-b920-d25baa093c65",
+      "dbd67c37-4427-52fc-a298-c114d23bd09d",
+      "dc5dec7b-1a15-5b43-893e-629ad6c6d9c7",
+      "dcce9fa5-d763-57fe-a635-51b57df12a8f",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "e990d9ed-c517-571b-936d-48f288ed3e8b",
+      "f33f73d9-745a-58d0-ae1a-45bdf3130d50",
+      "fc48c1fe-47a4-5a4b-aa24-06b35c12c84d",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:12420": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:12420",
+    "mode": "template",
+    "summary": "Austin, Texas ranks #9 with a screening score of 61.5. San Antonio, Texas is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "County charging coverage contributes 30.0 points to readiness.",
+      "Local road share: 0.91 fraction; comparison reference 0.91."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: zero-vehicle households, transit commute share.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "11c229f0-ee9b-5668-8a49-fa7b3327af4b",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "29afbbc3-a74a-53e4-b6c1-9b1b46b84721",
+      "2c9470d8-ed1e-501f-8695-a0e9aa51fa8d",
+      "2ca44ba3-83db-5f16-be86-a9eb9cb1ef6a",
+      "3e29233d-58df-5d1e-93e8-40aedb99a89e",
+      "449d21e4-fbc6-59cb-8acb-7afa566902f6",
+      "4e99e8b0-3ed8-53dd-938c-05df23a2c538",
+      "52a32978-e6be-5527-bce0-fe0762884216",
+      "7c87bd2a-0190-5a20-b95c-679e33ea31ec",
+      "7e8226ab-c7cb-5baa-869b-5fcb8ac43c90",
+      "841f5c9e-2126-5b94-bbb6-e9d4e91ec993",
+      "a6ef92cc-4283-5976-9a11-e1d7999b9bf9",
+      "b9e2a0cf-0b50-5fe2-8fdf-22e4f3909ae9",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "c2ee035e-7400-5b21-bb14-0a61aeb82565",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "f8775df5-f237-5378-a000-669e0d7fbb14",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:19100": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:19100",
+    "mode": "template",
+    "summary": "Dallas, Texas ranks #7 with a screening score of 63.3. Austin, Texas is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "County charging coverage contributes 30.0 points to readiness.",
+      "Arterial share: 0.04 fraction; comparison reference 0.04."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: transit commute share, zero-vehicle households.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "15aafa6b-0273-5e51-9346-8654e414455f",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "28ba14e3-2e3d-5c79-8a56-2b5eda8ce703",
+      "2f2d905b-da5a-5a06-a271-9c54b3e75878",
+      "4162a4f7-a159-5a37-ae2c-3f617300e1cc",
+      "4c4b0e6e-965d-5414-880a-0ceab6522430",
+      "55afebe4-3a72-55d0-a4b8-dc0d6048690d",
+      "64bf64df-dc69-59e9-b97c-eb8e5fd02b8e",
+      "85a1e2ce-d190-59d7-9949-1cd135bb1980",
+      "86c54dd5-9d9d-5437-9943-049c9cf75af8",
+      "91fac6ad-11cc-58bf-b034-afb7f237a34b",
+      "ababd2ce-b56e-583b-a817-d76e5997dc99",
+      "b5e0f197-3708-581f-b2f4-34e7c14ce0fb",
+      "b6107237-94a6-5000-ac13-c26c612a5392",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "cce928f2-8f15-525f-8d48-feb16be68319",
+      "d471bd09-c84a-53ac-abfc-3df561eb3f54",
+      "d4bfdc59-1e0f-5b14-9ace-6bba1614b242",
+      "de02027a-aebb-5afe-a404-8a911fe08ace",
+      "e49873e5-4b06-5a51-a3d1-8e17e91edfd6",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "f9765a9c-545e-5d00-ad77-c4b6b731468e",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:19740": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:19740",
+    "mode": "template",
+    "summary": "Denver, Colorado ranks #12 with a screening score of 58.1. San Diego, California is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "Arterial share: 0.05 fraction; comparison reference 0.05.",
+      "Annual precipitation: 447.04 mm/year; comparison reference 621.79."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: zero-vehicle households, transit commute share.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "12227bd6-a7c9-5fdc-815a-8d4174219850",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "16aa424c-71ab-512b-82cf-9c74c9743338",
+      "1a84a1df-5c36-50da-8e10-9ec06e524557",
+      "1c7beae6-b386-5cc1-90b3-257526cdf5e7",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "2cf393c7-00f2-5139-9d89-5b4ba8c4d544",
+      "47a4c235-5678-5f67-bbb6-1f0850efa00d",
+      "6256874b-4ed7-5aef-8604-6ac7924f56a4",
+      "711067a7-00ce-58f1-9fda-5f8cc8fb0e88",
+      "711ac62d-419d-5c2d-8221-f6d20d6275cb",
+      "7182b0b0-73ad-534f-8765-9eac63ca2b63",
+      "862513cd-1cab-556f-afbd-946bf5ed8fda",
+      "89dc3efc-7e7b-5ba1-bddc-2952cc238252",
+      "9d018b3d-6a62-5f59-809e-b9b36c3f3130",
+      "a1c0911c-66ac-5284-901f-a4acf7178ca9",
+      "a48a0e76-b954-534d-b8e8-67c1af0b2ffc",
+      "b5045887-9eeb-54c7-a336-9e9bccafc7c7",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "bd733820-4fdc-572e-ba1e-c9f494fd5e2c",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "c603c407-7646-5131-b869-61412b27e10c",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:26420": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:26420",
+    "mode": "template",
+    "summary": "Houston, Texas ranks #6 with a screening score of 64.1. Orlando, Florida is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "Annual snowfall: 0.00 mm/year; comparison reference 0.00.",
+      "Road density: 3.03 km/km2; comparison reference 3.05."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: transit commute share, zero-vehicle households.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "11cffa08-4b10-5b6b-8331-235a030202ba",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "19e16477-29ca-5b45-a925-c90163dc5d2f",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "23c389b5-e43c-57f6-8735-04af4c942f99",
+      "2cc9a7fd-55a0-5b7c-aee9-34442b542070",
+      "329ed801-4785-5b93-8cea-60f3ab25d9d7",
+      "35bb50bd-e859-5f85-b821-d057753aacf0",
+      "4421f323-89cb-5596-840f-2f43edec05db",
+      "5235986a-c882-5e35-a23b-b3b372889fac",
+      "52397a22-30b8-5946-9c16-9bd511bb94bc",
+      "5398d8d1-05a0-51d2-830b-453a6b1f8c06",
+      "5e3e9a1d-f15e-5e3d-abcc-a8ce0abbacb5",
+      "74ebeaf4-afb3-5c78-b628-f2f8f7bb54b0",
+      "9e6c7e41-63de-57c5-bce7-0066c31d27ee",
+      "9f1d8ca5-2898-5b3b-a2dd-38fa80fa4e44",
+      "b4c0c4d2-41e5-5963-ad63-d71efbc6f77f",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "d424030d-16b9-533e-9b27-4d5cafb493c0",
+      "de9d0302-315e-53de-9743-a14fbc492467",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "e76a8387-2c82-5abb-9ab6-82c5709a343c",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:29820": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:29820",
+    "mode": "template",
+    "summary": "Las Vegas, Nevada ranks #10 with a screening score of 61.0. Phoenix, Arizona is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "County charging coverage contributes 30.0 points to readiness.",
+      "Intersection density: 2.65 intersections/km2; comparison reference 4.02."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: transit commute share, population density.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "10f1bf1a-253f-54ff-b167-6ff3d09c02b9",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "3c3e2f8f-2ce5-58c0-9980-a84ec871d774",
+      "4d91e783-c069-51a0-8a00-46301ac391a8",
+      "57e66dd2-8eca-53ee-932d-643ca1e071ba",
+      "9339a890-e526-55b1-9921-033ace504393",
+      "995ca088-4602-5586-aa21-a794d8f310af",
+      "a1703b59-fafb-5c21-98e9-297806d01bb2",
+      "a18688e8-8851-5772-859a-384ba5dffa3e",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "cfae2bc2-c7ce-56c3-9423-cde0841ff8df",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:31080": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:31080",
+    "mode": "template",
+    "summary": "Los Angeles, California ranks #2 with a screening score of 82.9. San Francisco Bay Area, California is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "County charging coverage contributes 30.0 points to readiness.",
+      "Population density contributes 25.0 points to opportunity."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: transit commute share, zero-vehicle households.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "083e961a-b2ee-54ac-809f-ff690aec9bd1",
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "24c4e925-0111-5fd9-9d6b-eed5982a3c4c",
+      "27c778a2-c183-5ffa-b9b4-40952d2d6772",
+      "46959b7e-f93b-501e-b64f-ae2fa0b1566a",
+      "55dfe9be-c25d-5454-a78d-1703f348e48d",
+      "609d2679-6ee1-5a66-ba6e-be783cdc6d69",
+      "8cb87e6e-a0f8-5799-82db-2a8eb657d2d2",
+      "9d51f853-bff9-50f4-93e0-2d1e4490d2fa",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "cd46b4fc-c2be-5aff-9dd3-d582722a2935",
+      "db105fb9-b645-5bed-b7b6-306fc45b0268",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:33100": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:33100",
+    "mode": "template",
+    "summary": "Miami, Florida ranks #3 with a screening score of 73.5. Orlando, Florida is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "County charging coverage contributes 30.0 points to readiness.",
+      "Annual snowfall: 0.00 mm/year; comparison reference 0.00."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: transit commute share, zero-vehicle households.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0af3fb56-6ed6-541c-87b6-c22b9ec687dd",
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "33658af8-c702-5d80-b9f9-329bd87b1cb7",
+      "5cdc849f-53d6-56cb-89b7-b640aa4ba7a1",
+      "6573975b-2972-5fe5-9135-c1a61b19ca11",
+      "73158877-d35f-5de4-9117-7b9e63c2ff8e",
+      "81e18d06-73eb-50a4-88dc-49e7bcfcca90",
+      "841d9b50-3554-53ab-a1ec-ebfce7520811",
+      "938916f6-ef4b-57fc-88c7-006754b58e0a",
+      "a8efb726-b412-51fe-b20b-de716f078fd5",
+      "af2fc7f2-4503-54c2-b158-f5d80d4523ae",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "c2bbb0a3-e559-5066-9b3c-b11fb5fa70d2",
+      "ded861e2-149d-576c-a0d9-aa61bee4c2c6",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "f81d657e-c7ac-57d4-ad4b-4fa4af3c5261",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:34980": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:34980",
+    "mode": "template",
+    "summary": "Nashville, Tennessee ranks #15 with a screening score of 44.4. Atlanta, Georgia is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "Annual precipitation: 1,380.49 mm/year; comparison reference 1,374.39.",
+      "Days at or above 90°F: 45.03 days/year; comparison reference 39.13."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: zero-vehicle households, transit commute share.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "0f1ff518-47b5-5958-9762-99ebb6f8b884",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "268d2c40-fe17-53b8-b0dc-dd7b34135cb5",
+      "39bf64a5-ccac-5a87-9d0d-202b892ec8a3",
+      "4a86781a-d501-5d1f-8f0c-c58334db008c",
+      "5618a212-2d32-5885-a105-b36d0ef1fee8",
+      "5de14f39-c54b-5fcb-ac2f-4dc0c147ba93",
+      "61dba32e-7435-590a-9f46-cd47f105b981",
+      "7685222f-2124-5e03-8862-c02cf15e875d",
+      "791d313c-e959-5676-957e-01a0fdb0f618",
+      "7b6bad04-2686-5d49-af3a-3e6c0a139ed8",
+      "8423af9a-e64b-5b2c-b1cc-e338b9599efc",
+      "8a9a47f7-b26c-5a7a-b6e7-d03458c6580d",
+      "8e5e9b40-6437-57e3-a065-0fe6ac22ee62",
+      "924901a7-5384-5b21-8f27-c40dc62bf4ee",
+      "94a09dac-6a38-54a9-9d86-b3e951a963e1",
+      "9c45812c-9d9a-54dc-b248-d8136168dd7f",
+      "9e07918a-45e8-58ac-89cb-af7f036862e7",
+      "ac61e6ba-2b96-5eb4-9bdc-f677ae7478eb",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "c6bac0db-4217-5ab2-9fcf-3b0fa591fad2",
+      "d3482c9c-24a2-5025-9649-964a6e10b7a9",
+      "d7011470-0ec2-5e55-98df-98b12f858a91",
+      "dff33317-b6d1-53af-884b-b0c30d147bd6",
+      "e182e5c1-3baf-5a7c-9de3-7767624bf824",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "f1ec78ee-6430-5b6f-8017-cdc30890203b",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:36740": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:36740",
+    "mode": "template",
+    "summary": "Orlando, Florida ranks #5 with a screening score of 64.7. Miami, Florida is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "County charging coverage contributes 30.0 points to readiness.",
+      "Annual snowfall: 0.00 mm/year; comparison reference 0.00."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: zero-vehicle households, transit commute share.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "12a7e705-3cd0-5769-8491-6fbd4456c975",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "247dbd36-9058-52e9-93f4-e77be7f54b97",
+      "2b06392d-2908-5bd2-bc2c-7b25b45e823d",
+      "2eca991a-70b8-5437-aae2-5440dbb8badb",
+      "6602ac71-e819-5274-af84-305eb037bd12",
+      "73d02ed4-3817-5e12-8f42-7bd527d8cf48",
+      "80eadc83-ad19-5b5f-9964-b86286eea43f",
+      "9e54f1d3-0f0d-5630-85d2-b7a5ad7afb61",
+      "a43e1c23-37c2-5567-a1de-a31bf30241b6",
+      "a7bff478-e3d5-551f-9d27-ce000cbb025e",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "ddbdb15f-82e9-54b7-a1ec-0760ec5318fe",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "f2e1ed5e-e3df-5d75-80fb-3f12c9a51c15",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:38060": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:38060",
+    "mode": "template",
+    "summary": "Phoenix, Arizona ranks #14 with a screening score of 55.2. San Antonio, Texas is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "County charging coverage contributes 30.0 points to readiness.",
+      "Annual snowfall: 0.00 mm/year; comparison reference 0.00."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: transit commute share, zero-vehicle households.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "673034b4-e804-5c02-b638-b2f50735963f",
+      "6c129f99-94eb-5a2e-9fec-f72234e680fc",
+      "7f0a70b6-8e23-50a7-9d04-6b39e8465949",
+      "9af422ff-db73-56bd-86e3-82a95627c606",
+      "a32344bb-934e-5b3e-9acf-65e22c2de662",
+      "a44cc32e-9f8c-55cf-923a-05bae318d65a",
+      "b07fdf7d-4a82-52c6-bf67-483cc990b698",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "bb5f1c3c-f8f5-51d8-8376-c98aae08f457",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "d357e764-a4e2-5dfd-8d06-c87e95ba06c0",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "f4dbf9ec-59e0-5ef8-ad70-88b4f3e6ed80",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:41700": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:41700",
+    "mode": "template",
+    "summary": "San Antonio, Texas ranks #13 with a screening score of 56.9. Austin, Texas is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "Local road share: 0.91 fraction; comparison reference 0.91.",
+      "Arterial share: 0.05 fraction; comparison reference 0.04."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: transit commute share, zero-vehicle households.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "1f30a61c-7bb7-55ec-af9e-7994ebf4ca0c",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "4072bb7b-88b9-5dbf-af20-ef1e957727a0",
+      "4465017b-d99b-520a-8bdb-1ce37682cacc",
+      "4482e25b-041b-5c01-9e72-1220da299e6d",
+      "4f7b862d-cddf-594d-9451-c27b26ad192c",
+      "524516d9-b790-57cd-bb95-a0811a82952b",
+      "760779ae-3623-54eb-bc53-be669de3cdc5",
+      "96247cd3-065f-5bd7-a02a-2164f8b1dc47",
+      "ac14c7cb-4acb-5982-9036-333471b42dac",
+      "accd9fcd-9f99-50c4-b585-dcc78821ce65",
+      "afd75e78-9dd1-5f24-88da-0c6e3f99b95f",
+      "b0873dd0-c79a-553a-861d-57f1dc5fbed6",
+      "b2e8d20d-87fa-5575-8875-c42471ba3e4d",
+      "ba036a5c-cb2e-5072-9f60-d37253ee1a2e",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "c2cf619c-2d34-5465-a8f2-44d5a9dbde36",
+      "cd4003b5-0912-51d3-adb7-8184c502d775",
+      "cf9c9d1d-78cf-532e-8a03-6acf25e22ec3",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "f619d8d1-8ff9-5d02-8f5d-0ad070a731c5",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:41740": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:41740",
+    "mode": "template",
+    "summary": "San Diego, California ranks #4 with a screening score of 65.8. Denver, Colorado is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "County charging coverage contributes 30.0 points to readiness.",
+      "Arterial share: 0.05 fraction; comparison reference 0.05."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: zero-vehicle households, transit commute share.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "2e561fbd-2c14-5e6e-8cb0-6dacb98726e4",
+      "65c7147e-e154-5189-8c81-31f0a2a172a4",
+      "ad31f204-09b7-51fe-9935-88dfd4b470a8",
+      "b316701f-ed27-5524-adab-6f5f90e348a5",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "d6ba7521-507a-543e-9d23-866e2b47e25e",
+      "de2d07c3-c1df-527a-95b1-35d051efebd8",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "e77475c6-9288-5dc3-8c79-604690fb832c",
+      "efbaf134-86cf-5c63-aee8-3cc9d652045d",
+      "f3ba270e-fdcd-562c-ae98-46406512533a",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:41860": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:41860",
+    "mode": "template",
+    "summary": "San Francisco Bay Area, California ranks #1 with a screening score of 90.3. Los Angeles, California is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "Zero-vehicle households contributes 30.0 points to opportunity.",
+      "Transit commute share contributes 15.0 points to opportunity."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: resident population, population density.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "01356031-5efa-5028-a150-241367f3c305",
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "4344d14e-e552-561e-92b0-0059cdf51d0f",
+      "451c030b-9bdb-5e07-b002-963a4144c405",
+      "4bdcc367-7a9e-5cc4-ac96-2d1559463604",
+      "62171067-4d5a-5291-af90-9340e48430e5",
+      "7c359b8a-1df8-5331-b2b0-2e9b8c6ec849",
+      "8054da7d-3c6f-58f0-8258-290649ae98e7",
+      "a36a2d9a-bfd5-59a4-9a9a-c93578693e70",
+      "afe5977f-c09a-5536-9d6b-868a5bcba386",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "c3690397-243f-56f8-ab52-f8a497c51bc9",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "ea509e73-f0fc-5d27-8c28-cc78d198d13d",
+      "ed687083-fbba-5d49-ad55-981e8e128367",
+      "fdf7c0d9-aadb-599f-a7d4-5d95164625dc",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  },
+  "cbsa:45300": {
+    "ranking_id": "71f044a1cedf8c2e8246",
+    "city_id": "cbsa:45300",
+    "mode": "template",
+    "summary": "Tampa, Florida ranks #8 with a screening score of 62.1. Houston, Texas is the nearest selected reference across climate and commuting proxies. Applied weights: familiarity 40%, readiness 20%, opportunity 40%.",
+    "advantages": [
+      "County charging coverage contributes 30.0 points to readiness.",
+      "Annual snowfall: 0.00 mm/year; comparison reference 0.00."
+    ],
+    "tradeoffs": [
+      "Lower relative factors: transit commute share, zero-vehicle households.",
+      "Public charging does not establish secured fleet capacity. Regulatory review remains separate; this is not a safety or approval assessment."
+    ],
+    "evidence_ids": [
+      "0c1897ce-4edb-5327-87f8-ec462b84a7fd",
+      "15420067-b475-5d59-a16c-7148fb9adc5b",
+      "238b7854-dd37-55ed-9875-1b6f0c682f45",
+      "2829a838-2cd1-5487-9653-096346ab52dc",
+      "3cb06a79-42f8-5382-a47c-d2697a98c21d",
+      "482a0fc8-0f23-56d4-a4ef-4ea1435d6e36",
+      "6e33419d-23b6-5031-982e-5e5414600641",
+      "7ababbde-ee3a-58b3-bcaa-90a44bbda543",
+      "7ddd9401-1a3c-5644-a163-4117b9161fdb",
+      "9b257bf1-5f30-53c0-a3b4-ceccc4c13898",
+      "9b7f5759-66a2-587e-8e6e-e6875595bdba",
+      "a3af3344-1f0f-5e96-8421-cd58c96813ba",
+      "ba1b02a1-e74c-5be3-8b36-c67bb4204afd",
+      "c243eb39-7dbd-546d-ae04-797471af1fe5",
+      "d0692913-5c31-5b25-ac8d-1b1a2c17b26d",
+      "d0dbed0f-3a94-51b3-86be-63a19288cce6",
+      "d456b94a-26cb-55f9-9b5d-db75f87320a4",
+      "e549ddf1-21fe-5a03-aa64-45e37d02db01",
+      "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+    ]
+  }
+}

@@ -11,6 +11,7 @@ from contracts.models import (
     Health,
     PillarWeights,
     PublicConfig,
+    ReferenceRankingRequest,
     RankingRequest,
     RankingResult,
     SimulationRequest,
@@ -20,19 +21,27 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from odd_ranking.engine import rank
+from odd_ranking.engine import rank, rank_reference_cities
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from odd_scout.api.limits import RequestSizeLimit
 from odd_scout.explanations.live import LiveExplanation
 from odd_scout.explanations.template import explain
 from odd_scout.simulation.engine import CapacityError, simulate
-from odd_scout.store import assumptions, default_weights, load_release
+from odd_scout.store import (
+    assumptions,
+    default_weights,
+    load_release,
+    load_waymo_reference_ranking,
+    load_waymo_reference_release,
+)
 
 
 @asynccontextmanager
 async def lifespan(app):
     app.state.release = load_release()
+    app.state.waymo_reference_release = load_waymo_reference_release()
+    app.state.waymo_reference_ranking = load_waymo_reference_ranking()
     app.state.live_explanations = LiveExplanation()
     yield
 
@@ -160,6 +169,60 @@ def rankings(request: RankingRequest):
     return calculate_ranking(request)
 
 
+@app.post("/api/v1/reference-rankings", response_model=RankingResult)
+def reference_rankings(request: ReferenceRankingRequest):
+    try:
+        if "weights" not in request.model_fields_set:
+            request = request.model_copy(
+                update={"weights": PillarWeights(**default_weights())}
+            )
+        return rank_reference_cities(app.state.release, request, request.city_ids)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+
+@app.post("/api/v1/waymo-reference-rankings", response_model=RankingResult)
+def waymo_reference_rankings(request: ReferenceRankingRequest):
+    try:
+        if "weights" not in request.model_fields_set:
+            request = request.model_copy(
+                update={"weights": PillarWeights(**default_weights())}
+            )
+        return rank_reference_cities(
+            app.state.waymo_reference_release, request, request.city_ids
+        )
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+
+@app.post(
+    "/api/v1/waymo-reference-cities/{city_id}/explanation",
+    response_model=Explanation,
+)
+def waymo_reference_explanation(
+    city_id: str, request: ReferenceRankingRequest, http_request: Request
+):
+    release = app.state.waymo_reference_release
+    if city_id not in {city.city_id for city in release.cities}:
+        raise HTTPException(404, "Unknown reference market ID")
+    try:
+        if "weights" not in request.model_fields_set:
+            request = request.model_copy(
+                update={"weights": PillarWeights(**default_weights())}
+            )
+        ranking = rank_reference_cities(release, request, request.city_ids)
+        template = explain(release, ranking, city_id)
+        return app.state.live_explanations.explain(
+            release,
+            ranking,
+            city_id,
+            template,
+            http_request.client.host if http_request.client else "unknown",
+        )
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+
 @app.post("/api/v1/cities/{city_id}/explanation", response_model=Explanation)
 def explanation(city_id: str, request: RankingRequest, http_request: Request):
     get_city(city_id)
@@ -186,6 +249,25 @@ def simulation(request: SimulationRequest):
         return simulate(
             request, assumptions(request.fleet_size), app.state.release.versions
         )
+    except CapacityError as exc:
+        raise HTTPException(413, str(exc)) from exc
+    finally:
+        slots.release()
+
+
+@app.post("/api/v1/waymo-reference-simulations", response_model=SimulationResult)
+def waymo_reference_simulation(request: SimulationRequest):
+    release = app.state.waymo_reference_release
+    if request.city_id not in {
+        reference.city_id
+        for reference in release.references
+        if reference.enabled and reference.operator == "Waymo"
+    }:
+        raise HTTPException(404, "Unknown Waymo reference market ID")
+    if not slots.acquire(blocking=False):
+        raise HTTPException(429, "Simulation capacity busy; retry shortly")
+    try:
+        return simulate(request, assumptions(request.fleet_size), release.versions)
     except CapacityError as exc:
         raise HTTPException(413, str(exc)) from exc
     finally:

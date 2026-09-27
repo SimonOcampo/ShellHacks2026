@@ -2,7 +2,7 @@ import math
 
 import pytest
 from contracts.models import PillarWeights, RankingRequest
-from odd_ranking.engine import rank
+from odd_ranking.engine import rank, rank_reference_cities
 from pydantic import ValidationError
 
 
@@ -151,3 +151,21 @@ def test_constant_pillar_and_self_reference(release):
         any("No discriminating" in reason for reason in c.exclusion_reasons)
         for c in result.unranked
     )
+
+
+def test_reference_comparison_reuses_pillars_without_changing_candidate_ranking(release):
+    city_ids = [reference.city_id for reference in release.references[:3]]
+    candidates = rank(release, RankingRequest())
+    comparison = rank_reference_cities(release, RankingRequest(), city_ids)
+    assert {score.city_id for score in comparison.ranked} == set(city_ids)
+    assert [score.rank for score in comparison.ranked] == [1, 2, 3]
+    assert all(
+        match.reference_id != reference.id
+        for score in comparison.ranked
+        for match in score.reference_matches
+        for reference in release.references
+        if reference.city_id == score.city_id
+    )
+    assert rank(release, RankingRequest()) == candidates
+    with pytest.raises(ValueError, match="reference city IDs"):
+        rank_reference_cities(release, RankingRequest(), [release.candidate_ids[0]])

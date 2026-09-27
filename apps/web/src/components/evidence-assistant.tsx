@@ -135,7 +135,7 @@ export default function EvidenceAssistant({
             <Sparkles size={13} />
           </span>
           <div>
-            <span className="assistant-speaker">ODD Scout analyst</span>
+            <span className="assistant-speaker">ODDyssey analyst</span>
             <p>
               {loading
                 ? "Loading the city evidence…"
@@ -161,7 +161,7 @@ export default function EvidenceAssistant({
             )}
             <div>
               <span className="assistant-speaker">
-                {message.role === "user" ? "You" : "ODD Scout analyst"}
+                {message.role === "user" ? "You" : "ODDyssey analyst"}
               </span>
               <p>{message.text}</p>
               {message.evidence?.length ? (

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -31,6 +31,7 @@ import { api, fixtureMode } from "@/lib/api/client";
 import type { Simulation, SimulationRequest } from "@/lib/api/types";
 import { Button } from "./ui/button";
 import { SimulationMapbox } from "./mapbox-map";
+import { citySkyline } from "@/lib/city-photos";
 
 const defaults = {
   fleet_size: 50,
@@ -40,6 +41,11 @@ const defaults = {
   price_per_mile_usd: 1.75,
   price_per_minute_usd: 0.3,
   seed: 42,
+};
+const skylinePhotos: Record<string, string> = {
+  Nashville: "/nashville-skyline.jpg",
+  Charlotte: "/charlotte-skyline.jpg",
+  Tampa: "/tampa-skyline.jpg",
 };
 const number = (n: number | undefined, digits = 0) =>
   n == null
@@ -56,28 +62,36 @@ const chartCurrencyTick = (value: unknown) => {
     ? `$${(value / 1000).toLocaleString(undefined, { maximumFractionDigits: 1 })}k`
     : chartValue(value, "$");
 };
-const chartAxisTick = { fontSize: 9, fill: "#c2d0c8" };
+const chartAxisTick = { fontSize: 10, fill: "#63707b" };
 export default function Scenario({
   cityId,
   cityName,
   latitude,
   longitude,
   onBack,
+  referenceMode,
 }: {
   cityId: string;
   cityName: string;
   latitude: number;
   longitude: number;
   onBack: () => void;
+  referenceMode: boolean;
 }) {
   const [inputs, setInputs] = useState(defaults);
   const [result, setResult] = useState<Simulation>();
+  const [previousResult, setPreviousResult] = useState<Simulation>();
+  const lastResult = useRef<Simulation | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [retry, setRetry] = useState(0);
   const [hour, setHour] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const skyline =
+    citySkyline(cityId) ??
+    Object.entries(skylinePhotos).find(([name]) => cityName.includes(name))?.[1];
+  useEffect(() => setPreviousResult(undefined), [cityId]);
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updatePreference = () => setReducedMotion(preference.matches);
@@ -94,13 +108,19 @@ export default function Scenario({
     setError("");
     const timer = setTimeout(
       () =>
-        api
-          .simulate(
-            { city_id: cityId, ...inputs } as SimulationRequest,
-            controller.signal,
-          )
+        (referenceMode ? api.simulateWaymoReference : api.simulate)(
+          { city_id: cityId, ...inputs } as SimulationRequest,
+          controller.signal,
+        )
           .then((r) => {
             if (!controller.signal.aborted) {
+              const earlier = lastResult.current;
+              if (
+                earlier?.request.city_id === r.request.city_id &&
+                JSON.stringify(earlier.request) !== JSON.stringify(r.request)
+              )
+                setPreviousResult(earlier);
+              lastResult.current = r;
               setResult(r);
               setHour(0);
               setPlaying(false);
@@ -118,7 +138,7 @@ export default function Scenario({
       clearTimeout(timer);
       controller.abort();
     };
-  }, [cityId, inputs, retry]);
+  }, [cityId, inputs, retry, referenceMode]);
   useEffect(() => {
     if (!playing || !result || reducedMotion) return;
     const interval = setInterval(
@@ -152,13 +172,13 @@ export default function Scenario({
   ];
   const tooltip = {
     contentStyle: {
-      background: "#152426",
-      border: "1px solid #334749",
+      background: "#ffffff",
+      border: "1px solid #e1e7e4",
       borderRadius: 8,
-      color: "#e8efea",
+      color: "#1f2933",
     },
-    labelStyle: { color: "#a4b5b0" },
-    cursor: { stroke: "#a4b5b0", strokeDasharray: "3 4" },
+    labelStyle: { color: "#63707b" },
+    cursor: { stroke: "#9cabb7", strokeDasharray: "3 4" },
   };
   return (
     <section className="scenario">
@@ -170,14 +190,25 @@ export default function Scenario({
           FLEET OPERATIONS · NOT AUTONOMOUS DRIVING
         </span>
       </div>
+      <div className="scenario-photo-banner">
+        <img
+          src={skyline ?? "/nashville-skyline.jpg"}
+          alt={`${skyline ? cityName : "Nashville"} skyline, illustrative city context`}
+        />
+        <span>
+          {skyline
+            ? cityName.toUpperCase()
+            : `ILLUSTRATIVE NASHVILLE SKYLINE · ${cityName.toUpperCase()} SCENARIO`}{" "}
+          · HYPOTHETICAL FLEET
+        </span>
+      </div>
       <div className="scenario-grid">
         <aside className="panel scenario-controls">
-          <span className="eyebrow">SCENARIO PARAMETERS</span>
-          <h2>{cityName}</h2>
+          <span className="eyebrow">SCENARIO BUILDER</span>
+          <h2>Build your fleet</h2>
           <p>
-            One hypothetical service zone.
-            <br />
-            Every assumption is adjustable or disclosed.
+            {cityName} · One hypothetical service zone.
+            <br /> Every assumption is adjustable or disclosed.
           </p>
           <div className="controls-divider" />
           <h3>
@@ -243,6 +274,12 @@ export default function Scenario({
           <Button variant="outline" onClick={() => setInputs(defaults)}>
             Reset assumptions
           </Button>
+          <Button
+            onClick={() => setRetry((value) => value + 1)}
+            disabled={busy}
+          >
+            Run simulation <ArrowRight size={15} />
+          </Button>
           <div className="assumption-note">
             <i className="dot amber" />
             <p>
@@ -264,7 +301,10 @@ export default function Scenario({
             seed={inputs.seed}
           />
         </div>
-        <aside className="panel scenario-live-panel" aria-label="Selected simulation hour">
+        <aside
+          className="panel scenario-live-panel"
+          aria-label="Selected simulation hour"
+        >
           <div className="scenario-live-heading">
             <span className="eyebrow">LIVE SIMULATION</span>
             <h3>
@@ -309,475 +349,537 @@ export default function Scenario({
             <strong>
               {Math.min(inputs.fleet_size, 60)} <small>vehicle samples</small>
             </strong>
-            <p>Illustrative markers change color through idle, pickup, and dropoff states.</p>
+            <p>
+              Illustrative markers change color through idle, pickup, and
+              dropoff states.
+            </p>
           </div>
         </aside>
       </div>
       <div className="scenario-results" aria-busy={busy}>
-          <div className="results-heading">
-            <div>
-              <span className="eyebrow">03 / HYPOTHETICAL LAUNCH</span>
-              <h2>
-                {result?.request.days ?? inputs.days} days. One operating
-                scenario.
-              </h2>
-            </div>
-            <span className="status-pill" role="status" aria-live="polite">
-              {busy ? (
-                <>
-                  <LoaderCircle size={12} className="spin" aria-hidden="true" />{" "}
-                  UPDATING…
-                </>
-              ) : (
-                <>
-                  <i className="dot teal" /> SEEDED & REPRODUCIBLE
-                </>
-              )}
-            </span>
+        <div className="results-heading">
+          <div>
+            <span className="eyebrow">03 / HYPOTHETICAL LAUNCH</span>
+            <h2>
+              {result?.request.days ?? inputs.days} days. One operating
+              scenario.
+            </h2>
           </div>
-          {error && (
-            <div className="error" role="alert">
-              {error}
-              {result && <span>Showing the last successful scenario.</span>}
-              <Button onClick={() => setRetry((x) => x + 1)}>Retry</Button>
-            </div>
-          )}
-          {busy && result && (
-            <p className="async-note" role="status" aria-live="polite">
-              Showing the last successful scenario while updated inputs run.
-            </p>
-          )}
-          {!result ? (
-            error ? (
-              <div className="empty async-empty" role="status">
-                Scenario results are unavailable. Retry to run this scenario
-                again.
-              </div>
+          <span className="status-pill" role="status" aria-live="polite">
+            {busy ? (
+              <>
+                <LoaderCircle size={12} className="spin" aria-hidden="true" />{" "}
+                UPDATING…
+              </>
             ) : (
-              <div className="loading" role="status" aria-live="polite">
-                <LoaderCircle className="spin" aria-hidden="true" /> Running
-                fleet operations…
-              </div>
-            )
+              <>
+                <i className="dot teal" /> SEEDED & REPRODUCIBLE
+              </>
+            )}
+          </span>
+        </div>
+        {error && (
+          <div className="error" role="alert">
+            {error}
+            {result && <span>Showing the last successful scenario.</span>}
+            <Button onClick={() => setRetry((x) => x + 1)}>Retry</Button>
+          </div>
+        )}
+        {busy && result && (
+          <p className="async-note" role="status" aria-live="polite">
+            Showing the last successful scenario while updated inputs run.
+          </p>
+        )}
+        {!result ? (
+          error ? (
+            <div className="empty async-empty" role="status">
+              Scenario results are unavailable. Retry to run this scenario
+              again.
+            </div>
           ) : (
-            <>
-              <div className="kpi-grid">
-                <Metric
-                  icon={<Users size={18} />}
-                  label="RIDES COMPLETED"
-                  value={number(metrics?.rides_completed)}
-                  note={`${number(metrics?.total_requests)} requests generated`}
-                />
-                <Metric
-                  icon={<Clock3 size={18} />}
-                  label="AVERAGE WAIT"
-                  value={
-                    metrics?.average_wait_minutes == null
-                      ? "N/A"
-                      : `${number(metrics.average_wait_minutes, 1)} min`
-                  }
-                  note={`p95 ${metrics?.p95_wait_minutes == null ? "N/A" : number(metrics.p95_wait_minutes, 1) + " min"} · completed rides`}
-                />
-                <Metric
-                  icon={<CarFront size={18} />}
-                  label="FLEET UTILIZATION"
-                  value={`${number(metrics?.utilization_pct, 1)}%`}
-                  note="Pickup + passenger service time"
-                />
-                <Metric
-                  icon={<CarFront size={18} />}
-                  label="PASSENGER UTILIZATION"
-                  value={`${number(metrics?.passenger_utilization_pct, 1)}%`}
-                  note="Passenger travel + dropoff dwell"
-                />
-                <Metric
-                  icon={<Route size={18} />}
-                  label="EMPTY-MILE SHARE"
-                  value={
-                    metrics?.empty_mile_pct == null
-                      ? "N/A"
-                      : `${number(metrics.empty_mile_pct, 1)}%`
-                  }
-                  note="Empty miles / total miles"
-                />
-                <Metric
-                  icon={<BatteryCharging size={18} />}
-                  label="CHARGING VEHICLE-HOURS"
-                  value={number(metrics?.charging_vehicle_hours, 1)}
-                  note="Summed vehicle time; queue separate"
-                />
-                <Metric
-                  icon={<DollarSign size={18} />}
-                  label="SIMULATED GROSS REVENUE"
-                  value={`$${number(metrics?.gross_revenue_usd)}`}
-                  note="Costs excluded; not profit"
-                  accent
-                />
-                <Metric
-                  icon={<DollarSign size={18} />}
-                  label="REVENUE PER VEHICLE"
-                  value={`$${number(metrics?.revenue_per_vehicle_usd)}`}
-                  note="Gross revenue / vehicles"
-                  accent
-                />
-              </div>
-              {result.hourly.length === 0 ? (
-                <p className="empty async-empty" role="status">
-                  No hourly simulation records were returned. Timeline and
-                  charts are unavailable for this result.
-                </p>
-              ) : (
-                <>
-                  <section className="panel playback">
-                    <div>
-                      <span className="eyebrow">WEEK IN MOTION</span>
-                      <h3>
-                        Day {Math.floor(hour / 24) + 1}{" "}
-                        <span>/ {String(hour % 24).padStart(2, "0")}:00</span>
-                      </h3>
-                    </div>
-                    <Button
-                      variant="outline"
-                      aria-label={
-                        reducedMotion
-                          ? "Automatic playback disabled by reduced-motion preference"
-                          : playing
-                            ? "Pause playback"
-                            : "Play playback"
-                      }
-                      disabled={reducedMotion}
-                      onClick={() => setPlaying(!playing)}
-                    >
-                      {playing ? <Pause size={14} /> : <Play size={14} />}
-                    </Button>
-                    <label className="playback-slider">
-                      <span className="sr-only">Playback hour</span>
-                      <input
-                        type="range"
-                        min="0"
-                        max={result.hourly.length - 1}
-                        value={hour}
-                        onChange={(e) => {
-                          setPlaying(false);
-                          setHour(Number(e.target.value));
-                        }}
-                      />
-                    </label>
-                    <span className="playback-stat">
-                      {current?.completed_rides}
-                      <small>rides this hour</small>
-                    </span>
-                    <span className="playback-stat">
-                      {number(current?.utilization_pct, 0)}%
-                      <small>utilization</small>
-                    </span>
-                  </section>
-                  {reducedMotion && (
-                    <p className="async-note reduced-motion-note" role="status">
-                      Auto-play is off; use the hour slider to move through the
-                      results.
-                    </p>
-                  )}
-                  <div className="charts-grid">
-                    <ChartPanel
-                      title="Hourly requests vs. completed rides"
-                      subtitle="Returned counts for each simulated hour"
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart
-                          data={chart}
-                          syncId="simulation-hours"
-                          accessibilityLayer
-                        >
-                          <defs>
-                            <linearGradient
-                              id="rides-fill"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
-                            >
-                              <stop stopColor="#5bddbe" stopOpacity={0.35} />
-                              <stop
-                                offset="1"
-                                stopColor="#5bddbe"
-                                stopOpacity={0}
-                              />
-                            </linearGradient>
-                          </defs>
-                          <CartesianGrid vertical={false} stroke="#334748" />
-                          <XAxis
-                            dataKey="label"
-                            minTickGap={80}
-                            tick={chartAxisTick}
-                          />
-                          <YAxis
-                            tick={chartAxisTick}
-                            width={42}
-                            tickFormatter={(value) => chartValue(value)}
-                          />
-                          <Tooltip
-                            {...tooltip}
-                            formatter={(value, name) => [
-                              chartValue(value),
-                              name,
-                            ]}
-                          />
-                          {chart[hour] && (
-                            <ReferenceLine
-                              x={chart[hour].label}
-                              stroke="#71e2c3"
-                              strokeDasharray="3 4"
-                            />
-                          )}
-                          <Area
-                            name="Requests"
-                            dataKey="requests"
-                            stroke="#b8a783"
-                            fill="transparent"
-                            strokeDasharray="4 4"
-                            isAnimationActive={false}
-                          />
-                          <Legend
-                            verticalAlign="top"
-                            height={28}
-                            wrapperStyle={{ fontSize: 10, color: "#e6ede7" }}
-                          />
-                          <Area
-                            name="Completed rides"
-                            dataKey="completed_rides"
-                            stroke="#5bddbe"
-                            fill="url(#rides-fill)"
-                            isAnimationActive={false}
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </ChartPanel>
-                    <ChartPanel
-                      title="Cumulative gross revenue"
-                      subtitle="Simulated fares · USD · costs excluded"
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart
-                          data={chart}
-                          syncId="simulation-hours"
-                          accessibilityLayer
-                        >
-                          <CartesianGrid vertical={false} stroke="#334748" />
-                          <XAxis
-                            dataKey="label"
-                            minTickGap={90}
-                            tick={chartAxisTick}
-                          />
-                          <YAxis
-                            tick={chartAxisTick}
-                            width={52}
-                            tickFormatter={chartCurrencyTick}
-                          />
-                          <Tooltip
-                            {...tooltip}
-                            formatter={(value) => [
-                              chartValue(value, "$"),
-                              "Cumulative gross revenue",
-                            ]}
-                          />
-                          {chart[hour] && (
-                            <ReferenceLine
-                              x={chart[hour].label}
-                              stroke="#71e2c3"
-                              strokeDasharray="3 4"
-                            />
-                          )}
-                          <Area
-                            name="Gross revenue"
-                            dataKey="cumulative_revenue"
-                            stroke="#d6bd83"
-                            fill="#d6bd8312"
-                            isAnimationActive={false}
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </ChartPanel>
-                    <ChartPanel
-                      title="Fleet utilization"
-                      subtitle="Hourly share of total vehicle time in service"
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart
-                          data={chart}
-                          syncId="simulation-hours"
-                          accessibilityLayer
-                        >
-                          <CartesianGrid vertical={false} stroke="#334748" />
-                          <XAxis
-                            dataKey="label"
-                            minTickGap={90}
-                            tick={chartAxisTick}
-                          />
-                          <YAxis
-                            domain={[0, 100]}
-                            tick={chartAxisTick}
-                            width={42}
-                            tickFormatter={(value) =>
-                              chartValue(value, "", 0) + "%"
-                            }
-                          />
-                          <Tooltip
-                            {...tooltip}
-                            formatter={(value) => [
-                              chartValue(value, "%", 1),
-                              "Utilization",
-                            ]}
-                          />
-                          {chart[hour] && (
-                            <ReferenceLine
-                              x={chart[hour].label}
-                              stroke="#71e2c3"
-                              strokeDasharray="3 4"
-                            />
-                          )}
-                          <Line
-                            name="Utilization %"
-                            dataKey="utilization_pct"
-                            stroke="#5bddbe"
-                            dot={false}
-                            isAnimationActive={false}
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </ChartPanel>
-                    <ChartPanel
-                      title="Average pickup wait"
-                      subtitle="Mean wait for rides completed that hour · minutes"
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart
-                          data={chart}
-                          syncId="simulation-hours"
-                          accessibilityLayer
-                        >
-                          <CartesianGrid vertical={false} stroke="#334748" />
-                          <XAxis
-                            dataKey="label"
-                            minTickGap={90}
-                            tick={chartAxisTick}
-                          />
-                          <YAxis
-                            tick={chartAxisTick}
-                            width={42}
-                            tickFormatter={(value) => chartValue(value, "", 0)}
-                          />
-                          <Tooltip
-                            {...tooltip}
-                            formatter={(value) => [
-                              chartValue(value, " min", 1),
-                              "Average pickup wait",
-                            ]}
-                          />
-                          {chart[hour] && (
-                            <ReferenceLine
-                              x={chart[hour].label}
-                              stroke="#71e2c3"
-                              strokeDasharray="3 4"
-                            />
-                          )}
-                          <Line
-                            name="Wait minutes"
-                            dataKey="average_wait_minutes"
-                            stroke="#95a9d9"
-                            dot={false}
-                            connectNulls={false}
-                            isAnimationActive={false}
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </ChartPanel>
+            <div className="loading" role="status" aria-live="polite">
+              <LoaderCircle className="spin" aria-hidden="true" /> Running fleet
+              operations…
+            </div>
+          )
+        ) : (
+          <>
+            <div className="kpi-grid">
+              <Metric
+                icon={<Users size={18} />}
+                label="RIDES COMPLETED"
+                value={number(metrics?.rides_completed)}
+                note={`${number(metrics?.total_requests)} requests generated`}
+              />
+              <Metric
+                icon={<Clock3 size={18} />}
+                label="AVERAGE WAIT"
+                value={
+                  metrics?.average_wait_minutes == null
+                    ? "N/A"
+                    : `${number(metrics.average_wait_minutes, 1)} min`
+                }
+                note={`p95 ${metrics?.p95_wait_minutes == null ? "N/A" : number(metrics.p95_wait_minutes, 1) + " min"} · completed rides`}
+              />
+              <Metric
+                icon={<CarFront size={18} />}
+                label="FLEET UTILIZATION"
+                value={`${number(metrics?.utilization_pct, 1)}%`}
+                note="Pickup + passenger service time"
+              />
+              <Metric
+                icon={<CarFront size={18} />}
+                label="PASSENGER UTILIZATION"
+                value={`${number(metrics?.passenger_utilization_pct, 1)}%`}
+                note="Passenger travel + dropoff dwell"
+              />
+              <Metric
+                icon={<Route size={18} />}
+                label="EMPTY-MILE SHARE"
+                value={
+                  metrics?.empty_mile_pct == null
+                    ? "N/A"
+                    : `${number(metrics.empty_mile_pct, 1)}%`
+                }
+                note="Empty miles / total miles"
+              />
+              <Metric
+                icon={<BatteryCharging size={18} />}
+                label="CHARGING VEHICLE-HOURS"
+                value={number(metrics?.charging_vehicle_hours, 1)}
+                note="Summed vehicle time; queue separate"
+              />
+              <Metric
+                icon={<DollarSign size={18} />}
+                label="SIMULATED GROSS REVENUE"
+                value={`$${number(metrics?.gross_revenue_usd)}`}
+                note="Costs excluded; not profit"
+                accent
+              />
+              <Metric
+                icon={<DollarSign size={18} />}
+                label="REVENUE PER VEHICLE"
+                value={`$${number(metrics?.revenue_per_vehicle_usd)}`}
+                note="Gross revenue / vehicles"
+                accent
+              />
+            </div>
+            {previousResult && !busy && (
+              <section
+                className="panel scenario-comparison"
+                aria-label="Compare scenarios"
+              >
+                <div className="scenario-comparison-heading">
+                  <div>
+                    <span className="eyebrow">COMPARE SCENARIOS</span>
+                    <h3>Tune the operation.</h3>
                   </div>
-                </>
-              )}
-              <section className="panel operations-ledger">
-                <div className="section-heading">
-                  <h3>
-                    <Route size={16} /> The operating ledger
-                  </h3>
-                  <span className="micro-tag">WITHIN SIMULATED WINDOW</span>
+                  <p>Previous and current API results for {cityName}.</p>
                 </div>
-                <div className="ledger-grid">
-                  <div>
-                    <span>Passenger miles</span>
-                    <strong>{number(metrics?.paid_miles)}</strong>
+                <div className="comparison-table">
+                  <div className="comparison-header">
+                    <span>MEASURE</span>
+                    <span>PREVIOUS SCENARIO</span>
+                    <span>CURRENT SCENARIO</span>
                   </div>
                   <div>
-                    <span>Empty / deadhead miles</span>
-                    <strong>{number(metrics?.empty_miles)}</strong>
+                    <span>Fleet size</span>
+                    <strong>{number(previousResult.request.fleet_size)}</strong>
+                    <strong>{number(result.request.fleet_size)}</strong>
                   </div>
                   <div>
-                    <span>Empty-mile share</span>
+                    <span>Average wait</span>
                     <strong>
-                      {metrics?.empty_mile_pct == null
+                      {previousResult.metrics.average_wait_minutes == null
                         ? "N/A"
-                        : number(metrics.empty_mile_pct, 1) + "%"}
+                        : `${number(previousResult.metrics.average_wait_minutes, 1)} min`}
+                    </strong>
+                    <strong>
+                      {metrics?.average_wait_minutes == null
+                        ? "N/A"
+                        : `${number(metrics.average_wait_minutes, 1)} min`}
                     </strong>
                   </div>
                   <div>
                     <span>Rejected requests</span>
+                    <strong>
+                      {number(previousResult.metrics.rejected_requests)}
+                    </strong>
                     <strong>{number(metrics?.rejected_requests)}</strong>
                   </div>
                   <div>
-                    <span>Unfinished at cutoff</span>
-                    <strong>{number(metrics?.unfinished_requests)}</strong>
-                  </div>
-                  <div>
-                    <span>Charging vehicle-hours</span>
+                    <span>Fleet utilization</span>
                     <strong>
-                      {number(metrics?.charging_vehicle_hours, 1)}
+                      {number(previousResult.metrics.utilization_pct, 1)}%
                     </strong>
+                    <strong>{number(metrics?.utilization_pct, 1)}%</strong>
                   </div>
                   <div>
-                    <span>Charger queue hours</span>
+                    <span>Gross revenue</span>
                     <strong>
-                      {number(metrics?.charging_queue_vehicle_hours, 1)}
+                      ${number(previousResult.metrics.gross_revenue_usd)}
                     </strong>
-                  </div>
-                  <div>
-                    <span>Rides per vehicle</span>
-                    <strong>{number(metrics?.rides_per_vehicle, 1)}</strong>
+                    <strong>${number(metrics?.gross_revenue_usd)}</strong>
                   </div>
                 </div>
+                <p className="comparison-disclosure">
+                  Hypothetical scenarios share the selected model and data
+                  release. Gross revenue excludes operating costs.
+                </p>
               </section>
-              <details className="panel assumptions">
-                <summary>
-                  <BatteryCharging size={16} /> Model assumptions & accounting{" "}
-                  <ArrowRight size={15} />
-                </summary>
-                <div>
-                  <p>
-                    Resolved fleet: {result.request.fleet_size} vehicles. Seed:{" "}
-                    {result.request.seed}. {result.assumptions.charger_count}{" "}
-                    private depot chargers. Battery range{" "}
-                    {result.assumptions.battery_range_miles} miles; reserve{" "}
-                    {result.assumptions.reserve_fraction * 100}%; charge at{" "}
-                    {result.assumptions.charge_trigger_fraction * 100}% to{" "}
-                    {result.assumptions.charge_target_fraction * 100}%.
+            )}
+            {result.hourly.length === 0 ? (
+              <p className="empty async-empty" role="status">
+                No hourly simulation records were returned. Timeline and charts
+                are unavailable for this result.
+              </p>
+            ) : (
+              <>
+                <section className="panel playback">
+                  <div>
+                    <span className="eyebrow">WEEK IN MOTION</span>
+                    <h3>
+                      Day {Math.floor(hour / 24) + 1}{" "}
+                      <span>/ {String(hour % 24).padStart(2, "0")}:00</span>
+                    </h3>
+                  </div>
+                  <Button
+                    variant="outline"
+                    aria-label={
+                      reducedMotion
+                        ? "Automatic playback disabled by reduced-motion preference"
+                        : playing
+                          ? "Pause playback"
+                          : "Play playback"
+                    }
+                    disabled={reducedMotion}
+                    onClick={() => setPlaying(!playing)}
+                  >
+                    {playing ? <Pause size={14} /> : <Play size={14} />}
+                  </Button>
+                  <label className="playback-slider">
+                    <span className="sr-only">Playback hour</span>
+                    <input
+                      type="range"
+                      min="0"
+                      max={result.hourly.length - 1}
+                      value={hour}
+                      onChange={(e) => {
+                        setPlaying(false);
+                        setHour(Number(e.target.value));
+                      }}
+                    />
+                  </label>
+                  <span className="playback-stat">
+                    {current?.completed_rides}
+                    <small>rides this hour</small>
+                  </span>
+                  <span className="playback-stat">
+                    {number(current?.utilization_pct, 0)}%
+                    <small>utilization</small>
+                  </span>
+                </section>
+                {reducedMotion && (
+                  <p className="async-note reduced-motion-note" role="status">
+                    Auto-play is off; use the hour slider to move through the
+                    results.
                   </p>
-                  <p>
-                    Zone radius {result.assumptions.service_zone_radius_miles}{" "}
-                    miles. Distance multiplier{" "}
-                    {result.assumptions.road_distance_multiplier}. Speed{" "}
-                    {result.assumptions.average_speed_mph} mph. Pickup limit{" "}
-                    {result.assumptions.max_pickup_wait_minutes} minutes.
-                  </p>
-                  {result.warnings.map((w) => (
-                    <p key={w}>{w}</p>
-                  ))}
-                  <code>
-                    Run {result.simulation_id} · {result.versions.model_version}{" "}
-                    · {result.versions.data_mode}
-                  </code>
+                )}
+                <div className="charts-grid">
+                  <ChartPanel
+                    title="Hourly requests vs. completed rides"
+                    subtitle="Returned counts for each simulated hour"
+                  >
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart
+                        data={chart}
+                        syncId="simulation-hours"
+                        accessibilityLayer
+                      >
+                        <defs>
+                          <linearGradient
+                            id="rides-fill"
+                            x1="0"
+                            y1="0"
+                            x2="0"
+                            y2="1"
+                          >
+                            <stop stopColor="#4d7cff" stopOpacity={0.35} />
+                            <stop
+                              offset="1"
+                              stopColor="#4d7cff"
+                              stopOpacity={0}
+                            />
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid vertical={false} stroke="#e1e7e4" />
+                        <XAxis
+                          dataKey="label"
+                          minTickGap={80}
+                          tick={chartAxisTick}
+                        />
+                        <YAxis
+                          tick={chartAxisTick}
+                          width={42}
+                          tickFormatter={(value) => chartValue(value)}
+                        />
+                        <Tooltip
+                          {...tooltip}
+                          formatter={(value, name) => [chartValue(value), name]}
+                        />
+                        {chart[hour] && (
+                          <ReferenceLine
+                            x={chart[hour].label}
+                            stroke="#4d7cff"
+                            strokeDasharray="3 4"
+                          />
+                        )}
+                        <Area
+                          name="Requests"
+                          dataKey="requests"
+                          stroke="#17b990"
+                          fill="transparent"
+                          strokeDasharray="4 4"
+                          isAnimationActive={false}
+                        />
+                        <Legend
+                          verticalAlign="top"
+                          height={28}
+                          wrapperStyle={{ fontSize: 10, color: "#1f2933" }}
+                        />
+                        <Area
+                          name="Completed rides"
+                          dataKey="completed_rides"
+                          stroke="#4d7cff"
+                          fill="url(#rides-fill)"
+                          isAnimationActive={false}
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </ChartPanel>
+                  <ChartPanel
+                    title="Cumulative gross revenue"
+                    subtitle="Simulated fares · USD · costs excluded"
+                  >
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart
+                        data={chart}
+                        syncId="simulation-hours"
+                        accessibilityLayer
+                      >
+                        <CartesianGrid vertical={false} stroke="#e1e7e4" />
+                        <XAxis
+                          dataKey="label"
+                          minTickGap={90}
+                          tick={chartAxisTick}
+                        />
+                        <YAxis
+                          tick={chartAxisTick}
+                          width={52}
+                          tickFormatter={chartCurrencyTick}
+                        />
+                        <Tooltip
+                          {...tooltip}
+                          formatter={(value) => [
+                            chartValue(value, "$"),
+                            "Cumulative gross revenue",
+                          ]}
+                        />
+                        {chart[hour] && (
+                          <ReferenceLine
+                            x={chart[hour].label}
+                            stroke="#4d7cff"
+                            strokeDasharray="3 4"
+                          />
+                        )}
+                        <Area
+                          name="Gross revenue"
+                          dataKey="cumulative_revenue"
+                          stroke="#17b990"
+                          fill="#17b99020"
+                          isAnimationActive={false}
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </ChartPanel>
+                  <ChartPanel
+                    title="Fleet utilization"
+                    subtitle="Hourly share of total vehicle time in service"
+                  >
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={chart}
+                        syncId="simulation-hours"
+                        accessibilityLayer
+                      >
+                        <CartesianGrid vertical={false} stroke="#e1e7e4" />
+                        <XAxis
+                          dataKey="label"
+                          minTickGap={90}
+                          tick={chartAxisTick}
+                        />
+                        <YAxis
+                          domain={[0, 100]}
+                          tick={chartAxisTick}
+                          width={42}
+                          tickFormatter={(value) =>
+                            chartValue(value, "", 0) + "%"
+                          }
+                        />
+                        <Tooltip
+                          {...tooltip}
+                          formatter={(value) => [
+                            chartValue(value, "%", 1),
+                            "Utilization",
+                          ]}
+                        />
+                        {chart[hour] && (
+                          <ReferenceLine
+                            x={chart[hour].label}
+                            stroke="#4d7cff"
+                            strokeDasharray="3 4"
+                          />
+                        )}
+                        <Line
+                          name="Utilization %"
+                          dataKey="utilization_pct"
+                          stroke="#4d7cff"
+                          dot={false}
+                          isAnimationActive={false}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </ChartPanel>
+                  <ChartPanel
+                    title="Average pickup wait"
+                    subtitle="Mean wait for rides completed that hour · minutes"
+                  >
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={chart}
+                        syncId="simulation-hours"
+                        accessibilityLayer
+                      >
+                        <CartesianGrid vertical={false} stroke="#e1e7e4" />
+                        <XAxis
+                          dataKey="label"
+                          minTickGap={90}
+                          tick={chartAxisTick}
+                        />
+                        <YAxis
+                          tick={chartAxisTick}
+                          width={42}
+                          tickFormatter={(value) => chartValue(value, "", 0)}
+                        />
+                        <Tooltip
+                          {...tooltip}
+                          formatter={(value) => [
+                            chartValue(value, " min", 1),
+                            "Average pickup wait",
+                          ]}
+                        />
+                        {chart[hour] && (
+                          <ReferenceLine
+                            x={chart[hour].label}
+                            stroke="#4d7cff"
+                            strokeDasharray="3 4"
+                          />
+                        )}
+                        <Line
+                          name="Wait minutes"
+                          dataKey="average_wait_minutes"
+                          stroke="#7b8bfa"
+                          dot={false}
+                          connectNulls={false}
+                          isAnimationActive={false}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </ChartPanel>
                 </div>
-              </details>
-            </>
-          )}
+              </>
+            )}
+            <section className="panel operations-ledger">
+              <div className="section-heading">
+                <h3>
+                  <Route size={16} /> The operating ledger
+                </h3>
+                <span className="micro-tag">WITHIN SIMULATED WINDOW</span>
+              </div>
+              <div className="ledger-grid">
+                <div>
+                  <span>Passenger miles</span>
+                  <strong>{number(metrics?.paid_miles)}</strong>
+                </div>
+                <div>
+                  <span>Empty / deadhead miles</span>
+                  <strong>{number(metrics?.empty_miles)}</strong>
+                </div>
+                <div>
+                  <span>Empty-mile share</span>
+                  <strong>
+                    {metrics?.empty_mile_pct == null
+                      ? "N/A"
+                      : number(metrics.empty_mile_pct, 1) + "%"}
+                  </strong>
+                </div>
+                <div>
+                  <span>Rejected requests</span>
+                  <strong>{number(metrics?.rejected_requests)}</strong>
+                </div>
+                <div>
+                  <span>Unfinished at cutoff</span>
+                  <strong>{number(metrics?.unfinished_requests)}</strong>
+                </div>
+                <div>
+                  <span>Charging vehicle-hours</span>
+                  <strong>{number(metrics?.charging_vehicle_hours, 1)}</strong>
+                </div>
+                <div>
+                  <span>Charger queue hours</span>
+                  <strong>
+                    {number(metrics?.charging_queue_vehicle_hours, 1)}
+                  </strong>
+                </div>
+                <div>
+                  <span>Rides per vehicle</span>
+                  <strong>{number(metrics?.rides_per_vehicle, 1)}</strong>
+                </div>
+              </div>
+            </section>
+            <details className="panel assumptions">
+              <summary>
+                <BatteryCharging size={16} /> Model assumptions & accounting{" "}
+                <ArrowRight size={15} />
+              </summary>
+              <div>
+                <p>
+                  Resolved fleet: {result.request.fleet_size} vehicles. Seed:{" "}
+                  {result.request.seed}. {result.assumptions.charger_count}{" "}
+                  private depot chargers. Battery range{" "}
+                  {result.assumptions.battery_range_miles} miles; reserve{" "}
+                  {result.assumptions.reserve_fraction * 100}%; charge at{" "}
+                  {result.assumptions.charge_trigger_fraction * 100}% to{" "}
+                  {result.assumptions.charge_target_fraction * 100}%.
+                </p>
+                <p>
+                  Zone radius {result.assumptions.service_zone_radius_miles}{" "}
+                  miles. Distance multiplier{" "}
+                  {result.assumptions.road_distance_multiplier}. Speed{" "}
+                  {result.assumptions.average_speed_mph} mph. Pickup limit{" "}
+                  {result.assumptions.max_pickup_wait_minutes} minutes.
+                </p>
+                {result.warnings.map((w) => (
+                  <p key={w}>{w}</p>
+                ))}
+                <code>
+                  Run {result.simulation_id} · {result.versions.model_version} ·{" "}
+                  {result.versions.data_mode}
+                </code>
+              </div>
+            </details>
+          </>
+        )}
       </div>
     </section>
   );

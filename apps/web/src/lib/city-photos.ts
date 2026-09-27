@@ -1,0 +1,42 @@
+const skylineFiles: Record<string, string> = {
+  "cbsa:10740": "targets/albuquerque.jpg",
+  "cbsa:12060": "references/atlanta.jpg",
+  "cbsa:12420": "references/austin.jpg",
+  "cbsa:13820": "targets/birmingham.jpg",
+  "cbsa:19100": "references/dallas.jpg",
+  "cbsa:19740": "references/denver.jpg",
+  "cbsa:17140": "targets/cincinnati.jpg",
+  "cbsa:17410": "targets/cleveland.jpg",
+  "cbsa:18140": "targets/columbus.jpg",
+  "cbsa:26420": "references/houston.jpg",
+  "cbsa:21340": "targets/el_paso.jpg",
+  "cbsa:29820": "references/las_vegas.jpg",
+  "cbsa:31080": "references/los_angeles.jpg",
+  "cbsa:25540": "targets/hartford.jpg",
+  "cbsa:26900": "targets/indianapolis.jpg",
+  "cbsa:27260": "targets/jacksonville.jpg",
+  "cbsa:28140": "targets/kansas_city.jpg",
+  "cbsa:31140": "targets/louisville.jpg",
+  "cbsa:32820": "targets/memphis.jpg",
+  "cbsa:33100": "references/miami.jpg",
+  "cbsa:34980": "references/nashville.jpg",
+  "cbsa:36740": "references/orlando.jpg",
+  "cbsa:38060": "references/phoenix.jpg",
+  "cbsa:33340": "targets/milwaukee.jpg",
+  "cbsa:36420": "targets/oklahoma_city.jpg",
+  "cbsa:39300": "targets/providence.jpg",
+  "cbsa:39580": "targets/raleigh.jpg",
+  "cbsa:40060": "targets/richmond.jpg",
+  "cbsa:41620": "targets/salt_lake_city.jpg",
+  "cbsa:41860": "references/san_francisco_skyline_2024.jpg",
+  "cbsa:41700": "references/san_antonio.jpg",
+  "cbsa:41740": "references/san_diego.jpg",
+  "cbsa:45300": "references/tampa.jpg",
+  "cbsa:46140": "targets/tulsa.jpg",
+  "cbsa:47260": "targets/virginia_beach.jpg",
+};
+
+export function citySkyline(cityId: string): string | undefined {
+  const file = skylineFiles[cityId];
+  return file ? `/images/cities/${file}` : undefined;
+}

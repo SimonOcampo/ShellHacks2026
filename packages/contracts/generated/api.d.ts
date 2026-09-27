@@ -89,6 +89,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/reference-rankings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reference Rankings */
+        post: operations["reference_rankings_api_v1_reference_rankings_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/simulations": {
         parameters: {
             query?: never;
@@ -472,6 +489,17 @@ export interface components {
             reference_id: string;
             /** Similarity */
             similarity: number;
+        };
+        /** ReferenceRankingRequest */
+        ReferenceRankingRequest: {
+            /** City Ids */
+            city_ids: string[];
+            compare_weights?: components["schemas"]["PillarWeights"] | null;
+            /** Reference Categories */
+            reference_categories?: ("commercial" | "announced" | "testing")[] | null;
+            /** Reference Ids */
+            reference_ids?: string[] | null;
+            weights?: components["schemas"]["PillarWeights"];
         };
         /** SimulationAssumptions */
         SimulationAssumptions: {
@@ -920,6 +948,75 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": components["schemas"]["RankingRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RankingResult"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    reference_rankings_api_v1_reference_rankings_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReferenceRankingRequest"];
             };
         };
         responses: {
