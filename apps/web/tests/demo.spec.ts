@@ -129,6 +129,11 @@ test("superseded ranking responses cannot overwrite newer selection", async ({
   await page.goto("/");
   await page.getByRole("button", { name: "Explore candidate cities" }).click();
   await expect(page.locator(".ranking-row")).toHaveCount(20);
+  await expect(page.getByRole("group", { name: "Reference categories" })).toContainText("commercial");
+  await expect(page.getByRole("checkbox", { name: "commercial" })).toBeChecked();
+  await expect(page.locator(".ranking-comparison")).toContainText("Default weights:");
+  const comparison = page.locator(".ranking-comparison > div p");
+  const beforeComparison = await comparison.innerText();
   await page.route("**/api/v1/rankings", async (route) => {
     const weights = route.request().postDataJSON().weights;
     if (weights.familiarity === 0.1)
@@ -150,4 +155,6 @@ test("superseded ranking responses cannot overwrite newer selection", async ({
     "27%",
   ]);
   await expect(slider).toHaveValue("0.9");
+  await expect(comparison).not.toHaveText(beforeComparison);
+  await expect(comparison).toContainText("Rank change:");
 });

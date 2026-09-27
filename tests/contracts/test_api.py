@@ -41,6 +41,26 @@ def test_integrated_flow(client):
     assert response.json()["metrics"]["rides_completed"] > 0
 
 
+def test_category_selection_and_weight_comparison(client):
+    response = client.post(
+        "/api/v1/rankings",
+        json={
+            "reference_categories": ["commercial"],
+            "weights": {"familiarity": 0.1, "readiness": 0.6, "opportunity": 0.3},
+            "compare_weights": {"familiarity": 0.4, "readiness": 0.2, "opportunity": 0.4},
+        },
+    )
+    assert response.status_code == 200
+    result = response.json()
+    baseline = client.post("/api/v1/rankings", json={}).json()
+    assert result["reference_ids"] == baseline["reference_ids"]
+    assert result["weight_sensitivity"]["baseline_ranking_id"] == baseline["ranking_id"]
+    assert len(result["weight_sensitivity"]["changes"]) == len(result["ranked"])
+    assert client.post(
+        "/api/v1/rankings", json={"reference_categories": ["testing"]}
+    ).status_code == 422
+
+
 def test_error_shapes(client):
     assert client.get("/api/v1/cities/unknown").status_code == 404
     for body in [

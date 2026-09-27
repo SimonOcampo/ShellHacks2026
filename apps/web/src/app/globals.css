@@ -605,6 +605,42 @@ main {
   gap: 28px;
   align-items: center;
 }
+.ranking-comparison {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  font-size: 11px;
+}
+.ranking-comparison fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  min-width: 210px;
+  border: 0;
+  padding: 0;
+}
+.ranking-comparison legend {
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+.ranking-comparison label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: capitalize;
+}
+.ranking-comparison input {
+  accent-color: var(--teal);
+}
+.ranking-comparison strong {
+  font-weight: 600;
+}
+.ranking-comparison p {
+  font-size: 11px;
+}
 .weight-controls label > span {
   display: flex;
   justify-content: space-between;

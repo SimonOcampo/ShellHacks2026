@@ -982,6 +982,35 @@
       "RankingRequest": {
         "additionalProperties": false,
         "properties": {
+          "compare_weights": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PillarWeights"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reference_categories": {
+            "anyOf": [
+              {
+                "items": {
+                  "enum": [
+                    "commercial",
+                    "announced",
+                    "testing"
+                  ],
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Categories"
+          },
           "reference_ids": {
             "anyOf": [
               {
@@ -1036,6 +1065,16 @@
           },
           "versions": {
             "$ref": "#/components/schemas/VersionStamp"
+          },
+          "weight_sensitivity": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WeightSensitivity"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
@@ -1502,6 +1541,68 @@
           "data_mode"
         ],
         "title": "VersionStamp",
+        "type": "object"
+      },
+      "WeightChange": {
+        "additionalProperties": false,
+        "properties": {
+          "baseline_rank": {
+            "title": "Baseline Rank",
+            "type": "integer"
+          },
+          "baseline_score": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Baseline Score",
+            "type": "number"
+          },
+          "city_id": {
+            "title": "City Id",
+            "type": "string"
+          },
+          "rank_change": {
+            "title": "Rank Change",
+            "type": "integer"
+          },
+          "score_change": {
+            "title": "Score Change",
+            "type": "number"
+          }
+        },
+        "required": [
+          "city_id",
+          "baseline_rank",
+          "baseline_score",
+          "rank_change",
+          "score_change"
+        ],
+        "title": "WeightChange",
+        "type": "object"
+      },
+      "WeightSensitivity": {
+        "additionalProperties": false,
+        "properties": {
+          "baseline_ranking_id": {
+            "title": "Baseline Ranking Id",
+            "type": "string"
+          },
+          "baseline_weights": {
+            "$ref": "#/components/schemas/PillarWeights"
+          },
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/WeightChange"
+            },
+            "title": "Changes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "baseline_ranking_id",
+          "baseline_weights",
+          "changes"
+        ],
+        "title": "WeightSensitivity",
         "type": "object"
       }
     }

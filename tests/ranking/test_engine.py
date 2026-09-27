@@ -1,7 +1,9 @@
 import math
+
 import pytest
-from contracts.models import RankingRequest, PillarWeights
+from contracts.models import PillarWeights, RankingRequest
 from odd_ranking.engine import rank
+from pydantic import ValidationError
 
 
 def test_rank_reproducible_and_explainable(release):
@@ -86,6 +88,53 @@ def test_reference_category_and_unknown(release):
     for ids in [[], ["unknown"], [release.references[0].id]]:
         with pytest.raises(ValueError):
             rank(release, RankingRequest(reference_ids=ids))
+
+
+def test_reference_categories_select_enabled_whole_markets(release):
+    release.references[0].category = "testing"
+    selected = rank(release, RankingRequest(reference_categories=["testing"]))
+    assert selected.reference_ids == [release.references[0].id]
+    assert selected == rank(release, RankingRequest(reference_ids=selected.reference_ids))
+    with pytest.raises(ValueError, match="Select nonempty"):
+        rank(release, RankingRequest(reference_categories=["announced"]))
+    with pytest.raises(ValidationError):
+        RankingRequest(reference_categories=[])
+    with pytest.raises(ValidationError):
+        RankingRequest(reference_categories=["testing", "testing"])
+    with pytest.raises(ValidationError):
+        RankingRequest(reference_ids=[selected.reference_ids[0]], reference_categories=["testing"])
+    release.references[0].enabled = False
+    with pytest.raises(ValueError, match="Select nonempty"):
+        rank(release, RankingRequest(reference_categories=["testing"]))
+
+
+def test_weight_sensitivity_uses_same_references_and_frozen_bounds(release):
+    before = release.model_dump_json()
+    base_weights = PillarWeights()
+    scenario_weights = PillarWeights(familiarity=0.1, readiness=0.6, opportunity=0.3)
+    scenario = rank(
+        release,
+        RankingRequest(
+            weights=scenario_weights,
+            reference_categories=["commercial"],
+            compare_weights=base_weights,
+        ),
+    )
+    baseline = rank(release, RankingRequest(weights=base_weights))
+    assert scenario.weight_sensitivity.baseline_ranking_id == baseline.ranking_id
+    assert scenario.reference_ids == baseline.reference_ids
+    assert release.model_dump_json() == before
+    assert scenario == rank(
+        release,
+        RankingRequest(weights=scenario_weights, reference_categories=["commercial"], compare_weights=base_weights),
+    )
+    baseline_by_id = {city.city_id: city for city in baseline.ranked}
+    for city, change in zip(scenario.ranked, scenario.weight_sensitivity.changes):
+        previous = baseline_by_id[city.city_id]
+        assert change.city_id == city.city_id
+        assert change.rank_change == previous.rank - city.rank
+        assert change.score_change == pytest.approx(city.expansion_score - previous.expansion_score)
+    assert any(change.rank_change for change in scenario.weight_sensitivity.changes)
 
 
 def test_constant_pillar_and_self_reference(release):

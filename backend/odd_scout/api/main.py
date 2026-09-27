@@ -2,12 +2,6 @@ import os
 from contextlib import asynccontextmanager
 from threading import BoundedSemaphore
 
-from fastapi import FastAPI, HTTPException
-from fastapi.exceptions import RequestValidationError
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from starlette.exceptions import HTTPException as StarletteHTTPException
-
 from contracts.models import (
     CityFeature,
     CityList,
@@ -22,16 +16,24 @@ from contracts.models import (
     SimulationRequest,
     SimulationResult,
 )
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from odd_ranking.engine import rank
-from odd_scout.store import load_release, assumptions, default_weights
-from odd_scout.simulation.engine import simulate, CapacityError
-from odd_scout.explanations.template import explain
+from starlette.exceptions import HTTPException as StarletteHTTPException
+
 from odd_scout.api.limits import RequestSizeLimit
+from odd_scout.explanations.live import LiveExplanation
+from odd_scout.explanations.template import explain
+from odd_scout.simulation.engine import CapacityError, simulate
+from odd_scout.store import assumptions, default_weights, load_release
 
 
 @asynccontextmanager
 async def lifespan(app):
     app.state.release = load_release()
+    app.state.live_explanations = LiveExplanation()
     yield
 
 
@@ -159,10 +161,18 @@ def rankings(request: RankingRequest):
 
 
 @app.post("/api/v1/cities/{city_id}/explanation", response_model=Explanation)
-def explanation(city_id: str, request: RankingRequest):
+def explanation(city_id: str, request: RankingRequest, http_request: Request):
     get_city(city_id)
     try:
-        return explain(app.state.release, calculate_ranking(request), city_id)
+        ranking = calculate_ranking(request)
+        template = explain(app.state.release, ranking, city_id)
+        return app.state.live_explanations.explain(
+            app.state.release,
+            ranking,
+            city_id,
+            template,
+            http_request.client.host if http_request.client else "unknown",
+        )
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from exc
 

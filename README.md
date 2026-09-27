@@ -32,7 +32,7 @@ Open [http://localhost:3000](http://localhost:3000). API documentation: [http://
 ## Working path
 
 1. Explore the map and ranked list. The top three are highlighted.
-2. Change pillar weights; deterministic backend rankings update.
+2. Select available reference categories and change pillar weights. The backend shows each metro's rank and score change from default weights using the same references and frozen normalization bounds. Current releases contain commercial references only.
 3. Select a metro, read its analyst note, and inspect features and provenance.
 4. Select **Simulate hypothetical launch**.
 5. Change fleet, demand, fares, duration, or seed. Results recalculate.

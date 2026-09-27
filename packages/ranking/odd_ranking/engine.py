@@ -3,16 +3,19 @@ import json
 import math
 
 from contracts.models import (
+    RANKING_V2_KEYS,
     CityScore,
     DataRelease,
     FactorResult,
-    RANKING_V2_KEYS,
     PillarScores,
     PillarWeights,
     RankingRequest,
     RankingResult,
     ReferenceMatch,
+    WeightChange,
+    WeightSensitivity,
 )
+
 from odd_ranking.normalization import normalize_value
 
 
@@ -35,13 +38,12 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
         )
     cities = {c.city_id: c for c in release.cities}
     reference_map = {r.id: r for r in release.references}
-    selected = (
-        request.reference_ids
-        if request.reference_ids is not None
-        else [
-            r.id for r in release.references if r.enabled and r.category == "commercial"
+    selected = request.reference_ids
+    if selected is None:
+        categories = request.reference_categories or ["commercial"]
+        selected = [
+            r.id for r in release.references if r.enabled and r.category in categories
         ]
-    )
     if (
         not selected
         or len(set(selected)) != len(selected)
@@ -192,7 +194,7 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
     )
     for index, result in enumerate(ranked, 1):
         result.rank = index
-    return RankingResult(
+    result = RankingResult(
         versions=release.versions,
         ranking_id=digest(
             {
@@ -208,3 +210,27 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
             [r for r in results if r.expansion_score is None], key=lambda r: r.city_id
         ),
     )
+    if request.compare_weights is not None:
+        baseline = rank(
+            release,
+            request.model_copy(
+                update={"weights": request.compare_weights, "compare_weights": None}
+            ),
+        )
+        baseline_by_id = {city.city_id: city for city in baseline.ranked}
+        result.weight_sensitivity = WeightSensitivity(
+            baseline_ranking_id=baseline.ranking_id,
+            baseline_weights=baseline.normalized_weights,
+            changes=[
+                WeightChange(
+                    city_id=city.city_id,
+                    baseline_rank=baseline_by_id[city.city_id].rank,
+                    baseline_score=baseline_by_id[city.city_id].expansion_score,
+                    rank_change=baseline_by_id[city.city_id].rank - city.rank,
+                    score_change=city.expansion_score
+                    - baseline_by_id[city.city_id].expansion_score,
+                )
+                for city in result.ranked
+            ],
+        )
+    return result
