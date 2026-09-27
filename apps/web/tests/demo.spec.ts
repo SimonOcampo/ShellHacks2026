@@ -58,6 +58,33 @@ test("market evidence and a recalculated launch work end to end", async ({
   await expect(page.locator(".sim-map-frame .sim-legend")).toContainText(
     "Picking up",
   );
+  await expect(page.locator(".scenario-grid > .scenario-controls")).toBeVisible();
+  await expect(page.locator(".scenario-grid > .scenario-map-column")).toBeVisible();
+  await expect(page.getByLabel("Selected simulation hour")).toContainText(
+    "Gross revenue",
+  );
+  const fleetVehicles = page.locator(
+    ".mapbox-vehicle-marker, .fallback-car",
+  );
+  await expect(fleetVehicles).toHaveCount(50, { timeout: 30000 });
+  const pickupVehicles = page.locator(
+    '.mapbox-vehicle-marker[data-state="pickup"], .fallback-car[data-state="pickup"]',
+  );
+  await expect(pickupVehicles).not.toHaveCount(0);
+  const pickup = pickupVehicles.first();
+  const initialPosition = await pickup.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    return [rect.x, rect.y];
+  });
+  await page.waitForTimeout(500);
+  const movedPosition = await pickup.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    return [rect.x, rect.y];
+  });
+  expect(
+    Math.abs(movedPosition[0] - initialPosition[0]) +
+      Math.abs(movedPosition[1] - initialPosition[1]),
+  ).toBeGreaterThan(0.25);
   await expect(
     page.getByText("RIDES COMPLETED", { exact: true }),
   ).toBeVisible();
