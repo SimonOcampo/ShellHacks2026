@@ -79,14 +79,14 @@ test("market evidence and a recalculated launch work end to end", async ({
   await expect(page.getByText("SEEDED & REPRODUCIBLE")).toBeVisible({
     timeout: 30000,
   });
-  await expect(page.locator(".sim-map-frame .sim-legend")).toContainText(
+  await expect(page.locator(".fleet-state-legend")).toContainText(
     "Picking up",
   );
   await expect(
     page.locator(".scenario-grid > .scenario-controls"),
   ).toBeVisible();
   await expect(
-    page.locator(".scenario-grid > .scenario-map-column"),
+    page.getByRole("region", { name: "Engine vehicle playback" }),
   ).toBeVisible();
   await expect(page.getByLabel("Selected simulation hour")).toContainText(
     "Gross revenue",
