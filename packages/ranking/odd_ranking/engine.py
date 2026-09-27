@@ -27,7 +27,13 @@ def digest(value) -> str:
     ).hexdigest()[:20]
 
 
-def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
+def rank(
+    release: DataRelease,
+    request: RankingRequest,
+    *,
+    city_ids: list[str] | None = None,
+    include_reference_metros: bool = False,
+) -> RankingResult:
     if release.versions.model_version == "ranking.v2" and {
         feature.key for feature in release.features
     } != RANKING_V2_KEYS:
@@ -37,6 +43,11 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
             f"Unsupported ranking model version: {release.versions.model_version}"
         )
     cities = {c.city_id: c for c in release.cities}
+    screened_city_ids = release.candidate_ids if city_ids is None else city_ids
+    if len(set(screened_city_ids)) != len(screened_city_ids) or any(
+        city_id not in cities for city_id in screened_city_ids
+    ):
+        raise ValueError("Select known, unique city IDs")
     reference_map = {r.id: r for r in release.references}
     selected = request.reference_ids
     if selected is None:
@@ -82,7 +93,7 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
             raise ValueError(f"Incomplete reference: {ref_id}")
     results = []
     reference_city_ids = {r.city_id for r in release.references}
-    for city_id in release.candidate_ids:
+    for city_id in screened_city_ids:
         city = cities[city_id]
         missing = [
             f.key
@@ -93,7 +104,7 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
         reasons.extend(
             f"No discriminating features in {p}" for p, fs in grouped.items() if not fs
         )
-        if city_id in reference_city_ids:
+        if city_id in reference_city_ids and not include_reference_metros:
             reasons.append("Reference metro excluded from expansion shortlist")
         matches = []
         factors = []
@@ -194,15 +205,17 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
     )
     for index, result in enumerate(ranked, 1):
         result.rank = index
+    ranking_inputs = {
+        "release": release.model_dump(),
+        "weights": weights,
+        "references": selected,
+    }
+    if city_ids is not None:
+        ranking_inputs["screened_city_ids"] = screened_city_ids
+        ranking_inputs["include_reference_metros"] = include_reference_metros
     result = RankingResult(
         versions=release.versions,
-        ranking_id=digest(
-            {
-                "release": release.model_dump(),
-                "weights": weights,
-                "references": selected,
-            }
-        ),
+        ranking_id=digest(ranking_inputs),
         normalized_weights=PillarWeights(**weights),
         reference_ids=selected,
         ranked=ranked,
@@ -216,6 +229,8 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
             request.model_copy(
                 update={"weights": request.compare_weights, "compare_weights": None}
             ),
+            city_ids=city_ids,
+            include_reference_metros=include_reference_metros,
         )
         baseline_by_id = {city.city_id: city for city in baseline.ranked}
         result.weight_sensitivity = WeightSensitivity(
@@ -234,3 +249,21 @@ def rank(release: DataRelease, request: RankingRequest) -> RankingResult:
             ],
         )
     return result
+
+
+def rank_reference_cities(
+    release: DataRelease, request: RankingRequest, city_ids: list[str]
+) -> RankingResult:
+    enabled_reference_cities = {
+        reference.city_id for reference in release.references if reference.enabled
+    }
+    if not city_ids or any(
+        city_id not in enabled_reference_cities for city_id in city_ids
+    ):
+        raise ValueError("Select enabled reference city IDs")
+    return rank(
+        release,
+        request,
+        city_ids=city_ids,
+        include_reference_metros=True,
+    )

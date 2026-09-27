@@ -1,0 +1,4039 @@
+{
+  "versions": {
+    "schema_version": "1",
+    "data_version": "2024-acs5__2024-tiger__NOAA-1991-2020__TIGER-edges-2024__AFDC-current__commute-B08013-B08303-r2",
+    "model_version": "ranking.v2",
+    "data_mode": "verified"
+  },
+  "ranking_id": "71f044a1cedf8c2e8246",
+  "normalized_weights": {
+    "familiarity": 0.4,
+    "readiness": 0.2,
+    "opportunity": 0.4
+  },
+  "reference_ids": [
+    "waymo-atlanta",
+    "waymo-austin",
+    "waymo-dallas",
+    "waymo-denver",
+    "waymo-houston",
+    "waymo-las_vegas",
+    "waymo-los_angeles",
+    "waymo-miami",
+    "waymo-nashville",
+    "waymo-orlando",
+    "waymo-phoenix",
+    "waymo-san_antonio",
+    "waymo-san_diego",
+    "waymo-san_francisco_bay_area",
+    "waymo-tampa"
+  ],
+  "ranked": [
+    {
+      "city_id": "cbsa:41860",
+      "rank": 1,
+      "expansion_score": 90.30498067945436,
+      "pillars": {
+        "familiarity": 89.87335129826074,
+        "readiness": 100.0,
+        "opportunity": 85.88910040037516
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 370.84,
+          "normalized_value": 0.4348949883027324,
+          "reference_value": 510.0319999999999,
+          "distance_component": 0.0015490068425777766,
+          "score_points": null,
+          "provenance_ids": [
+            "c3690397-243f-56f8-ab52-f8a497c51bc9",
+            "8054da7d-3c6f-58f0-8258-290649ae98e7"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 0.0,
+          "normalized_value": 0.0,
+          "reference_value": 0.0,
+          "distance_component": 0.0,
+          "score_points": null,
+          "provenance_ids": [
+            "c3690397-243f-56f8-ab52-f8a497c51bc9",
+            "8054da7d-3c6f-58f0-8258-290649ae98e7"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 45.36666666666667,
+          "normalized_value": 0.22310283336635622,
+          "reference_value": 51.46666666666667,
+          "distance_component": 0.00013147269638059283,
+          "score_points": null,
+          "provenance_ids": [
+            "ed687083-fbba-5d49-ad55-981e8e128367",
+            "01356031-5efa-5028-a150-241367f3c305",
+            "62171067-4d5a-5291-af90-9340e48430e5",
+            "afe5977f-c09a-5536-9d6b-868a5bcba386",
+            "4344d14e-e552-561e-92b0-0059cdf51d0f",
+            "451c030b-9bdb-5e07-b002-963a4144c405"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 31.00658806006066,
+          "normalized_value": 0.9954382733265493,
+          "reference_value": 29.509705252898495,
+          "distance_component": 0.005549614665337554,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 4.644573571637176,
+          "normalized_value": 0.9029549020938399,
+          "reference_value": 5.314785865967842,
+          "distance_component": 0.0009417751027616203,
+          "score_points": null,
+          "provenance_ids": [
+            "ea509e73-f0fc-5d27-8c28-cc78d198d13d",
+            "a36a2d9a-bfd5-59a4-9a9a-c93578693e70",
+            "7c359b8a-1df8-5331-b2b0-2e9b8c6ec849",
+            "fdf7c0d9-aadb-599f-a7d4-5d95164625dc",
+            "4bdcc367-7a9e-5cc4-ac96-2d1559463604"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 14.06024513449907,
+          "normalized_value": 0.8882933760572643,
+          "reference_value": 17.610212905913116,
+          "distance_component": 0.0012478369832683769,
+          "score_points": null,
+          "provenance_ids": [
+            "ea509e73-f0fc-5d27-8c28-cc78d198d13d",
+            "a36a2d9a-bfd5-59a4-9a9a-c93578693e70",
+            "7c359b8a-1df8-5331-b2b0-2e9b8c6ec849",
+            "fdf7c0d9-aadb-599f-a7d4-5d95164625dc",
+            "4bdcc367-7a9e-5cc4-ac96-2d1559463604"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.0649945088570456,
+          "normalized_value": 0.7534622400014599,
+          "reference_value": 0.061044835442755734,
+          "distance_component": 0.000577517016084199,
+          "score_points": null,
+          "provenance_ids": [
+            "ea509e73-f0fc-5d27-8c28-cc78d198d13d",
+            "a36a2d9a-bfd5-59a4-9a9a-c93578693e70",
+            "7c359b8a-1df8-5331-b2b0-2e9b8c6ec849",
+            "fdf7c0d9-aadb-599f-a7d4-5d95164625dc",
+            "4bdcc367-7a9e-5cc4-ac96-2d1559463604"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.022963107779110294,
+          "normalized_value": 0.01089220817228895,
+          "reference_value": 0.02925368418569538,
+          "distance_component": 0.00023142589532566054,
+          "score_points": null,
+          "provenance_ids": [
+            "ea509e73-f0fc-5d27-8c28-cc78d198d13d",
+            "a36a2d9a-bfd5-59a4-9a9a-c93578693e70",
+            "7c359b8a-1df8-5331-b2b0-2e9b8c6ec849",
+            "fdf7c0d9-aadb-599f-a7d4-5d95164625dc",
+            "4bdcc367-7a9e-5cc4-ac96-2d1559463604"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.9120423833638441,
+          "normalized_value": 0.8234796218419935,
+          "reference_value": 0.9097014803715489,
+          "distance_component": 0.000026252191107970115,
+          "score_points": null,
+          "provenance_ids": [
+            "ea509e73-f0fc-5d27-8c28-cc78d198d13d",
+            "a36a2d9a-bfd5-59a4-9a9a-c93578693e70",
+            "7c359b8a-1df8-5331-b2b0-2e9b8c6ec849",
+            "fdf7c0d9-aadb-599f-a7d4-5d95164625dc",
+            "4bdcc367-7a9e-5cc4-ac96-2d1559463604"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 53.67027848480601,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 70.0,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 1.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 4645029.0,
+          "normalized_value": 0.6192007479535401,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 18.576022438606202,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 726.1535067473546,
+          "normalized_value": 0.8925231184707584,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 22.31307796176896,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.12137356872143894,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.08688003365255012,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 15.0,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-los_angeles",
+          "distance": 0.10126648701739263,
+          "similarity": 89.87335129826074
+        },
+        {
+          "reference_id": "waymo-houston",
+          "distance": 0.270861798284178,
+          "similarity": 72.9138201715822
+        },
+        {
+          "reference_id": "waymo-dallas",
+          "distance": 0.2743420966196425,
+          "similarity": 72.56579033803575
+        }
+      ],
+      "strongest_factor_ids": [
+        "zero_vehicle_household_share",
+        "transit_commute_share"
+      ],
+      "weakest_factor_ids": [
+        "population",
+        "population_density_per_km2"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:31080",
+      "rank": 2,
+      "expansion_score": 82.93556299879698,
+      "pillars": {
+        "familiarity": 89.87335129826074,
+        "readiness": 86.74651609361892,
+        "opportunity": 74.09229815192222
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 510.0319999999999,
+          "normalized_value": 0.5593540917294314,
+          "reference_value": 370.84,
+          "distance_component": 0.0015490068425777766,
+          "score_points": null,
+          "provenance_ids": [
+            "cd46b4fc-c2be-5aff-9dd3-d582722a2935",
+            "083e961a-b2ee-54ac-809f-ff690aec9bd1"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 0.0,
+          "normalized_value": 0.0,
+          "reference_value": 0.0,
+          "distance_component": 0.0,
+          "score_points": null,
+          "provenance_ids": [
+            "cd46b4fc-c2be-5aff-9dd3-d582722a2935",
+            "083e961a-b2ee-54ac-809f-ff690aec9bd1"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 51.46666666666667,
+          "normalized_value": 0.2593619972260749,
+          "reference_value": 45.36666666666667,
+          "distance_component": 0.00013147269638059283,
+          "score_points": null,
+          "provenance_ids": [
+            "55dfe9be-c25d-5454-a78d-1703f348e48d",
+            "46959b7e-f93b-501e-b64f-ae2fa0b1566a",
+            "8cb87e6e-a0f8-5799-82db-2a8eb657d2d2",
+            "db105fb9-b645-5bed-b7b6-306fc45b0268",
+            "24c4e925-0111-5fd9-9d6b-eed5982a3c4c",
+            "9d51f853-bff9-50f4-93e0-2d1e4490d2fa"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 29.509705252898495,
+          "normalized_value": 0.8288607438494684,
+          "reference_value": 31.00658806006066,
+          "distance_component": 0.005549614665337554,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 5.314785865967842,
+          "normalized_value": 1.0,
+          "reference_value": 4.644573571637176,
+          "distance_component": 0.0009417751027616203,
+          "score_points": null,
+          "provenance_ids": [
+            "27c778a2-c183-5ffa-b9b4-40952d2d6772",
+            "609d2679-6ee1-5a66-ba6e-be783cdc6d69"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 17.610212905913116,
+          "normalized_value": 1.0,
+          "reference_value": 14.06024513449907,
+          "distance_component": 0.0012478369832683769,
+          "score_points": null,
+          "provenance_ids": [
+            "27c778a2-c183-5ffa-b9b4-40952d2d6772",
+            "609d2679-6ee1-5a66-ba6e-be783cdc6d69"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.061044835442755734,
+          "normalized_value": 0.6774676996657095,
+          "reference_value": 0.0649945088570456,
+          "distance_component": 0.000577517016084199,
+          "score_points": null,
+          "provenance_ids": [
+            "27c778a2-c183-5ffa-b9b4-40952d2d6772",
+            "609d2679-6ee1-5a66-ba6e-be783cdc6d69"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.02925368418569538,
+          "normalized_value": 0.05899895357515948,
+          "reference_value": 0.022963107779110294,
+          "distance_component": 0.00023142589532566054,
+          "score_points": null,
+          "provenance_ids": [
+            "27c778a2-c183-5ffa-b9b4-40952d2d6772",
+            "609d2679-6ee1-5a66-ba6e-be783cdc6d69"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.9097014803715489,
+          "normalized_value": 0.807277093919484,
+          "reference_value": 0.9120423833638441,
+          "distance_component": 0.000026252191107970115,
+          "score_points": null,
+          "provenance_ids": [
+            "27c778a2-c183-5ffa-b9b4-40952d2d6772",
+            "609d2679-6ee1-5a66-ba6e-be783cdc6d69"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 38.38302046161825,
+          "normalized_value": 0.8106645156231275,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 56.74651609361892,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 1.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 12974487.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 1032.2178178421786,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 25.0,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.0787363407060794,
+          "normalized_value": 0.46117147049332624,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 13.835144114799787,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.032203132866309755,
+          "normalized_value": 0.35047693580816275,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 5.257154037122441,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-san_francisco_bay_area",
+          "distance": 0.10126648701739263,
+          "similarity": 89.87335129826074
+        },
+        {
+          "reference_id": "waymo-dallas",
+          "distance": 0.23159056113893478,
+          "similarity": 76.84094388610652
+        },
+        {
+          "reference_id": "waymo-tampa",
+          "distance": 0.23391120115636305,
+          "similarity": 76.60887988436369
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "population_density_per_km2"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:33100",
+      "rank": 3,
+      "expansion_score": 73.4886283613145,
+      "pillars": {
+        "familiarity": 92.23203287895953,
+        "readiness": 65.82452527502119,
+        "opportunity": 58.5772753868161
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1574.292,
+          "normalized_value": 1.0,
+          "reference_value": 1306.83,
+          "distance_component": 0.0005304496022746984,
+          "score_points": null,
+          "provenance_ids": [
+            "5cdc849f-53d6-56cb-89b7-b640aa4ba7a1",
+            "c2bbb0a3-e559-5066-9b3c-b11fb5fa70d2"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 0.0,
+          "normalized_value": 0.0,
+          "reference_value": 0.0,
+          "distance_component": 0.0,
+          "score_points": null,
+          "provenance_ids": [
+            "73158877-d35f-5de4-9117-7b9e63c2ff8e",
+            "81e18d06-73eb-50a4-88dc-49e7bcfcca90"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 93.43333333333334,
+          "normalized_value": 0.508817119080642,
+          "reference_value": 116.63333333333333,
+          "distance_component": 0.0019017431899997336,
+          "score_points": null,
+          "provenance_ids": [
+            "0af3fb56-6ed6-541c-87b6-c22b9ec687dd",
+            "a8efb726-b412-51fe-b20b-de716f078fd5",
+            "af2fc7f2-4503-54c2-b158-f5d80d4523ae",
+            "938916f6-ef4b-57fc-88c7-006754b58e0a",
+            "ded861e2-149d-576c-a0d9-aa61bee4c2c6",
+            "33658af8-c702-5d80-b9f9-329bd87b1cb7"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 29.309263936755983,
+          "normalized_value": 0.8065550435712654,
+          "reference_value": 29.179618910789323,
+          "distance_component": 0.00004162928452499046,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 2.8017088558034198,
+          "normalized_value": 0.5610942277311605,
+          "reference_value": 3.0455559888847565,
+          "distance_component": 0.00028913862291472033,
+          "score_points": null,
+          "provenance_ids": [
+            "6573975b-2972-5fe5-9135-c1a61b19ca11",
+            "f81d657e-c7ac-57d4-ad4b-4fa4af3c5261",
+            "841d9b50-3554-53ab-a1ec-ebfce7520811"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 8.8982569947139,
+          "normalized_value": 0.6667823708175469,
+          "reference_value": 7.915336612262492,
+          "distance_component": 0.00030468946215220493,
+          "score_points": null,
+          "provenance_ids": [
+            "6573975b-2972-5fe5-9135-c1a61b19ca11",
+            "f81d657e-c7ac-57d4-ad4b-4fa4af3c5261",
+            "841d9b50-3554-53ab-a1ec-ebfce7520811"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.05139203564797285,
+          "normalized_value": 0.4917409302818053,
+          "reference_value": 0.05753635564896431,
+          "distance_component": 0.001397623078834757,
+          "score_points": null,
+          "provenance_ids": [
+            "6573975b-2972-5fe5-9135-c1a61b19ca11",
+            "f81d657e-c7ac-57d4-ad4b-4fa4af3c5261",
+            "841d9b50-3554-53ab-a1ec-ebfce7520811"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.07712890763575155,
+          "normalized_value": 0.425121393993567,
+          "reference_value": 0.06260979722462216,
+          "distance_component": 0.001232852399634056,
+          "score_points": null,
+          "provenance_ids": [
+            "6573975b-2972-5fe5-9135-c1a61b19ca11",
+            "f81d657e-c7ac-57d4-ad4b-4fa4af3c5261",
+            "841d9b50-3554-53ab-a1ec-ebfce7520811"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.8714790567162757,
+          "normalized_value": 0.542721113351778,
+          "reference_value": 0.8798538471264136,
+          "distance_component": 0.0003360056790214025,
+          "score_points": null,
+          "provenance_ids": [
+            "6573975b-2972-5fe5-9135-c1a61b19ca11",
+            "f81d657e-c7ac-57d4-ad4b-4fa4af3c5261",
+            "841d9b50-3554-53ab-a1ec-ebfce7520811"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 22.466548605273783,
+          "normalized_value": 0.5117789325003028,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 35.824525275021195,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 1.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 6249291.0,
+          "normalized_value": 0.7291825049252142,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 21.875475147756426,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 476.1756923510244,
+          "normalized_value": 0.763643251148658,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 19.09108127871645,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.07858841689448805,
+          "normalized_value": 0.45930208137989514,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 13.779062441396855,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.024203233589515177,
+          "normalized_value": 0.2554437679297577,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 3.8316565189463656,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-orlando",
+          "distance": 0.07767967121040462,
+          "similarity": 92.23203287895953
+        },
+        {
+          "reference_id": "waymo-houston",
+          "distance": 0.16068817371517752,
+          "similarity": 83.93118262848225
+        },
+        {
+          "reference_id": "waymo-tampa",
+          "distance": 0.18800477496936277,
+          "similarity": 81.19952250306372
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:41740",
+      "rank": 4,
+      "expansion_score": 65.77632360492272,
+      "pillars": {
+        "familiarity": 77.92802088270831,
+        "readiness": 96.81939750272106,
+        "opportunity": 38.10308937823795
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 621.792,
+          "normalized_value": 0.6367691970654082,
+          "reference_value": 447.04,
+          "distance_component": 0.0016616815077068578,
+          "score_points": null,
+          "provenance_ids": [
+            "efbaf134-86cf-5c63-aee8-3cc9d652045d",
+            "b316701f-ed27-5524-adab-6f5f90e348a5"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 162.56,
+          "normalized_value": 0.639653426973741,
+          "reference_value": 1460.5,
+          "distance_component": 0.007553237023740812,
+          "score_points": null,
+          "provenance_ids": [
+            "efbaf134-86cf-5c63-aee8-3cc9d652045d",
+            "b316701f-ed27-5524-adab-6f5f90e348a5"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 43.93333333333334,
+          "normalized_value": 0.2145829205468595,
+          "reference_value": 21.633333333333336,
+          "distance_component": 0.0017570560919942199,
+          "score_points": null,
+          "provenance_ids": [
+            "d6ba7521-507a-543e-9d23-866e2b47e25e",
+            "2e561fbd-2c14-5e6e-8cb0-6dacb98726e4",
+            "e77475c6-9288-5dc3-8c79-604690fb832c",
+            "ad31f204-09b7-51fe-9935-88dfd4b470a8",
+            "65c7147e-e154-5189-8c81-31f0a2a172a4",
+            "de2d07c3-c1df-527a-95b1-35d051efebd8"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 25.533664413924935,
+          "normalized_value": 0.38639520353650314,
+          "reference_value": 27.027661282558658,
+          "distance_component": 0.005528236361433604,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 2.2383635411495564,
+          "normalized_value": 0.4223736259633565,
+          "reference_value": 1.7325487301934308,
+          "distance_component": 0.0021578123940681143,
+          "score_points": null,
+          "provenance_ids": [
+            "f3ba270e-fdcd-562c-ae98-46406512533a"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 5.685257774213323,
+          "normalized_value": 0.4596513301888261,
+          "reference_value": 3.7935192511253826,
+          "distance_component": 0.0030822068980553862,
+          "score_points": null,
+          "provenance_ids": [
+            "f3ba270e-fdcd-562c-ae98-46406512533a"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.07439833342737501,
+          "normalized_value": 0.934398548060416,
+          "reference_value": 0.04906969454344496,
+          "distance_component": 0.02375013682201424,
+          "score_points": null,
+          "provenance_ids": [
+            "f3ba270e-fdcd-562c-ae98-46406512533a"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.04634943614673063,
+          "normalized_value": 0.18973752726122461,
+          "reference_value": 0.04573380642666799,
+          "distance_component": 2.2165127014143385e-6,
+          "score_points": null,
+          "provenance_ids": [
+            "f3ba270e-fdcd-562c-ae98-46406512533a"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.8792522304258943,
+          "normalized_value": 0.5965230284636565,
+          "reference_value": 0.905196499029887,
+          "distance_component": 0.003224642603701351,
+          "score_points": null,
+          "provenance_ids": [
+            "f3ba270e-fdcd-562c-ae98-46406512533a"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 49.532135683388404,
+          "normalized_value": 0.9545628214674438,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 66.81939750272106,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 1.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 3288774.0,
+          "normalized_value": 0.49119740761573183,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 14.735922228471955,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 301.5827599459764,
+          "normalized_value": 0.6242765134601412,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 15.60691283650353,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.05490413036017069,
+          "normalized_value": 0.15999159897462092,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 4.799747969238628,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.01931433440485774,
+          "normalized_value": 0.19736708960158905,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 2.9605063440238357,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-denver",
+          "distance": 0.2207197911729168,
+          "similarity": 77.92802088270831
+        },
+        {
+          "reference_id": "waymo-dallas",
+          "distance": 0.25784347289643067,
+          "similarity": 74.21565271035692
+        },
+        {
+          "reference_id": "waymo-nashville",
+          "distance": 0.2614115467749387,
+          "similarity": 73.85884532250613
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "arterial_share"
+      ],
+      "weakest_factor_ids": [
+        "zero_vehicle_household_share",
+        "transit_commute_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:36740",
+      "rank": 5,
+      "expansion_score": 64.67393162252728,
+      "pillars": {
+        "familiarity": 92.23203287895953,
+        "readiness": 73.56119841834985,
+        "opportunity": 32.67219696818372
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1306.83,
+          "normalized_value": 0.9271680288420876,
+          "reference_value": 1574.292,
+          "distance_component": 0.0005304496022746984,
+          "score_points": null,
+          "provenance_ids": [
+            "2eca991a-70b8-5437-aae2-5440dbb8badb",
+            "a43e1c23-37c2-5567-a1de-a31bf30241b6"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 0.0,
+          "normalized_value": 0.0,
+          "reference_value": 0.0,
+          "distance_component": 0.0,
+          "score_points": null,
+          "provenance_ids": [
+            "2eca991a-70b8-5437-aae2-5440dbb8badb",
+            "a43e1c23-37c2-5567-a1de-a31bf30241b6"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 116.63333333333333,
+          "normalized_value": 0.6467208242520308,
+          "reference_value": 93.43333333333334,
+          "distance_component": 0.0019017431899997336,
+          "score_points": null,
+          "provenance_ids": [
+            "f2e1ed5e-e3df-5d75-80fb-3f12c9a51c15",
+            "2b06392d-2908-5bd2-bc2c-7b25b45e823d",
+            "247dbd36-9058-52e9-93f4-e77be7f54b97",
+            "6602ac71-e819-5274-af84-305eb037bd12",
+            "9e54f1d3-0f0d-5630-85d2-b7a5ad7afb61",
+            "ddbdb15f-82e9-54b7-a1ec-0760ec5318fe"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 29.179618910789323,
+          "normalized_value": 0.7921277630712906,
+          "reference_value": 29.309263936755983,
+          "distance_component": 0.00004162928452499046,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 3.0455559888847565,
+          "normalized_value": 0.6148658394714385,
+          "reference_value": 2.8017088558034198,
+          "distance_component": 0.00028913862291472033,
+          "score_points": null,
+          "provenance_ids": [
+            "80eadc83-ad19-5b5f-9964-b86286eea43f",
+            "73d02ed4-3817-5e12-8f42-7bd527d8cf48",
+            "a7bff478-e3d5-551f-9d27-ce000cbb025e",
+            "12a7e705-3cd0-5769-8491-6fbd4456c975"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 7.915336612262492,
+          "normalized_value": 0.6115836876672937,
+          "reference_value": 8.8982569947139,
+          "distance_component": 0.00030468946215220493,
+          "score_points": null,
+          "provenance_ids": [
+            "80eadc83-ad19-5b5f-9964-b86286eea43f",
+            "73d02ed4-3817-5e12-8f42-7bd527d8cf48",
+            "a7bff478-e3d5-551f-9d27-ce000cbb025e",
+            "12a7e705-3cd0-5769-8491-6fbd4456c975"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.05753635564896431,
+          "normalized_value": 0.6099620400226108,
+          "reference_value": 0.05139203564797285,
+          "distance_component": 0.001397623078834757,
+          "score_points": null,
+          "provenance_ids": [
+            "80eadc83-ad19-5b5f-9964-b86286eea43f",
+            "73d02ed4-3817-5e12-8f42-7bd527d8cf48",
+            "a7bff478-e3d5-551f-9d27-ce000cbb025e",
+            "12a7e705-3cd0-5769-8491-6fbd4456c975"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.06260979722462216,
+          "normalized_value": 0.3140875072907205,
+          "reference_value": 0.07712890763575155,
+          "distance_component": 0.001232852399634056,
+          "score_points": null,
+          "provenance_ids": [
+            "80eadc83-ad19-5b5f-9964-b86286eea43f",
+            "73d02ed4-3817-5e12-8f42-7bd527d8cf48",
+            "a7bff478-e3d5-551f-9d27-ce000cbb025e",
+            "12a7e705-3cd0-5769-8491-6fbd4456c975"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.8798538471264136,
+          "normalized_value": 0.6006871101966009,
+          "reference_value": 0.8714790567162757,
+          "distance_component": 0.0003360056790214025,
+          "score_points": null,
+          "provenance_ids": [
+            "80eadc83-ad19-5b5f-9964-b86286eea43f",
+            "73d02ed4-3817-5e12-8f42-7bd527d8cf48",
+            "a7bff478-e3d5-551f-9d27-ce000cbb025e",
+            "12a7e705-3cd0-5769-8491-6fbd4456c975"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 27.418383775762006,
+          "normalized_value": 0.6223028345478551,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 43.56119841834985,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 1.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 2793746.0,
+          "normalized_value": 0.43072124732842193,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 12.921637419852658,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 308.8943832035912,
+          "normalized_value": 0.6315814554215157,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 15.789536385537891,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.04920499063400224,
+          "normalized_value": 0.08796864577048263,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 2.639059373114479,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.010118825308303993,
+          "normalized_value": 0.08813091931191251,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 1.3219637896786878,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-miami",
+          "distance": 0.07767967121040462,
+          "similarity": 92.23203287895953
+        },
+        {
+          "reference_id": "waymo-houston",
+          "distance": 0.126263885032539,
+          "similarity": 87.3736114967461
+        },
+        {
+          "reference_id": "waymo-dallas",
+          "distance": 0.16963660751690696,
+          "similarity": 83.0363392483093
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "zero_vehicle_household_share",
+        "transit_commute_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:26420",
+      "rank": 6,
+      "expansion_score": 64.12319536906786,
+      "pillars": {
+        "familiarity": 87.3736114967461,
+        "readiness": 48.43436497102691,
+        "opportunity": 48.7171944404101
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1536.446,
+          "normalized_value": 0.9904814387732024,
+          "reference_value": 1306.83,
+          "distance_component": 0.00040085878771053843,
+          "score_points": null,
+          "provenance_ids": [
+            "11cffa08-4b10-5b6b-8331-235a030202ba",
+            "b4c0c4d2-41e5-5963-ad63-d71efbc6f77f"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 0.0,
+          "normalized_value": 0.0,
+          "reference_value": 0.0,
+          "distance_component": 0.0,
+          "score_points": null,
+          "provenance_ids": [
+            "11cffa08-4b10-5b6b-8331-235a030202ba",
+            "b4c0c4d2-41e5-5963-ad63-d71efbc6f77f"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 110.33333333333333,
+          "normalized_value": 0.6092728353477312,
+          "reference_value": 116.63333333333333,
+          "distance_component": 0.00014023518729765436,
+          "score_points": null,
+          "provenance_ids": [
+            "5398d8d1-05a0-51d2-830b-453a6b1f8c06",
+            "9e6c7e41-63de-57c5-bce7-0066c31d27ee",
+            "23c389b5-e43c-57f6-8735-04af4c942f99",
+            "de9d0302-315e-53de-9743-a14fbc492467",
+            "9f1d8ca5-2898-5b3b-a2dd-38fa80fa4e44",
+            "5235986a-c882-5e35-a23b-b3b372889fac"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 29.932653492623114,
+          "normalized_value": 0.8759276702199938,
+          "reference_value": 29.179618910789323,
+          "distance_component": 0.0014044848876262565,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 3.034807589676085,
+          "normalized_value": 0.6125647844225722,
+          "reference_value": 3.0455559888847565,
+          "distance_component": 5.294854337912817e-7,
+          "score_points": null,
+          "provenance_ids": [
+            "329ed801-4785-5b93-8cea-60f3ab25d9d7",
+            "2cc9a7fd-55a0-5b7c-aee9-34442b542070",
+            "5e3e9a1d-f15e-5e3d-abcc-a8ce0abbacb5",
+            "4421f323-89cb-5596-840f-2f43edec05db",
+            "35bb50bd-e859-5f85-b821-d057753aacf0",
+            "d424030d-16b9-533e-9b27-4d5cafb493c0",
+            "52397a22-30b8-5946-9c16-9bd511bb94bc",
+            "74ebeaf4-afb3-5c78-b628-f2f8f7bb54b0",
+            "e76a8387-2c82-5abb-9ab6-82c5709a343c",
+            "19e16477-29ca-5b45-a925-c90163dc5d2f"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 7.376500709755482,
+          "normalized_value": 0.5786801544722522,
+          "reference_value": 7.915336612262492,
+          "distance_component": 0.00010826424967171958,
+          "score_points": null,
+          "provenance_ids": [
+            "329ed801-4785-5b93-8cea-60f3ab25d9d7",
+            "2cc9a7fd-55a0-5b7c-aee9-34442b542070",
+            "5e3e9a1d-f15e-5e3d-abcc-a8ce0abbacb5",
+            "4421f323-89cb-5596-840f-2f43edec05db",
+            "35bb50bd-e859-5f85-b821-d057753aacf0",
+            "d424030d-16b9-533e-9b27-4d5cafb493c0",
+            "52397a22-30b8-5946-9c16-9bd511bb94bc",
+            "74ebeaf4-afb3-5c78-b628-f2f8f7bb54b0",
+            "e76a8387-2c82-5abb-9ab6-82c5709a343c",
+            "19e16477-29ca-5b45-a925-c90163dc5d2f"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.05201792718074153,
+          "normalized_value": 0.5037835308575155,
+          "reference_value": 0.05753635564896431,
+          "distance_component": 0.0011273875808522228,
+          "score_points": null,
+          "provenance_ids": [
+            "329ed801-4785-5b93-8cea-60f3ab25d9d7",
+            "2cc9a7fd-55a0-5b7c-aee9-34442b542070",
+            "5e3e9a1d-f15e-5e3d-abcc-a8ce0abbacb5",
+            "4421f323-89cb-5596-840f-2f43edec05db",
+            "35bb50bd-e859-5f85-b821-d057753aacf0",
+            "d424030d-16b9-533e-9b27-4d5cafb493c0",
+            "52397a22-30b8-5946-9c16-9bd511bb94bc",
+            "74ebeaf4-afb3-5c78-b628-f2f8f7bb54b0",
+            "e76a8387-2c82-5abb-9ab6-82c5709a343c",
+            "19e16477-29ca-5b45-a925-c90163dc5d2f"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.03057085798161227,
+          "normalized_value": 0.06907194853714338,
+          "reference_value": 0.06260979722462216,
+          "distance_component": 0.00600326240313276,
+          "score_points": null,
+          "provenance_ids": [
+            "329ed801-4785-5b93-8cea-60f3ab25d9d7",
+            "2cc9a7fd-55a0-5b7c-aee9-34442b542070",
+            "5e3e9a1d-f15e-5e3d-abcc-a8ce0abbacb5",
+            "4421f323-89cb-5596-840f-2f43edec05db",
+            "35bb50bd-e859-5f85-b821-d057753aacf0",
+            "d424030d-16b9-533e-9b27-4d5cafb493c0",
+            "52397a22-30b8-5946-9c16-9bd511bb94bc",
+            "74ebeaf4-afb3-5c78-b628-f2f8f7bb54b0",
+            "e76a8387-2c82-5abb-9ab6-82c5709a343c",
+            "19e16477-29ca-5b45-a925-c90163dc5d2f"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.9174112148376463,
+          "normalized_value": 0.8606399151782992,
+          "reference_value": 0.8798538471264136,
+          "distance_component": 0.006757546081785285,
+          "score_points": null,
+          "provenance_ids": [
+            "329ed801-4785-5b93-8cea-60f3ab25d9d7",
+            "2cc9a7fd-55a0-5b7c-aee9-34442b542070",
+            "5e3e9a1d-f15e-5e3d-abcc-a8ce0abbacb5",
+            "4421f323-89cb-5596-840f-2f43edec05db",
+            "35bb50bd-e859-5f85-b821-d057753aacf0",
+            "d424030d-16b9-533e-9b27-4d5cafb493c0",
+            "52397a22-30b8-5946-9c16-9bd511bb94bc",
+            "74ebeaf4-afb3-5c78-b628-f2f8f7bb54b0",
+            "e76a8387-2c82-5abb-9ab6-82c5709a343c",
+            "19e16477-29ca-5b45-a925-c90163dc5d2f"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 16.176733772344452,
+          "normalized_value": 0.33165968882192187,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 23.21617821753453,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.9861100437094271,
+          "normalized_value": 0.8406062251164126,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 25.21818675349238,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 7442788.0,
+          "normalized_value": 0.7939760817327202,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 23.819282451981604,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 325.12587698050834,
+          "normalized_value": 0.6472004857578699,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 16.180012143946747,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.0594220545290128,
+          "normalized_value": 0.21708692504607421,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 6.512607751382227,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.015076068211644936,
+          "normalized_value": 0.14701947287330117,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 2.2052920930995175,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-orlando",
+          "distance": 0.126263885032539,
+          "similarity": 87.3736114967461
+        },
+        {
+          "reference_id": "waymo-miami",
+          "distance": 0.16068817371517752,
+          "similarity": 83.93118262848225
+        },
+        {
+          "reference_id": "waymo-austin",
+          "distance": 0.17989031831908756,
+          "similarity": 82.01096816809125
+        }
+      ],
+      "strongest_factor_ids": [
+        "annual_snowfall_mm",
+        "road_density_km_per_km2"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:19100",
+      "rank": 7,
+      "expansion_score": 63.34909675004872,
+      "pillars": {
+        "familiarity": 85.14631713408475,
+        "readiness": 57.60034315526305,
+        "opportunity": 44.42625316340553
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1018.2860000000001,
+          "normalized_value": 0.8296000983102666,
+          "reference_value": 903.478,
+          "distance_component": 0.00021878546524705316,
+          "score_points": null,
+          "provenance_ids": [
+            "86c54dd5-9d9d-5437-9943-049c9cf75af8",
+            "85a1e2ce-d190-59d7-9949-1cd135bb1980"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 20.32,
+          "normalized_value": 0.3839599215725247,
+          "reference_value": 5.08,
+          "distance_component": 0.0024789537448403906,
+          "score_points": null,
+          "provenance_ids": [
+            "86c54dd5-9d9d-5437-9943-049c9cf75af8",
+            "85a1e2ce-d190-59d7-9949-1cd135bb1980"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 99.83333333333333,
+          "normalized_value": 0.546859520507232,
+          "reference_value": 122.56666666666666,
+          "distance_component": 0.001826005746105491,
+          "score_points": null,
+          "provenance_ids": [
+            "4162a4f7-a159-5a37-ae2c-3f617300e1cc",
+            "4c4b0e6e-965d-5414-880a-0ceab6522430",
+            "64bf64df-dc69-59e9-b97c-eb8e5fd02b8e",
+            "2f2d905b-da5a-5a06-a271-9c54b3e75878",
+            "b6107237-94a6-5000-ac13-c26c612a5392",
+            "15aafa6b-0273-5e51-9346-8654e414455f"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 27.9140571767235,
+          "normalized_value": 0.6512923242161388,
+          "reference_value": 27.289687212492392,
+          "distance_component": 0.0009655421435362992,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 3.6233555129365436,
+          "normalized_value": 0.7303362826935346,
+          "reference_value": 2.4798957085707665,
+          "distance_component": 0.006039020706616669,
+          "score_points": null,
+          "provenance_ids": [
+            "ababd2ce-b56e-583b-a817-d76e5997dc99",
+            "55afebe4-3a72-55d0-a4b8-dc0d6048690d",
+            "de02027a-aebb-5afe-a404-8a911fe08ace",
+            "b5e0f197-3708-581f-b2f4-34e7c14ce0fb",
+            "cce928f2-8f15-525f-8d48-feb16be68319",
+            "d471bd09-c84a-53ac-abfc-3df561eb3f54",
+            "91fac6ad-11cc-58bf-b034-afb7f237a34b",
+            "e49873e5-4b06-5a51-a3d1-8e17e91edfd6",
+            "f9765a9c-545e-5d00-ad77-c4b6b731468e",
+            "28ba14e3-2e3d-5c79-8a56-2b5eda8ce703",
+            "d4bfdc59-1e0f-5b14-9ace-6bba1614b242"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 9.867917386633351,
+          "normalized_value": 0.7161072031932398,
+          "reference_value": 5.5085548747023685,
+          "distance_component": 0.007322100668403796,
+          "score_points": null,
+          "provenance_ids": [
+            "ababd2ce-b56e-583b-a817-d76e5997dc99",
+            "55afebe4-3a72-55d0-a4b8-dc0d6048690d",
+            "de02027a-aebb-5afe-a404-8a911fe08ace",
+            "b5e0f197-3708-581f-b2f4-34e7c14ce0fb",
+            "cce928f2-8f15-525f-8d48-feb16be68319",
+            "d471bd09-c84a-53ac-abfc-3df561eb3f54",
+            "91fac6ad-11cc-58bf-b034-afb7f237a34b",
+            "e49873e5-4b06-5a51-a3d1-8e17e91edfd6",
+            "f9765a9c-545e-5d00-ad77-c4b6b731468e",
+            "28ba14e3-2e3d-5c79-8a56-2b5eda8ce703",
+            "d4bfdc59-1e0f-5b14-9ace-6bba1614b242"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.05636206663609478,
+          "normalized_value": 0.5873678798493989,
+          "reference_value": 0.04745860310144506,
+          "distance_component": 0.002934677485013139,
+          "score_points": null,
+          "provenance_ids": [
+            "ababd2ce-b56e-583b-a817-d76e5997dc99",
+            "55afebe4-3a72-55d0-a4b8-dc0d6048690d",
+            "de02027a-aebb-5afe-a404-8a911fe08ace",
+            "b5e0f197-3708-581f-b2f4-34e7c14ce0fb",
+            "cce928f2-8f15-525f-8d48-feb16be68319",
+            "d471bd09-c84a-53ac-abfc-3df561eb3f54",
+            "91fac6ad-11cc-58bf-b034-afb7f237a34b",
+            "e49873e5-4b06-5a51-a3d1-8e17e91edfd6",
+            "f9765a9c-545e-5d00-ad77-c4b6b731468e",
+            "28ba14e3-2e3d-5c79-8a56-2b5eda8ce703",
+            "d4bfdc59-1e0f-5b14-9ace-6bba1614b242"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.04011942629394614,
+          "normalized_value": 0.14209396036462968,
+          "reference_value": 0.0415755956620609,
+          "distance_component": 0.000012400946992569814,
+          "score_points": null,
+          "provenance_ids": [
+            "ababd2ce-b56e-583b-a817-d76e5997dc99",
+            "55afebe4-3a72-55d0-a4b8-dc0d6048690d",
+            "de02027a-aebb-5afe-a404-8a911fe08ace",
+            "b5e0f197-3708-581f-b2f4-34e7c14ce0fb",
+            "cce928f2-8f15-525f-8d48-feb16be68319",
+            "d471bd09-c84a-53ac-abfc-3df561eb3f54",
+            "91fac6ad-11cc-58bf-b034-afb7f237a34b",
+            "e49873e5-4b06-5a51-a3d1-8e17e91edfd6",
+            "f9765a9c-545e-5d00-ad77-c4b6b731468e",
+            "28ba14e3-2e3d-5c79-8a56-2b5eda8ce703",
+            "d4bfdc59-1e0f-5b14-9ace-6bba1614b242"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.9035185070699592,
+          "normalized_value": 0.7644817290996412,
+          "reference_value": 0.910965801236494,
+          "distance_component": 0.00026570256136302614,
+          "score_points": null,
+          "provenance_ids": [
+            "ababd2ce-b56e-583b-a817-d76e5997dc99",
+            "55afebe4-3a72-55d0-a4b8-dc0d6048690d",
+            "de02027a-aebb-5afe-a404-8a911fe08ace",
+            "b5e0f197-3708-581f-b2f4-34e7c14ce0fb",
+            "cce928f2-8f15-525f-8d48-feb16be68319",
+            "d471bd09-c84a-53ac-abfc-3df561eb3f54",
+            "91fac6ad-11cc-58bf-b034-afb7f237a34b",
+            "e49873e5-4b06-5a51-a3d1-8e17e91edfd6",
+            "f9765a9c-545e-5d00-ad77-c4b6b731468e",
+            "28ba14e3-2e3d-5c79-8a56-2b5eda8ce703",
+            "d4bfdc59-1e0f-5b14-9ace-6bba1614b242"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 18.14518401270288,
+          "normalized_value": 0.3942906165037578,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 27.600343155263047,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 1.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 7985590.0,
+          "normalized_value": 0.8200722596713071,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 24.602167790139216,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 355.37791008133627,
+          "normalized_value": 0.6743402695430473,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 16.85850673857618,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.04819718334212278,
+          "normalized_value": 0.07523246787181884,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 2.256974036154565,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.006676650427551211,
+          "normalized_value": 0.04724030656903812,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.7086045985355718,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-austin",
+          "distance": 0.14853682865915252,
+          "similarity": 85.14631713408475
+        },
+        {
+          "reference_id": "waymo-orlando",
+          "distance": 0.16963660751690696,
+          "similarity": 83.0363392483093
+        },
+        {
+          "reference_id": "waymo-houston",
+          "distance": 0.1823312370889501,
+          "similarity": 81.76687629110499
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "arterial_share"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:45300",
+      "rank": 8,
+      "expansion_score": 62.14618567262339,
+      "pillars": {
+        "familiarity": 81.53620894732583,
+        "readiness": 64.20587863832327,
+        "opportunity": 41.72631591507099
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1345.4379999999999,
+          "normalized_value": 0.9385557192991779,
+          "reference_value": 1536.446,
+          "distance_component": 0.0002696280342895084,
+          "score_points": null,
+          "provenance_ids": [
+            "3cb06a79-42f8-5382-a47c-d2697a98c21d",
+            "9b257bf1-5f30-53c0-a3b4-ceccc4c13898"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 0.0,
+          "normalized_value": 0.0,
+          "reference_value": 0.0,
+          "distance_component": 0.0,
+          "score_points": null,
+          "provenance_ids": [
+            "3cb06a79-42f8-5382-a47c-d2697a98c21d",
+            "9b257bf1-5f30-53c0-a3b4-ceccc4c13898"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 106.56666666666666,
+          "normalized_value": 0.5868832970081236,
+          "reference_value": 110.33333333333333,
+          "distance_component": 0.000050129142706076144,
+          "score_points": null,
+          "provenance_ids": [
+            "d0dbed0f-3a94-51b3-86be-63a19288cce6",
+            "2829a838-2cd1-5487-9653-096346ab52dc",
+            "a3af3344-1f0f-5e96-8421-cd58c96813ba",
+            "7ddd9401-1a3c-5644-a163-4117b9161fdb",
+            "6e33419d-23b6-5031-982e-5e5414600641",
+            "d0692913-5c31-5b25-ac8d-1b1a2c17b26d"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 28.25784354413231,
+          "normalized_value": 0.6895498841779827,
+          "reference_value": 29.932653492623114,
+          "distance_component": 0.006947335825984339,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 4.5423809217126925,
+          "normalized_value": 0.8871521132646083,
+          "reference_value": 3.034807589676085,
+          "distance_component": 0.007539820116060446,
+          "score_points": null,
+          "provenance_ids": [
+            "9b7f5759-66a2-587e-8e6e-e6875595bdba",
+            "7ababbde-ee3a-58b3-bcaa-90a44bbda543",
+            "d456b94a-26cb-55f9-9b5d-db75f87320a4",
+            "482a0fc8-0f23-56d4-a4ef-4ea1435d6e36"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 13.676174674805155,
+          "normalized_value": 0.8746590743881069,
+          "reference_value": 7.376500709755482,
+          "distance_component": 0.008760352103455592,
+          "score_points": null,
+          "provenance_ids": [
+            "9b7f5759-66a2-587e-8e6e-e6875595bdba",
+            "7ababbde-ee3a-58b3-bcaa-90a44bbda543",
+            "d456b94a-26cb-55f9-9b5d-db75f87320a4",
+            "482a0fc8-0f23-56d4-a4ef-4ea1435d6e36"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.03805753003288941,
+          "normalized_value": 0.23517550865568707,
+          "reference_value": 0.05201792718074153,
+          "distance_component": 0.007215026959117796,
+          "score_points": null,
+          "provenance_ids": [
+            "9b7f5759-66a2-587e-8e6e-e6875595bdba",
+            "7ababbde-ee3a-58b3-bcaa-90a44bbda543",
+            "d456b94a-26cb-55f9-9b5d-db75f87320a4",
+            "482a0fc8-0f23-56d4-a4ef-4ea1435d6e36"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.053067360471356045,
+          "normalized_value": 0.24111238613460192,
+          "reference_value": 0.03057085798161227,
+          "distance_component": 0.002959791216872503,
+          "score_points": null,
+          "provenance_ids": [
+            "9b7f5759-66a2-587e-8e6e-e6875595bdba",
+            "7ababbde-ee3a-58b3-bcaa-90a44bbda543",
+            "d456b94a-26cb-55f9-9b5d-db75f87320a4",
+            "482a0fc8-0f23-56d4-a4ef-4ea1435d6e36"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.9088751094957545,
+          "normalized_value": 0.8015573792480617,
+          "reference_value": 0.9174112148376463,
+          "distance_component": 0.0003490746051947804,
+          "score_points": null,
+          "provenance_ids": [
+            "9b7f5759-66a2-587e-8e6e-e6875595bdba",
+            "7ababbde-ee3a-58b3-bcaa-90a44bbda543",
+            "d456b94a-26cb-55f9-9b5d-db75f87320a4",
+            "482a0fc8-0f23-56d4-a4ef-4ea1435d6e36"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 21.545130845818868,
+          "normalized_value": 0.48865540911890387,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 34.20587863832327,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 1.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 3304691.0,
+          "normalized_value": 0.49298729098618554,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 14.789618729585566,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 507.1539494844531,
+          "normalized_value": 0.7828870497702907,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 19.572176244257268,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.05906924963711275,
+          "normalized_value": 0.21262834858709842,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 6.378850457612953,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.008231545574972441,
+          "normalized_value": 0.06571136557434683,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.9856704836152024,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-houston",
+          "distance": 0.1846379105267416,
+          "similarity": 81.53620894732583
+        },
+        {
+          "reference_id": "waymo-dallas",
+          "distance": 0.18675501400844646,
+          "similarity": 81.32449859915536
+        },
+        {
+          "reference_id": "waymo-miami",
+          "distance": 0.18800477496936277,
+          "similarity": 81.19952250306372
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:12420",
+      "rank": 9,
+      "expansion_score": 61.482597617326434,
+      "pillars": {
+        "familiarity": 90.09363123317226,
+        "readiness": 70.37205348626503,
+        "opportunity": 28.426836067011287
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 903.478,
+          "normalized_value": 0.7828255897348627,
+          "reference_value": 802.8939999999999,
+          "distance_component": 0.0002129330438528904,
+          "score_points": null,
+          "provenance_ids": [
+            "3e29233d-58df-5d1e-93e8-40aedb99a89e",
+            "a6ef92cc-4283-5976-9a11-e1d7999b9bf9"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 5.08,
+          "normalized_value": 0.22651298623110908,
+          "reference_value": 0.0,
+          "distance_component": 0.005130813293133462,
+          "score_points": null,
+          "provenance_ids": [
+            "52a32978-e6be-5527-bce0-fe0762884216",
+            "4e99e8b0-3ed8-53dd-938c-05df23a2c538"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 122.56666666666666,
+          "normalized_value": 0.6819893005745987,
+          "reference_value": 132.33333333333334,
+          "distance_component": 0.0003370300549905205,
+          "score_points": null,
+          "provenance_ids": [
+            "2ca44ba3-83db-5f16-be86-a9eb9cb1ef6a",
+            "11c229f0-ee9b-5668-8a49-fa7b3327af4b",
+            "c2ee035e-7400-5b21-bb14-0a61aeb82565",
+            "449d21e4-fbc6-59cb-8acb-7afa566902f6",
+            "29afbbc3-a74a-53e4-b6c1-9b1b46b84721",
+            "2c9470d8-ed1e-501f-8695-a0e9aa51fa8d"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 27.289687212492392,
+          "normalized_value": 0.5818105948358082,
+          "reference_value": 26.78460322947015,
+          "distance_component": 0.0006318506286465556,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 2.4798957085707665,
+          "normalized_value": 0.4845920923936077,
+          "reference_value": 2.1535550841811633,
+          "distance_component": 0.0007254249102937361,
+          "score_points": null,
+          "provenance_ids": [
+            "7e8226ab-c7cb-5baa-869b-5fcb8ac43c90",
+            "b9e2a0cf-0b50-5fe2-8fdf-22e4f3909ae9",
+            "f8775df5-f237-5378-a000-669e0d7fbb14",
+            "841f5c9e-2126-5b94-bbb6-e9d4e91ec993",
+            "7c87bd2a-0190-5a20-b95c-679e33ea31ec"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 5.5085548747023685,
+          "normalized_value": 0.4455133993394968,
+          "reference_value": 4.048742413104195,
+          "distance_component": 0.001796826493945612,
+          "score_points": null,
+          "provenance_ids": [
+            "7e8226ab-c7cb-5baa-869b-5fcb8ac43c90",
+            "b9e2a0cf-0b50-5fe2-8fdf-22e4f3909ae9",
+            "f8775df5-f237-5378-a000-669e0d7fbb14",
+            "841f5c9e-2126-5b94-bbb6-e9d4e91ec993",
+            "7c87bd2a-0190-5a20-b95c-679e33ea31ec"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.04745860310144506,
+          "normalized_value": 0.41605887585331175,
+          "reference_value": 0.04255805827151653,
+          "distance_component": 0.0008890601498420246,
+          "score_points": null,
+          "provenance_ids": [
+            "7e8226ab-c7cb-5baa-869b-5fcb8ac43c90",
+            "b9e2a0cf-0b50-5fe2-8fdf-22e4f3909ae9",
+            "f8775df5-f237-5378-a000-669e0d7fbb14",
+            "841f5c9e-2126-5b94-bbb6-e9d4e91ec993",
+            "7c87bd2a-0190-5a20-b95c-679e33ea31ec"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.0415755956620609,
+          "normalized_value": 0.15322991429438793,
+          "reference_value": 0.045358496983970764,
+          "distance_component": 0.0000836914504344591,
+          "score_points": null,
+          "provenance_ids": [
+            "7e8226ab-c7cb-5baa-869b-5fcb8ac43c90",
+            "b9e2a0cf-0b50-5fe2-8fdf-22e4f3909ae9",
+            "f8775df5-f237-5378-a000-669e0d7fbb14",
+            "841f5c9e-2126-5b94-bbb6-e9d4e91ec993",
+            "7c87bd2a-0190-5a20-b95c-679e33ea31ec"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.910965801236494,
+          "normalized_value": 0.8160280734281216,
+          "reference_value": 0.9120834447445126,
+          "distance_component": 5.984189298758814e-6,
+          "score_points": null,
+          "provenance_ids": [
+            "7e8226ab-c7cb-5baa-869b-5fcb8ac43c90",
+            "b9e2a0cf-0b50-5fe2-8fdf-22e4f3909ae9",
+            "f8775df5-f237-5378-a000-669e0d7fbb14",
+            "841f5c9e-2126-5b94-bbb6-e9d4e91ec993",
+            "7c87bd2a-0190-5a20-b95c-679e33ea31ec"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 25.26176629610581,
+          "normalized_value": 0.5767436212323577,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 40.37205348626504,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 1.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 2426592.0,
+          "normalized_value": 0.37848841152687823,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 11.354652345806347,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 222.02868896607816,
+          "normalized_value": 0.5309468853644149,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 13.273672134110374,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.04853279753879491,
+          "normalized_value": 0.0794737966938816,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 2.384213900816448,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.010637003602696624,
+          "normalized_value": 0.0942865124185412,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 1.414297686278118,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-san_antonio",
+          "distance": 0.09906368766827742,
+          "similarity": 90.09363123317226
+        },
+        {
+          "reference_id": "waymo-dallas",
+          "distance": 0.14853682865915252,
+          "similarity": 85.14631713408475
+        },
+        {
+          "reference_id": "waymo-orlando",
+          "distance": 0.17783399089542828,
+          "similarity": 82.21660091045717
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "local_road_share"
+      ],
+      "weakest_factor_ids": [
+        "zero_vehicle_household_share",
+        "transit_commute_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:29820",
+      "rank": 10,
+      "expansion_score": 60.95821740965245,
+      "pillars": {
+        "familiarity": 76.35261015852531,
+        "readiness": 81.47782612347149,
+        "opportunity": 35.304020303870054
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 121.412,
+          "normalized_value": 0.0,
+          "reference_value": 187.96,
+          "distance_component": 0.0028876894615876398,
+          "score_points": null,
+          "provenance_ids": [
+            "a18688e8-8851-5772-859a-384ba5dffa3e",
+            "57e66dd2-8eca-53ee-932d-643ca1e071ba"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 5.08,
+          "normalized_value": 0.22651298623110908,
+          "reference_value": 0.0,
+          "distance_component": 0.005130813293133462,
+          "score_points": null,
+          "provenance_ids": [
+            "a18688e8-8851-5772-859a-384ba5dffa3e",
+            "57e66dd2-8eca-53ee-932d-643ca1e071ba"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 134.13333333333333,
+          "normalized_value": 0.750743015652863,
+          "reference_value": 176.0666666666667,
+          "distance_component": 0.006212904424582888,
+          "score_points": null,
+          "provenance_ids": [
+            "10f1bf1a-253f-54ff-b167-6ff3d09c02b9",
+            "3c3e2f8f-2ce5-58c0-9980-a84ec871d774",
+            "9339a890-e526-55b1-9921-033ace504393",
+            "4d91e783-c069-51a0-8a00-46301ac391a8",
+            "a1703b59-fafb-5c21-98e9-297806d01bb2",
+            "cfae2bc2-c7ce-56c3-9423-cde0841ff8df"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 25.108063114006953,
+          "normalized_value": 0.3390330368101863,
+          "reference_value": 26.43541879770854,
+          "distance_component": 0.004363770040642442,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 0.9872239543446969,
+          "normalized_value": 0.0,
+          "reference_value": 1.6508966655754145,
+          "distance_component": 0.006212021681520709,
+          "score_points": null,
+          "provenance_ids": [
+            "995ca088-4602-5586-aa21-a794d8f310af"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 2.6532697933887444,
+          "normalized_value": 0.14072064501382717,
+          "reference_value": 4.020434278632372,
+          "distance_component": 0.0028149927141016035,
+          "score_points": null,
+          "provenance_ids": [
+            "995ca088-4602-5586-aa21-a794d8f310af"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.05449846063575834,
+          "normalized_value": 0.5515107680056396,
+          "reference_value": 0.040915557724002814,
+          "distance_component": 0.006830108525591078,
+          "score_points": null,
+          "provenance_ids": [
+            "995ca088-4602-5586-aa21-a794d8f310af"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.05983139778861572,
+          "normalized_value": 0.29283989091084095,
+          "reference_value": 0.02153881130737006,
+          "distance_component": 0.008575520170867323,
+          "score_points": null,
+          "provenance_ids": [
+            "995ca088-4602-5586-aa21-a794d8f310af"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.8856701415756258,
+          "normalized_value": 0.6409445123739109,
+          "reference_value": 0.9375456309686271,
+          "distance_component": 0.01289208431944086,
+          "score_points": null,
+          "provenance_ids": [
+            "995ca088-4602-5586-aa21-a794d8f310af"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 33.56874380781165,
+          "normalized_value": 0.7353975160495928,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 51.477826123471495,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 1.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 2329548.0,
+          "normalized_value": 0.36335800258622053,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 10.900740077586615,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 113.9739141938958,
+          "normalized_value": 0.3282297449906974,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 8.205743624767434,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.07592073440786164,
+          "normalized_value": 0.425589208888705,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 12.76767626666115,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.02194835137362383,
+          "normalized_value": 0.22865735565699044,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 3.4298603348548564,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-phoenix",
+          "distance": 0.23647389841474684,
+          "similarity": 76.35261015852531
+        },
+        {
+          "reference_id": "waymo-san_antonio",
+          "distance": 0.3083640399775249,
+          "similarity": 69.1635960022475
+        },
+        {
+          "reference_id": "waymo-austin",
+          "distance": 0.3363993751112398,
+          "similarity": 66.36006248887603
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "intersection_density_per_km2"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "population_density_per_km2"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:12060",
+      "rank": 11,
+      "expansion_score": 60.23312487587478,
+      "pillars": {
+        "familiarity": 79.06549979776885,
+        "readiness": 56.687087463864316,
+        "opportunity": 43.17376865998592
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1374.394,
+          "normalized_value": 0.9468842065585817,
+          "reference_value": 1574.292,
+          "distance_component": 0.0002821287512911411,
+          "score_points": null,
+          "provenance_ids": [
+            "b653c602-1c3e-57d1-9450-8301d9d8b246",
+            "64c497f6-a8b6-5e19-a008-f4079bc3e985"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 12.7,
+          "normalized_value": 0.32846127634191447,
+          "reference_value": 0.0,
+          "distance_component": 0.01078868100561595,
+          "score_points": null,
+          "provenance_ids": [
+            "b653c602-1c3e-57d1-9450-8301d9d8b246",
+            "64c497f6-a8b6-5e19-a008-f4079bc3e985"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 39.13333333333333,
+          "normalized_value": 0.18605111947691697,
+          "reference_value": 93.43333333333334,
+          "distance_component": 0.01041778905001918,
+          "score_points": null,
+          "provenance_ids": [
+            "964b2621-cac6-5ab9-84cc-213d64ca9508",
+            "98feaebd-d17e-5204-b196-af5334fff0b4",
+            "ae531498-9e18-5cca-9555-0d4f4dddc654",
+            "2c647879-e77b-5a0f-a919-892505e309a8",
+            "24925a42-6652-5c51-b9fb-80d99010885a",
+            "a42013ae-8263-5b94-bfef-298e45e564c8"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 31.04758020497899,
+          "normalized_value": 1.0,
+          "reference_value": 29.309263936755983,
+          "distance_component": 0.007484190233543006,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 3.1853220036426766,
+          "normalized_value": 0.6442430822069364,
+          "reference_value": 2.8017088558034198,
+          "distance_component": 0.000691373200063376,
+          "score_points": null,
+          "provenance_ids": [
+            "19ef8a5b-b413-52f1-929f-882530de07ac",
+            "dc5dec7b-1a15-5b43-893e-629ad6c6d9c7",
+            "7c9600a0-8c1e-52b0-9d8e-698e84de202f",
+            "dbd67c37-4427-52fc-a298-c114d23bd09d",
+            "144ee86f-fea5-5f0c-8321-02d5c7028032",
+            "08c064ea-dec6-5282-aa1c-9391056cbe4e",
+            "576765d8-abab-5b29-b4a4-7bb2bc4130b0",
+            "bd93c53a-c59f-5dca-a244-33ac172ad08c",
+            "0b0bba80-0602-5a9b-a92c-3a804f7ecbe8",
+            "3ce8cb6a-6dca-528e-83f3-00a1921dc707",
+            "c5d05179-027c-5c4c-acbc-d4a3e75f40f3",
+            "d6ee91f5-d592-5fa1-b920-d25baa093c65",
+            "3193718a-c153-5225-a6fc-f4518e9ab49c",
+            "cae81cb5-cd6b-580b-bae6-f65d51b3e844",
+            "271645aa-a216-5699-b0ec-a5d40edb1ca9",
+            "fc48c1fe-47a4-5a4b-aa24-06b35c12c84d",
+            "5efebb83-c52b-5961-908b-98c8d8c48009",
+            "0ff5b24c-db4c-5ca4-8879-473c7f365946",
+            "2eef0041-f120-5edc-877e-4fde74739ca3",
+            "b7b8dbee-5b0f-5a9b-9220-378bf257f0f9",
+            "505e08ed-6b7d-5b44-b6b6-9d3fbf9d5b63",
+            "964d3b67-9e17-50d7-9cfc-8e932af98213",
+            "dcce9fa5-d763-57fe-a635-51b57df12a8f",
+            "f33f73d9-745a-58d0-ae1a-45bdf3130d50",
+            "b24c45ca-15cb-5084-8e99-bee425b55d19",
+            "619c2ee7-afac-50f0-970c-bf3be3527c19",
+            "2b92fd6d-e9b1-55f1-80af-3d16d39454b1",
+            "e990d9ed-c517-571b-936d-48f288ed3e8b",
+            "c889f6f2-4673-555a-9af0-f746e43e8325"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 7.010636703760367,
+          "normalized_value": 0.5551093021345398,
+          "reference_value": 8.8982569947139,
+          "distance_component": 0.001247087426907962,
+          "score_points": null,
+          "provenance_ids": [
+            "19ef8a5b-b413-52f1-929f-882530de07ac",
+            "dc5dec7b-1a15-5b43-893e-629ad6c6d9c7",
+            "7c9600a0-8c1e-52b0-9d8e-698e84de202f",
+            "dbd67c37-4427-52fc-a298-c114d23bd09d",
+            "144ee86f-fea5-5f0c-8321-02d5c7028032",
+            "08c064ea-dec6-5282-aa1c-9391056cbe4e",
+            "576765d8-abab-5b29-b4a4-7bb2bc4130b0",
+            "bd93c53a-c59f-5dca-a244-33ac172ad08c",
+            "0b0bba80-0602-5a9b-a92c-3a804f7ecbe8",
+            "3ce8cb6a-6dca-528e-83f3-00a1921dc707",
+            "c5d05179-027c-5c4c-acbc-d4a3e75f40f3",
+            "d6ee91f5-d592-5fa1-b920-d25baa093c65",
+            "3193718a-c153-5225-a6fc-f4518e9ab49c",
+            "cae81cb5-cd6b-580b-bae6-f65d51b3e844",
+            "271645aa-a216-5699-b0ec-a5d40edb1ca9",
+            "fc48c1fe-47a4-5a4b-aa24-06b35c12c84d",
+            "5efebb83-c52b-5961-908b-98c8d8c48009",
+            "0ff5b24c-db4c-5ca4-8879-473c7f365946",
+            "2eef0041-f120-5edc-877e-4fde74739ca3",
+            "b7b8dbee-5b0f-5a9b-9220-378bf257f0f9",
+            "505e08ed-6b7d-5b44-b6b6-9d3fbf9d5b63",
+            "964d3b67-9e17-50d7-9cfc-8e932af98213",
+            "dcce9fa5-d763-57fe-a635-51b57df12a8f",
+            "f33f73d9-745a-58d0-ae1a-45bdf3130d50",
+            "b24c45ca-15cb-5084-8e99-bee425b55d19",
+            "619c2ee7-afac-50f0-970c-bf3be3527c19",
+            "2b92fd6d-e9b1-55f1-80af-3d16d39454b1",
+            "e990d9ed-c517-571b-936d-48f288ed3e8b",
+            "c889f6f2-4673-555a-9af0-f746e43e8325"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.033404129840905517,
+          "normalized_value": 0.14564076198304585,
+          "reference_value": 0.05139203564797285,
+          "distance_component": 0.011978532649642963,
+          "score_points": null,
+          "provenance_ids": [
+            "19ef8a5b-b413-52f1-929f-882530de07ac",
+            "dc5dec7b-1a15-5b43-893e-629ad6c6d9c7",
+            "7c9600a0-8c1e-52b0-9d8e-698e84de202f",
+            "dbd67c37-4427-52fc-a298-c114d23bd09d",
+            "144ee86f-fea5-5f0c-8321-02d5c7028032",
+            "08c064ea-dec6-5282-aa1c-9391056cbe4e",
+            "576765d8-abab-5b29-b4a4-7bb2bc4130b0",
+            "bd93c53a-c59f-5dca-a244-33ac172ad08c",
+            "0b0bba80-0602-5a9b-a92c-3a804f7ecbe8",
+            "3ce8cb6a-6dca-528e-83f3-00a1921dc707",
+            "c5d05179-027c-5c4c-acbc-d4a3e75f40f3",
+            "d6ee91f5-d592-5fa1-b920-d25baa093c65",
+            "3193718a-c153-5225-a6fc-f4518e9ab49c",
+            "cae81cb5-cd6b-580b-bae6-f65d51b3e844",
+            "271645aa-a216-5699-b0ec-a5d40edb1ca9",
+            "fc48c1fe-47a4-5a4b-aa24-06b35c12c84d",
+            "5efebb83-c52b-5961-908b-98c8d8c48009",
+            "0ff5b24c-db4c-5ca4-8879-473c7f365946",
+            "2eef0041-f120-5edc-877e-4fde74739ca3",
+            "b7b8dbee-5b0f-5a9b-9220-378bf257f0f9",
+            "505e08ed-6b7d-5b44-b6b6-9d3fbf9d5b63",
+            "964d3b67-9e17-50d7-9cfc-8e932af98213",
+            "dcce9fa5-d763-57fe-a635-51b57df12a8f",
+            "f33f73d9-745a-58d0-ae1a-45bdf3130d50",
+            "b24c45ca-15cb-5084-8e99-bee425b55d19",
+            "619c2ee7-afac-50f0-970c-bf3be3527c19",
+            "2b92fd6d-e9b1-55f1-80af-3d16d39454b1",
+            "e990d9ed-c517-571b-936d-48f288ed3e8b",
+            "c889f6f2-4673-555a-9af0-f746e43e8325"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.08242810744039909,
+          "normalized_value": 0.46564665580808984,
+          "reference_value": 0.07712890763575155,
+          "distance_component": 0.00016422968451356213,
+          "score_points": null,
+          "provenance_ids": [
+            "19ef8a5b-b413-52f1-929f-882530de07ac",
+            "dc5dec7b-1a15-5b43-893e-629ad6c6d9c7",
+            "7c9600a0-8c1e-52b0-9d8e-698e84de202f",
+            "dbd67c37-4427-52fc-a298-c114d23bd09d",
+            "144ee86f-fea5-5f0c-8321-02d5c7028032",
+            "08c064ea-dec6-5282-aa1c-9391056cbe4e",
+            "576765d8-abab-5b29-b4a4-7bb2bc4130b0",
+            "bd93c53a-c59f-5dca-a244-33ac172ad08c",
+            "0b0bba80-0602-5a9b-a92c-3a804f7ecbe8",
+            "3ce8cb6a-6dca-528e-83f3-00a1921dc707",
+            "c5d05179-027c-5c4c-acbc-d4a3e75f40f3",
+            "d6ee91f5-d592-5fa1-b920-d25baa093c65",
+            "3193718a-c153-5225-a6fc-f4518e9ab49c",
+            "cae81cb5-cd6b-580b-bae6-f65d51b3e844",
+            "271645aa-a216-5699-b0ec-a5d40edb1ca9",
+            "fc48c1fe-47a4-5a4b-aa24-06b35c12c84d",
+            "5efebb83-c52b-5961-908b-98c8d8c48009",
+            "0ff5b24c-db4c-5ca4-8879-473c7f365946",
+            "2eef0041-f120-5edc-877e-4fde74739ca3",
+            "b7b8dbee-5b0f-5a9b-9220-378bf257f0f9",
+            "505e08ed-6b7d-5b44-b6b6-9d3fbf9d5b63",
+            "964d3b67-9e17-50d7-9cfc-8e932af98213",
+            "dcce9fa5-d763-57fe-a635-51b57df12a8f",
+            "f33f73d9-745a-58d0-ae1a-45bdf3130d50",
+            "b24c45ca-15cb-5084-8e99-bee425b55d19",
+            "619c2ee7-afac-50f0-970c-bf3be3527c19",
+            "2b92fd6d-e9b1-55f1-80af-3d16d39454b1",
+            "e990d9ed-c517-571b-936d-48f288ed3e8b",
+            "c889f6f2-4673-555a-9af0-f746e43e8325"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.8841677627186955,
+          "normalized_value": 0.6305458177420865,
+          "reference_value": 0.8714790567162757,
+          "distance_component": 0.000771317870124508,
+          "score_points": null,
+          "provenance_ids": [
+            "19ef8a5b-b413-52f1-929f-882530de07ac",
+            "dc5dec7b-1a15-5b43-893e-629ad6c6d9c7",
+            "7c9600a0-8c1e-52b0-9d8e-698e84de202f",
+            "dbd67c37-4427-52fc-a298-c114d23bd09d",
+            "144ee86f-fea5-5f0c-8321-02d5c7028032",
+            "08c064ea-dec6-5282-aa1c-9391056cbe4e",
+            "576765d8-abab-5b29-b4a4-7bb2bc4130b0",
+            "bd93c53a-c59f-5dca-a244-33ac172ad08c",
+            "0b0bba80-0602-5a9b-a92c-3a804f7ecbe8",
+            "3ce8cb6a-6dca-528e-83f3-00a1921dc707",
+            "c5d05179-027c-5c4c-acbc-d4a3e75f40f3",
+            "d6ee91f5-d592-5fa1-b920-d25baa093c65",
+            "3193718a-c153-5225-a6fc-f4518e9ab49c",
+            "cae81cb5-cd6b-580b-bae6-f65d51b3e844",
+            "271645aa-a216-5699-b0ec-a5d40edb1ca9",
+            "fc48c1fe-47a4-5a4b-aa24-06b35c12c84d",
+            "5efebb83-c52b-5961-908b-98c8d8c48009",
+            "0ff5b24c-db4c-5ca4-8879-473c7f365946",
+            "2eef0041-f120-5edc-877e-4fde74739ca3",
+            "b7b8dbee-5b0f-5a9b-9220-378bf257f0f9",
+            "505e08ed-6b7d-5b44-b6b6-9d3fbf9d5b63",
+            "964d3b67-9e17-50d7-9cfc-8e932af98213",
+            "dcce9fa5-d763-57fe-a635-51b57df12a8f",
+            "f33f73d9-745a-58d0-ae1a-45bdf3130d50",
+            "b24c45ca-15cb-5084-8e99-bee425b55d19",
+            "619c2ee7-afac-50f0-970c-bf3be3527c19",
+            "2b92fd6d-e9b1-55f1-80af-3d16d39454b1",
+            "e990d9ed-c517-571b-936d-48f288ed3e8b",
+            "c889f6f2-4673-555a-9af0-f746e43e8325"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 19.931663325275956,
+          "normalized_value": 0.4457897349772318,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 31.205281448406225,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.986875790893036,
+          "normalized_value": 0.8493935338486032,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 25.481806015458094,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 6256377.0,
+          "normalized_value": 0.729602622394042,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 21.888078671821262,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 274.9538385223491,
+          "normalized_value": 0.5960925585795063,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 14.902313964487657,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.05325943395206772,
+          "normalized_value": 0.13920672649783172,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 4.1762017949349515,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.015086630766383561,
+          "normalized_value": 0.1471449485828032,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 2.2071742287420477,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-miami",
+          "distance": 0.2093450020223116,
+          "similarity": 79.06549979776885
+        },
+        {
+          "reference_id": "waymo-nashville",
+          "distance": 0.2477336878381092,
+          "similarity": 75.22663121618908
+        },
+        {
+          "reference_id": "waymo-orlando",
+          "distance": 0.25503376132522604,
+          "similarity": 74.4966238674774
+        }
+      ],
+      "strongest_factor_ids": [
+        "arterial_share",
+        "annual_precipitation_mm"
+      ],
+      "weakest_factor_ids": [
+        "zero_vehicle_household_share",
+        "transit_commute_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:19740",
+      "rank": 12,
+      "expansion_score": 58.115965677384146,
+      "pillars": {
+        "familiarity": 77.92802088270831,
+        "readiness": 68.36089262706412,
+        "opportunity": 33.181446997219986
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 447.04,
+          "normalized_value": 0.5078629711604172,
+          "reference_value": 621.792,
+          "distance_component": 0.0016616815077068578,
+          "score_points": null,
+          "provenance_ids": [
+            "bd733820-4fdc-572e-ba1e-c9f494fd5e2c",
+            "711ac62d-419d-5c2d-8221-f6d20d6275cb"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 1460.5,
+          "normalized_value": 0.9144849576200773,
+          "reference_value": 162.56,
+          "distance_component": 0.007553237023740812,
+          "score_points": null,
+          "provenance_ids": [
+            "bd733820-4fdc-572e-ba1e-c9f494fd5e2c",
+            "711ac62d-419d-5c2d-8221-f6d20d6275cb"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 21.633333333333336,
+          "normalized_value": 0.08202892807608482,
+          "reference_value": 43.93333333333334,
+          "distance_component": 0.0017570560919942199,
+          "score_points": null,
+          "provenance_ids": [
+            "a1c0911c-66ac-5284-901f-a4acf7178ca9",
+            "9d018b3d-6a62-5f59-809e-b9b36c3f3130",
+            "c603c407-7646-5131-b869-61412b27e10c",
+            "16aa424c-71ab-512b-82cf-9c74c9743338",
+            "b5045887-9eeb-54c7-a336-9e9bccafc7c7",
+            "711067a7-00ce-58f1-9fda-5f8cc8fb0e88"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 27.027661282558658,
+          "normalized_value": 0.5526515772704687,
+          "reference_value": 25.533664413924935,
+          "distance_component": 0.005528236361433604,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 1.7325487301934308,
+          "normalized_value": 0.27547868411483284,
+          "reference_value": 2.2383635411495564,
+          "distance_component": 0.0021578123940681143,
+          "score_points": null,
+          "provenance_ids": [
+            "7182b0b0-73ad-534f-8765-9eac63ca2b63",
+            "1c7beae6-b386-5cc1-90b3-257526cdf5e7",
+            "a48a0e76-b954-534d-b8e8-67c1af0b2ffc",
+            "2cf393c7-00f2-5139-9d89-5b4ba8c4d544",
+            "862513cd-1cab-556f-afbd-946bf5ed8fda",
+            "1a84a1df-5c36-50da-8e10-9ec06e524557",
+            "12227bd6-a7c9-5fdc-815a-8d4174219850",
+            "6256874b-4ed7-5aef-8604-6ac7924f56a4",
+            "47a4c235-5678-5f67-bbb6-1f0850efa00d",
+            "89dc3efc-7e7b-5ba1-bddc-2952cc238252"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 3.7935192511253826,
+          "normalized_value": 0.28408917885616025,
+          "reference_value": 5.685257774213323,
+          "distance_component": 0.0030822068980553862,
+          "score_points": null,
+          "provenance_ids": [
+            "7182b0b0-73ad-534f-8765-9eac63ca2b63",
+            "1c7beae6-b386-5cc1-90b3-257526cdf5e7",
+            "a48a0e76-b954-534d-b8e8-67c1af0b2ffc",
+            "2cf393c7-00f2-5139-9d89-5b4ba8c4d544",
+            "862513cd-1cab-556f-afbd-946bf5ed8fda",
+            "1a84a1df-5c36-50da-8e10-9ec06e524557",
+            "12227bd6-a7c9-5fdc-815a-8d4174219850",
+            "6256874b-4ed7-5aef-8604-6ac7924f56a4",
+            "47a4c235-5678-5f67-bbb6-1f0850efa00d",
+            "89dc3efc-7e7b-5ba1-bddc-2952cc238252"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.04906969454344496,
+          "normalized_value": 0.4470574270577426,
+          "reference_value": 0.07439833342737501,
+          "distance_component": 0.02375013682201424,
+          "score_points": null,
+          "provenance_ids": [
+            "7182b0b0-73ad-534f-8765-9eac63ca2b63",
+            "1c7beae6-b386-5cc1-90b3-257526cdf5e7",
+            "a48a0e76-b954-534d-b8e8-67c1af0b2ffc",
+            "2cf393c7-00f2-5139-9d89-5b4ba8c4d544",
+            "862513cd-1cab-556f-afbd-946bf5ed8fda",
+            "1a84a1df-5c36-50da-8e10-9ec06e524557",
+            "12227bd6-a7c9-5fdc-815a-8d4174219850",
+            "6256874b-4ed7-5aef-8604-6ac7924f56a4",
+            "47a4c235-5678-5f67-bbb6-1f0850efa00d",
+            "89dc3efc-7e7b-5ba1-bddc-2952cc238252"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.04573380642666799,
+          "normalized_value": 0.18502954180944767,
+          "reference_value": 0.04634943614673063,
+          "distance_component": 2.2165127014143385e-6,
+          "score_points": null,
+          "provenance_ids": [
+            "7182b0b0-73ad-534f-8765-9eac63ca2b63",
+            "1c7beae6-b386-5cc1-90b3-257526cdf5e7",
+            "a48a0e76-b954-534d-b8e8-67c1af0b2ffc",
+            "2cf393c7-00f2-5139-9d89-5b4ba8c4d544",
+            "862513cd-1cab-556f-afbd-946bf5ed8fda",
+            "1a84a1df-5c36-50da-8e10-9ec06e524557",
+            "12227bd6-a7c9-5fdc-815a-8d4174219850",
+            "6256874b-4ed7-5aef-8604-6ac7924f56a4",
+            "47a4c235-5678-5f67-bbb6-1f0850efa00d",
+            "89dc3efc-7e7b-5ba1-bddc-2952cc238252"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.905196499029887,
+          "normalized_value": 0.7760959274128395,
+          "reference_value": 0.8792522304258943,
+          "distance_component": 0.003224642603701351,
+          "score_points": null,
+          "provenance_ids": [
+            "7182b0b0-73ad-534f-8765-9eac63ca2b63",
+            "1c7beae6-b386-5cc1-90b3-257526cdf5e7",
+            "a48a0e76-b954-534d-b8e8-67c1af0b2ffc",
+            "2cf393c7-00f2-5139-9d89-5b4ba8c4d544",
+            "862513cd-1cab-556f-afbd-946bf5ed8fda",
+            "1a84a1df-5c36-50da-8e10-9ec06e524557",
+            "12227bd6-a7c9-5fdc-815a-8d4174219850",
+            "6256874b-4ed7-5aef-8604-6ac7924f56a4",
+            "47a4c235-5678-5f67-bbb6-1f0850efa00d",
+            "89dc3efc-7e7b-5ba1-bddc-2952cc238252"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 26.04304562428544,
+          "normalized_value": 0.5936666647315031,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 41.55666653120522,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.9907170862694203,
+          "normalized_value": 0.8934742031952967,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 26.8042260958589,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 3002721.0,
+          "normalized_value": 0.4574633524306839,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 13.723900572920517,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 138.93350147897814,
+          "normalized_value": 0.3883361697152261,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 9.708404242880652,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.05903558834219031,
+          "normalized_value": 0.21220295353004137,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 6.366088605901242,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.021685671603650935,
+          "normalized_value": 0.22553690503450494,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 3.383053575517574,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-san_diego",
+          "distance": 0.2207197911729168,
+          "similarity": 77.92802088270831
+        },
+        {
+          "reference_id": "waymo-nashville",
+          "distance": 0.2551008255755385,
+          "similarity": 74.48991744244616
+        },
+        {
+          "reference_id": "waymo-austin",
+          "distance": 0.31367430871244795,
+          "similarity": 68.63256912875521
+        }
+      ],
+      "strongest_factor_ids": [
+        "arterial_share",
+        "annual_precipitation_mm"
+      ],
+      "weakest_factor_ids": [
+        "zero_vehicle_household_share",
+        "transit_commute_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:41700",
+      "rank": 13,
+      "expansion_score": 56.94287131448078,
+      "pillars": {
+        "familiarity": 90.09363123317226,
+        "readiness": 45.97088260651037,
+        "opportunity": 29.278105749774504
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 802.8939999999999,
+          "normalized_value": 0.7366809211530113,
+          "reference_value": 903.478,
+          "distance_component": 0.0002129330438528904,
+          "score_points": null,
+          "provenance_ids": [
+            "ac14c7cb-4acb-5982-9036-333471b42dac",
+            "ba036a5c-cb2e-5072-9f60-d37253ee1a2e"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 0.0,
+          "normalized_value": 0.0,
+          "reference_value": 5.08,
+          "distance_component": 0.005130813293133462,
+          "score_points": null,
+          "provenance_ids": [
+            "4482e25b-041b-5c01-9e72-1220da299e6d",
+            "cf9c9d1d-78cf-532e-8a03-6acf25e22ec3"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 132.33333333333334,
+          "normalized_value": 0.7400435902516347,
+          "reference_value": 122.56666666666666,
+          "distance_component": 0.0003370300549905205,
+          "score_points": null,
+          "provenance_ids": [
+            "b2e8d20d-87fa-5575-8875-c42471ba3e4d",
+            "1f30a61c-7bb7-55ec-af9e-7994ebf4ca0c",
+            "4f7b862d-cddf-594d-9451-c27b26ad192c",
+            "96247cd3-065f-5bd7-a02a-2164f8b1dc47",
+            "b0873dd0-c79a-553a-861d-57f1dc5fbed6",
+            "c2cf619c-2d34-5465-a8f2-44d5a9dbde36"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 26.78460322947015,
+          "normalized_value": 0.5256033609309737,
+          "reference_value": 27.289687212492392,
+          "distance_component": 0.0006318506286465556,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 2.1535550841811633,
+          "normalized_value": 0.3994202126272355,
+          "reference_value": 2.4798957085707665,
+          "distance_component": 0.0007254249102937361,
+          "score_points": null,
+          "provenance_ids": [
+            "760779ae-3623-54eb-bc53-be669de3cdc5",
+            "afd75e78-9dd1-5f24-88da-0c6e3f99b95f",
+            "accd9fcd-9f99-50c4-b585-dcc78821ce65",
+            "f619d8d1-8ff9-5d02-8f5d-0ad070a731c5",
+            "4465017b-d99b-520a-8bdb-1ce37682cacc",
+            "4072bb7b-88b9-5dbf-af20-ef1e957727a0",
+            "cd4003b5-0912-51d3-adb7-8184c502d775",
+            "524516d9-b790-57cd-bb95-a0811a82952b"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 4.048742413104195,
+          "normalized_value": 0.31146764245231995,
+          "reference_value": 5.5085548747023685,
+          "distance_component": 0.001796826493945612,
+          "score_points": null,
+          "provenance_ids": [
+            "760779ae-3623-54eb-bc53-be669de3cdc5",
+            "afd75e78-9dd1-5f24-88da-0c6e3f99b95f",
+            "accd9fcd-9f99-50c4-b585-dcc78821ce65",
+            "f619d8d1-8ff9-5d02-8f5d-0ad070a731c5",
+            "4465017b-d99b-520a-8bdb-1ce37682cacc",
+            "4072bb7b-88b9-5dbf-af20-ef1e957727a0",
+            "cd4003b5-0912-51d3-adb7-8184c502d775",
+            "524516d9-b790-57cd-bb95-a0811a82952b"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.04255805827151653,
+          "normalized_value": 0.32176888964894196,
+          "reference_value": 0.04745860310144506,
+          "distance_component": 0.0008890601498420246,
+          "score_points": null,
+          "provenance_ids": [
+            "760779ae-3623-54eb-bc53-be669de3cdc5",
+            "afd75e78-9dd1-5f24-88da-0c6e3f99b95f",
+            "accd9fcd-9f99-50c4-b585-dcc78821ce65",
+            "f619d8d1-8ff9-5d02-8f5d-0ad070a731c5",
+            "4465017b-d99b-520a-8bdb-1ce37682cacc",
+            "4072bb7b-88b9-5dbf-af20-ef1e957727a0",
+            "cd4003b5-0912-51d3-adb7-8184c502d775",
+            "524516d9-b790-57cd-bb95-a0811a82952b"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.045358496983970764,
+          "normalized_value": 0.18215938895855338,
+          "reference_value": 0.0415755956620609,
+          "distance_component": 0.0000836914504344591,
+          "score_points": null,
+          "provenance_ids": [
+            "760779ae-3623-54eb-bc53-be669de3cdc5",
+            "afd75e78-9dd1-5f24-88da-0c6e3f99b95f",
+            "accd9fcd-9f99-50c4-b585-dcc78821ce65",
+            "f619d8d1-8ff9-5d02-8f5d-0ad070a731c5",
+            "4465017b-d99b-520a-8bdb-1ce37682cacc",
+            "4072bb7b-88b9-5dbf-af20-ef1e957727a0",
+            "cd4003b5-0912-51d3-adb7-8184c502d775",
+            "524516d9-b790-57cd-bb95-a0811a82952b"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.9120834447445126,
+          "normalized_value": 0.8237638276245518,
+          "reference_value": 0.910965801236494,
+          "distance_component": 5.984189298758814e-6,
+          "score_points": null,
+          "provenance_ids": [
+            "760779ae-3623-54eb-bc53-be669de3cdc5",
+            "afd75e78-9dd1-5f24-88da-0c6e3f99b95f",
+            "accd9fcd-9f99-50c4-b585-dcc78821ce65",
+            "f619d8d1-8ff9-5d02-8f5d-0ad070a731c5",
+            "4465017b-d99b-520a-8bdb-1ce37682cacc",
+            "4072bb7b-88b9-5dbf-af20-ef1e957727a0",
+            "cd4003b5-0912-51d3-adb7-8184c502d775",
+            "524516d9-b790-57cd-bb95-a0811a82952b"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 15.998599934728716,
+          "normalized_value": 0.3256417877471999,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 22.794925142303992,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.9801778849024667,
+          "normalized_value": 0.7725319154735462,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 23.175957464206384,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 2662733.0,
+          "normalized_value": 0.41291543741177206,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 12.38746312235316,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 140.57896974588166,
+          "normalized_value": 0.3919127587143256,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 9.797818967858142,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.056283902229278295,
+          "normalized_value": 0.17742848410744672,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 5.322854523223402,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.012633033578087616,
+          "normalized_value": 0.1179979424226532,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 1.769969136339798,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-austin",
+          "distance": 0.09906368766827742,
+          "similarity": 90.09363123317226
+        },
+        {
+          "reference_id": "waymo-orlando",
+          "distance": 0.21766372955346447,
+          "similarity": 78.23362704465356
+        },
+        {
+          "reference_id": "waymo-phoenix",
+          "distance": 0.21899878219120028,
+          "similarity": 78.10012178087997
+        }
+      ],
+      "strongest_factor_ids": [
+        "local_road_share",
+        "arterial_share"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:38060",
+      "rank": 14,
+      "expansion_score": 55.18792574621939,
+      "pillars": {
+        "familiarity": 78.10012178087997,
+        "readiness": 53.3801350534916,
+        "opportunity": 33.179625057922706
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 187.96,
+          "normalized_value": 0.16993202939962906,
+          "reference_value": 802.8939999999999,
+          "distance_component": 0.0321204306303687,
+          "score_points": null,
+          "provenance_ids": [
+            "f4dbf9ec-59e0-5ef8-ad70-88b4f3e6ed80",
+            "b07fdf7d-4a82-52c6-bf67-483cc990b698"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 0.0,
+          "normalized_value": 0.0,
+          "reference_value": 0.0,
+          "distance_component": 0.0,
+          "score_points": null,
+          "provenance_ids": [
+            "f4dbf9ec-59e0-5ef8-ad70-88b4f3e6ed80",
+            "b07fdf7d-4a82-52c6-bf67-483cc990b698"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 176.0666666666667,
+          "normalized_value": 1.0,
+          "reference_value": 132.33333333333334,
+          "distance_component": 0.006757733496926,
+          "score_points": null,
+          "provenance_ids": [
+            "6c129f99-94eb-5a2e-9fec-f72234e680fc",
+            "a32344bb-934e-5b3e-9acf-65e22c2de662",
+            "a44cc32e-9f8c-55cf-923a-05bae318d65a",
+            "bb5f1c3c-f8f5-51d8-8376-c98aae08f457",
+            "d357e764-a4e2-5dfd-8d06-c87e95ba06c0",
+            "673034b4-e804-5c02-b638-b2f50735963f"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 26.43541879770854,
+          "normalized_value": 0.4867450884620817,
+          "reference_value": 26.78460322947015,
+          "distance_component": 0.0003019930678533301,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 1.6508966655754145,
+          "normalized_value": 0.24923927622910294,
+          "reference_value": 2.1535550841811633,
+          "distance_component": 0.002255431365741993,
+          "score_points": null,
+          "provenance_ids": [
+            "9af422ff-db73-56bd-86e3-82a95627c606",
+            "7f0a70b6-8e23-50a7-9d04-6b39e8465949"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 4.020434278632372,
+          "normalized_value": 0.3085000452422701,
+          "reference_value": 4.048742413104195,
+          "distance_component": 8.806633201095683e-7,
+          "score_points": null,
+          "provenance_ids": [
+            "9af422ff-db73-56bd-86e3-82a95627c606",
+            "7f0a70b6-8e23-50a7-9d04-6b39e8465949"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.040915557724002814,
+          "normalized_value": 0.29016600479828014,
+          "reference_value": 0.04255805827151653,
+          "distance_component": 0.00009987423308841902,
+          "score_points": null,
+          "provenance_ids": [
+            "9af422ff-db73-56bd-86e3-82a95627c606",
+            "7f0a70b6-8e23-50a7-9d04-6b39e8465949"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.02153881130737006,
+          "normalized_value": 0.0,
+          "reference_value": 0.045358496983970764,
+          "distance_component": 0.0033182042985753536,
+          "score_points": null,
+          "provenance_ids": [
+            "9af422ff-db73-56bd-86e3-82a95627c606",
+            "7f0a70b6-8e23-50a7-9d04-6b39e8465949"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.9375456309686271,
+          "normalized_value": 1.0,
+          "reference_value": 0.9120834447445126,
+          "distance_component": 0.003105918845354869,
+          "score_points": null,
+          "provenance_ids": [
+            "9af422ff-db73-56bd-86e3-82a95627c606",
+            "7f0a70b6-8e23-50a7-9d04-6b39e8465949"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 16.24656922967399,
+          "normalized_value": 0.33400192933559425,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 23.380135053491596,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 1.0,
+          "normalized_value": 1.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 30.0,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 5028754.0,
+          "normalized_value": 0.6486265362829214,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 19.45879608848764,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 133.27296252132246,
+          "normalized_value": 0.3757029509647137,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 9.392573774117842,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.04987020590051955,
+          "normalized_value": 0.09637531244529064,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 2.8912593733587193,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.010764385654856493,
+          "normalized_value": 0.09579972146389996,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 1.4369958219584995,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-san_antonio",
+          "distance": 0.21899878219120028,
+          "similarity": 78.10012178087997
+        },
+        {
+          "reference_id": "waymo-las_vegas",
+          "distance": 0.23647389841474684,
+          "similarity": 76.35261015852531
+        },
+        {
+          "reference_id": "waymo-austin",
+          "distance": 0.26334199320393253,
+          "similarity": 73.66580067960675
+        }
+      ],
+      "strongest_factor_ids": [
+        "population_share_in_counties_with_dc",
+        "annual_snowfall_mm"
+      ],
+      "weakest_factor_ids": [
+        "transit_commute_share",
+        "zero_vehicle_household_share"
+      ],
+      "legal_flags": []
+    },
+    {
+      "city_id": "cbsa:34980",
+      "rank": 15,
+      "expansion_score": 44.419282291898824,
+      "pillars": {
+        "familiarity": 75.22663121618908,
+        "readiness": 32.92446026006983,
+        "opportunity": 19.35934438352307
+      },
+      "coverage": 1.0,
+      "exclusion_reasons": [],
+      "factors": [
+        {
+          "feature": "annual_precipitation_mm",
+          "pillar": "familiarity",
+          "raw_value": 1380.49,
+          "normalized_value": 0.9486152168980367,
+          "reference_value": 1374.394,
+          "distance_component": 2.9963967953001043e-7,
+          "score_points": null,
+          "provenance_ids": [
+            "4a86781a-d501-5d1f-8f0c-c58334db008c",
+            "f1ec78ee-6430-5b6f-8017-cdc30890203b"
+          ]
+        },
+        {
+          "feature": "annual_snowfall_mm",
+          "pillar": "familiarity",
+          "raw_value": 119.38,
+          "normalized_value": 0.6011869173727463,
+          "reference_value": 12.7,
+          "distance_component": 0.007437927527567816,
+          "score_points": null,
+          "provenance_ids": [
+            "5618a212-2d32-5885-a105-b36d0ef1fee8",
+            "268d2c40-fe17-53b8-b0dc-dd7b34135cb5"
+          ]
+        },
+        {
+          "feature": "hot_days_32c",
+          "pillar": "familiarity",
+          "raw_value": 45.03333333333333,
+          "normalized_value": 0.22112145829205465,
+          "reference_value": 39.13333333333333,
+          "distance_component": 0.0001229928664608553,
+          "score_points": null,
+          "provenance_ids": [
+            "39bf64a5-ccac-5a87-9d0d-202b892ec8a3",
+            "c6bac0db-4217-5ab2-9fcf-3b0fa591fad2",
+            "7685222f-2124-5e03-8862-c02cf15e875d",
+            "8423af9a-e64b-5b2c-b1cc-e338b9599efc",
+            "7b6bad04-2686-5d49-af3a-3e6c0a139ed8",
+            "924901a7-5384-5b21-8f27-c40dc62bf4ee"
+          ]
+        },
+        {
+          "feature": "mean_commute_minutes",
+          "pillar": "familiarity",
+          "raw_value": 27.786775672602833,
+          "normalized_value": 0.6371280633915098,
+          "reference_value": 31.04758020497899,
+          "distance_component": 0.026335208475599222,
+          "score_points": null,
+          "provenance_ids": [
+            "15420067-b475-5d59-a16c-7148fb9adc5b",
+            "c243eb39-7dbd-546d-ae04-797471af1fe5"
+          ]
+        },
+        {
+          "feature": "road_density_km_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 2.1868610621374702,
+          "normalized_value": 0.4085072494559999,
+          "reference_value": 3.1853220036426766,
+          "distance_component": 0.0055571382842777494,
+          "score_points": null,
+          "provenance_ids": [
+            "dff33317-b6d1-53af-884b-b0c30d147bd6",
+            "e182e5c1-3baf-5a7c-9de3-7767624bf824",
+            "9c45812c-9d9a-54dc-b248-d8136168dd7f",
+            "5de14f39-c54b-5fcb-ac2f-4dc0c147ba93",
+            "9e07918a-45e8-58ac-89cb-af7f036862e7",
+            "791d313c-e959-5676-957e-01a0fdb0f618",
+            "d7011470-0ec2-5e55-98df-98b12f858a91",
+            "61dba32e-7435-590a-9f46-cd47f105b981",
+            "ac61e6ba-2b96-5eb4-9bdc-f677ae7478eb",
+            "0f1ff518-47b5-5958-9762-99ebb6f8b884",
+            "8e5e9b40-6437-57e3-a065-0fe6ac22ee62",
+            "94a09dac-6a38-54a9-9d86-b3e951a963e1",
+            "8a9a47f7-b26c-5a7a-b6e7-d03458c6580d",
+            "d3482c9c-24a2-5025-9649-964a6e10b7a9"
+          ]
+        },
+        {
+          "feature": "intersection_density_per_km2",
+          "pillar": "familiarity",
+          "raw_value": 4.050768930065284,
+          "normalized_value": 0.31167944755042293,
+          "reference_value": 7.010636703760367,
+          "distance_component": 0.005925809410284429,
+          "score_points": null,
+          "provenance_ids": [
+            "dff33317-b6d1-53af-884b-b0c30d147bd6",
+            "e182e5c1-3baf-5a7c-9de3-7767624bf824",
+            "9c45812c-9d9a-54dc-b248-d8136168dd7f",
+            "5de14f39-c54b-5fcb-ac2f-4dc0c147ba93",
+            "9e07918a-45e8-58ac-89cb-af7f036862e7",
+            "791d313c-e959-5676-957e-01a0fdb0f618",
+            "d7011470-0ec2-5e55-98df-98b12f858a91",
+            "61dba32e-7435-590a-9f46-cd47f105b981",
+            "ac61e6ba-2b96-5eb4-9bdc-f677ae7478eb",
+            "0f1ff518-47b5-5958-9762-99ebb6f8b884",
+            "8e5e9b40-6437-57e3-a065-0fe6ac22ee62",
+            "94a09dac-6a38-54a9-9d86-b3e951a963e1",
+            "8a9a47f7-b26c-5a7a-b6e7-d03458c6580d",
+            "d3482c9c-24a2-5025-9649-964a6e10b7a9"
+          ]
+        },
+        {
+          "feature": "freeway_share",
+          "pillar": "familiarity",
+          "raw_value": 0.04917098711435664,
+          "normalized_value": 0.4490063685418687,
+          "reference_value": 0.033404129840905517,
+          "distance_component": 0.009203069124280249,
+          "score_points": null,
+          "provenance_ids": [
+            "dff33317-b6d1-53af-884b-b0c30d147bd6",
+            "e182e5c1-3baf-5a7c-9de3-7767624bf824",
+            "9c45812c-9d9a-54dc-b248-d8136168dd7f",
+            "5de14f39-c54b-5fcb-ac2f-4dc0c147ba93",
+            "9e07918a-45e8-58ac-89cb-af7f036862e7",
+            "791d313c-e959-5676-957e-01a0fdb0f618",
+            "d7011470-0ec2-5e55-98df-98b12f858a91",
+            "61dba32e-7435-590a-9f46-cd47f105b981",
+            "ac61e6ba-2b96-5eb4-9bdc-f677ae7478eb",
+            "0f1ff518-47b5-5958-9762-99ebb6f8b884",
+            "8e5e9b40-6437-57e3-a065-0fe6ac22ee62",
+            "94a09dac-6a38-54a9-9d86-b3e951a963e1",
+            "8a9a47f7-b26c-5a7a-b6e7-d03458c6580d",
+            "d3482c9c-24a2-5025-9649-964a6e10b7a9"
+          ]
+        },
+        {
+          "feature": "arterial_share",
+          "pillar": "familiarity",
+          "raw_value": 0.0993416749093403,
+          "normalized_value": 0.5949919862663413,
+          "reference_value": 0.08242810744039909,
+          "distance_component": 0.0016730214511354276,
+          "score_points": null,
+          "provenance_ids": [
+            "dff33317-b6d1-53af-884b-b0c30d147bd6",
+            "e182e5c1-3baf-5a7c-9de3-7767624bf824",
+            "9c45812c-9d9a-54dc-b248-d8136168dd7f",
+            "5de14f39-c54b-5fcb-ac2f-4dc0c147ba93",
+            "9e07918a-45e8-58ac-89cb-af7f036862e7",
+            "791d313c-e959-5676-957e-01a0fdb0f618",
+            "d7011470-0ec2-5e55-98df-98b12f858a91",
+            "61dba32e-7435-590a-9f46-cd47f105b981",
+            "ac61e6ba-2b96-5eb4-9bdc-f677ae7478eb",
+            "0f1ff518-47b5-5958-9762-99ebb6f8b884",
+            "8e5e9b40-6437-57e3-a065-0fe6ac22ee62",
+            "94a09dac-6a38-54a9-9d86-b3e951a963e1",
+            "8a9a47f7-b26c-5a7a-b6e7-d03458c6580d",
+            "d3482c9c-24a2-5025-9649-964a6e10b7a9"
+          ]
+        },
+        {
+          "feature": "local_road_share",
+          "pillar": "familiarity",
+          "raw_value": 0.8514873379763029,
+          "normalized_value": 0.40434870656282207,
+          "reference_value": 0.8841677627186955,
+          "distance_component": 0.005116513310584453,
+          "score_points": null,
+          "provenance_ids": [
+            "dff33317-b6d1-53af-884b-b0c30d147bd6",
+            "e182e5c1-3baf-5a7c-9de3-7767624bf824",
+            "9c45812c-9d9a-54dc-b248-d8136168dd7f",
+            "5de14f39-c54b-5fcb-ac2f-4dc0c147ba93",
+            "9e07918a-45e8-58ac-89cb-af7f036862e7",
+            "791d313c-e959-5676-957e-01a0fdb0f618",
+            "d7011470-0ec2-5e55-98df-98b12f858a91",
+            "61dba32e-7435-590a-9f46-cd47f105b981",
+            "ac61e6ba-2b96-5eb4-9bdc-f677ae7478eb",
+            "0f1ff518-47b5-5958-9762-99ebb6f8b884",
+            "8e5e9b40-6437-57e3-a065-0fe6ac22ee62",
+            "94a09dac-6a38-54a9-9d86-b3e951a963e1",
+            "8a9a47f7-b26c-5a7a-b6e7-d03458c6580d",
+            "d3482c9c-24a2-5025-9649-964a6e10b7a9"
+          ]
+        },
+        {
+          "feature": "public_dc_ports_per_100k",
+          "pillar": "readiness",
+          "raw_value": 14.281620083900911,
+          "normalized_value": 0.2641741916030687,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 18.49219341221481,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population_share_in_counties_with_dc",
+          "pillar": "readiness",
+          "raw_value": 0.9547796783606046,
+          "normalized_value": 0.48107556159516734,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 14.43226684785502,
+          "provenance_ids": [
+            "e549ddf1-21fe-5a03-aa64-45e37d02db01"
+          ]
+        },
+        {
+          "feature": "population",
+          "pillar": "opportunity",
+          "raw_value": 2079596.0,
+          "normalized_value": 0.32128102611832576,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 9.638430783549772,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "population_density_per_km2",
+          "pillar": "opportunity",
+          "raw_value": 127.41186496291432,
+          "normalized_value": 0.36204805911742155,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 9.051201477935539,
+          "provenance_ids": [
+            "fe3da0ea-0605-5bf3-b21a-11a76e98b67c"
+          ]
+        },
+        {
+          "feature": "zero_vehicle_household_share",
+          "pillar": "opportunity",
+          "raw_value": 0.0422440763495406,
+          "normalized_value": 0.0,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.0,
+          "provenance_ids": [
+            "238b7854-dd37-55ed-9875-1b6f0c682f45"
+          ]
+        },
+        {
+          "feature": "transit_commute_share",
+          "pillar": "opportunity",
+          "raw_value": 0.0064583856528740045,
+          "normalized_value": 0.044647474802517136,
+          "reference_value": null,
+          "distance_component": null,
+          "score_points": 0.669712122037757,
+          "provenance_ids": [
+            "0c1897ce-4edb-5327-87f8-ec462b84a7fd"
+          ]
+        }
+      ],
+      "reference_matches": [
+        {
+          "reference_id": "waymo-atlanta",
+          "distance": 0.2477336878381092,
+          "similarity": 75.22663121618908
+        },
+        {
+          "reference_id": "waymo-denver",
+          "distance": 0.2551008255755385,
+          "similarity": 74.48991744244616
+        },
+        {
+          "reference_id": "waymo-san_diego",
+          "distance": 0.2614115467749387,
+          "similarity": 73.85884532250613
+        }
+      ],
+      "strongest_factor_ids": [
+        "annual_precipitation_mm",
+        "hot_days_32c"
+      ],
+      "weakest_factor_ids": [
+        "zero_vehicle_household_share",
+        "transit_commute_share"
+      ],
+      "legal_flags": []
+    }
+  ],
+  "unranked": [],
+  "weight_sensitivity": {
+    "baseline_ranking_id": "71f044a1cedf8c2e8246",
+    "baseline_weights": {
+      "familiarity": 0.4,
+      "readiness": 0.2,
+      "opportunity": 0.4
+    },
+    "changes": [
+      {
+        "city_id": "cbsa:41860",
+        "baseline_rank": 1,
+        "baseline_score": 90.30498067945436,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:31080",
+        "baseline_rank": 2,
+        "baseline_score": 82.93556299879698,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:33100",
+        "baseline_rank": 3,
+        "baseline_score": 73.4886283613145,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:41740",
+        "baseline_rank": 4,
+        "baseline_score": 65.77632360492272,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:36740",
+        "baseline_rank": 5,
+        "baseline_score": 64.67393162252728,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:26420",
+        "baseline_rank": 6,
+        "baseline_score": 64.12319536906786,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:19100",
+        "baseline_rank": 7,
+        "baseline_score": 63.34909675004872,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:45300",
+        "baseline_rank": 8,
+        "baseline_score": 62.14618567262339,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:12420",
+        "baseline_rank": 9,
+        "baseline_score": 61.482597617326434,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:29820",
+        "baseline_rank": 10,
+        "baseline_score": 60.95821740965245,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:12060",
+        "baseline_rank": 11,
+        "baseline_score": 60.23312487587478,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:19740",
+        "baseline_rank": 12,
+        "baseline_score": 58.115965677384146,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:41700",
+        "baseline_rank": 13,
+        "baseline_score": 56.94287131448078,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:38060",
+        "baseline_rank": 14,
+        "baseline_score": 55.18792574621939,
+        "rank_change": 0,
+        "score_change": 0.0
+      },
+      {
+        "city_id": "cbsa:34980",
+        "baseline_rank": 15,
+        "baseline_score": 44.419282291898824,
+        "rank_change": 0,
+        "score_change": 0.0
+      }
+    ]
+  }
+}

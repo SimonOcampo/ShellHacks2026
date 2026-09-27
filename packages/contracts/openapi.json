@@ -1167,6 +1167,71 @@
         "title": "ReferenceMatch",
         "type": "object"
       },
+      "ReferenceRankingRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "city_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "City Ids",
+            "type": "array"
+          },
+          "compare_weights": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PillarWeights"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reference_categories": {
+            "anyOf": [
+              {
+                "items": {
+                  "enum": [
+                    "commercial",
+                    "announced",
+                    "testing"
+                  ],
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Categories"
+          },
+          "reference_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Ids"
+          },
+          "weights": {
+            "$ref": "#/components/schemas/PillarWeights"
+          }
+        },
+        "required": [
+          "city_ids"
+        ],
+        "title": "ReferenceRankingRequest",
+        "type": "object"
+      },
       "SimulationAssumptions": {
         "additionalProperties": false,
         "properties": {
@@ -1993,6 +2058,84 @@
           }
         },
         "summary": "Rankings"
+      }
+    },
+    "/api/v1/reference-rankings": {
+      "post": {
+        "operationId": "reference_rankings_api_v1_reference_rankings_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReferenceRankingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RankingResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Reference Rankings"
       }
     },
     "/api/v1/simulations": {

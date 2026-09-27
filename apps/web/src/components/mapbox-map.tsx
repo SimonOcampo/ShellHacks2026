@@ -143,7 +143,7 @@ export function MarketMapbox({
         const map = new mapbox.Map({
           accessToken: token,
           container: container.current,
-          style: "mapbox://styles/mapbox/navigation-night-v1",
+          style: "mapbox://styles/mapbox/light-v11",
           center: [-98.5, 39.5],
           zoom: 3.3,
           attributionControl: false,
@@ -290,26 +290,55 @@ function routeCoordinates(
 ): [number, number][] {
   const routes = [
     [
-      [-1, -0.2], [-0.75, -0.9], [-0.05, -1], [0.65, -0.65], [1, 0],
-      [0.68, 0.72], [0.05, 1], [-0.72, 0.7], [-1, -0.2],
+      [-1, -0.2],
+      [-0.75, -0.9],
+      [-0.05, -1],
+      [0.65, -0.65],
+      [1, 0],
+      [0.68, 0.72],
+      [0.05, 1],
+      [-0.72, 0.7],
+      [-1, -0.2],
     ],
     [
-      [-0.92, 0.45], [-0.75, -0.45], [-0.15, -0.92], [0.55, -0.8],
-      [0.92, -0.1], [0.55, 0.68], [-0.12, 0.95], [-0.72, 0.82], [-0.92, 0.45],
+      [-0.92, 0.45],
+      [-0.75, -0.45],
+      [-0.15, -0.92],
+      [0.55, -0.8],
+      [0.92, -0.1],
+      [0.55, 0.68],
+      [-0.12, 0.95],
+      [-0.72, 0.82],
+      [-0.92, 0.45],
     ],
     [
-      [-0.7, -0.78], [0.02, -0.96], [0.75, -0.52], [0.92, 0.3],
-      [0.44, 0.92], [-0.32, 0.88], [-0.92, 0.24], [-0.7, -0.78],
+      [-0.7, -0.78],
+      [0.02, -0.96],
+      [0.75, -0.52],
+      [0.92, 0.3],
+      [0.44, 0.92],
+      [-0.32, 0.88],
+      [-0.92, 0.24],
+      [-0.7, -0.78],
     ],
     [
-      [-0.98, -0.08], [-0.45, -0.72], [0.36, -0.94], [0.96, -0.36],
-      [0.82, 0.48], [0.15, 0.96], [-0.62, 0.72], [-0.98, -0.08],
+      [-0.98, -0.08],
+      [-0.45, -0.72],
+      [0.36, -0.94],
+      [0.96, -0.36],
+      [0.82, 0.48],
+      [0.15, 0.96],
+      [-0.62, 0.72],
+      [-0.98, -0.08],
     ],
   ] as const;
   const scale = 0.006 + (routeIndex % 3) * 0.0011;
   const lonScale = scale / Math.max(Math.cos((latitude * Math.PI) / 180), 0.45);
   const route = routes[routeIndex % routes.length];
-  return route.map(([x, y]) => [longitude + x * lonScale, latitude + y * scale]);
+  return route.map(([x, y]) => [
+    longitude + x * lonScale,
+    latitude + y * scale,
+  ]);
 }
 
 type VehicleState = "idle" | "pickup" | "dropoff";
@@ -346,7 +375,8 @@ function vehicleMotion(
   seed: number,
   seconds: number,
 ): VehicleMotion {
-  const phase = ((index / Math.max(count, 1)) * 24 + seededUnit(seed, index, 17) * 2) % 24;
+  const phase =
+    ((index / Math.max(count, 1)) * 24 + seededUnit(seed, index, 17) * 2) % 24;
   const cycle = (seconds + phase) % 24;
   const base = { index, routeIndex: index % routeCount };
   if (cycle < 3) return { ...base, state: "idle", progress: 0.06 };
@@ -378,10 +408,50 @@ function interpolateRoute(route: [number, number][], progress: number) {
 }
 
 const fallbackRoutes: [number, number][][] = [
-  [[70, 400], [190, 345], [330, 405], [510, 370], [700, 315], [900, 270], [940, 430], [510, 480], [70, 400]],
-  [[190, 45], [255, 140], [225, 280], [390, 500], [560, 410], [700, 250], [690, 55], [440, 80], [190, 45]],
-  [[690, 45], [620, 165], [770, 305], [740, 500], [570, 445], [430, 305], [300, 220], [440, 90], [690, 45]],
-  [[260, 282], [365, 190], [520, 222], [650, 318], [820, 410], [900, 320], [760, 180], [500, 155], [260, 282]],
+  [
+    [70, 400],
+    [190, 345],
+    [330, 405],
+    [510, 370],
+    [700, 315],
+    [900, 270],
+    [940, 430],
+    [510, 480],
+    [70, 400],
+  ],
+  [
+    [190, 45],
+    [255, 140],
+    [225, 280],
+    [390, 500],
+    [560, 410],
+    [700, 250],
+    [690, 55],
+    [440, 80],
+    [190, 45],
+  ],
+  [
+    [690, 45],
+    [620, 165],
+    [770, 305],
+    [740, 500],
+    [570, 445],
+    [430, 305],
+    [300, 220],
+    [440, 90],
+    [690, 45],
+  ],
+  [
+    [260, 282],
+    [365, 190],
+    [520, 222],
+    [650, 318],
+    [820, 410],
+    [900, 320],
+    [760, 180],
+    [500, 155],
+    [260, 282],
+  ],
 ];
 
 function FallbackSimulationMap({
@@ -412,7 +482,10 @@ function FallbackSimulationMap({
   const visibleVehicles = vehicleCount(fleetSize);
   const vehicles = Array.from({ length: visibleVehicles }, (_, index) => {
     const motion = vehicleMotion(index, visibleVehicles, seed, elapsed);
-    const point = interpolateRoute(fallbackRoutes[motion.routeIndex], motion.progress);
+    const point = interpolateRoute(
+      fallbackRoutes[motion.routeIndex],
+      motion.progress,
+    );
     return { ...motion, point };
   });
   const mapDescription =
@@ -567,7 +640,8 @@ function FallbackSimulationMap({
       </div>
       {simulationActive && !reducedMotion && (
         <span className="mapbox-sim-playing">
-          <span className="mapbox-live-dot" /> ILLUSTRATIVE FLEET PREVIEW · MOVING
+          <span className="mapbox-live-dot" /> ILLUSTRATIVE FLEET PREVIEW ·
+          MOVING
         </span>
       )}
     </div>
@@ -611,7 +685,7 @@ export function SimulationMapbox({
         const map = new mapbox.Map({
           accessToken: token,
           container: container.current,
-          style: "mapbox://styles/mapbox/navigation-night-v1",
+          style: "mapbox://styles/mapbox/light-v11",
           center: [longitude, latitude],
           zoom: 12.2,
           attributionControl: false,
@@ -743,7 +817,9 @@ export function SimulationMapbox({
           );
           vehicle.element.title = `Vehicle ${vehicle.index + 1} · ${motion.state}`;
         }
-        vehicle.marker.setLngLat(interpolateRoute(vehicle.route, motion.progress));
+        vehicle.marker.setLngLat(
+          interpolateRoute(vehicle.route, motion.progress),
+        );
       });
     }, 100);
     return () => window.clearInterval(interval);
@@ -800,7 +876,9 @@ export function SimulationMapbox({
       {simulationActive && !reducedMotion && (
         <span className="mapbox-sim-playing">
           <span className="mapbox-live-dot" />
-          {playing ? `FLEET PREVIEW · PLAYING HOUR ${activeHour + 1}` : "FLEET PREVIEW · MOVING"}
+          {playing
+            ? `FLEET PREVIEW · PLAYING HOUR ${activeHour + 1}`
+            : "FLEET PREVIEW · MOVING"}
         </span>
       )}
       {!mapReady && (

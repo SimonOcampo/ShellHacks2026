@@ -4,7 +4,7 @@ test("market evidence and a recalculated launch work end to end", async ({
   page,
 }) => {
   await page.goto("/");
-  await expect(page.locator(".landing-page")).toBeVisible();
+  await expect(page.locator(".figma-landing")).toBeVisible();
   await page.keyboard.press("Tab");
   await expect(page.locator(".brand")).toBeFocused();
   await expect(page.locator(".brand")).toHaveCSS("outline-style", "solid");
@@ -12,7 +12,7 @@ test("market evidence and a recalculated launch work end to end", async ({
     .poll(
       () =>
         page
-          .locator(".landing-photo img")
+          .locator(".figma-hero-photo img")
           .evaluate((image) => (image as HTMLImageElement).naturalWidth),
       { timeout: 10000 },
     )
@@ -21,8 +21,13 @@ test("market evidence and a recalculated launch work end to end", async ({
     path: "test-results/landing-desktop.png",
     fullPage: true,
   });
-  await page.getByRole("button", { name: "Explore candidate cities" }).click();
-  await expect(page.getByText("MOCK DATA · DEMO")).toBeVisible();
+  await page
+    .locator(".figma-hero-copy")
+    .getByRole("button", { name: "Explore markets" })
+    .click();
+  await expect(page.locator(".topbar .status-pill")).toHaveText(
+    "MOCK DATA · DEMO",
+  );
   await expect(
     page.getByRole("heading", { name: "Candidate markets" }),
   ).toBeVisible();
@@ -58,14 +63,16 @@ test("market evidence and a recalculated launch work end to end", async ({
   await expect(page.locator(".sim-map-frame .sim-legend")).toContainText(
     "Picking up",
   );
-  await expect(page.locator(".scenario-grid > .scenario-controls")).toBeVisible();
-  await expect(page.locator(".scenario-grid > .scenario-map-column")).toBeVisible();
+  await expect(
+    page.locator(".scenario-grid > .scenario-controls"),
+  ).toBeVisible();
+  await expect(
+    page.locator(".scenario-grid > .scenario-map-column"),
+  ).toBeVisible();
   await expect(page.getByLabel("Selected simulation hour")).toContainText(
     "Gross revenue",
   );
-  const fleetVehicles = page.locator(
-    ".mapbox-vehicle-marker, .fallback-car",
-  );
+  const fleetVehicles = page.locator(".mapbox-vehicle-marker, .fallback-car");
   await expect(fleetVehicles).toHaveCount(50, { timeout: 30000 });
   const pickupVehicles = page.locator(
     '.mapbox-vehicle-marker[data-state="pickup"], .fallback-car[data-state="pickup"]',
@@ -114,6 +121,9 @@ test("market evidence and a recalculated launch work end to end", async ({
   await response;
   await expect(page.getByText("SEEDED & REPRODUCIBLE")).toBeVisible();
   await expect(revenue).not.toHaveText(before);
+  await expect(
+    page.getByRole("region", { name: "Compare scenarios" }),
+  ).toContainText("PREVIOUS SCENARIO");
   await page.getByRole("button", { name: "Play playback" }).click();
   await expect(
     page.getByRole("button", { name: "Pause playback" }),
@@ -131,6 +141,7 @@ test("market evidence and a recalculated launch work end to end", async ({
   });
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(page.locator("body")).toHaveJSProperty("scrollWidth", 390);
+  await expect(page.locator(".topbar .status-pill")).toBeVisible();
   await page.screenshot({
     path: "test-results/scenario-mobile.png",
     fullPage: true,
@@ -154,11 +165,20 @@ test("superseded ranking responses cannot overwrite newer selection", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Explore candidate cities" }).click();
+  await page
+    .locator(".figma-hero-copy")
+    .getByRole("button", { name: "Explore markets" })
+    .click();
   await expect(page.locator(".ranking-row")).toHaveCount(20);
-  await expect(page.getByRole("group", { name: "Reference categories" })).toContainText("commercial");
-  await expect(page.getByRole("checkbox", { name: "commercial" })).toBeChecked();
-  await expect(page.locator(".ranking-comparison")).toContainText("Default weights:");
+  await expect(
+    page.getByRole("group", { name: "Reference categories" }),
+  ).toContainText("commercial");
+  await expect(
+    page.getByRole("checkbox", { name: "commercial" }),
+  ).toBeChecked();
+  await expect(page.locator(".ranking-comparison")).toContainText(
+    "Default weights:",
+  );
   const comparison = page.locator(".ranking-comparison > div p");
   const beforeComparison = await comparison.innerText();
   await page.route("**/api/v1/rankings", async (route) => {

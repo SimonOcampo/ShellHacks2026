@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./experience.css";
+import "./figma.css";
 export const metadata: Metadata = {
-  title: "ODD Scout — Expansion starts with a better question",
+  title: "ODDyssey — Public-data market explorer",
   description:
     "Explore public-data market signals and hypothetical fleet scenarios. Not an assessment of AV safety or deployment approval.",
 };

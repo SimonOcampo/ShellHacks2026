@@ -149,7 +149,8 @@ small {
   align-items: center;
   gap: 32px;
 }
-.topbar nav button {
+.topbar nav button,
+.topbar nav a {
   background: none;
   border: 0;
   height: 100%;
@@ -889,7 +890,8 @@ footer {
   font-size: 10px;
   letter-spacing: 2px;
 }
-footer button {
+footer button,
+footer a {
   background: transparent;
   border: 0;
   display: flex;
@@ -1493,7 +1495,8 @@ footer button {
     width: 100%;
     gap: 28px;
   }
-  .topbar nav button {
+  .topbar nav button,
+  .topbar nav a {
     font-size: 11px;
   }
   .topbar > .status-pill {

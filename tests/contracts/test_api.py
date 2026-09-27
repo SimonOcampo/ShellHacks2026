@@ -61,6 +61,35 @@ def test_category_selection_and_weight_comparison(client):
     ).status_code == 422
 
 
+def test_verified_reference_scores_use_release_features_and_default_weights(monkeypatch):
+    monkeypatch.setenv("ODD_DATA_MODE", "verified")
+    monkeypatch.setenv("ODD_DATA_RELEASE", "data/releases/verified.v2.json")
+    selected = ["cbsa:41860", "cbsa:33100", "cbsa:12060"]
+    with TestClient(app) as verified:
+        response = verified.post(
+            "/api/v1/reference-rankings", json={"city_ids": selected}
+        )
+        assert response.status_code == 200
+        result = response.json()
+        assert {item["city_id"] for item in result["ranked"]} == set(selected)
+        assert [item["rank"] for item in result["ranked"]] == [1, 2, 3]
+        assert result["unranked"] == []
+        weights = verified.get("/api/v1/config").json()["weights"]
+        assert result["normalized_weights"] == weights
+        for item in result["ranked"]:
+            pillars = item["pillars"]
+            expected = sum(weights[key] * pillars[key] for key in weights)
+            assert item["expansion_score"] == pytest.approx(expected)
+            assert item["coverage"] == 1
+        assert len(verified.get("/api/v1/cities").json()["cities"]) == 20
+        assert verified.post(
+            "/api/v1/reference-rankings", json={"city_ids": ["cbsa:13820"]}
+        ).status_code == 422
+        assert verified.post(
+            "/api/v1/reference-rankings", json={"city_ids": selected[:1] * 2}
+        ).status_code == 422
+
+
 def test_error_shapes(client):
     assert client.get("/api/v1/cities/unknown").status_code == 404
     for body in [
