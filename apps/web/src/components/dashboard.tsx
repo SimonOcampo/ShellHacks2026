@@ -43,11 +43,20 @@ const initialWeights: Weights = {
   readiness: 0.2,
   opportunity: 0.4,
 };
+type ReferenceCategory = Config["references"][number]["category"];
+const referenceCategories: ReferenceCategory[] = [
+  "commercial",
+  "announced",
+  "testing",
+];
 export default function Dashboard() {
   const [cities, setCities] = useState<CityList>();
   const [config, setConfig] = useState<Config>();
   const [ranking, setRanking] = useState<Ranking>();
   const [weights, setWeights] = useState<Weights>(initialWeights);
+  const [selectedCategories, setSelectedCategories] = useState<ReferenceCategory[]>([
+    "commercial",
+  ]);
   const [selected, setSelected] = useState("");
   const [city, setCity] = useState<City>();
   const [explanation, setExplanation] = useState<Explanation>();
@@ -87,6 +96,12 @@ export default function Dashboard() {
         setCities(c);
         setConfig(f);
         setWeights(f.weights);
+        const available = referenceCategories.filter((category) =>
+          f.references.some((reference) => reference.enabled && reference.category === category),
+        );
+        setSelectedCategories(
+          available.includes("commercial") ? ["commercial"] : available.slice(0, 1),
+        );
       })
       .catch((e) => {
         if (!controller.signal.aborted) setError(e.message);
@@ -101,7 +116,14 @@ export default function Dashboard() {
     const timer = setTimeout(
       () =>
         api
-          .rank({ weights }, controller.signal)
+          .rank(
+            {
+              weights,
+              reference_categories: selectedCategories,
+              compare_weights: config.weights,
+            },
+            controller.signal,
+          )
           .then((r) => {
             if (controller.signal.aborted) return;
             setRanking(r);
@@ -121,7 +143,7 @@ export default function Dashboard() {
       clearTimeout(timer);
       controller.abort();
     };
-  }, [weights, config, retry]);
+  }, [weights, selectedCategories, config, retry]);
   useEffect(() => {
     if (!selected || !ranking) return;
     const controller = new AbortController();
@@ -159,6 +181,12 @@ export default function Dashboard() {
     [...ranking.ranked, ...ranking.unranked].find(
       (r) => r.city_id === selected,
     );
+  const sensitivity = ranking?.weight_sensitivity?.changes.find(
+    (change) => change.city_id === selected,
+  );
+  const availableCategories = referenceCategories.filter((category) =>
+    config?.references.some((reference) => reference.enabled && reference.category === category),
+  );
   const currentName =
     cities?.cities.find((c) => c.city_id === selected)?.display_name ??
     "Select a market";
@@ -223,6 +251,15 @@ export default function Dashboard() {
     const next = { ...weights, [key]: value };
     if (Object.values(next).reduce<number>((a, b) => a + (b ?? 0), 0) > 0)
       setWeights(next);
+  }
+  function toggleCategory(category: ReferenceCategory) {
+    setSelectedCategories((current) =>
+      current.includes(category)
+        ? current.length > 1
+          ? current.filter((item) => item !== category)
+          : current
+        : [...current, category],
+    );
   }
   function openEvidence(id: string) {
     setFocusEvidenceId(id);
@@ -613,6 +650,42 @@ export default function Dashboard() {
                     </small>
                   </label>
                 ))}
+              </div>
+              <div className="ranking-comparison">
+                <fieldset disabled={fixtureMode || busy}>
+                  <legend>Reference categories</legend>
+                  {availableCategories.map((category) => (
+                    <label key={category}>
+                      <input
+                        type="checkbox"
+                        checked={selectedCategories.includes(category)}
+                        disabled={selectedCategories.length === 1 && selectedCategories.includes(category)}
+                        onChange={() => toggleCategory(category)}
+                      />
+                      {category}
+                    </label>
+                  ))}
+                  {availableCategories.length === 1 && (
+                    <p>Only category available in this release.</p>
+                  )}
+                </fieldset>
+                <div aria-live="polite">
+                  <strong>Weight sensitivity · {currentName}</strong>
+                  {fixtureMode ? (
+                    <p>Fixture replay shows default ranking only. Use live API for comparisons.</p>
+                  ) : busy ? (
+                    <p>Updating comparison…</p>
+                  ) : sensitivity && score?.rank ? (
+                    <p>
+                      Default weights: #{sensitivity.baseline_rank}, {sensitivity.baseline_score.toFixed(1)}.
+                      Current weights: #{score.rank}, {score.expansion_score?.toFixed(1)}.
+                      Rank change: {sensitivity.rank_change > 0 ? "+" : ""}{sensitivity.rank_change};
+                      score change: {sensitivity.score_change > 0 ? "+" : ""}{sensitivity.score_change.toFixed(1)}.
+                    </p>
+                  ) : (
+                    <p>No weight comparison for this metro.</p>
+                  )}
+                </div>
               </div>
             </section>
             <section

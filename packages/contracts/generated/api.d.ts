@@ -423,6 +423,9 @@ export interface components {
         };
         /** RankingRequest */
         RankingRequest: {
+            compare_weights?: components["schemas"]["PillarWeights"] | null;
+            /** Reference Categories */
+            reference_categories?: ("commercial" | "announced" | "testing")[] | null;
             /** Reference Ids */
             reference_ids?: string[] | null;
             weights?: components["schemas"]["PillarWeights"];
@@ -439,6 +442,7 @@ export interface components {
             /** Unranked */
             unranked: components["schemas"]["CityScore"][];
             versions: components["schemas"]["VersionStamp"];
+            weight_sensitivity?: components["schemas"]["WeightSensitivity"] | null;
         };
         /** ReferenceMarket */
         ReferenceMarket: {
@@ -607,6 +611,27 @@ export interface components {
              * @constant
              */
             schema_version: "1";
+        };
+        /** WeightChange */
+        WeightChange: {
+            /** Baseline Rank */
+            baseline_rank: number;
+            /** Baseline Score */
+            baseline_score: number;
+            /** City Id */
+            city_id: string;
+            /** Rank Change */
+            rank_change: number;
+            /** Score Change */
+            score_change: number;
+        };
+        /** WeightSensitivity */
+        WeightSensitivity: {
+            /** Baseline Ranking Id */
+            baseline_ranking_id: string;
+            baseline_weights: components["schemas"]["PillarWeights"];
+            /** Changes */
+            changes: components["schemas"]["WeightChange"][];
         };
     };
     responses: never;

@@ -22,7 +22,7 @@ Each task names an owner, bounded files, an output, and proof. Start the indepen
 
 **P1. Expand and improve the ranking.**
 
-- Grow verified coverage toward twenty metros; document exclusions and uncertainty.
+- Maintain the 20 ranked `verified.v2` candidate metros and the documented exclusions and uncertainty in `docs/data-sources.md`. Evaluate any additional metros as a separate release scope.
 - The five network Familiarity features are versioned in `ranking.v2`; do not include the optional `average_aadt` or `lane_miles_per_km2` measurements in the score. Coordinate release/model changes before updating the frontend feature display.
 - Add explicit reference-category selection and weight-sensitivity comparisons with deterministic ranking tests.
 - Add crash context only as unscored public context after validating the NHTSA source and denominators. Keep it out of safety or readiness claims.

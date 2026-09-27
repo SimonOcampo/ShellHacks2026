@@ -206,6 +206,19 @@ class PillarWeights(DTO):
 class RankingRequest(DTO):
     weights: PillarWeights = Field(default_factory=PillarWeights)
     reference_ids: list[str] | None = None
+    reference_categories: list[Literal["commercial", "announced", "testing"]] | None = None
+    compare_weights: PillarWeights | None = None
+
+    @model_validator(mode="after")
+    def reference_selection(self):
+        if self.reference_ids is not None and self.reference_categories is not None:
+            raise ValueError("Select reference IDs or categories, not both")
+        if self.reference_categories is not None and (
+            not self.reference_categories
+            or len(set(self.reference_categories)) != len(self.reference_categories)
+        ):
+            raise ValueError("Select nonempty, unique reference categories")
+        return self
 
 
 class PillarScores(DTO):
@@ -245,6 +258,20 @@ class CityScore(DTO):
     legal_flags: list[str]
 
 
+class WeightChange(DTO):
+    city_id: str
+    baseline_rank: int
+    baseline_score: Score
+    rank_change: int
+    score_change: float
+
+
+class WeightSensitivity(DTO):
+    baseline_ranking_id: str
+    baseline_weights: PillarWeights
+    changes: list[WeightChange]
+
+
 class RankingResult(DTO):
     versions: VersionStamp
     ranking_id: str
@@ -252,6 +279,7 @@ class RankingResult(DTO):
     reference_ids: list[str]
     ranked: list[CityScore]
     unranked: list[CityScore]
+    weight_sensitivity: WeightSensitivity | None = None
 
 
 class Explanation(DTO):
