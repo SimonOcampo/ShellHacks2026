@@ -61,7 +61,7 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
-slots = BoundedSemaphore(2)
+slots = BoundedSemaphore(3)
 
 
 @app.exception_handler(RequestValidationError)
