@@ -84,7 +84,7 @@ export default function Scenario({
   const [error, setError] = useState("");
   const [retry, setRetry] = useState(0);
   const [minute, setMinute] = useState(0);
-  const [speed, setSpeed] = useState(60);
+  const [speed, setSpeed] = useState(1);
   const [playbackNotice, setPlaybackNotice] = useState("");
   const hour = Math.min(
     Math.floor(minute / 60),

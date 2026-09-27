@@ -10,7 +10,7 @@ The layer provides a limited spatial proxy. It is not a complete Providence muni
 
 ## Providence GIS display layers
 
-The 3D scene uses public City of Providence GIS Hub [building footprints](https://pvdgis.maps.arcgis.com/home/item.html?id=d66b8deed2614d54b18906ba1f532030) and [road centerlines](https://pvdgis.maps.arcgis.com/home/item.html?id=8c101a6fca0c4104b9b08499725c6625). Their downloaded Shapefiles, acquisition metadata, SHA-256 digests, deterministic conversion script, and limitations are recorded in [the GIS dataset README](../data/src/datasets/providence_gis/README.md). The checked-in display GeoJSON is derived from those snapshots. The GIS layers add visual city context only; neither the event engine nor its movement assumptions consume them.
+The 3D scene uses public City of Providence GIS Hub [building footprints](https://pvdgis.maps.arcgis.com/home/item.html?id=d66b8deed2614d54b18906ba1f532030) and [road centerlines](https://pvdgis.maps.arcgis.com/home/item.html?id=8c101a6fca0c4104b9b08499725c6625). Their downloaded Shapefiles, acquisition metadata, SHA-256 digests, deterministic conversion script, and limitations are recorded in [the GIS dataset README](../data/src/datasets/providence_gis/README.md). The checked-in display GeoJSON is derived from those snapshots. The browser uses the roads for display-only paths between engine endpoints; neither the event engine nor its timing and movement assumptions consume them.
 
 ## Current status
 

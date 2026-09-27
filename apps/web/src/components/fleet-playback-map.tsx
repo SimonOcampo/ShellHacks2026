@@ -9,7 +9,7 @@ import {
   vehicleStates,
 } from "@/lib/simulation-playback";
 import { loadMapbox, type MapInstance } from "./mapbox-map";
-import { fleetCarIcon } from "./fleet-car-icon";
+import { ProvidenceRoadNetwork } from "@/lib/providence-road-routing";
 import "./fleet-playback.css";
 
 export function FleetPlaybackMap({
@@ -33,6 +33,12 @@ export function FleetPlaybackMap({
   const [selected, setSelected] = useState<number | null>(null);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState("");
+  const [roadNetwork, setRoadNetwork] = useState<ProvidenceRoadNetwork | null>(
+    null,
+  );
+  const [roadStatus, setRoadStatus] = useState<
+    "loading" | "ready" | "unavailable"
+  >("loading");
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapInstance | null>(null);
   const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -45,6 +51,39 @@ export function FleetPlaybackMap({
     [index, minute],
   );
   const focus = vehicles.find((vehicle) => vehicle.id === selected);
+  const isProvidence = cityName.toLowerCase().includes("providence");
+  const activeRoadNetwork = isProvidence ? roadNetwork : null;
+  const mapVehicles = useMemo(() => {
+    if (!project) return [];
+    return vehicles.map((vehicle) => {
+      const segment = vehicle.segment;
+      const from = project(segment.from_x_miles, segment.from_y_miles);
+      const to = project(segment.to_x_miles, segment.to_y_miles);
+      const route = activeRoadNetwork?.route(from, to);
+      const fraction = Math.max(
+        0,
+        Math.min(
+          1,
+          (minute - segment.start_minute) /
+            (segment.end_minute - segment.start_minute || 1),
+        ),
+      );
+      return {
+        ...vehicle,
+        point: route?.at(fraction) ?? project(vehicle.x, vehicle.y),
+        route,
+      };
+    });
+  }, [vehicles, project, activeRoadNetwork, minute]);
+  const focusOnMap = mapVehicles.find((vehicle) => vehicle.id === selected);
+  const unroutedCount = activeRoadNetwork
+    ? mapVehicles.filter(
+        (vehicle) =>
+          !vehicle.route &&
+          (vehicle.segment.from_x_miles !== vehicle.segment.to_x_miles ||
+            vehicle.segment.from_y_miles !== vehicle.segment.to_y_miles),
+      ).length
+    : 0;
   const bounds = useMemo(() => {
     let radius = 1;
     for (const segment of playback?.segments ?? [])
@@ -62,6 +101,30 @@ export function FleetPlaybackMap({
     setSelected(null);
   }, [playback]);
   useEffect(() => {
+    if (!isProvidence || !token) {
+      setRoadNetwork(null);
+      return;
+    }
+    let active = true;
+    setRoadStatus("loading");
+    fetch("/gis/providence-roads.geojson")
+      .then((response) => {
+        if (!response.ok) throw new Error("Providence roads unavailable");
+        return response.json() as Promise<GeoJSON.FeatureCollection>;
+      })
+      .then((data) => {
+        if (!active) return;
+        setRoadNetwork(new ProvidenceRoadNetwork(data));
+        setRoadStatus("ready");
+      })
+      .catch(() => {
+        if (active) setRoadStatus("unavailable");
+      });
+    return () => {
+      active = false;
+    };
+  }, [isProvidence, token]);
+  useEffect(() => {
     if (!token || !project || !container.current) return;
     let active = true;
     let map: MapInstance | undefined;
@@ -75,7 +138,16 @@ export function FleetPlaybackMap({
         map = new api.Map({
           container: container.current,
           accessToken: token,
-          style: "mapbox://styles/mapbox/light-v11",
+          style: "mapbox://styles/mapbox/standard-satellite",
+          config: {
+            basemap: {
+              lightPreset: "day",
+              show3dObjects: true,
+              show3dBuildings: true,
+              show3dFacades: true,
+              show3dLandmarks: true,
+            },
+          },
           center: project(0, 0),
           zoom: 12.8,
           pitch: 55,
@@ -86,7 +158,7 @@ export function FleetPlaybackMap({
         map.once("load", () => {
           if (!active || !map) return;
           try {
-            if (cityName.toLowerCase().includes("providence")) {
+            if (isProvidence) {
               map.addSource("providence-roads", {
                 type: "geojson",
                 data: "/gis/providence-roads.geojson",
@@ -94,6 +166,7 @@ export function FleetPlaybackMap({
               map.addLayer({
                 id: "providence-roads",
                 type: "line",
+                slot: "middle",
                 source: "providence-roads",
                 minzoom: 8,
                 paint: {
@@ -117,8 +190,10 @@ export function FleetPlaybackMap({
               map.addLayer({
                 id: "providence-buildings",
                 type: "fill-extrusion",
+                slot: "middle",
                 source: "providence-buildings",
                 minzoom: 8,
+                maxzoom: 14.5,
                 paint: {
                   "fill-extrusion-color": "#aebec4",
                   "fill-extrusion-height": ["coalesce", ["get", "height_m"], 0],
@@ -126,29 +201,14 @@ export function FleetPlaybackMap({
                   "fill-extrusion-opacity": 0.72,
                 },
               });
-            } else {
-              map.addLayer({
-                id: "fleet-buildings",
-                type: "fill-extrusion",
-                source: "composite",
-                "source-layer": "building",
-                filter: ["==", "extrude", "true"],
-                minzoom: 12,
-                paint: {
-                  "fill-extrusion-color": "#bcc9cc",
-                  "fill-extrusion-height": ["get", "height"],
-                  "fill-extrusion-base": ["get", "min_height"],
-                  "fill-extrusion-opacity": 0.55,
-                },
-              });
             }
             const empty = { type: "FeatureCollection", features: [] };
-            map.addSource("fleet-cars", { type: "geojson", data: empty });
-            map.addSource("fleet-bodies", { type: "geojson", data: empty });
+            map.addSource("fleet-points", { type: "geojson", data: empty });
             map.addSource("fleet-route", { type: "geojson", data: empty });
             map.addLayer({
               id: "fleet-route",
               type: "line",
+              slot: "top",
               source: "fleet-route",
               paint: {
                 "line-color": "#334155",
@@ -156,40 +216,16 @@ export function FleetPlaybackMap({
                 "line-dasharray": [2, 2],
               },
             });
-            for (const [state, value] of Object.entries(vehicleStates))
-              map.addImage(`fleet-car-${state}`, fleetCarIcon(value.color), {
-                pixelRatio: 2,
-              });
             map.addLayer({
-              id: "fleet-car-icons",
-              type: "symbol",
-              source: "fleet-cars",
-              layout: {
-                "icon-image": ["concat", "fleet-car-", ["get", "state"]],
-                "icon-size": [
-                  "interpolate",
-                  ["linear"],
-                  ["zoom"],
-                  9,
-                  0.6,
-                  15,
-                  1.1,
-                ],
-                "icon-rotate": ["get", "bearing"],
-                "icon-rotation-alignment": "map",
-                "icon-allow-overlap": true,
-              },
-            });
-            map.addLayer({
-              id: "fleet-bodies",
-              type: "fill-extrusion",
-              source: "fleet-bodies",
-              minzoom: 15,
+              id: "fleet-points",
+              type: "circle",
+              slot: "top",
+              source: "fleet-points",
               paint: {
-                "fill-extrusion-color": ["get", "color"],
-                "fill-extrusion-height": ["get", "height"],
-                "fill-extrusion-base": ["get", "base"],
-                "fill-extrusion-opacity": 1,
+                "circle-color": ["get", "color"],
+                "circle-radius": ["case", ["get", "selected"], 8, 5],
+                "circle-stroke-width": 2,
+                "circle-stroke-color": "#ffffff",
               },
             });
             setReady(true);
@@ -214,85 +250,52 @@ export function FleetPlaybackMap({
       map?.remove();
       mapRef.current = null;
     };
-  }, [token, project, bounds, cityName]);
+  }, [token, project, bounds, isProvidence]);
 
   useEffect(() => {
     const map = mapRef.current;
     if (!ready || !map || !project) return;
-    const cars: GeoJSON.FeatureCollection<GeoJSON.Point> = {
+    const points: GeoJSON.FeatureCollection<GeoJSON.Point> = {
       type: "FeatureCollection",
       features: [],
     };
-    const bodies: GeoJSON.FeatureCollection<GeoJSON.Polygon> = {
-      type: "FeatureCollection",
-      features: [],
-    };
-    for (const vehicle of vehicles) {
+    for (const vehicle of mapVehicles) {
       const color = vehicleStates[vehicle.segment.state].color;
-      cars.features.push({
+      points.features.push({
         type: "Feature",
         properties: {
-          state: vehicle.segment.state,
-          bearing: 90 - (vehicle.angle * 180) / Math.PI,
+          color,
+          selected: vehicle.id === selected,
         },
-        geometry: { type: "Point", coordinates: project(vehicle.x, vehicle.y) },
+        geometry: { type: "Point", coordinates: vehicle.point },
       });
-      // Stylized autonomous minivan body, cabin, and roof sensor, enlarged for legibility.
-      for (const [length, width, base, height, tint] of [
-        [8.5, 3.8, 0, 2.2, "#eef3f5"],
-        [5.2, 3.2, 2.2, 3.2, "#243746"],
-        [3.4, 2.4, 3.2, 3.35, color],
-        [0.9, 0.9, 3.35, 4.05, "#e5eaf0"],
-      ] as const) {
-        const coordinates = [
-          [-1, -1],
-          [1, -1],
-          [1, 1],
-          [-1, 1],
-          [-1, -1],
-        ].map(([a, b]) => {
-          const dx = (a * length) / 2 / 1609.344,
-            dy = (b * width) / 2 / 1609.344;
-          return project(
-            vehicle.x +
-              dx * Math.cos(vehicle.angle) -
-              dy * Math.sin(vehicle.angle),
-            vehicle.y +
-              dx * Math.sin(vehicle.angle) +
-              dy * Math.cos(vehicle.angle),
-          );
-        });
-        bodies.features.push({
-          type: "Feature",
-          properties: { color: tint, base, height },
-          geometry: { type: "Polygon", coordinates: [coordinates] },
-        });
-      }
     }
-    map.getSource("fleet-cars")?.setData(cars);
-    map.getSource("fleet-bodies")?.setData(bodies);
+    map.getSource("fleet-points")?.setData(points);
     map.getSource("fleet-route")?.setData({
       type: "FeatureCollection",
-      features: focus
+      features: focusOnMap
         ? [
             {
               type: "Feature",
               properties: {},
               geometry: {
                 type: "LineString",
-                coordinates: [
+                coordinates: focusOnMap.route?.points ?? [
                   project(
-                    focus.segment.from_x_miles,
-                    focus.segment.from_y_miles,
+                    focusOnMap.segment.from_x_miles,
+                    focusOnMap.segment.from_y_miles,
                   ),
-                  project(focus.segment.to_x_miles, focus.segment.to_y_miles),
+                  project(
+                    focusOnMap.segment.to_x_miles,
+                    focusOnMap.segment.to_y_miles,
+                  ),
                 ],
               },
             },
           ]
         : [],
     });
-  }, [ready, project, vehicles, focus]);
+  }, [ready, project, mapVehicles, focusOnMap, selected]);
 
   const local = !token || !project || Boolean(error);
   return (
@@ -315,6 +318,17 @@ export function FleetPlaybackMap({
             <div>
               <span className="eyebrow">ENGINE PLAYBACK</span>
               <h3>{cityName}</h3>
+              {isProvidence && token && (
+                <small className="fleet-route-status" role="status">
+                  {roadStatus === "loading"
+                    ? "Preparing city road paths…"
+                    : roadStatus === "unavailable"
+                      ? "City road paths unavailable"
+                      : unroutedCount
+                        ? `City road paths · ${unroutedCount} leg${unroutedCount === 1 ? "" : "s"} using straight fallback`
+                        : "City road paths active"}
+                </small>
+              )}
             </div>
             <span>
               {busy
@@ -345,40 +359,21 @@ export function FleetPlaybackMap({
                     strokeDasharray="4 6"
                   />
                   {vehicles.map((v) => (
-                    <g
+                    <circle
                       data-testid="fleet-vehicle"
                       data-state={v.segment.state}
                       key={v.id}
-                      transform={`translate(${300 + (v.x / bounds) * 185} ${200 - (v.y / bounds) * 185}) rotate(${90 - (v.angle * 180) / Math.PI})`}
+                      cx={300 + (v.x / bounds) * 185}
+                      cy={200 - (v.y / bounds) * 185}
+                      r={v.id === selected ? 7 : 4.5}
+                      fill={vehicleStates[v.segment.state].color}
+                      stroke="#fff"
+                      strokeWidth="1.5"
                     >
                       <title>
                         Vehicle {v.id}: {vehicleStates[v.segment.state].label}
                       </title>
-                      <rect
-                        x="-5"
-                        y="-9"
-                        width="10"
-                        height="18"
-                        rx="3"
-                        fill="#f8fafb"
-                        stroke={vehicleStates[v.segment.state].color}
-                        strokeWidth={v.id === selected ? 2.5 : 1.7}
-                      />
-                      <rect
-                        x="-3.5"
-                        y="-4"
-                        width="7"
-                        height="5"
-                        rx="1.5"
-                        fill="#243746"
-                      />
-                      <circle
-                        r="2.2"
-                        cy="3"
-                        fill={vehicleStates[v.segment.state].color}
-                      />
-                      <circle r="0.8" cy="3" fill="#f8fafb" />
-                    </g>
+                    </circle>
                   ))}
                   <text x="20" y="385" fill="#475569" fontSize="12">
                     Local miles · north ↑ · extent ±{bounds.toFixed(1)} miles
@@ -420,8 +415,8 @@ export function FleetPlaybackMap({
                   type="button"
                   onClick={() =>
                     mapRef.current?.easeTo({
-                      center: focus
-                        ? project!(focus.x, focus.y)
+                      center: focusOnMap
+                        ? focusOnMap.point
                         : [-71.4128, 41.824],
                       zoom: 16.5,
                       pitch: 60,
@@ -482,13 +477,14 @@ export function FleetPlaybackMap({
         )}
       </div>
       <p className="fleet-disclosure">
-        Hypothetical fleet, not live Waymo operations. Positions follow
-        straight-line engine legs, which may cross buildings or water; street
-        routing is not modeled.{" "}
-        {cityName.toLowerCase().includes("providence")
-          ? "Providence GIS Hub supplies building footprints, published heights, and road centerlines; Mapbox supplies the basemap."
-          : "Mapbox supplies city streets and available building heights."}{" "}
-        Car shapes are enlarged symbols.
+        Hypothetical fleet, not live Waymo operations. The event engine still
+        calculates trip timing from its own assumptions.{" "}
+        {isProvidence && roadStatus === "ready"
+          ? "Moving circles follow shortest paths on the published Providence road centerlines for display when both endpoints can be connected; other legs use straight interpolation. One-way rules, traffic, turns, and travel time are not modeled."
+          : "The displayed positions interpolate the engine endpoints; a road path is unavailable."}{" "}
+        Mapbox Standard Satellite provides imagery and detailed 3D buildings
+        where its coverage permits. City GIS footprints and heights provide the
+        city-wide building layer.
       </p>
       {cityName.toLowerCase().includes("providence") && (
         <p className="fleet-gis-source">
@@ -508,9 +504,9 @@ export function FleetPlaybackMap({
           >
             road centerlines
           </a>{" "}
-          (item modified January 2025). Individual records may be older.
-          Missing or nonpositive building heights render flat. GIS geometry is
-          reference context, not a drivable route network.
+          (item modified January 2025). Individual records may be older. Missing
+          or nonpositive building heights render flat. The road path is a visual
+          approximation, not verified navigation guidance.
         </p>
       )}
       {result?.demand_source && (
