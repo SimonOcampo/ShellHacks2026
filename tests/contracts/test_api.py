@@ -116,8 +116,8 @@ def test_error_shapes(client):
         oversized.status_code == 413
         and oversized.json()["error"]["code"] == "too_large"
     )
-    slots.acquire()
-    slots.acquire()
+    for _ in range(3):
+        slots.acquire()
     try:
         assert (
             client.post(
@@ -126,8 +126,8 @@ def test_error_shapes(client):
             == 429
         )
     finally:
-        slots.release()
-        slots.release()
+        for _ in range(3):
+            slots.release()
 
 
 def test_trust_boundaries(release, settings):
