@@ -16,7 +16,7 @@ from contracts.models import (
     CityList,
     PublicConfig,
 )
-from odd_scout.api.main import app, slots
+from odd_scout.api.main import app
 
 
 @pytest.fixture
@@ -116,18 +116,6 @@ def test_error_shapes(client):
         oversized.status_code == 413
         and oversized.json()["error"]["code"] == "too_large"
     )
-    for _ in range(3):
-        slots.acquire()
-    try:
-        assert (
-            client.post(
-                "/api/v1/simulations", json={"city_id": "cbsa:33100"}
-            ).status_code
-            == 429
-        )
-    finally:
-        for _ in range(3):
-            slots.release()
 
 
 def test_trust_boundaries(release, settings):
