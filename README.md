@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="apps/web/public/images/logo.png" alt="ODDyssey logo" width="400">
+</div>
+
 # Oddyssey
 
 Oddyssye is a public-data market screening tool and a hypothetical fleet-operations simulator. It compares the 20 biggest U.S. metro areas without Waymo Operations or Planned Waymo operations with a dated set of Waymo markets using transparent, configurable public features.
