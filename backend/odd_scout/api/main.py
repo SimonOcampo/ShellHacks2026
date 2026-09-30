@@ -1,6 +1,5 @@
 import os
 from contextlib import asynccontextmanager
-from threading import BoundedSemaphore
 
 from contracts.models import (
     CityFeature,
@@ -47,7 +46,7 @@ async def lifespan(app):
     yield
 
 
-ERRORS = {status: {"model": ErrorResponse} for status in (404, 413, 422, 429, 503)}
+ERRORS = {status: {"model": ErrorResponse} for status in (404, 413, 422, 503)}
 app = FastAPI(title="ODD Scout", version="1.0.0", lifespan=lifespan, responses=ERRORS)
 app.add_middleware(RequestSizeLimit)
 app.add_middleware(
@@ -61,7 +60,6 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
-slots = BoundedSemaphore(3)
 
 
 @app.exception_handler(RequestValidationError)
@@ -90,7 +88,6 @@ async def http_error(request, exc):
                     404: "not_found",
                     413: "too_large",
                     422: "invalid_request",
-                    429: "busy",
                     503: "unavailable",
                 }.get(exc.status_code, "http_error"),
                 "message": str(exc.detail),
@@ -258,8 +255,6 @@ def simulation(request: SimulationRequest):
         simulation_assumptions = simulation_assumptions.model_copy(
             update={"profile_id": demand_profile.source.profile_id}
         )
-    if not slots.acquire(blocking=False):
-        raise HTTPException(429, "Simulation capacity busy; retry shortly")
     try:
         return simulate(
             request,
@@ -269,8 +264,6 @@ def simulation(request: SimulationRequest):
         )
     except CapacityError as exc:
         raise HTTPException(413, str(exc)) from exc
-    finally:
-        slots.release()
 
 
 @app.post("/api/v1/waymo-reference-simulations", response_model=SimulationResult)
@@ -286,11 +279,7 @@ def waymo_reference_simulation(request: SimulationRequest):
         if reference.enabled and reference.operator == "Waymo"
     }:
         raise HTTPException(404, "Unknown Waymo reference market ID")
-    if not slots.acquire(blocking=False):
-        raise HTTPException(429, "Simulation capacity busy; retry shortly")
     try:
         return simulate(request, assumptions(request.fleet_size), release.versions)
     except CapacityError as exc:
         raise HTTPException(413, str(exc)) from exc
-    finally:
-        slots.release()
