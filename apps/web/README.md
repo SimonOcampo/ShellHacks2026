@@ -83,6 +83,20 @@ Reference: [Vercel monorepo setup](https://vercel.com/docs/monorepos).
 
 ## Local verified release
 
+HTTP requests have a two-minute deadline, including response-body loading.
+If the API stalls, the scenario exits loading and offers Retry; it never
+substitutes mock results. Changing inputs or leaving the scenario cancels the
+previous request. Browser cancellation does not stop work already running in
+the backend. Simulations run on the separately hosted Python API, so changing
+Vercel function duration does not change their execution budget.
+
+Providence cruising reuses bounded, per-run geometry caches and vectorized
+distance checks. It preserves the policy's candidate ordering, seeded random
+draws, inclusive distance boundaries, and accounting. Deployment timing still
+depends on the API host's CPU and concurrent workload.
+The API compresses responses above 1 KB when the client accepts gzip, including
+large vehicle playback traces. JSON schemas and decoded results are unchanged.
+
 The frontend uses the release selected by the HTTP backend. To serve `verified.v2`
 locally, start the backend from the repository root in PowerShell:
 

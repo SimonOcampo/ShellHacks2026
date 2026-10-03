@@ -19,6 +19,7 @@ from contracts.models import (
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 from odd_ranking.engine import rank, rank_reference_cities
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -49,6 +50,7 @@ async def lifespan(app):
 ERRORS = {status: {"model": ErrorResponse} for status in (404, 413, 422, 503)}
 app = FastAPI(title="ODD Scout", version="1.0.0", lifespan=lifespan, responses=ERRORS)
 app.add_middleware(RequestSizeLimit)
+app.add_middleware(GZipMiddleware, minimum_size=1000, compresslevel=3)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[

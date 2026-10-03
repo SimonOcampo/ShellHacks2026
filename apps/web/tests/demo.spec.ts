@@ -1,5 +1,50 @@
 import { test, expect } from "@playwright/test";
 
+test("a stalled simulation leaves loading and can be retried", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .locator(".figma-hero-copy")
+    .getByRole("button", { name: "Explore markets" })
+    .click();
+  await expect(page.locator(".ranking-row")).toHaveCount(20);
+  await page.getByPlaceholder("Find a metro…").fill("Miami");
+  await page.locator(".ranking-row").click();
+  await expect(page.locator(".map-panel h2")).toHaveText("Miami");
+  let releaseRequest!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    releaseRequest = resolve;
+  });
+  let intercepted = false;
+  await page.route(
+    "**/api/v1/simulations",
+    async (route) => {
+      intercepted = true;
+      await gate;
+      await route.abort();
+    },
+    { times: 1 },
+  );
+  await page.clock.install();
+  await page
+    .getByRole("button", { name: "Simulate hypothetical launch" })
+    .click();
+  await page.clock.runFor(500);
+  await expect.poll(() => intercepted).toBe(true);
+  await expect(page.locator(".scenario-results-skeleton")).toBeVisible();
+  await page.clock.fastForward(120_001);
+  await expect(page.locator('.error[role="alert"]')).toContainText(
+    "The API did not finish within 2 minutes",
+  );
+  await expect(page.locator(".scenario-results-skeleton")).toHaveCount(0);
+  releaseRequest();
+  await page.getByRole("button", { name: "Retry", exact: true }).click();
+  await page.clock.runFor(500);
+  await expect(page.getByText("SEEDED & REPRODUCIBLE")).toBeVisible();
+  await expect(page.locator('.error[role="alert"]')).toHaveCount(0);
+});
+
 test("market evidence and a recalculated launch work end to end", async ({
   page,
 }) => {

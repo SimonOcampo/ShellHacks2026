@@ -29,19 +29,40 @@ async function call<T>(
   body?: unknown,
   signal?: AbortSignal,
 ): Promise<T> {
-  const response = await fetch(`${base}${path}`, {
-    method: body === undefined ? "GET" : "POST",
-    headers: { "Content-Type": "application/json" },
-    body: body === undefined ? undefined : JSON.stringify(body),
-    signal,
-  });
-  const json = await response.json();
-  if (!response.ok)
-    throw new ApiError(
-      json.error?.message ?? `API error ${response.status}`,
-      response.status,
-    );
-  return json as T;
+  const controller = new AbortController();
+  const cancel = () => controller.abort(signal?.reason);
+  if (signal?.aborted) cancel();
+  else signal?.addEventListener("abort", cancel, { once: true });
+  let timedOut = false;
+  const timeout = setTimeout(() => {
+    timedOut = true;
+    controller.abort();
+  }, 120_000);
+  try {
+    const response = await fetch(`${base}${path}`, {
+      method: body === undefined ? "GET" : "POST",
+      headers: { "Content-Type": "application/json" },
+      body: body === undefined ? undefined : JSON.stringify(body),
+      signal: controller.signal,
+    });
+    const json = await response.json();
+    if (!response.ok)
+      throw new ApiError(
+        json.error?.message ?? `API error ${response.status}`,
+        response.status,
+      );
+    return json as T;
+  } catch (error) {
+    if (timedOut && !signal?.aborted)
+      throw new ApiError(
+        "The API did not finish within 2 minutes. Retry, or reduce the scenario duration or fleet size.",
+        408,
+      );
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+    signal?.removeEventListener("abort", cancel);
+  }
 }
 
 async function fixture<T>(name: string, signal?: AbortSignal): Promise<T> {

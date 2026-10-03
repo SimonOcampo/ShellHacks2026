@@ -41,6 +41,20 @@ def test_integrated_flow(client):
     assert response.json()["metrics"]["rides_completed"] > 0
 
 
+def test_large_responses_compress_without_changing_contract_or_cors(client):
+    headers = {"Origin": "http://localhost:3000"}
+    compressed = client.get("/api/v1/config", headers={**headers, "Accept-Encoding": "gzip"})
+    plain = client.get("/api/v1/config", headers={**headers, "Accept-Encoding": "identity"})
+    assert compressed.status_code == plain.status_code == 200
+    assert compressed.headers["content-encoding"] == "gzip"
+    assert "content-encoding" not in plain.headers
+    assert "Accept-Encoding" in compressed.headers["vary"]
+    assert compressed.headers["access-control-allow-origin"] == "http://localhost:3000"
+    assert compressed.json() == plain.json()
+    PublicConfig.model_validate(compressed.json())
+    assert int(compressed.headers["content-length"]) < len(plain.content)
+
+
 def test_category_selection_and_weight_comparison(client):
     response = client.post(
         "/api/v1/rankings",

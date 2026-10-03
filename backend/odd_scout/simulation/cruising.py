@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-import json
 import math
-from collections import defaultdict
+from collections import OrderedDict, defaultdict
 from pathlib import Path
 from typing import Literal
 
@@ -13,7 +12,6 @@ from contracts.models import DTO, Positive
 from pydantic import model_validator
 
 from odd_scout.simulation.profile import DemandProfile
-
 
 ROOT = Path(__file__).resolve().parents[3]
 POLICY_PATH = ROOT / "config/providence-idle-cruising.v1.json"
@@ -45,6 +43,9 @@ class CruiseWaypoints:
         self.weights = []
         self.cells = defaultdict(list)
         self.cell_miles = policy.maximum_leg_miles
+        # Cache geometry only; every visit still consumes its own seeded draw.
+        # Per-run bounded storage avoids retaining profiles across API requests.
+        self._options_cache = OrderedDict()
         for zone in profile.zones:
             weight = zone.trip_production_2015 / len(zone.sample_points)
             for point in zone.sample_points:
@@ -53,6 +54,9 @@ class CruiseWaypoints:
                 self.points.append(location)
                 self.weights.append(weight)
                 self.cells[self._cell(location)].append(index)
+        self._coordinates = np.array(self.points, dtype=float).reshape(-1, 2)
+        self._weights = np.array(self.weights, dtype=float)
+        self._neighborhoods = {}
 
     def _cell(self, position: tuple[float, float]) -> tuple[int, int]:
         return (
@@ -63,16 +67,54 @@ class CruiseWaypoints:
     def choose(
         self, position: tuple[float, float], rng: np.random.Generator
     ) -> tuple[float, float] | None:
+        if position in self._options_cache:
+            candidates, weights, fallback = self._options_cache[position]
+            self._options_cache.move_to_end(position)
+        else:
+            candidates, weights, fallback = self._options(position)
+            self._options_cache[position] = (candidates, weights, fallback)
+            if len(self._options_cache) > 4096:
+                self._options_cache.popitem(last=False)
+        if len(candidates) == 0:
+            return fallback
+        return self.points[int(rng.choice(candidates, p=weights))]
+
+    def _options(self, position: tuple[float, float]):
         cell_x, cell_y = self._cell(position)
-        candidates = []
-        for x in range(cell_x - 1, cell_x + 2):
-            for y in range(cell_y - 1, cell_y + 2):
-                for index in self.cells.get((x, y), ()):
-                    point = self.points[index]
-                    miles = math.dist(position, point)
-                    if self.policy.minimum_leg_miles <= miles <= self.policy.maximum_leg_miles:
-                        candidates.append(index)
-        if not candidates:
+        cell = (cell_x, cell_y)
+        if cell not in self._neighborhoods:
+            self._neighborhoods[cell] = np.array(
+                [
+                    index
+                    for x in range(cell_x - 1, cell_x + 2)
+                    for y in range(cell_y - 1, cell_y + 2)
+                    for index in self.cells.get((x, y), ())
+                ],
+                dtype=np.intp,
+            )
+            if len(self._neighborhoods) > 4096:
+                self._neighborhoods.pop(next(iter(self._neighborhoods)))
+        indices = self._neighborhoods[cell]
+        coordinates = self._coordinates[indices]
+        deltas = coordinates - position
+        distances = np.hypot(deltas[:, 0], deltas[:, 1])
+        minimum, maximum = self.policy.minimum_leg_miles, self.policy.maximum_leg_miles
+        # Preserve math.dist's inclusive boundary decisions despite rounding in
+        # vectorized subtraction/hypot. Candidate order and RNG draws stay intact.
+        scale = max(
+            1.0,
+            maximum,
+            *map(abs, position),
+            float(np.max(np.abs(coordinates), initial=0)),
+        )
+        tolerance = 8 * np.finfo(float).eps * scale
+        boundary = (np.abs(distances - minimum) <= tolerance) | (
+            np.abs(distances - maximum) <= tolerance
+        )
+        for offset in np.flatnonzero(boundary):
+            distances[offset] = math.dist(position, self.points[indices[offset]])
+        candidates = indices[(distances >= minimum) & (distances <= maximum)]
+        if len(candidates) == 0:
             nearest = min(
                 (
                     (math.dist(position, point), index)
@@ -82,14 +124,18 @@ class CruiseWaypoints:
                 default=None,
             )
             if nearest is None:
-                return None
+                return candidates, None, None
             miles, index = nearest
             point = self.points[index]
             fraction = min(1.0, self.policy.maximum_leg_miles / miles)
             return (
-                position[0] + (point[0] - position[0]) * fraction,
-                position[1] + (point[1] - position[1]) * fraction,
+                candidates,
+                None,
+                (
+                    position[0] + (point[0] - position[0]) * fraction,
+                    position[1] + (point[1] - position[1]) * fraction,
+                ),
             )
-        weights = np.array([self.weights[index] for index in candidates], dtype=float)
+        weights = self._weights[candidates].copy()
         weights /= weights.sum()
-        return self.points[int(rng.choice(candidates, p=weights))]
+        return candidates, weights, None

@@ -12,7 +12,7 @@ export default defineConfig({
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: [
     {
-      command: `${process.env.CI ? "uv" : "python -m uv"} run uvicorn odd_scout.api.main:app --host 127.0.0.1 --port 8000`,
+      command: `${process.env.CI ? "uv" : "python -m uv"} run python -m uvicorn odd_scout.api.main:app --host 127.0.0.1 --port 8000`,
       cwd: "../..",
       url: "http://127.0.0.1:8000/health",
       reuseExistingServer: !process.env.CI,
