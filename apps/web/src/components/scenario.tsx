@@ -428,20 +428,17 @@ export default function Scenario({
         )}
         {busy && result && (
           <p className="async-note" role="status" aria-live="polite">
-            Showing the last successful scenario while updated inputs run.
+            Recalculating the scenario with your updated inputs.
           </p>
         )}
-        {!result ? (
-          error ? (
+        {!result || busy ? (
+          error && !result ? (
             <div className="empty async-empty" role="status">
               Scenario results are unavailable. Retry to run this scenario
               again.
             </div>
           ) : (
-            <div className="loading" role="status" aria-live="polite">
-              <LoaderCircle className="spin" aria-hidden="true" /> Running fleet
-              operations…
-            </div>
+            <ScenarioResultsSkeleton days={inputs.days} />
           )
         ) : (
           <>
@@ -979,12 +976,14 @@ function Metric({
   value,
   note,
   accent = false,
+  loading = false,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
   note: string;
   accent?: boolean;
+  loading?: boolean;
 }) {
   return (
     <div className={`panel metric ${accent ? "accent" : ""}`}>
@@ -992,8 +991,8 @@ function Metric({
         {label}
         {icon}
       </span>
-      <strong>{value}</strong>
-      <small>{note}</small>
+      <strong>{loading ? <span className="scenario-skeleton-block skeleton-value" /> : value}</strong>
+      <small>{loading ? <span className="scenario-skeleton-block skeleton-note" /> : note}</small>
     </div>
   );
 }
@@ -1014,5 +1013,53 @@ function ChartPanel({
         {children}
       </div>
     </section>
+  );
+}
+
+
+function ScenarioResultsSkeleton({ days }: { days: number }) {
+  const cards = [
+    { label: "RIDES COMPLETED", icon: <Users size={18} /> },
+    { label: "AVERAGE WAIT", icon: <Clock3 size={18} /> },
+    { label: "FLEET UTILIZATION", icon: <CarFront size={18} /> },
+    { label: "PASSENGER UTILIZATION", icon: <CarFront size={18} /> },
+    { label: "EMPTY-MILE SHARE", icon: <Route size={18} /> },
+    { label: "CHARGING VEHICLE-HOURS", icon: <BatteryCharging size={18} /> },
+    { label: "SIMULATED GROSS REVENUE", icon: <DollarSign size={18} />, accent: true },
+    { label: "REVENUE PER VEHICLE", icon: <DollarSign size={18} />, accent: true },
+  ];
+  const charts = [
+    ["Hourly requests vs. completed rides", "Returned counts for each simulated hour"],
+    ["Cumulative gross revenue", "Simulated fares · USD · costs excluded"],
+    ["Fleet utilization", "Hourly share of total vehicle time in service"],
+    ["Average pickup wait", "Mean wait for rides completed that hour · minutes"],
+  ];
+  return (
+    <div className="scenario-results-skeleton" role="status" aria-live="polite">
+      <span className="sr-only">Running fleet operations. Scenario results are loading.</span>
+      <div aria-hidden="true">
+        <div className="kpi-grid">
+          {cards.map((card) => <Metric key={card.label} {...card} value="" note="" loading />)}
+        </div>
+        <section className="panel playback">
+          <div><span className="eyebrow">WEEK IN MOTION</span><h3>Day 1 <span>/ 00:00</span></h3></div>
+          <Button variant="outline" aria-label="Play playback" disabled><Play size={14} /></Button>
+          <label className="playback-slider"><span className="sr-only">Playback minute</span><input type="range" min="0" max={days * 1440} value="0" disabled /></label>
+          <label className="playback-speed">Speed<select value="1" disabled><option value="1">1 min / sec</option><option value="10">10 min / sec</option><option value="60">1 hour / sec</option></select></label>
+          <span className="playback-stat"><span className="scenario-skeleton-block skeleton-stat" /><small>rides this hour</small></span>
+          <span className="playback-stat"><span className="scenario-skeleton-block skeleton-stat" /><small>utilization</small></span>
+        </section>
+        <div className="charts-grid">
+          {charts.map(([title, subtitle]) => <ChartPanel key={title} title={title} subtitle={subtitle}><div className="scenario-skeleton-block skeleton-chart" /></ChartPanel>)}
+        </div>
+        <section className="panel operations-ledger">
+          <div className="section-heading"><h3><Route size={16} /> The operating ledger</h3><span className="micro-tag">WITHIN SIMULATED WINDOW</span></div>
+          <div className="ledger-grid">
+            {["Passenger miles", "Empty / cruising miles", "Empty-mile share", "Rejected requests", "Unfinished at cutoff", "Charging vehicle-hours", "Charger queue hours", "Rides per vehicle"].map((label) => <div key={label}><span>{label}</span><strong><span className="scenario-skeleton-block skeleton-stat" /></strong></div>)}
+          </div>
+        </section>
+        <details className="panel assumptions"><summary><BatteryCharging size={16} /> Model assumptions & accounting <ArrowRight size={15} /></summary><div><span className="scenario-skeleton-block skeleton-note" /></div></details>
+      </div>
+    </div>
   );
 }

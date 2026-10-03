@@ -6,6 +6,24 @@ separately; no backend or LLM secrets belong in the frontend.
 
 The frontend visual system follows the [ODDyssey Figma Make design](https://www.figma.com/make/KiKHMkRKsYdL4yDLGoaSOP/Design-ODD-Scout-Web-App). The local Nashville, Charlotte, and Tampa images use the Unsplash photo URLs shown in that preview. Manrope is stored locally under `public/fonts/` with its Open Font License. The hero skyline is illustrative; market scores, labels, evidence, and simulation results come from the selected API release. Mapbox remains the interactive map.
 
+Markets, Waymo references, SimEngine, and Methodology heroes use
+white cards, regular geometric typography, and spacing informed by
+[Waymo's public website](https://waymo.com/). That reference uses GT Walsheim;
+ODDyssey uses self-hosted Outfit under its bundled Open Font License as an
+independent alternative. The homepage retains its original Manrope typography
+and split composition, with a decorative route connecting its five signal labels.
+Markets and Waymo references show three diagonal capsules using New York City
+and San Francisco imagery respectively. SimEngine uses a fixed Providence image;
+Methodology uses Chicago. Hero imagery is illustrative and never contributes
+to a score or indicates the currently selected simulation city.
+The local `nyc.jpg` and `chicago.jpg` assets were supplied by the user; their
+source and license metadata has not been supplied. The visual reference does not imply affiliation with
+Waymo or reproduction of its private models. Shared styles live in
+`src/app/waymo-inspired.css`; narrow layouts stack the text card below the
+visible image area and preserve release and data-mode labels. The homepage and
+data-mode indicators share the same rounded pill styling as secondary actions;
+data-mode indicators are labels, not interactive controls.
+
 ## Vercel setup
 
 1. Import the entire Git repository into Vercel.
@@ -62,3 +80,21 @@ and CORS failures. A successful frontend build alone does not verify the hosted
 API or Mapbox token.
 
 Reference: [Vercel monorepo setup](https://vercel.com/docs/monorepos).
+
+## Local verified release
+
+The frontend uses the release selected by the HTTP backend. To serve `verified.v2`
+locally, start the backend from the repository root in PowerShell:
+
+```powershell
+$env:ODD_DATA_MODE = "verified"
+$env:ODD_DATA_RELEASE = "data/releases/verified.v2.json"
+python -m uv run python -m uvicorn odd_scout.api.main:app --host 127.0.0.1 --port 8000
+```
+
+Keep `NEXT_PUBLIC_DATA_TRANSPORT=http` and the API origin set to
+`http://127.0.0.1:8000` in `apps/web/.env.local`. Build and start the frontend
+with `npm --prefix apps/web run build` and `npm --prefix apps/web run start -- --hostname 127.0.0.1`.
+The verified release reports `ranking.v2` and the public source snapshot version;
+the UI retains that source version for provenance. The standard browser suite
+uses the mock release for its deterministic demo assertions.

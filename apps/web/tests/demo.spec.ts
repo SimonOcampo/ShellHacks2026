@@ -12,7 +12,7 @@ test("market evidence and a recalculated launch work end to end", async ({
     .poll(
       () =>
         page
-          .locator(".figma-hero-photo img")
+          .locator(".figma-hero-skyline")
           .evaluate((image) => (image as HTMLImageElement).naturalWidth),
       { timeout: 10000 },
     )
@@ -73,9 +73,23 @@ test("market evidence and a recalculated launch work end to end", async ({
   await page.getByPlaceholder("Find a metro…").fill("Miami");
   await page.locator(".ranking-row").click();
   await expect(page.locator(".map-panel h2")).toHaveText("Miami");
+  let releaseSimulation!: () => void;
+  const simulationGate = new Promise<void>((resolve) => { releaseSimulation = resolve; });
+  await page.route("**/api/v1/simulations", async (route) => {
+    await simulationGate;
+    await route.continue();
+  }, { times: 1 });
   await page
     .getByRole("button", { name: "Simulate hypothetical launch" })
     .click();
+  const skeleton = page.locator(".scenario-results-skeleton");
+  await expect(skeleton).toBeVisible();
+  await expect(skeleton.locator(".metric")).toHaveCount(8);
+  await expect(skeleton.locator(".chart-panel")).toHaveCount(4);
+  await expect(skeleton.locator(".playback button")).toBeDisabled();
+  await skeleton.screenshot({ path: "test-results/scenario-loading.png" });
+  releaseSimulation();
+  await expect(skeleton).toHaveCount(0, { timeout: 30000 });
   await expect(page.getByText("SEEDED & REPRODUCIBLE")).toBeVisible({
     timeout: 30000,
   });

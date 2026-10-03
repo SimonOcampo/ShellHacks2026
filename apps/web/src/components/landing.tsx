@@ -85,6 +85,14 @@ export default function Landing({
             <a className="figma-secondary" href="#how-it-works">
               How it works <ArrowDown size={15} />
             </a>
+            <span className="figma-secondary landing-data-badge">
+              <i aria-hidden="true" />
+              {dataMode === undefined
+                ? "Data mode loading"
+                : dataMode === "verified"
+                  ? "Verified public data"
+                  : "Mock data · demo"}
+            </span>
           </div>
         </div>
         <figure className="figma-hero-photo">
@@ -103,13 +111,14 @@ export default function Landing({
           <span className="signal-chip chip-population">Population</span>
           <svg
             className="mobility-path"
-            viewBox="0 0 560 230"
+            viewBox="0 0 1000 1000"
+            preserveAspectRatio="none"
             aria-hidden="true"
           >
-            <path d="M0 190 C100 120 140 250 260 155 S420 160 560 35" />
-            <circle cx="120" cy="185" r="6" />
-            <circle cx="380" cy="115" r="6" />
+            <path className="signal-route-underlay" d="M300 230 C390 230 510 160 660 160 S820 270 820 380 S850 640 750 640 S600 630 480 630" />
+            <path d="M300 230 C390 230 510 160 660 160 S820 270 820 380 S850 640 750 640 S600 630 480 630" />
           </svg>
+          <img className="hero-car-cutout" src="/images/waymocar2-cutout.png" alt="" aria-hidden="true" />
           <figcaption>
             City imagery: Unsplash · Illustrative visual context
           </figcaption>
@@ -272,7 +281,7 @@ export default function Landing({
         <article className="workflow-scenario">
           <h3>7-day scenario</h3>
           <p className="workflow-example-label">
-            Illustrative example · mock values
+            Illustrative hypothetical scenario
           </p>
           <div className="workflow-metrics">
             <div>

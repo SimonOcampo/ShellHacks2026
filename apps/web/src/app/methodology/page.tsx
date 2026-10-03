@@ -393,9 +393,6 @@ export default async function MethodologyPage({
           aria-labelledby="methodology-title"
         >
           <div className="methodology-hero-copy">
-            <p className="method-eyebrow">
-              <i /> ODDYSSEY / PUBLIC-DATA FRAMEWORK
-            </p>
             <h1 id="methodology-title">Methodology</h1>
             <p className="methodology-hero-description">
               A clear record of where the evidence comes from, what we extract,
@@ -409,8 +406,8 @@ export default async function MethodologyPage({
           </div>
           <figure className="methodology-hero-visual">
             <img
-              src="/images/cities/references/san_francisco_bay_area.jpg"
-              alt="San Francisco Bay Area skyline used as visual context"
+              src="/chicago.jpg"
+              alt="Chicago skyline and river used as visual context"
             />
             <figcaption>
               <span>REFERENCE ENVIRONMENT</span>
@@ -418,6 +415,7 @@ export default async function MethodologyPage({
               <small>Illustrative image · not a scoring input</small>
             </figcaption>
           </figure>
+          <img className="hero-car-cutout" src="/images/waymocar2-cutout.png" alt="" aria-hidden="true" />
         </section>
 
         <nav className="methodology-index" aria-label="On this page">

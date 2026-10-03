@@ -1,0 +1,514 @@
+/* Waymo's public site informs the regular geometric type, ink, blue, and spacing.
+   Outfit is an independently licensed, self-hosted alternative to GT Walsheim. */
+:root {
+  --mobility-ink: #23233c;
+  --mobility-blue: #0067df;
+  --mobility-secondary: #535366;
+  --mobility-card-radius: 24px;
+  --mobility-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobility-hero,
+.methodology-main .methodology-hero {
+  font-family: var(--font-mobility), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.mobility-hero h1,
+.methodology-main .methodology-hero h1 {
+  margin: 0;
+  color: var(--mobility-ink);
+  font-size: clamp(2.75rem, 4.6vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.mobility-hero h1 em {
+  background: none;
+  color: inherit;
+  font-style: normal;
+  -webkit-text-fill-color: currentColor;
+}
+.mobility-hero p,
+.methodology-main .methodology-hero-description {
+  max-width: 60ch;
+  margin-top: 24px;
+  color: var(--mobility-secondary);
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.hero.mobility-hero {
+  position: relative;
+  min-height: 460px;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 28px;
+  padding: clamp(24px, 3vw, 44px);
+  border-radius: 32px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #dfe6eb;
+}
+
+.mobility-hero-image {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  margin: 0;
+}
+.mobility-hero-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mobility-hero-image::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgb(13 26 42 / 55%), transparent 50%);
+  content: "";
+}
+.mobility-hero-image figcaption {
+  position: absolute;
+  z-index: 1;
+  right: 24px;
+  bottom: 16px;
+  max-width: 35%;
+  color: #fff;
+  font-size: 12px;
+  text-align: right;
+}
+.mobility-hero-image figcaption a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.mobility-hero-card {
+  width: min(65%, 760px);
+  padding: clamp(28px, 3vw, 48px);
+  border-radius: var(--mobility-card-radius);
+  background: #fff;
+  box-shadow: 0 16px 48px rgb(35 35 60 / 10%);
+}
+.mobility-hero h1 {
+  font-size: clamp(2.5rem, 4.2vw, 4rem);
+}
+.mobility-hero .hero-aside {
+  justify-content: flex-start;
+  max-width: none;
+  font-family: Manrope, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+.mobility-hero .hero-aside > span {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.methodology-main .methodology-hero {
+  position: relative;
+  min-height: 500px;
+  grid-template-columns: minmax(0, 1fr);
+  padding: clamp(24px, 3vw, 44px);
+  margin-bottom: 40px;
+  border-radius: 32px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.methodology-main .methodology-hero-copy {
+  z-index: 1;
+  width: min(64%, 720px);
+  padding: clamp(28px, 3vw, 48px);
+  border-radius: var(--mobility-card-radius);
+  background: #fff;
+  box-shadow: 0 16px 48px rgb(35 35 60 / 10%);
+}
+.methodology-main .methodology-hero-visual {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+}
+.methodology-main .methodology-hero-visual figcaption {
+  right: 24px;
+  bottom: 24px;
+  left: auto;
+  max-width: 28%;
+  text-align: right;
+}
+.methodology-main .methodology-hero-visual figcaption strong {
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+.methodology-main .methodology-hero-visual figcaption small {
+  font-size: 12px;
+  color: #fff;
+}
+.methodology-main .methodology-hero-note {
+  margin-top: 24px;
+  padding: 16px 0 0;
+  border-left: 0;
+  border-top: 1px solid #e1e6ef;
+  color: var(--mobility-secondary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* The homepage keeps its original composition; this track links its signals. */
+.figma-hero-photo .signal-chip {
+  transform: translate(-50%, -50%);
+  right: auto;
+}
+.figma-hero-photo .chip-climate {
+  left: 30%;
+  top: 23%;
+}
+.figma-hero-photo .chip-mobility {
+  left: 66%;
+  top: 16%;
+}
+.figma-hero-photo .chip-roads {
+  left: 82%;
+  top: 38%;
+}
+.figma-hero-photo .chip-population {
+  left: 75%;
+  top: 64%;
+}
+.figma-hero-photo .chip-infrastructure {
+  left: 48%;
+  top: 63%;
+}
+.figma-hero-photo .mobility-path {
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.figma-hero-photo .mobility-path path {
+  vector-effect: non-scaling-stroke;
+  stroke: #4c7ff7;
+  stroke-width: 3;
+  stroke-dasharray: 2 9;
+}
+.figma-hero-photo .mobility-path .signal-route-underlay {
+  stroke: rgb(255 255 255 / 75%);
+  stroke-width: 5;
+  stroke-dasharray: none;
+}
+.landing-data-badge {
+  font-size: 14px;
+  font-weight: 700;
+}
+.landing-data-badge i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+.topbar .status-pill {
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--mobility-secondary);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.topbar nav button,
+.topbar nav a {
+  white-space: nowrap;
+}
+.mobility-hero .hero-aside > span,
+.mobility-hero .hero-aside > span:last-child {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid #e8e9e6;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--mobility-secondary);
+  font-size: 11px;
+  font-weight: 600;
+}
+.hero.mobility-hero-trio {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 20px 32px;
+  background: #fff;
+  min-height: 560px;
+  padding-top: 32px;
+}
+.mobility-hero-trio .mobility-hero-card {
+  width: 100%;
+  padding: 20px 0;
+  box-shadow: none;
+}
+.mobility-hero-trio h1 {
+  font-size: clamp(2.5rem, 4vw, 3.75rem);
+}
+.mobility-hero-trio .mobility-hero-image img,
+.mobility-hero-trio .mobility-hero-image::after {
+  visibility: hidden;
+}
+.mobility-hero-trio .mobility-hero-image figcaption {
+  color: var(--mobility-secondary);
+  max-width: 50%;
+}
+.hero-photo-trio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  width: 100%;
+  gap: 0;
+  justify-self: end;
+}
+.hero-photo-capsule {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.hero-photo-capsule:nth-child(2) {
+  transform: translateY(-28px);
+}
+.hero-photo-capsule:nth-child(3) {
+  transform: translateY(-56px);
+}
+.mobility-hero-trio .hero-aside {
+  grid-column: 1 / -1;
+  padding-bottom: 60px;
+  padding-right: 36%;
+}
+
+@media (max-width: 1000px) {
+  .mobility-hero-card {
+    width: 72%;
+  }
+  .methodology-main .methodology-hero-copy {
+    width: 70%;
+  }
+  .hero.mobility-hero-trio {
+    gap: 16px;
+  }
+  .mobility-hero-trio h1 {
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 720px) {
+  .hero.mobility-hero {
+    padding: 200px 16px 64px;
+    min-height: 0;
+    border-radius: 24px;
+  }
+  .mobility-hero-card {
+    width: 100%;
+    padding: 28px;
+    border-radius: 20px;
+  }
+  .mobility-hero h1 {
+    font-size: clamp(2rem, 7.8vw, 3rem);
+  }
+  .mobility-hero p,
+  .methodology-main .methodology-hero-description {
+    font-size: 1.125rem;
+    margin-top: 18px;
+  }
+  .mobility-hero .hero-aside {
+    gap: 6px;
+  }
+  .mobility-hero-image figcaption {
+    right: 16px;
+    bottom: 16px;
+    max-width: calc(100% - 32px);
+  }
+  .methodology-main .methodology-hero {
+    min-height: 0;
+    padding: 200px 16px 112px;
+    border-radius: 24px;
+  }
+  .methodology-main .methodology-hero-copy {
+    width: 100%;
+    padding: 28px;
+    border-radius: 20px;
+  }
+  .methodology-main .methodology-hero h1 {
+    font-size: clamp(2rem, 8.5vw, 3rem);
+  }
+  .methodology-main .methodology-hero-visual figcaption {
+    right: 20px;
+    bottom: 20px;
+    max-width: calc(100% - 40px);
+  }
+  .hero.mobility-hero-trio {
+    grid-template-columns: 1fr;
+    padding: 28px 24px 72px;
+    gap: 24px;
+  }
+  .mobility-hero-trio .mobility-hero-card {
+    padding: 0;
+  }
+  .hero-photo-trio {
+    max-width: 440px;
+    padding-top: 32px;
+  }
+  .hero-photo-capsule:nth-child(2) {
+    transform: translateY(-16px);
+  }
+  .hero-photo-capsule:nth-child(3) {
+    transform: translateY(-32px);
+  }
+  .mobility-hero-trio .hero-aside {
+    padding-bottom: 0;
+  }
+  .mobility-hero-trio .mobility-hero-image figcaption {
+    max-width: calc(100% - 32px);
+  }
+}
+
+/* Decorative vehicle foregrounds stay clear of data controls and photo credits. */
+.hero-car-cutout {
+  position: absolute;
+  z-index: 3;
+  right: 12px;
+  bottom: 32px;
+  width: clamp(120px, 17%, 200px);
+  height: auto;
+  pointer-events: none;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 8px rgb(22 32 45 / 18%));
+}
+.figma-hero-photo .hero-car-cutout {
+  width: clamp(110px, 22%, 170px);
+  height: auto;
+  inset: auto 12px 24px auto;
+  object-fit: contain;
+}
+.mobility-hero-image figcaption {
+  right: auto;
+  left: 24px;
+  max-width: 60%;
+  text-align: left;
+}
+.methodology-main .methodology-hero-visual figcaption {
+  right: 24px;
+  bottom: 220px;
+}
+.hero-photo-trio {
+  padding-top: 64px;
+}
+@media (max-width: 720px) {
+  .hero.mobility-hero,
+  .hero.mobility-hero-trio {
+    padding-bottom: 190px;
+  }
+  .methodology-main .methodology-hero {
+    padding-bottom: 280px;
+  }
+  .hero-car-cutout {
+    width: min(40%, 150px);
+    right: 12px;
+    bottom: 40px;
+  }
+  .figma-hero-photo .hero-car-cutout {
+    width: min(40%, 140px);
+    bottom: 24px;
+  }
+  .mobility-hero-trio .hero-aside {
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+  .mobility-hero-image figcaption {
+    left: 16px;
+    max-width: calc(100% - 32px);
+  }
+  .methodology-main .methodology-hero-visual figcaption {
+    bottom: 190px;
+    max-width: calc(100% - 40px);
+  }
+  .hero-photo-trio {
+    padding-top: 32px;
+    max-width: 520px;
+  }
+}
+
+.mobility-hero .release-details summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 18px;
+  width: fit-content;
+  border: 1px solid #e8e9e6;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--mobility-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+.release-details summary::-webkit-details-marker { display: none; }
+.release-details summary i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4d7cff;
+}
+.release-details summary svg { transition: transform 180ms ease-out; }
+.release-details[open] summary svg { transform: rotate(90deg); }
+.release-details summary:hover { background: #f5f8fc; }
+.release-details summary:focus-visible { outline: 2px solid var(--mobility-blue); outline-offset: 3px; }
+.release-details-content {
+  max-width: 400px;
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px solid #e8e9e6;
+  border-radius: 16px;
+  background: #f7f9fc;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.mobility-hero .release-details-content p {
+  margin: 8px 0;
+  font-family: Manrope, sans-serif;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.release-details-content a { display: inline-flex; align-items: center; gap: 6px; color: var(--mobility-blue); font-size: 12px; }
+.scenario-skeleton-block {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #e8edf2;
+}
+.scenario-skeleton-block::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 70%), transparent);
+  transform: translateX(-100%);
+  animation: scenario-loading-sweep 1.8s ease-in-out infinite;
+  content: "";
+}
+.skeleton-value { width: 65%; height: 36px; }
+.skeleton-note { width: 80%; height: 12px; }
+.skeleton-stat { width: 64px; height: 24px; margin-bottom: 6px; }
+.skeleton-chart { width: 100%; height: 100%; border-radius: 10px; }
+.scenario-results-skeleton .kpi-grid .metric:nth-child(4n + 2) .scenario-skeleton-block::after { animation-delay: 100ms; }
+.scenario-results-skeleton .kpi-grid .metric:nth-child(4n + 3) .scenario-skeleton-block::after { animation-delay: 200ms; }
+.scenario-results-skeleton .kpi-grid .metric:nth-child(4n + 4) .scenario-skeleton-block::after { animation-delay: 300ms; }
+@keyframes scenario-loading-sweep { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .scenario-skeleton-block::after { animation: none; display: none; }
+  .release-details summary svg { transition: none; }
+}

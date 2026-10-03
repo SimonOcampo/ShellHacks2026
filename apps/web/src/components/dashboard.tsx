@@ -25,6 +25,7 @@ import type {
 } from "@/lib/api/types";
 import { Button } from "@/components/ui/button";
 import Landing from "./landing";
+import HeroPhotoTrio from "./hero-photo-trio";
 import EvidenceAssistant from "./evidence-assistant";
 import { MarketMapbox } from "./mapbox-map";
 import Scenario from "./scenario";
@@ -572,32 +573,44 @@ export default function Dashboard() {
         />
       )}
       <main hidden={tab === "home"}>
-        <div className="eyebrow page-eyebrow">
-          {tab === "waymo"
-            ? "WAYMO REFERENCE MARKETS"
-            : tab === "markets"
-              ? "MARKET EXPLORER"
-              : "SIMENGINE"}
-        </div>
-        <div className="hero figma-page-hero">
-          <div>
+        <div className={`hero figma-page-hero mobility-hero ${tab === "scenario" ? "" : "mobility-hero-trio"}`}>
+          <figure className="mobility-hero-image">
+            <img
+              src={
+                tab === "waymo"
+                  ? "/images/cities/references/san_francisco_skyline_2024.jpg"
+                  : tab === "scenario"
+                    ? "/images/cities/targets/providence.jpg"
+                    : "/nyc.jpg"
+              }
+              alt=""
+            />
+            <figcaption>
+              {tab === "markets" ? (
+                "Illustrative New York City image"
+              ) : (
+                <>Illustrative city imagery · <Link href="/photo-credits">Photo credits</Link></>
+              )}
+            </figcaption>
+          </figure>
+          <div className="mobility-hero-card">
             <h1>
               {tab === "waymo" ? (
                 <>
                   Screen Waymo reference
-                  <br />
+                  {" "}
                   <em>markets on public data.</em>
                 </>
               ) : tab === "markets" ? (
                 <>
                   Discover the next
-                  <br />
+                  {" "}
                   <em>opportunity.</em>
                 </>
               ) : (
                 <>
                   What would a fleet
-                  <br /> look like here?
+                  {" "} look like here?
                 </>
               )}
             </h1>
@@ -611,11 +624,35 @@ export default function Dashboard() {
                     : currentName}
             </p>
           </div>
+          {tab !== "scenario" && (
+            <HeroPhotoTrio
+              src={tab === "waymo" ? "/images/cities/references/san_francisco_skyline_2024.jpg" : "/nyc.jpg"}
+            />
+          )}
+          <img className="hero-car-cutout" src="/images/waymocar2-cutout.png" alt="" aria-hidden="true" />
           <div className="hero-aside">
-            <span className="release-badge">
-              <i aria-hidden="true" />
-              DATA RELEASE {screenReleaseLabel ?? "LOADING"}
-            </span>
+            {tab === "markets" ? (
+              <details className="release-details">
+                <summary>
+                  <i aria-hidden="true" />
+                  {screenConfig?.versions.data_mode === "verified"
+                    ? "Data release 2024"
+                    : screenConfig ? "Mock data · demo" : "Data release loading"}
+                  <ChevronRight size={14} aria-hidden="true" />
+                </summary>
+                <div className="release-details-content">
+                  <strong>Public source snapshot</strong>
+                  <p>{screenReleaseLabel ?? "Loading release details…"}</p>
+                  <p>Model: {screenConfig?.versions.model_version ?? "Loading"}</p>
+                  <Link href={methodologyHref()}>View sources and provenance <ArrowRight size={14} /></Link>
+                </div>
+              </details>
+            ) : (
+              <span className="release-badge">
+                <i aria-hidden="true" />
+                DATA RELEASE {screenReleaseLabel ?? "LOADING"}
+              </span>
+            )}
             <span className="model-badge">
               <i aria-hidden="true" />
               MODEL {screenConfig?.versions.model_version ?? "LOADING"}
