@@ -4,9 +4,14 @@
 
 # Oddyssey
 
-Oddyssye is a public-data market screening tool and a hypothetical fleet-operations simulator. It compares the 20 biggest U.S. metro areas without Waymo Operations or Planned Waymo operations with a dated set of Waymo markets using transparent, configurable public features.
+Oddyssey is a public-data market screening tool and a hypothetical fleet-operations simulator. It compares the 20 biggest U.S. metro areas without Waymo Operations or Planned Waymo operations with a dated set of Waymo markets using transparent, configurable public features.
 
 **The product does not assess autonomous-vehicle safety, grant deployment approval, forecast ride-hailing demand, or reproduce Waymo’s private models or operating data.** Scores and simulations are reproducible screening scenarios built from documented data and assumptions.
+
+## Results
+
+Oddyssey placed 2nd in Waymo Sponsor Track in Florida's Biggest Hackathon ShellHacks 2026. Located at Florida International University (FIU), INIT FIU's event hosted more than 1400 attendees and had more than 300 project submissions.
+
 
 ## What is in this repository
 
